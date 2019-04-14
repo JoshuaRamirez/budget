@@ -12,10 +12,6 @@ const factory = () => {
     };
   };
 
-  const notify = eventData => {
-    subscriptions.forEach(handler => handler(eventData));
-  };
-
   const publish = (eventData) => {
 
     eventData = {
