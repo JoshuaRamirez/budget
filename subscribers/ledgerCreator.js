@@ -1,5 +1,5 @@
 import {ledgerProjectionStore} from "../projections/ledgerProjectionStore";
-import {newLedgerRequestedPublisher} from "../events/newLedgerRequestedPublisher";
+import {newLedgerRequestedPublisher} from "../publishers/newLedgerRequestedPublisher";
 
 const factory = () => {
 

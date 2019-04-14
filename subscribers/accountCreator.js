@@ -1,5 +1,5 @@
-import {newAccountSubmittedPublisher} from "../events/newAccountSubmittedPublisher";
-import {newLedgerRequestedPublisher} from "../events/newLedgerRequestedPublisher";
+import {newAccountSubmittedPublisher} from "../publishers/newAccountSubmittedPublisher";
+import {newLedgerRequestedPublisher} from "../publishers/newLedgerRequestedPublisher";
 import {accountProjectionStore} from "../projections/accountProjectionStore";
 
 const factory = () => {

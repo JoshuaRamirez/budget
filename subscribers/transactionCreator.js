@@ -1,5 +1,5 @@
 import {transactionProjectionStore} from "../projections/transactionProjectionStore";
-import {newTransactionSubmittedPublisher} from "../events/newTransactionSubmittedPublisher";
+import {newTransactionSubmittedPublisher} from "../publishers/newTransactionSubmittedPublisher";
 
 const factory = () => {
 
