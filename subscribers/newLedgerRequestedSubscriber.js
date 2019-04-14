@@ -27,4 +27,4 @@ const factory = () => {
 
 const singleton = factory();
 
-export {singleton as ledgerCreator}
+export {singleton as newLedgerRequestedSubscriber}

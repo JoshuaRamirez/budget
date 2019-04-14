@@ -30,4 +30,4 @@ const factory = () => {
 
 const singleton = factory();
 
-export {singleton as transactionCreator}
+export {singleton as newTransactionSubmittedSubscriber}

@@ -1,7 +1,7 @@
 //Services
-import {accountCreator} from "../subscribers/newAccountSubmittedSubscriber";
-import {ledgerCreator} from "../subscribers/newLedgerRequestedSubscriber";
-import {transactionCreator} from "../subscribers/newTransactionSubmittedSubscriber";
+import {newAccountSubmittedSubscriber} from "../subscribers/newAccountSubmittedSubscriber";
+import {newLedgerRequestedSubscriber} from "../subscribers/newLedgerRequestedSubscriber";
+import {newTransactionSubmittedSubscriber} from "../subscribers/newTransactionSubmittedSubscriber";
 
 //Events
 import {newTransactionSubmittedPublisher} from "../publishers/newTransactionSubmittedPublisher";
@@ -16,9 +16,9 @@ const factory = () => {
 
   const run = function(){
 
-    accountCreator.subscribe();
-    ledgerCreator.subscribe();
-    transactionCreator.subscribe();
+    newAccountSubmittedSubscriber.subscribe();
+    newLedgerRequestedSubscriber.subscribe();
+    newTransactionSubmittedSubscriber.subscribe();
 
     const newAccountSubmitted = newAccountSubmittedPublisher.publish.contract();
     newAccountSubmitted.name = "Wells Fargo Checking";

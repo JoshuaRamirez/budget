@@ -31,4 +31,4 @@ const factory = () => {
 
 const singleton = factory();
 
-export {singleton as accountCreator}
+export {singleton as newAccountSubmittedSubscriber}
