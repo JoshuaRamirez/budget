@@ -1,20 +1,10 @@
-import {transactionProjectionStore} from "../projections/transactionProjectionStore";
+import {createTransactionService} from "../services/createTransactionService";
 import {newTransactionSubmittedPublisher} from "../publishers/newTransactionSubmittedPublisher";
 
 const factory = () => {
 
-  const process = (newTransactionSubmitted) => {
-
-    const newTransaction = transactionProjectionStore.project.contract();
-    newTransaction.amount = newTransactionSubmitted.amount;
-    newTransaction.destination = newTransactionSubmitted.destination;
-    newTransaction.ledger = newTransactionSubmitted.ledger;
-    newTransaction.source = newTransactionSubmitted.source;
-    newTransaction.type = newTransactionSubmitted.type;
-    transactionProjectionStore.project(newTransaction);
-
-    newTransactionSubmitted.ledger.balance -= newTransaction.amount;
-
+  const process = (parameters) => {
+    createTransactionService.process(parameters);
   };
 
   const subscribe = () => {

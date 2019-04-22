@@ -1,21 +1,10 @@
 import {newAccountSubmittedPublisher} from "../publishers/newAccountSubmittedPublisher";
-import {newLedgerRequestedPublisher} from "../publishers/newLedgerRequestedPublisher";
-import {accountProjectionStore} from "../projections/accountProjectionStore";
+import {createAccountService} from "../services/createAccountService";
 
 const factory = () => {
 
   const process = (parameters) => {
-
-    let newAccount = accountProjectionStore.project.contract();
-    newAccount.name = parameters.name;
-    newAccount.type = parameters.type;
-    newAccount = accountProjectionStore.project(newAccount);
-
-    const newLedgerRequestedData = newLedgerRequestedPublisher.publish.contract();
-    newLedgerRequestedData.account = newAccount;
-    newLedgerRequestedData.type = "Account";
-    newLedgerRequestedPublisher.publish(newLedgerRequestedData);
-
+    createAccountService.process(parameters);
   };
 
   const subscribe = () => {
