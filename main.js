@@ -1,3 +1,3 @@
-import {allTests} from "./tests/all";
+import {allTests} from "./test";
 
 allTests.run();
