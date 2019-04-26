@@ -15,6 +15,8 @@ const factory = () => {
   const publish = (eventData) => {
 
     eventData = {
+      eventId: Date.now(),
+      eventName: eventName,
       amount: eventData.amount,
       ledgerId: eventData.ledgerId,
     };
