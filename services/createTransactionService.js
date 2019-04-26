@@ -1,21 +1,39 @@
 import {transactionProjectionStore} from "../projections/transactionProjectionStore";
+import {newTransactionCreatedPublisher} from "../publishers/newTransactionCreatedPublisher";
+import {ledgerProjectionStore} from "../projections/ledgerProjectionStore";
 
 const factory = () => {
 
   const process = (parameters) => {
 
+    let newTransaction = undefined;
+
     const createTransactionProjection = () => {
-      const newTransaction = transactionProjectionStore.project.contract();
-      newTransaction.amount = parameters.amount;
-      newTransaction.destination = parameters.destination;
-      newTransaction.ledger = parameters.ledger;
-      newTransaction.source = parameters.source;
-      newTransaction.type = parameters.type;
-      transactionProjectionStore.project(newTransaction);
-      parameters.ledger.balance -= newTransaction.amount;
+      const projection = transactionProjectionStore.project.contract();
+      projection.amount = parameters.amount;
+      projection.destination = parameters.destination;
+      projection.ledgerId = parameters.ledgerId;
+      projection.source = parameters.source;
+      projection.type = parameters.type;
+      newTransaction = transactionProjectionStore.project(projection);
+    };
+
+    const publishTransactionCreated = () => {
+      const eventData = newTransactionCreatedPublisher.publish.contract();
+      eventData.transaction = newTransaction;
+      eventData.sagaId = parameters.sagaId;
+      newTransactionCreatedPublisher.publish(eventData);
+    };
+
+    const updateLedgerProjection = () => {
+      const ledgerId = parameters.ledgerId;
+      const ledger = ledgerProjectionStore.getById(ledgerId);
+      ledger.balance -= newTransaction.amount;
     };
 
     createTransactionProjection();
+    updateLedgerProjection();
+    publishTransactionCreated();
 
   };
 
