@@ -18,11 +18,14 @@ const factory = () => {
   const publish = (eventData) => {
 
     eventData = {
+      eventId: Date.now(),
+      eventName: eventName,
+      sagaId: eventData.sagaId,
       source: eventData.source,
       destination: eventData.destination,
       type: eventData.type,
       amount: eventData.amount,
-      ledger: eventData.ledger,
+      ledgerId: eventData.ledgerId,
     };
 
     eventDataStore.record(eventData);
