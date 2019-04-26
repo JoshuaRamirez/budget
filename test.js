@@ -14,8 +14,23 @@ import {accountProjectionStore} from "./projections/accountProjectionStore";
 import {ledgerProjectionStore} from "./projections/ledgerProjectionStore";
 import {transactionProjectionStore} from "./projections/transactionProjectionStore";
 import {allocationProjectionStore} from "./projections/allocationProjectionStore";
+import {newTransactionCreatedPublisher} from "./publishers/newTransactionCreatedPublisher";
+import {newTransactionCreatedSubscriber} from "./subscribers/newTransactionCreatedSubscriber";
 
 const factory = () => {
+
+  const publishNewAllocation = (ledgerId, amount) => {
+    newAllocationSubmittedPublisher.publish({
+      amount: amount,
+      ledgerId: ledgerId,
+    });
+    if(allocationProjectionStore.all.length !== 1) {
+      throw "Test Failed";
+    }
+    if(allocationProjectionStore.all[0].ledgerId !== ledgerProjectionStore.all[0].id) {
+      throw "Test Failed";
+    }
+  };
 
   const publishNewAccountSubmitted = () => {
     const newAccountSubmitted = newAccountSubmittedPublisher.publish.contract();
@@ -30,7 +45,7 @@ const factory = () => {
     newTransaction1.destination = "payee";
     newTransaction1.amount = amount;
     newTransaction1.type = "purchase";
-    newTransaction1.ledger = ledgerProjectionStore.all[0];
+    newTransaction1.ledgerId = ledgerProjectionStore.all[0].id;
     newTransactionSubmittedPublisher.publish(newTransaction1);
   };
 
@@ -40,6 +55,7 @@ const factory = () => {
     newLedgerRequestedSubscriber.subscribe();
     newTransactionSubmittedSubscriber.subscribe();
     newAllocationSubmittedSubscriber.subscribe();
+    newTransactionCreatedSubscriber.subscribe();
 
     projectionTests();
     publisherTests();
@@ -50,12 +66,13 @@ const factory = () => {
   const basicScenario = () => {
 
     publishNewAccountSubmitted();
-
     publishNewTransaction(1);
     publishNewTransaction(1);
     publishNewTransaction(1);
     publishNewTransaction(1);
     publishNewTransaction(1);
+    const ledgerId = ledgerProjectionStore.all[0].id;
+    publishNewAllocation(ledgerId, -10);
 
     console.log(ledgerProjectionStore.all[0]);
 
@@ -65,16 +82,9 @@ const factory = () => {
   const projectionTests = () => {
 
     const projectionStoreIsEmpty = (store) => {
-      if(store.all > 0) throw "Test Failed";
-    };
-
-    const allocationProjectionStoreProjects = () => {
-      const projection = allocationProjectionStore.project.contract();
-      projection.amount = 1;
-      projection.ledgerId = 1;
-      allocationProjectionStore.project(projection);
-      if(allocationProjectionStore.all.length === 0) throw "Test Failed";
-      if(allocationProjectionStore.all[0].ledgerId !== 1) throw "Test Failed";
+      if(store.all > 0) {
+        throw "Test Failed";
+      }
     };
 
     projectionStoreIsEmpty(allocationProjectionStore);
@@ -82,22 +92,11 @@ const factory = () => {
     projectionStoreIsEmpty(transactionProjectionStore);
     projectionStoreIsEmpty(ledgerProjectionStore);
 
-    allocationProjectionStoreProjects();
-
   };
 
   const publisherTests = () => {
 
-    const newAllocationPublicationWorks = () => {
-      newAllocationSubmittedPublisher.publish({
-        amount: 1,
-        ledgerId: 2,
-      });
-      if(allocationProjectionStore.all.length !== 2) throw "Test Failed";
-      if(allocationProjectionStore.all[1].ledgerId !== 2) throw "Test Failed";
-    };
 
-    newAllocationPublicationWorks();
 
   };
 
