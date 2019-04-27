@@ -18,7 +18,7 @@
     "start": "tsc main.ts && node main.js --experimental-modules --loader ./system/customLoader.mjs",
     "test": "mocha",
     "build": "tsc --p tsconfig.json",
-    "tsc": "tsc"
+    "lint": "tslint -p tsconfig.json"
   },
   "author": "",
   "license": "ISC"
