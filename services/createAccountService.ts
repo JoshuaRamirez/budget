@@ -28,16 +28,16 @@ const factory = () => {
   process.contract = () => {
     return {
       name: undefined,
-      type: undefined
-    }
+      type: undefined,
+    };
   };
 
   return {
-    process: process
+    process,
   };
 
 };
 
 const singleton = factory();
 
-export {singleton as createAccountService}
+export {singleton as createAccountService};

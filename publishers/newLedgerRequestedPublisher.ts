@@ -21,11 +21,11 @@ const factory = () => {
     };
 
     eventDataStore.record(eventName, eventData);
-    subscriptions.forEach(handler => handler(eventData));
+    subscriptions.forEach((handler) => handler(eventData));
 
     return {
-      eventName: eventName,
-      eventData: eventData
+      eventName,
+      eventData,
     };
 
   };
@@ -37,9 +37,9 @@ const factory = () => {
   };
 
   return {
-    eventName: eventName,
-    publish: publish,
-    subscribe: subscribe
+    eventName,
+    publish,
+    subscribe,
   };
 
 };

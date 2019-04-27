@@ -1,12 +1,12 @@
+import {ledgerProjectionStore} from "../projections/ledgerProjectionStore";
 import {transactionProjectionStore} from "../projections/transactionProjectionStore";
 import {newTransactionCreatedPublisher} from "../publishers/newTransactionCreatedPublisher";
-import {ledgerProjectionStore} from "../projections/ledgerProjectionStore";
 
 const factory = () => {
 
   const process = (parameters) => {
 
-    let newTransaction = undefined;
+    let newTransaction;
 
     const createTransactionProjection = () => {
       const projection = transactionProjectionStore.project.contract();
@@ -48,12 +48,12 @@ const factory = () => {
   };
 
   return {
-    process: process
+    process,
   };
 
 };
 
 const singleton = factory();
 
-export {singleton as createTransactionService}
+export {singleton as createTransactionService};
 

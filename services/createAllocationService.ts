@@ -1,8 +1,8 @@
-import {allocationProjectionStore} from "../projections/allocationProjectionStore";
-import {newTransactionCreatedPublisher} from "../publishers/newTransactionCreatedPublisher";
-import {newAllocationSubmittedPublisher} from "../publishers/newAllocationSubmittedPublisher";
-import {newTransactionSubmittedPublisher} from "../publishers/newTransactionSubmittedPublisher";
 import {sagaStore} from "../data/sagaStore";
+import {allocationProjectionStore} from "../projections/allocationProjectionStore";
+import {newAllocationSubmittedPublisher} from "../publishers/newAllocationSubmittedPublisher";
+import {newTransactionCreatedPublisher} from "../publishers/newTransactionCreatedPublisher";
+import {newTransactionSubmittedPublisher} from "../publishers/newTransactionSubmittedPublisher";
 
 const factory = () => {
 
@@ -26,25 +26,25 @@ const factory = () => {
       eventData.ledgerId = parameters.ledgerId;
       eventData.source = "Allocation";
       eventData.type = "Allocation";
-      if (saga) eventData.sagaId = saga.sagaId;
+      if (saga) { eventData.sagaId = saga.sagaId; }
       newTransactionSubmittedPublisher.publish(eventData);
     };
 
-    //New Allocation Submitted
-    if(parameters.eventName === newAllocationSubmittedPublisher.eventName){
+    // New Allocation Submitted
+    if (parameters.eventName === newAllocationSubmittedPublisher.eventName) {
       const sagaData = {
-        originalEvent: parameters
+        originalEvent: parameters,
       };
       const saga = sagaStore.saveSaga(sagaName, sagaData);
       submitNewTransaction(saga);
     }
 
-    //New Transaction Created
-    if(parameters.eventName === newTransactionCreatedPublisher.eventName){
-      if (!parameters.sagaId) return;
-      const sagaId = parameters.sagaId; //TODO: Standardize ID Names
+    // New Transaction Created
+    if (parameters.eventName === newTransactionCreatedPublisher.eventName) {
+      if (!parameters.sagaId) { return; }
+      const sagaId = parameters.sagaId; // TODO: Standardize ID Names
       const saga = sagaStore.getSaga(sagaName, sagaId);
-      saga.sagaData.transactionId = parameters.transaction.id; //TODO: Standardize ID Names
+      saga.sagaData.transactionId = parameters.transaction.id; // TODO: Standardize ID Names
       createAllocationProjection(saga);
     }
 
@@ -53,16 +53,16 @@ const factory = () => {
   process.contract = () => {
     return {
       amount: undefined,
-      ledgerId: undefined
-    }
+      ledgerId: undefined,
+    };
   };
 
   return {
-    process: process
+    process,
   };
 
 };
 
 const singleton = factory();
 
-export {singleton as createAllocationService}
+export {singleton as createAllocationService};

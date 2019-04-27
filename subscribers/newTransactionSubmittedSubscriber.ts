@@ -1,5 +1,5 @@
-import {createTransactionService} from "../services/createTransactionService";
 import {newTransactionSubmittedPublisher} from "../publishers/newTransactionSubmittedPublisher";
+import {createTransactionService} from "../services/createTransactionService";
 
 const factory = () => {
 
@@ -12,12 +12,12 @@ const factory = () => {
   };
 
   return {
-    process: process,
-    subscribe: subscribe
+    process,
+    subscribe,
   };
 
 };
 
 const singleton = factory();
 
-export {singleton as newTransactionSubmittedSubscriber}
+export {singleton as newTransactionSubmittedSubscriber};

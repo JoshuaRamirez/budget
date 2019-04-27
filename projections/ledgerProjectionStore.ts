@@ -30,9 +30,9 @@ const factory = () => {
 
   return {
     all: projections,
-    getById: getById,
-    project: project,
-  }
+    getById,
+    project,
+  };
 
 };
 

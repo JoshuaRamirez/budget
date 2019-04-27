@@ -2,7 +2,7 @@ const factory = () => {
 
   return {
 
-  }
+  };
 
 };
 

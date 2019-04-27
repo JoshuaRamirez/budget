@@ -19,7 +19,7 @@ const factory = () => {
 
     eventData = {
       eventId: Date.now(),
-      eventName: eventName,
+      eventName,
       sagaId: eventData.sagaId,
       source: eventData.source,
       destination: eventData.destination,
@@ -29,11 +29,11 @@ const factory = () => {
     };
 
     eventDataStore.record(eventData);
-    subscriptions.forEach(handler => handler(eventData));
+    subscriptions.forEach((handler) => handler(eventData));
 
     return {
-      eventName: eventName,
-      eventData: eventData
+      eventName,
+      eventData,
     };
 
   };
@@ -45,9 +45,9 @@ const factory = () => {
   };
 
   return {
-    eventName: eventName,
-    publish: publish,
-    subscribe: subscribe
+    eventName,
+    publish,
+    subscribe,
   };
 
 };

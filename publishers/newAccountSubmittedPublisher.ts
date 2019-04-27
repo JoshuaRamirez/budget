@@ -8,7 +8,7 @@ const factory = () => {
   const contract = () => {
     return {
       name: undefined,
-      type: undefined
+      type: undefined,
     };
   };
 
@@ -16,15 +16,15 @@ const factory = () => {
 
     eventData = {
       name: eventData.name,
-      type: eventData.type
+      type: eventData.type,
     };
 
     eventDataStore.record(eventName, eventData);
-    subscriptions.forEach(handler => handler(eventData));
+    subscriptions.forEach((handler) => handler(eventData));
 
     return {
-      eventName: eventName,
-      eventData: eventData
+      eventName,
+      eventData,
     };
 
   };
@@ -36,9 +36,9 @@ const factory = () => {
   };
 
   return {
-    eventName: eventName,
-    publish: publish,
-    subscribe: subscribe,
+    eventName,
+    publish,
+    subscribe,
 
   };
 

@@ -15,13 +15,13 @@ const factory = () => {
 
     eventData = {
       eventId: Date.now(),
-      eventName: eventName,
+      eventName,
       transaction: eventData.transaction,
       sagaId: eventData.sagaId,
     };
 
     eventDataStore.record(eventData);
-    subscriptions.forEach(handler => handler(eventData));
+    subscriptions.forEach((handler) => handler(eventData));
 
   };
 
@@ -32,9 +32,9 @@ const factory = () => {
   };
 
   return {
-    eventName: eventName,
-    publish: publish,
-    subscribe: subscribe
+    eventName,
+    publish,
+    subscribe,
   };
 
 };

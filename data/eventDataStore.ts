@@ -4,23 +4,23 @@ const factory = () => {
 
   const record = (eventName, eventData) => {
     const eventMeta = {
-      eventName: eventName,
-      eventData: eventData
+      eventName,
+      eventData,
     };
-    if(!eventMetas[eventName]){
+    if (!eventMetas[eventName]) {
       eventMetas[eventName] = [];
     }
     eventMetas[eventName].push(eventMeta);
   };
 
   const replay = () => {
-    eventMetas.forEach(eventMeta => {
-      eventMeta
+    eventMetas.forEach((eventMeta) => {
+      eventMeta;
     });
   };
 
   return {
-    record: record
+    record,
   };
 
 };

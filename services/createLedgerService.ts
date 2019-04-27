@@ -25,12 +25,12 @@ const factory = () => {
   };
 
   return {
-    process: process
+    process,
   };
 
 };
 
 const singleton = factory();
 
-export {singleton as createLedgerService}
+export {singleton as createLedgerService};
 

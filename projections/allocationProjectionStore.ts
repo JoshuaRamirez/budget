@@ -13,7 +13,7 @@ const factory = () => {
     const newProjection = {
       id: Date.now(),
       amount: data.amount,
-      ledgerId: data.ledgerId
+      ledgerId: data.ledgerId,
     };
     projections.push(newProjection);
     return newProjection;
@@ -27,9 +27,9 @@ const factory = () => {
 
   return {
     all: projections,
-    getById: getById,
-    project: project,
-  }
+    getById,
+    project,
+  };
 
 };
 

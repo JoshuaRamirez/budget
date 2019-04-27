@@ -1,19 +1,19 @@
-//Subscribers
+// Subscribers
 import {newAccountSubmittedSubscriber} from "./subscribers/newAccountSubmittedSubscriber";
+import {newAllocationSubmittedSubscriber} from "./subscribers/newAllocationSubmittedSubscriber";
 import {newLedgerRequestedSubscriber} from "./subscribers/newLedgerRequestedSubscriber";
 import {newTransactionSubmittedSubscriber} from "./subscribers/newTransactionSubmittedSubscriber";
-import {newAllocationSubmittedSubscriber} from "./subscribers/newAllocationSubmittedSubscriber";
 
-//Publishers
-import {newTransactionSubmittedPublisher} from "./publishers/newTransactionSubmittedPublisher";
+// Publishers
 import {newAccountSubmittedPublisher} from "./publishers/newAccountSubmittedPublisher";
 import {newAllocationSubmittedPublisher} from "./publishers/newAllocationSubmittedPublisher";
+import {newTransactionSubmittedPublisher} from "./publishers/newTransactionSubmittedPublisher";
 
-//Projections
+// Projections
 import {accountProjectionStore} from "./projections/accountProjectionStore";
+import {allocationProjectionStore} from "./projections/allocationProjectionStore";
 import {ledgerProjectionStore} from "./projections/ledgerProjectionStore";
 import {transactionProjectionStore} from "./projections/transactionProjectionStore";
-import {allocationProjectionStore} from "./projections/allocationProjectionStore";
 import {newTransactionCreatedPublisher} from "./publishers/newTransactionCreatedPublisher";
 import {newTransactionCreatedSubscriber} from "./subscribers/newTransactionCreatedSubscriber";
 
@@ -21,14 +21,14 @@ const factory = () => {
 
   const publishNewAllocation = (ledgerId, amount) => {
     newAllocationSubmittedPublisher.publish({
-      amount: amount,
-      ledgerId: ledgerId,
+      amount,
+      ledgerId,
     });
-    if(allocationProjectionStore.all.length !== 1) {
-      throw "Test Failed";
+    if (allocationProjectionStore.all.length !== 1) {
+      throw new Error("Test Failed");
     }
-    if(allocationProjectionStore.all[0].ledgerId !== ledgerProjectionStore.all[0].id) {
-      throw "Test Failed";
+    if (allocationProjectionStore.all[0].ledgerId !== ledgerProjectionStore.all[0].id) {
+      throw new Error("Test Failed");
     }
   };
 
@@ -49,7 +49,7 @@ const factory = () => {
     newTransactionSubmittedPublisher.publish(newTransaction1);
   };
 
-  const run = function(){
+  const run = function() {
 
     newAccountSubmittedSubscriber.subscribe();
     newLedgerRequestedSubscriber.subscribe();
@@ -82,8 +82,8 @@ const factory = () => {
   const projectionTests = () => {
 
     const projectionStoreIsEmpty = (store) => {
-      if(store.all > 0) {
-        throw "Test Failed";
+      if (store.all > 0) {
+        throw new Error("Test Failed");
       }
     };
 
@@ -103,11 +103,11 @@ const factory = () => {
 
 
   return {
-    run: run
+    run,
   };
 
 };
 
 const singleton = factory();
 
-export {singleton as allTests}
+export {singleton as allTests};

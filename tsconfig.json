@@ -7,7 +7,12 @@
     "outDir": "./build",
     "rootDir": "./"
   },
-  "files": [],
+  "paths": {
+    "~/*": ["~/*"]
+  },
+  "files": [
+    "./**/*.ts"
+  ],
   "include": [
     "./**/*.ts"
   ],

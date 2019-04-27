@@ -16,17 +16,17 @@ const factory = () => {
 
     eventData = {
       eventId: Date.now(),
-      eventName: eventName,
+      eventName,
       amount: eventData.amount,
       ledgerId: eventData.ledgerId,
     };
 
     eventDataStore.record(eventName, eventData);
-    subscriptions.forEach(handler => handler(eventData));
+    subscriptions.forEach((handler) => handler(eventData));
 
     return {
-      eventName: eventName,
-      eventData: eventData
+      eventName,
+      eventData,
     };
 
   };
@@ -38,9 +38,9 @@ const factory = () => {
   };
 
   return {
-    eventName: eventName,
-    publish: publish,
-    subscribe: subscribe,
+    eventName,
+    publish,
+    subscribe,
 
   };
 

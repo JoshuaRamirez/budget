@@ -12,12 +12,12 @@ const factory = () => {
   };
 
   return {
-    process: process,
-    subscribe: subscribe
+    process,
+    subscribe,
   };
 
 };
 
 const singleton = factory();
 
-export {singleton as newAllocationSubmittedSubscriber}
+export {singleton as newAllocationSubmittedSubscriber};

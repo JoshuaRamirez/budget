@@ -5,10 +5,10 @@ const factory = () => {
   const saveSaga = (sagaName, sagaData) => {
     const saga = {
       sagaId: Date.now(),
-      sagaName: sagaName,
-      sagaData: sagaData,
+      sagaName,
+      sagaData,
     };
-    if(!sagas[sagaName]){
+    if (!sagas[sagaName]) {
       sagas[sagaName] = [];
     }
     sagas[sagaName].push(saga);
@@ -17,20 +17,20 @@ const factory = () => {
 
   const getSaga = (sagaName, sagaId) => {
     let foundSaga = null;
-    if(sagaName){
-      if(!sagas[sagaName]){
+    if (sagaName) {
+      if (!sagas[sagaName]) {
         return undefined;
       }
-      sagas[sagaName].forEach(saga => {
-        if(saga.sagaId === sagaId) foundSaga = saga;
+      sagas[sagaName].forEach((saga) => {
+        if (saga.sagaId === sagaId) { foundSaga = saga; }
       });
     }
     return foundSaga;
   };
 
   return {
-    saveSaga: saveSaga,
-    getSaga: getSaga,
+    saveSaga,
+    getSaga,
   };
 
 };
