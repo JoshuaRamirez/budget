@@ -1,11 +1,12 @@
 const factory = () => {
 
-  const eventMetas = [];
+  const eventMetas: any[] = [];
 
-  const record = (eventName, eventData) => {
+  const record = (eventData) => {
+    const eventName = eventData.eventName;
     const eventMeta = {
-      eventName,
       eventData,
+      eventName,
     };
     if (!eventMetas[eventName]) {
       eventMetas[eventName] = [];
@@ -15,7 +16,7 @@ const factory = () => {
 
   const replay = () => {
     eventMetas.forEach((eventMeta) => {
-      eventMeta;
+      return eventMeta;
     });
   };
 

@@ -6,16 +6,16 @@ const factory = () => {
   const process = (parameters) => {
 
     const createLedgerProjection = () => {
-      let newAccount = accountProjectionStore.project.contract();
-      newAccount.name = parameters.name;
-      newAccount.type = parameters.type;
-      newAccount = accountProjectionStore.project(newAccount);
-      return newAccount;
+      let account = accountProjectionStore.project.contract();
+      account.name = parameters.name;
+      account.type = parameters.type;
+      account = accountProjectionStore.project(account);
+      return account;
     };
 
-    const requestNewLedger = (newAccount) => {
+    const requestNewLedger = (account) => {
       const newLedgerRequestedContract = newLedgerRequestedPublisher.publish.contract();
-      newLedgerRequestedContract.account = newAccount;
+      newLedgerRequestedContract.account = account;
       newLedgerRequestedContract.type = "Account";
       newLedgerRequestedPublisher.publish(newLedgerRequestedContract);
     };

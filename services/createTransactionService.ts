@@ -39,11 +39,11 @@ const factory = () => {
 
   process.contract = () => {
     return {
-      source: undefined,
-      destination: undefined,
-      type: undefined,
       amount: undefined,
+      destination: undefined,
       ledger: undefined,
+      source: undefined,
+      type: undefined,
     };
   };
 

@@ -7,6 +7,7 @@ const factory = () => {
 
   const contract = () => {
     return {
+      sagaId: undefined,
       transaction: undefined,
     };
   };
@@ -16,8 +17,8 @@ const factory = () => {
     eventData = {
       eventId: Date.now(),
       eventName,
-      transaction: eventData.transaction,
       sagaId: eventData.sagaId,
+      transaction: eventData.transaction,
     };
 
     eventDataStore.record(eventData);

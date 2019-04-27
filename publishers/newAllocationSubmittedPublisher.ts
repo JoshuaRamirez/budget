@@ -15,18 +15,18 @@ const factory = () => {
   const publish = (eventData) => {
 
     eventData = {
+      amount: eventData.amount,
       eventId: Date.now(),
       eventName,
-      amount: eventData.amount,
       ledgerId: eventData.ledgerId,
     };
 
-    eventDataStore.record(eventName, eventData);
+    eventDataStore.record(eventData);
     subscriptions.forEach((handler) => handler(eventData));
 
     return {
-      eventName,
       eventData,
+      eventName,
     };
 
   };

@@ -19,12 +19,12 @@ const factory = () => {
       type: eventData.type,
     };
 
-    eventDataStore.record(eventName, eventData);
+    eventDataStore.record(eventData);
     subscriptions.forEach((handler) => handler(eventData));
 
     return {
-      eventName,
       eventData,
+      eventName,
     };
 
   };

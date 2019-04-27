@@ -48,7 +48,7 @@ const factory = () => {
     newTransactionSubmittedPublisher.publish(newTransaction1);
   };
 
-  const run = function() {
+  const run = () => {
 
     newAccountSubmittedSubscriber.subscribe();
     newLedgerRequestedSubscriber.subscribe();
@@ -57,7 +57,6 @@ const factory = () => {
     newTransactionCreatedSubscriber.subscribe();
 
     projectionTests();
-    publisherTests();
     basicScenario();
 
   };
@@ -90,12 +89,6 @@ const factory = () => {
     projectionStoreIsEmpty(accountProjectionStore);
     projectionStoreIsEmpty(transactionProjectionStore);
     projectionStoreIsEmpty(ledgerProjectionStore);
-
-  };
-
-  const publisherTests = () => {
-
-
 
   };
 

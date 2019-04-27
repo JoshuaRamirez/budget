@@ -15,17 +15,17 @@ const factory = () => {
   const publish = (eventData) => {
 
     eventData = {
-      name: eventData.name,
       account: eventData.account,
+      name: eventData.name,
       type: eventData.type,
     };
 
-    eventDataStore.record(eventName, eventData);
+    eventDataStore.record(eventData);
     subscriptions.forEach((handler) => handler(eventData));
 
     return {
-      eventName,
       eventData,
+      eventName,
     };
 
   };

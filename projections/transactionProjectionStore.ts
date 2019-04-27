@@ -6,9 +6,9 @@ const factory = () => {
     return {
       amount: undefined,
       destination: undefined,
-      ledger: undefined,
-      type: undefined,
+      ledgerId: undefined,
       source: undefined,
+      type: undefined,
     };
   };
 

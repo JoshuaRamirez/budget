@@ -4,9 +4,9 @@ const factory = () => {
 
   const saveSaga = (sagaName, sagaData) => {
     const saga = {
+      sagaData,
       sagaId: Date.now(),
       sagaName,
-      sagaData,
     };
     if (!sagas[sagaName]) {
       sagas[sagaName] = [];
@@ -29,8 +29,8 @@ const factory = () => {
   };
 
   return {
-    saveSaga,
     getSaga,
+    saveSaga,
   };
 
 };

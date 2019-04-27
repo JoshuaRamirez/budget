@@ -6,13 +6,14 @@ const factory = () => {
     return {
       amount: undefined,
       ledgerId: undefined,
+      transactionId: undefined,
     };
   };
 
   const project = (data) => {
     const newProjection = {
-      id: Date.now(),
       amount: data.amount,
+      id: Date.now(),
       ledgerId: data.ledgerId,
     };
     projections.push(newProjection);

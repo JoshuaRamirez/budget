@@ -7,33 +7,34 @@ const factory = () => {
 
   const contract = () => {
     return {
-      source: undefined,
-      destination: undefined,
-      type: undefined,
       amount: undefined,
-      ledger: undefined,
+      destination: undefined,
+      ledgerId: undefined,
+      sagaId: undefined,
+      source: undefined,
+      type: undefined,
     };
   };
 
   const publish = (eventData) => {
 
     eventData = {
+      amount: eventData.amount,
+      destination: eventData.destination,
       eventId: Date.now(),
       eventName,
+      ledgerId: eventData.ledgerId,
       sagaId: eventData.sagaId,
       source: eventData.source,
-      destination: eventData.destination,
       type: eventData.type,
-      amount: eventData.amount,
-      ledgerId: eventData.ledgerId,
     };
 
     eventDataStore.record(eventData);
     subscriptions.forEach((handler) => handler(eventData));
 
     return {
-      eventName,
       eventData,
+      eventName,
     };
 
   };
