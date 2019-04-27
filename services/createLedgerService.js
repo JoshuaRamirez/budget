@@ -1,36 +1,27 @@
-import {ledgerProjectionStore} from "../projections/ledgerProjectionStore";
-
-const factory = () => {
-
-  const process = (parameters) => {
-
-    const createLedgerProjection = () => {
-      const newLedger = ledgerProjectionStore.project.contract();
-      newLedger.account = parameters.account;
-      newLedger.balance = 0;
-      newLedger.transactions = [];
-      newLedger.type = parameters.type;
-      ledgerProjectionStore.project(newLedger);
+"use strict";
+exports.__esModule = true;
+var ledgerProjectionStore_1 = require("../projections/ledgerProjectionStore");
+var factory = function () {
+    var process = function (parameters) {
+        var createLedgerProjection = function () {
+            var newLedger = ledgerProjectionStore_1.ledgerProjectionStore.project.contract();
+            newLedger.account = parameters.account;
+            newLedger.balance = 0;
+            newLedger.transactions = [];
+            newLedger.type = parameters.type;
+            ledgerProjectionStore_1.ledgerProjectionStore.project(newLedger);
+        };
+        createLedgerProjection();
     };
-
-    createLedgerProjection();
-
-  };
-
-  process.contract = () => {
+    process.contract = function () {
+        return {
+            account: undefined,
+            type: undefined
+        };
+    };
     return {
-      account: undefined,
-      type: undefined,
+        process: process
     };
-  };
-
-  return {
-    process: process
-  };
-
 };
-
-const singleton = factory();
-
-export {singleton as createLedgerService}
-
+var singleton = factory();
+exports.createLedgerService = singleton;

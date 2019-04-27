@@ -1,23 +1,18 @@
-import {createAllocationService} from "../services/createAllocationService";
-import {newTransactionCreatedPublisher} from "../publishers/newTransactionCreatedPublisher";
-
-const factory = () => {
-
-  const process = (parameters) => {
-    createAllocationService.process(parameters);
-  };
-
-  const subscribe = () => {
-    newTransactionCreatedPublisher.subscribe(process);
-  };
-
-  return {
-    process: process,
-    subscribe: subscribe
-  };
-
+"use strict";
+exports.__esModule = true;
+var createAllocationService_1 = require("../services/createAllocationService");
+var newTransactionCreatedPublisher_1 = require("../publishers/newTransactionCreatedPublisher");
+var factory = function () {
+    var process = function (parameters) {
+        createAllocationService_1.createAllocationService.process(parameters);
+    };
+    var subscribe = function () {
+        newTransactionCreatedPublisher_1.newTransactionCreatedPublisher.subscribe(process);
+    };
+    return {
+        process: process,
+        subscribe: subscribe
+    };
 };
-
-const singleton = factory();
-
-export {singleton as newTransactionCreatedSubscriber}
+var singleton = factory();
+exports.newTransactionCreatedSubscriber = singleton;

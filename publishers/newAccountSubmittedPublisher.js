@@ -1,49 +1,36 @@
-import { eventDataStore } from "../data/eventDataStore";
-
-const factory = () => {
-
-  const eventName = "newAccountSubmitted";
-  const subscriptions = [];
-
-  const contract = () => {
+"use strict";
+exports.__esModule = true;
+var eventDataStore_1 = require("../data/eventDataStore");
+var factory = function () {
+    var eventName = "newAccountSubmitted";
+    var subscriptions = [];
+    var contract = function () {
+        return {
+            name: undefined,
+            type: undefined
+        };
+    };
+    var publish = function (eventData) {
+        eventData = {
+            name: eventData.name,
+            type: eventData.type
+        };
+        eventDataStore_1.eventDataStore.record(eventName, eventData);
+        subscriptions.forEach(function (handler) { return handler(eventData); });
+        return {
+            eventName: eventName,
+            eventData: eventData
+        };
+    };
+    publish.contract = contract;
+    var subscribe = function (handler) {
+        subscriptions.push(handler);
+    };
     return {
-      name: undefined,
-      type: undefined
+        eventName: eventName,
+        publish: publish,
+        subscribe: subscribe
     };
-  };
-
-  const publish = (eventData) => {
-
-    eventData = {
-      name: eventData.name,
-      type: eventData.type
-    };
-
-    eventDataStore.record(eventName, eventData);
-    subscriptions.forEach(handler => handler(eventData));
-
-    return {
-      eventName: eventName,
-      eventData: eventData
-    };
-
-  };
-
-  publish.contract = contract;
-
-  const subscribe = (handler) => {
-    subscriptions.push(handler);
-  };
-
-  return {
-    eventName: eventName,
-    publish: publish,
-    subscribe: subscribe,
-
-  };
-
 };
-
-const singleton = factory();
-
-export { singleton as newAccountSubmittedPublisher };
+var singleton = factory();
+exports.newAccountSubmittedPublisher = singleton;

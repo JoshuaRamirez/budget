@@ -1,23 +1,18 @@
-import {newLedgerRequestedPublisher} from "../publishers/newLedgerRequestedPublisher";
-import {createLedgerService} from "../services/createLedgerService";
-
-const factory = () => {
-
-  const process = (parameters) => {
-    createLedgerService.process(parameters);
-  };
-
-  const subscribe = () => {
-    newLedgerRequestedPublisher.subscribe(process);
-  };
-
-  return {
-    process: process,
-    subscribe: subscribe
-  };
-
+"use strict";
+exports.__esModule = true;
+var newLedgerRequestedPublisher_1 = require("../publishers/newLedgerRequestedPublisher");
+var createLedgerService_1 = require("../services/createLedgerService");
+var factory = function () {
+    var process = function (parameters) {
+        createLedgerService_1.createLedgerService.process(parameters);
+    };
+    var subscribe = function () {
+        newLedgerRequestedPublisher_1.newLedgerRequestedPublisher.subscribe(process);
+    };
+    return {
+        process: process,
+        subscribe: subscribe
+    };
 };
-
-const singleton = factory();
-
-export {singleton as newLedgerRequestedSubscriber}
+var singleton = factory();
+exports.newLedgerRequestedSubscriber = singleton;

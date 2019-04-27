@@ -1,30 +1,26 @@
-const factory = () => {
-
-  const eventMetas = [];
-
-  const record = (eventName, eventData) => {
-    const eventMeta = {
-      eventName: eventName,
-      eventData: eventData
+"use strict";
+exports.__esModule = true;
+var factory = function () {
+    var eventMetas = [];
+    var record = function (eventName, eventData) {
+        var eventMeta = {
+            eventName: eventName,
+            eventData: eventData
+        };
+        if (!eventMetas[eventName]) {
+            eventMetas[eventName] = [];
+        }
+        eventMetas[eventName].push(eventMeta);
     };
-    if(!eventMetas[eventName]){
-      eventMetas[eventName] = [];
-    }
-    eventMetas[eventName].push(eventMeta);
-  };
-
-  const replay = () => {
-    eventMetas.forEach(eventMeta => {
-      eventMeta
-    });
-  };
-
-  return {
-    record: record
-  };
-
+    var replay = function () {
+        eventMetas.forEach(function (eventMeta) {
+            eventMeta;
+        });
+    };
+    return {
+        record: record
+    };
 };
-
-const singleton = factory();
-
-export {singleton as eventDataStore, factory as eventStoreFactory};
+exports.eventStoreFactory = factory;
+var singleton = factory();
+exports.eventDataStore = singleton;

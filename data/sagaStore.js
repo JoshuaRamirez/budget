@@ -1,40 +1,36 @@
-const factory = () => {
-
-  const sagas = [];
-
-  const saveSaga = (sagaName, sagaData) => {
-    const saga = {
-      sagaId: Date.now(),
-      sagaName: sagaName,
-      sagaData: sagaData,
+"use strict";
+exports.__esModule = true;
+var factory = function () {
+    var sagas = [];
+    var saveSaga = function (sagaName, sagaData) {
+        var saga = {
+            sagaId: Date.now(),
+            sagaName: sagaName,
+            sagaData: sagaData
+        };
+        if (!sagas[sagaName]) {
+            sagas[sagaName] = [];
+        }
+        sagas[sagaName].push(saga);
+        return saga;
     };
-    if(!sagas[sagaName]){
-      sagas[sagaName] = [];
-    }
-    sagas[sagaName].push(saga);
-    return saga;
-  };
-
-  const getSaga = (sagaName, sagaId) => {
-    let foundSaga = null;
-    if(sagaName){
-      if(!sagas[sagaName]){
-        return undefined;
-      }
-      sagas[sagaName].forEach(saga => {
-        if(saga.sagaId === sagaId) foundSaga = saga;
-      });
-    }
-    return foundSaga;
-  };
-
-  return {
-    saveSaga: saveSaga,
-    getSaga: getSaga,
-  };
-
+    var getSaga = function (sagaName, sagaId) {
+        var foundSaga = null;
+        if (sagaName) {
+            if (!sagas[sagaName]) {
+                return undefined;
+            }
+            sagas[sagaName].forEach(function (saga) {
+                if (saga.sagaId === sagaId)
+                    foundSaga = saga;
+            });
+        }
+        return foundSaga;
+    };
+    return {
+        saveSaga: saveSaga,
+        getSaga: getSaga
+    };
 };
-
-const singleton = factory();
-
-export {singleton as sagaStore};
+var singleton = factory();
+exports.sagaStore = singleton;
