@@ -14,7 +14,6 @@ import {accountProjectionStore} from "./projections/accountProjectionStore";
 import {allocationProjectionStore} from "./projections/allocationProjectionStore";
 import {ledgerProjectionStore} from "./projections/ledgerProjectionStore";
 import {transactionProjectionStore} from "./projections/transactionProjectionStore";
-import {newTransactionCreatedPublisher} from "./publishers/newTransactionCreatedPublisher";
 import {newTransactionCreatedSubscriber} from "./subscribers/newTransactionCreatedSubscriber";
 
 const factory = () => {
