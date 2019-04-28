@@ -1,0 +1,3 @@
+interface IProjection {
+  Id: any;
+}
