@@ -1,16 +1,16 @@
-import {ledgerProjectionStore} from "../projections/ledgerProjectionStore";
-
 const factory = () => {
+
+  const ledgerProjectionStore = new LedgerProjectionStore();
 
   const process = (parameters) => {
 
     const createLedgerProjection = () => {
-      const newLedger = ledgerProjectionStore.project.contract();
-      newLedger.account = parameters.account;
-      newLedger.balance = 0;
-      newLedger.transactions = [];
-      newLedger.type = parameters.type;
-      ledgerProjectionStore.project(newLedger);
+      const newLedger = new LedgerProjection();
+      newLedger.Account = parameters.account;
+      newLedger.Balance = 0;
+      newLedger.Transactions = [];
+      newLedger.Type = parameters.type;
+      ledgerProjectionStore.Project(newLedger);
     };
 
     createLedgerProjection();

@@ -1,21 +1,22 @@
-import {ledgerProjectionStore} from "../projections/ledgerProjectionStore";
-import {transactionProjectionStore} from "../projections/transactionProjectionStore";
 import {newTransactionCreatedPublisher} from "../publishers/newTransactionCreatedPublisher";
 
 const factory = () => {
+
+  const ledgerProjectionStore = new LedgerProjectionStore();
+  const transactionProjectionStore = new TransactionProjectionStore();
 
   const process = (parameters) => {
 
     let newTransaction;
 
     const createTransactionProjection = () => {
-      const projection = transactionProjectionStore.project.contract();
-      projection.amount = parameters.amount;
-      projection.destination = parameters.destination;
-      projection.ledgerId = parameters.ledgerId;
-      projection.source = parameters.source;
-      projection.type = parameters.type;
-      newTransaction = transactionProjectionStore.project(projection);
+      const projection = new TransactionProjection();
+      projection.Amount = parameters.amount;
+      projection.Destination = parameters.destination;
+      projection.LedgerId = parameters.ledgerId;
+      projection.Source = parameters.source;
+      projection.Type = parameters.type;
+      newTransaction = transactionProjectionStore.Project(projection);
     };
 
     const publishTransactionCreated = () => {
@@ -27,8 +28,8 @@ const factory = () => {
 
     const updateLedgerProjection = () => {
       const ledgerId = parameters.ledgerId;
-      const ledger = ledgerProjectionStore.getById(ledgerId);
-      ledger.balance -= newTransaction.amount;
+      const ledger = ledgerProjectionStore.GetById(ledgerId);
+      ledger.Balance -= newTransaction.amount;
     };
 
     createTransactionProjection();

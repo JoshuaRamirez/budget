@@ -2,6 +2,7 @@
 import {newAccountSubmittedSubscriber} from "./subscribers/newAccountSubmittedSubscriber";
 import {newAllocationSubmittedSubscriber} from "./subscribers/newAllocationSubmittedSubscriber";
 import {newLedgerRequestedSubscriber} from "./subscribers/newLedgerRequestedSubscriber";
+import {newTransactionCreatedSubscriber} from "./subscribers/newTransactionCreatedSubscriber";
 import {newTransactionSubmittedSubscriber} from "./subscribers/newTransactionSubmittedSubscriber";
 
 // Publishers
@@ -10,11 +11,10 @@ import {newAllocationSubmittedPublisher} from "./publishers/newAllocationSubmitt
 import {newTransactionSubmittedPublisher} from "./publishers/newTransactionSubmittedPublisher";
 
 // Projections
-import {accountProjectionStore} from "./projections/accountProjectionStore";
-import {allocationProjectionStore} from "./projections/allocationProjectionStore";
-import {ledgerProjectionStore} from "./projections/ledgerProjectionStore";
-import {transactionProjectionStore} from "./projections/transactionProjectionStore";
-import {newTransactionCreatedSubscriber} from "./subscribers/newTransactionCreatedSubscriber";
+const accountProjectionStore = new AccountProjectionStore();
+const allocationProjectionStore = new AllocationProjectionStore();
+const ledgerProjectionStore = new LedgerProjectionStore();
+const transactionProjectionStore = new TransactionProjectionStore();
 
 const factory = () => {
 
@@ -23,10 +23,10 @@ const factory = () => {
       amount,
       ledgerId,
     });
-    if (allocationProjectionStore.all.length !== 1) {
+    if (allocationProjectionStore.Projections.length !== 1) {
       throw new Error("Test Failed");
     }
-    if (allocationProjectionStore.all[0].ledgerId !== ledgerProjectionStore.all[0].id) {
+    if (allocationProjectionStore.Projections[0].LedgerId !== ledgerProjectionStore.Projections[0].Id) {
       throw new Error("Test Failed");
     }
   };
@@ -44,7 +44,7 @@ const factory = () => {
     newTransaction1.destination = "payee";
     newTransaction1.amount = amount;
     newTransaction1.type = "purchase";
-    newTransaction1.ledgerId = ledgerProjectionStore.all[0].id;
+    newTransaction1.ledgerId = ledgerProjectionStore.Projections[0].Id;
     newTransactionSubmittedPublisher.publish(newTransaction1);
   };
 
@@ -69,10 +69,10 @@ const factory = () => {
     publishNewTransaction(1);
     publishNewTransaction(1);
     publishNewTransaction(1);
-    const ledgerId = ledgerProjectionStore.all[0].id;
+    const ledgerId = ledgerProjectionStore.Projections[0].Id;
     publishNewAllocation(ledgerId, -10);
 
-    console.log(ledgerProjectionStore.all[0]);
+    console.log(ledgerProjectionStore.Projections[0]);
 
     console.log("done!");
   };

@@ -1,16 +1,17 @@
-import {accountProjectionStore} from "../projections/accountProjectionStore";
 import {newLedgerRequestedPublisher} from "../publishers/newLedgerRequestedPublisher";
 
 const factory = () => {
 
+  const accountProjectionStore = new AccountProjectionStore();
+
   const process = (parameters) => {
 
     const createLedgerProjection = () => {
-      let account = accountProjectionStore.project.contract();
-      account.name = parameters.name;
-      account.type = parameters.type;
-      account = accountProjectionStore.project(account);
-      return account;
+      const contract = new AccountProjectionRequest();
+      contract.Name = parameters.name;
+      contract.Type = parameters.type;
+      const projection = accountProjectionStore.Project(contract);
+      return projection;
     };
 
     const requestNewLedger = (account) => {

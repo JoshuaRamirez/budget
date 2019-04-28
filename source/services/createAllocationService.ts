@@ -1,10 +1,11 @@
 import {sagaStore} from "../data/sagaStore";
-import {allocationProjectionStore} from "../projections/allocationProjectionStore";
 import {newAllocationSubmittedPublisher} from "../publishers/newAllocationSubmittedPublisher";
 import {newTransactionCreatedPublisher} from "../publishers/newTransactionCreatedPublisher";
 import {newTransactionSubmittedPublisher} from "../publishers/newTransactionSubmittedPublisher";
 
 const factory = () => {
+
+  const allocationProjectionStore = new AllocationProjectionStore();
 
   const process = (parameters) => {
 
@@ -12,11 +13,11 @@ const factory = () => {
 
     const createAllocationProjection = (saga) => {
       const originalEvent = saga.sagaData.originalEvent;
-      const newAllocation = allocationProjectionStore.project.contract();
-      newAllocation.amount = originalEvent.amount;
-      newAllocation.ledgerId = originalEvent.ledgerId;
-      newAllocation.transactionId = saga.sagaData.transactionId;
-      allocationProjectionStore.project(newAllocation);
+      const newAllocation = new AllocationProjection();
+      newAllocation.Amount = originalEvent.amount;
+      newAllocation.LedgerId = originalEvent.ledgerId;
+      newAllocation.TransactionId = saga.sagaData.transactionId;
+      allocationProjectionStore.Project(newAllocation);
     };
 
     const submitNewTransaction = (saga) => {
