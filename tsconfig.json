@@ -1,18 +1,12 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "module": "commonjs",
-    "target": "ES6",
+    "target": "ES5",
     "outDir": "./build",
-    "rootDir": "./"
+    "rootDir": "./source"
   },
   "include": [
     "./**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
   ]
 }

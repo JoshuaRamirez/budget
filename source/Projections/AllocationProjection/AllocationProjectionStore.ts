@@ -1,12 +1,11 @@
-class AllocationProjectionStore extends ProjectionStore<AllocationProjection, AllocationProjectionRequest> {
-  public Project(contract: AllocationProjectionRequest): AllocationProjection {
-    const projection = new AllocationProjection();
-    projection.Amount = contract.Amount;
+import { ProjectionStore } from "../../Core/ProjectionStore";
+import { AllocationProjection } from "./AllocationProjection";
+
+export class AllocationProjectionStore extends ProjectionStore<AllocationProjection> {
+  public static Instance: AllocationProjectionStore = new AllocationProjectionStore();
+  public Project(projection: AllocationProjection): void {
     projection.Id = Date.now();
-    projection.LedgerId = contract.LedgerId;
-    projection.TransactionId = contract.TransactionId;
     this.Projections.push(projection);
-    return projection;
   }
 
 }

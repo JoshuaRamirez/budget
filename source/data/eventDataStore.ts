@@ -3,7 +3,7 @@ const factory = () => {
   const eventMetas: any[] = [];
 
   const record = (eventData) => {
-    const eventName = eventData.eventName;
+    const eventName = eventData.EventName;
     const eventMeta = {
       eventData,
       eventName,

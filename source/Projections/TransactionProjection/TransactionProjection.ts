@@ -1,4 +1,6 @@
-class TransactionProjection implements IProjection {
+import { IProjection } from "../../Core/IProjection";
+
+export class TransactionProjection implements IProjection {
   public Id: any;
   public Amount: number;
   public Destination: any;
