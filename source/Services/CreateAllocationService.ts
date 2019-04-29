@@ -1,3 +1,4 @@
+import { SagaStore } from "../data/sagaStore";
 import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
@@ -5,7 +6,6 @@ import { AllocationProjection } from "../Projections/AllocationProjection";
 import { AllocationProjectionStore } from "../ProjectionStores/AllocationProjectionStore";
 
 export class CreateAllocationService {
-  private sagaStore = require("../data/sagaStore").sagaStore;
   private allocationProjectionStore: AllocationProjectionStore = AllocationProjectionStore.Instance;
   public Process1(allocationRequestedEvent: AllocationRequestedEvent) {
     const startNewSaga = () => {
@@ -13,7 +13,7 @@ export class CreateAllocationService {
       const sagaData = {
         originalEvent: allocationRequestedEvent,
       };
-      const newSaga = this.sagaStore.saveSaga(sagaName, sagaData);
+      const newSaga = SagaStore.Instance.SaveSaga(sagaName, sagaData);
       return newSaga;
     };
     const submitNewTransaction = () => {
@@ -41,7 +41,7 @@ export class CreateAllocationService {
     };
     const sagaName = AllocationRequestedEvent.name;
     const sagaId = transactionCreatedEvent.SagaId; // TODO: Standardize ID Names
-    const saga = this.sagaStore.getSaga(sagaName, sagaId);
+    const saga = SagaStore.Instance.GetSaga(sagaName, sagaId);
     saga.sagaData.transactionId = transactionCreatedEvent.Transaction.Id; // TODO: Standardize ID Names
     createAllocationProjection();
   }

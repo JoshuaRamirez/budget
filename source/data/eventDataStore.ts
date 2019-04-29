@@ -1,31 +1,12 @@
-const factory = () => {
+import { IEvent } from "../Core/IEvent";
 
-  const eventMetas: any[] = [];
-
-  const record = (eventData) => {
-    const eventName = eventData.EventName;
-    const eventMeta = {
-      eventData,
-      eventName,
-    };
-    if (!eventMetas[eventName]) {
-      eventMetas[eventName] = [];
+export class EventDataStore {
+  public static Instance = new EventDataStore();
+  private store = {};
+  public Record<T extends IEvent>(event: T) {
+    if (!this.store[event.EventName]) {
+      this.store[event.EventName] = [];
     }
-    eventMetas[eventName].push(eventMeta);
-  };
-
-  const replay = () => {
-    eventMetas.forEach((eventMeta) => {
-      return eventMeta;
-    });
-  };
-
-  return {
-    record,
-  };
-
-};
-
-const singleton = factory();
-
-export {singleton as eventDataStore, factory as eventStoreFactory};
+    this.store[event.EventName].push(event);
+  }
+}
