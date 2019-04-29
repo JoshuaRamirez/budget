@@ -7,29 +7,7 @@ import { AllocationProjectionStore } from "../ProjectionStores/AllocationProject
 
 export class CreateAllocationService {
   private allocationProjectionStore: AllocationProjectionStore = AllocationProjectionStore.Instance;
-  public Process1(allocationRequestedEvent: AllocationRequestedEvent) {
-    const startNewSaga = () => {
-      const sagaName = AllocationRequestedEvent.name;
-      const sagaData = {
-        originalEvent: allocationRequestedEvent,
-      };
-      const newSaga = SagaStore.Instance.SaveSaga(sagaName, sagaData);
-      return newSaga;
-    };
-    const submitNewTransaction = () => {
-      const transactionSubmittedEvent = new TransactionSubmittedEvent();
-      transactionSubmittedEvent.Amount = allocationRequestedEvent.Amount;
-      transactionSubmittedEvent.Destination = allocationRequestedEvent.LedgerId;
-      transactionSubmittedEvent.LedgerId = allocationRequestedEvent.LedgerId;
-      transactionSubmittedEvent.Source = "Allocation";
-      transactionSubmittedEvent.Type = "Allocation";
-      if (saga) { transactionSubmittedEvent.SagaId = saga.sagaId; }
-      transactionSubmittedEvent.Publish(transactionSubmittedEvent);
-    };
-    const saga = startNewSaga();
-    submitNewTransaction();
-  }
-  public Process2(transactionCreatedEvent: TransactionCreatedEvent) {
+  public Process(transactionCreatedEvent: TransactionCreatedEvent) {
     if (!transactionCreatedEvent.SagaId) { return; }
     const createAllocationProjection = () => {
       const originalEvent: TransactionSubmittedEvent = saga.sagaData.originalEvent;

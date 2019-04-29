@@ -5,6 +5,7 @@ import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
 import { CreateAccountService } from "../Services/CreateAccountService";
 import { CreateAllocationService } from "../Services/CreateAllocationService";
+import { CreateAllocationTransactionService } from "../Services/CreateAllocationTransactionService";
 import { CreateLedgerService } from "../Services/CreateLedgerService";
 import { CreateTransactionService } from "../Services/CreateTransactionService";
 
@@ -19,6 +20,7 @@ export class Subscriber {
 
     const createAccountService = new CreateAccountService();
     const createAllocationService = new CreateAllocationService();
+    const createAllocationTransactionService = new CreateAllocationTransactionService();
     const createLedgerService = new CreateLedgerService();
     const createTransactionService = new CreateTransactionService();
 
@@ -28,7 +30,7 @@ export class Subscriber {
 
     newAllocationSubmittedEvent.Subscribe(
       newAllocationSubmittedEvent.EventName,
-      createAllocationService.Process1.bind(createAllocationService));
+      createAllocationTransactionService.Process.bind(createAllocationService));
 
     newLedgerRequestedEvent.Subscribe(
       newLedgerRequestedEvent.EventName,
@@ -36,7 +38,7 @@ export class Subscriber {
 
     newTransactionCreatedEvent.Subscribe(
       newTransactionCreatedEvent.EventName,
-      createAllocationService.Process2.bind(createAllocationService));
+      createAllocationService.Process.bind(createAllocationService));
 
     newTransactionSubmittedEvent.Subscribe(
       newTransactionSubmittedEvent.EventName,
