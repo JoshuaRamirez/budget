@@ -20,7 +20,7 @@ export class ProjectionStore {
   public GetProjections<TProjection extends Projection>(type: (new () => TProjection)): TProjection[] {
     const projectionName = type.name;
     if (!this.Projections[projectionName]) {
-      return undefined;
+      return [];
     }
     return this.Projections[projectionName];
   }
