@@ -1,10 +1,8 @@
 import { SagaStore } from "../Core/SagaStore";
 import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
-import { AllocationProjectionStore } from "../ProjectionStores/AllocationProjectionStore";
 
 export class CreateAllocationTransactionService {
-  private allocationProjectionStore: AllocationProjectionStore = AllocationProjectionStore.Instance;
   public Process(allocationRequestedEvent: AllocationRequestedEvent) {
     const startNewSaga = () => {
       const sagaName = AllocationRequestedEvent.name;
