@@ -2,8 +2,8 @@ import { Subscriber } from "./Core/Subscriber";
 import { AccountRequestedEvent } from "./Events/AccountRequestedEvent";
 import { AllocationRequestedEvent } from "./Events/AllocationRequestedEvent";
 import { TransactionSubmittedEvent } from "./Events/TransactionSubmittedEvent";
-import { AllocationProjectionStore } from "./Projections/AllocationProjection/AllocationProjectionStore";
-import { LedgerProjectionStore } from "./Projections/LedgerProjection/LedgerProjectionStore";
+import { AllocationProjectionStore } from "./ProjectionStores/AllocationProjectionStore";
+import { LedgerProjectionStore } from "./ProjectionStores/LedgerProjectionStore";
 
 export class Test {
 

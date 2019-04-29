@@ -1,4 +1,4 @@
-import { IProjection } from "../../Core/IProjection";
+import { IProjection } from "../Core/IProjection";
 
 export class TransactionProjection implements IProjection {
   public Id: any;

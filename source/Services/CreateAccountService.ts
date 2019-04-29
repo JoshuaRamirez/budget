@@ -1,7 +1,7 @@
 import { AccountRequestedEvent } from "../Events/AccountRequestedEvent";
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
-import { AccountProjection } from "../Projections/AccountProjection/AccountProjection";
-import { AccountProjectionStore } from "../Projections/AccountProjection/AccountProjectionStore";
+import { AccountProjection } from "../Projections/AccountProjection";
+import { AccountProjectionStore } from "../ProjectionStores/AccountProjectionStore";
 
 export class CreateAccountService {
   private accountProjectionStore: AccountProjectionStore = AccountProjectionStore.Instance;

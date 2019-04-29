@@ -1,7 +1,7 @@
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
-import { LedgerProjectionStore } from "../Projections/LedgerProjection/LedgerProjectionStore";
-import { TransactionProjection } from "../Projections/TransactionProjection/TransactionProjection";
+import { TransactionProjection } from "../Projections/TransactionProjection";
+import { LedgerProjectionStore } from "../ProjectionStores/LedgerProjectionStore";
 
 export class CreateTransactionService {
   private ledgerProjectionStore: LedgerProjectionStore = LedgerProjectionStore.Instance;

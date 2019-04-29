@@ -1,8 +1,8 @@
 import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
-import { AllocationProjection } from "../Projections/AllocationProjection/AllocationProjection";
-import { AllocationProjectionStore } from "../Projections/AllocationProjection/AllocationProjectionStore";
+import { AllocationProjection } from "../Projections/AllocationProjection";
+import { AllocationProjectionStore } from "../ProjectionStores/AllocationProjectionStore";
 
 export class CreateAllocationService {
   private sagaStore = require("../data/sagaStore").sagaStore;

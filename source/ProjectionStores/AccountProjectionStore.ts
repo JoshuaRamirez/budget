@@ -1,5 +1,5 @@
-import { ProjectionStore } from "../../Core/ProjectionStore";
-import { AccountProjection } from "./AccountProjection";
+import { ProjectionStore } from "../Core/ProjectionStore";
+import { AccountProjection } from "../Projections/AccountProjection";
 
 export class AccountProjectionStore extends ProjectionStore<AccountProjection> {
   public static Instance: AccountProjectionStore = new AccountProjectionStore();

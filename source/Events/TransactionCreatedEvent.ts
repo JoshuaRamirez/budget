@@ -1,5 +1,5 @@
 import { SagaEvent } from "../Core/SagaEvent";
-import { TransactionProjection } from "../Projections/TransactionProjection/TransactionProjection";
+import { TransactionProjection } from "../Projections/TransactionProjection";
 
 export class TransactionCreatedEvent extends SagaEvent<TransactionCreatedEvent> {
   public Amount: number;

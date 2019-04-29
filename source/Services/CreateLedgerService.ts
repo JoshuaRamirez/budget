@@ -1,6 +1,6 @@
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
-import { LedgerProjection } from "../Projections/LedgerProjection/LedgerProjection";
-import { LedgerProjectionStore } from "../Projections/LedgerProjection/LedgerProjectionStore";
+import { LedgerProjection } from "../Projections/LedgerProjection";
+import { LedgerProjectionStore } from "../ProjectionStores/LedgerProjectionStore";
 
 export class CreateLedgerService {
   private ledgerProjectionStore: LedgerProjectionStore = LedgerProjectionStore.Instance;

@@ -1,5 +1,5 @@
-import { ProjectionStore } from "../../Core/ProjectionStore";
-import { TransactionProjection } from "./TransactionProjection";
+import { ProjectionStore } from "../Core/ProjectionStore";
+import { TransactionProjection } from "../Projections/TransactionProjection";
 
 export class TransactionProjectionStore extends ProjectionStore<TransactionProjection> {
   public static Instance: TransactionProjectionStore = new TransactionProjectionStore();
