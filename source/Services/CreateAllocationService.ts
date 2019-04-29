@@ -7,8 +7,8 @@ import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
 import { AllocationProjection } from "../Projections/AllocationProjection";
 
 export class CreateAllocationService implements ISubscriber<TransactionCreatedEvent> {
-  public Process(transactionCreatedEvent: TransactionCreatedEvent) {
-    if (!transactionCreatedEvent.SagaId) { return; }
+  public Process(event: TransactionCreatedEvent) {
+    if (!event.SagaId) { return; }
     const createAllocationProjection = () => {
       const originalEvent: TransactionSubmittedEvent = saga.sagaData.originalEvent;
       const allocationProjection: AllocationProjection = new AllocationProjection();
@@ -18,9 +18,9 @@ export class CreateAllocationService implements ISubscriber<TransactionCreatedEv
       ProjectionStore.Instance.Project(allocationProjection);
     };
     const sagaName = AllocationRequestedEvent.name;
-    const sagaId = transactionCreatedEvent.SagaId; // TODO: Standardize ID Names
+    const sagaId = event.SagaId; // TODO: Standardize ID Names
     const saga = SagaStore.Instance.GetSaga(sagaName, sagaId);
-    saga.sagaData.transactionId = transactionCreatedEvent.Transaction.Id; // TODO: Standardize ID Names
+    saga.sagaData.transactionId = event.Transaction.Id; // TODO: Standardize ID Names
     createAllocationProjection();
   }
 }

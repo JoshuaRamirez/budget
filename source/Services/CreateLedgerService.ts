@@ -4,13 +4,13 @@ import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
 export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
-  public Process(ledgerRequestedEvent: LedgerRequestedEvent) {
+  public Process(event: LedgerRequestedEvent) {
     const createLedgerProjection = () => {
       const ledgerProjection = new LedgerProjection();
-      ledgerProjection.Account = ledgerRequestedEvent.Account;
+      ledgerProjection.Account = event.Account;
       ledgerProjection.Balance = 0;
       ledgerProjection.Transactions = [];
-      ledgerProjection.Type = ledgerRequestedEvent.Type;
+      ledgerProjection.Type = event.Type;
       ProjectionStore.Instance.Project(ledgerProjection);
     };
     createLedgerProjection();
