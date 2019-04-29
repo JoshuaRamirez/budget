@@ -6,6 +6,7 @@ import { LedgerProjection } from "../Projections/LedgerProjection";
 import { TransactionProjection } from "../Projections/TransactionProjection";
 
 export class CreateTransactionService implements ISubscriber<TransactionSubmittedEvent> {
+  public static Instance = new CreateTransactionService();
   public Process(event: TransactionSubmittedEvent) {
     let newTransaction: TransactionProjection;
     const createTransactionProjection = () => {

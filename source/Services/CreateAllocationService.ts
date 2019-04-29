@@ -7,6 +7,7 @@ import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
 import { AllocationProjection } from "../Projections/AllocationProjection";
 
 export class CreateAllocationService implements ISubscriber<TransactionCreatedEvent> {
+  public static Instance = new CreateAllocationService();
   public Process(event: TransactionCreatedEvent) {
     if (!event.SagaId) { return; }
     const createAllocationProjection = () => {

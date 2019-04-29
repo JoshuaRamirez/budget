@@ -5,6 +5,7 @@ import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
 import { AccountProjection } from "../Projections/AccountProjection";
 
 export class CreateAccountService implements ISubscriber<AccountRequestedEvent> {
+  public static Instance = new CreateAccountService();
   public Process(event: AccountRequestedEvent) {
     const createLedgerProjection = () => {
       const accountProjection = new AccountProjection();

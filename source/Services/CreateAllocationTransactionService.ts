@@ -4,6 +4,7 @@ import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
 
 export class CreateAllocationTransactionService implements ISubscriber<TransactionSubmittedEvent> {
+  public static Instance = new CreateAllocationTransactionService();
   public Process(event: AllocationRequestedEvent) {
     const startNewSaga = () => {
       const sagaName = AllocationRequestedEvent.name;
