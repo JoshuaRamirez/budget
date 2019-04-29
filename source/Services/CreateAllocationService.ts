@@ -1,4 +1,4 @@
-import { SagaStore } from "../data/sagaStore";
+import { SagaStore } from "../Core/SagaStore";
 import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";

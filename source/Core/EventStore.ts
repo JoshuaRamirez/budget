@@ -1,7 +1,7 @@
-import { IEvent } from "../Core/IEvent";
+import { IEvent } from "./IEvent";
 
-export class EventDataStore {
-  public static Instance = new EventDataStore();
+export class EventStore {
+  public static Instance = new EventStore();
   private store = {};
   public Record<T extends IEvent>(event: T) {
     if (!this.store[event.EventName]) {

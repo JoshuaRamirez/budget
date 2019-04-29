@@ -1,10 +1,10 @@
-import { EventDataStore } from "../data/eventDataStore";
+import { EventStore } from "./EventStore";
 import { MainEvent } from "./MainEvent";
 
 export abstract class Publisher<TEvent extends MainEvent<TEvent>> {
   public static Subscriptions = {};
   public Publish(event: TEvent) {
-    EventDataStore.Instance.Record(event);
+    EventStore.Instance.Record(event);
     Publisher.Subscriptions[event.EventName].forEach((handler) => handler(event));
   }
   public Subscribe(eventName: string,  subscription: (event: TEvent) => void) {
