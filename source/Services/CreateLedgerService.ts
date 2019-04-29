@@ -9,7 +9,7 @@ export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
       const ledgerProjection = new LedgerProjection();
       ledgerProjection.Account = event.Account;
       ledgerProjection.Balance = 0;
-      ledgerProjection.Transactions = [];
+      ledgerProjection.TransactionIds = [];
       ledgerProjection.Type = event.Type;
       ProjectionStore.Instance.Project(ledgerProjection);
     };
