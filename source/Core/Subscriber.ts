@@ -8,8 +8,6 @@ import { CreateAllocationService } from "../Services/CreateAllocationService";
 import { CreateLedgerService } from "../Services/CreateLedgerService";
 import { CreateTransactionService } from "../Services/CreateTransactionService";
 
-
-
 export class Subscriber {
   public Subscribe() {
 
