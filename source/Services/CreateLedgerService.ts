@@ -1,9 +1,9 @@
+import { ISubscriber } from "../Core/ISubscriber";
 import { ProjectionStore } from "../Core/ProjectionStore";
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
-export class CreateLedgerService {
-  private projectionStore = ProjectionStore.Instance;
+export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
   public Process(ledgerRequestedEvent: LedgerRequestedEvent) {
     const createLedgerProjection = () => {
       const ledgerProjection = new LedgerProjection();
@@ -11,7 +11,7 @@ export class CreateLedgerService {
       ledgerProjection.Balance = 0;
       ledgerProjection.Transactions = [];
       ledgerProjection.Type = ledgerRequestedEvent.Type;
-      this.projectionStore.Project(ledgerProjection);
+      ProjectionStore.Instance.Project(ledgerProjection);
     };
     createLedgerProjection();
   }

@@ -1,8 +1,9 @@
+import { ISubscriber } from "../Core/ISubscriber";
 import { SagaStore } from "../Core/SagaStore";
 import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
 
-export class CreateAllocationTransactionService {
+export class CreateAllocationTransactionService implements ISubscriber<TransactionSubmittedEvent> {
   public Process(allocationRequestedEvent: AllocationRequestedEvent) {
     const startNewSaga = () => {
       const sagaName = AllocationRequestedEvent.name;
@@ -20,7 +21,7 @@ export class CreateAllocationTransactionService {
       transactionSubmittedEvent.Source = "Allocation";
       transactionSubmittedEvent.Type = "Allocation";
       if (saga) { transactionSubmittedEvent.SagaId = saga.sagaId; }
-      transactionSubmittedEvent.Publish(transactionSubmittedEvent);
+      transactionSubmittedEvent.Publish();
     };
     const saga = startNewSaga();
     submitNewTransaction();

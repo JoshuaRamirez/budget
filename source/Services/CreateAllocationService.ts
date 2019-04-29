@@ -1,3 +1,4 @@
+import { ISubscriber } from "../Core/ISubscriber";
 import { ProjectionStore } from "../Core/ProjectionStore";
 import { SagaStore } from "../Core/SagaStore";
 import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
@@ -5,8 +6,7 @@ import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
 import { AllocationProjection } from "../Projections/AllocationProjection";
 
-export class CreateAllocationService {
-  private projectionStore = ProjectionStore.Instance;
+export class CreateAllocationService implements ISubscriber<TransactionCreatedEvent> {
   public Process(transactionCreatedEvent: TransactionCreatedEvent) {
     if (!transactionCreatedEvent.SagaId) { return; }
     const createAllocationProjection = () => {
@@ -15,7 +15,7 @@ export class CreateAllocationService {
       allocationProjection.Amount = originalEvent.Amount;
       allocationProjection.LedgerId = originalEvent.LedgerId;
       allocationProjection.TransactionId = saga.sagaData.transactionId;
-      this.projectionStore.Project(allocationProjection);
+      ProjectionStore.Instance.Project(allocationProjection);
     };
     const sagaName = AllocationRequestedEvent.name;
     const sagaId = transactionCreatedEvent.SagaId; // TODO: Standardize ID Names

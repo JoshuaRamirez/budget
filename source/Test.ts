@@ -1,5 +1,5 @@
 import { ProjectionStore } from "./Core/ProjectionStore";
-import { Subscriber } from "./Core/Subscriber";
+import { Subscriptions } from "./Core/Subscriptions";
 import { AccountRequestedEvent } from "./Events/AccountRequestedEvent";
 import { AllocationRequestedEvent } from "./Events/AllocationRequestedEvent";
 import { TransactionSubmittedEvent } from "./Events/TransactionSubmittedEvent";
@@ -10,14 +10,14 @@ export class Test {
 
   public Run() {
 
-    const subscriber = new Subscriber();
+    const subscriptions = new Subscriptions();
     const projectionStore = ProjectionStore.Instance;
 
     const publishNewAllocation = (ledgerId, amount) => {
       const allocationRequestedEvent = new AllocationRequestedEvent();
       allocationRequestedEvent.Amount = amount;
       allocationRequestedEvent.LedgerId = ledgerId;
-      allocationRequestedEvent.Publish(allocationRequestedEvent);
+      allocationRequestedEvent.Publish();
       if (projectionStore.GetProjections(AllocationProjection).length !== 1) {
         throw new Error("Test Failed: Expected Projection Not Present");
       }
@@ -31,7 +31,7 @@ export class Test {
       const accountRequestedEvent = new AccountRequestedEvent();
       accountRequestedEvent.Name = "Wells Fargo Checking";
       accountRequestedEvent.Type = "Bank";
-      accountRequestedEvent.Publish(accountRequestedEvent);
+      accountRequestedEvent.Publish();
     };
 
     const publishNewTransaction = (amount) => {
@@ -41,10 +41,10 @@ export class Test {
       transactionSubmittedEvent.Amount = amount;
       transactionSubmittedEvent.Type = "purchase";
       transactionSubmittedEvent.LedgerId = projectionStore.GetProjections(LedgerProjection)[0].Id;
-      transactionSubmittedEvent.Publish(transactionSubmittedEvent);
+      transactionSubmittedEvent.Publish();
     };
 
-    subscriber.Subscribe();
+    subscriptions.Create();
     publishNewAccountSubmitted();
     publishNewTransaction(1);
     publishNewTransaction(1);
