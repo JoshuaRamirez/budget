@@ -1,27 +1,28 @@
+import { ProjectionStore } from "./Core/ProjectionStore";
 import { Subscriber } from "./Core/Subscriber";
 import { AccountRequestedEvent } from "./Events/AccountRequestedEvent";
 import { AllocationRequestedEvent } from "./Events/AllocationRequestedEvent";
 import { TransactionSubmittedEvent } from "./Events/TransactionSubmittedEvent";
-import { AllocationProjectionStore } from "./ProjectionStores/AllocationProjectionStore";
-import { LedgerProjectionStore } from "./ProjectionStores/LedgerProjectionStore";
+import { AllocationProjection } from "./Projections/AllocationProjection";
+import { LedgerProjection } from "./Projections/LedgerProjection";
 
 export class Test {
 
   public Run() {
 
     const subscriber = new Subscriber();
-    const allocationProjectionStore = AllocationProjectionStore.Instance;
-    const ledgerProjectionStore = LedgerProjectionStore.Instance;
+    const projectionStore = ProjectionStore.Instance;
 
     const publishNewAllocation = (ledgerId, amount) => {
       const allocationRequestedEvent = new AllocationRequestedEvent();
       allocationRequestedEvent.Amount = amount;
       allocationRequestedEvent.LedgerId = ledgerId;
       allocationRequestedEvent.Publish(allocationRequestedEvent);
-      if (allocationProjectionStore.Projections.length !== 1) {
+      if (projectionStore.GetProjections(AllocationProjection).length !== 1) {
         throw new Error("Test Failed: Expected Projection Not Present");
       }
-      if (allocationProjectionStore.Projections[0].LedgerId !== ledgerProjectionStore.Projections[0].Id) {
+      const allocationLedgerId = projectionStore.GetProjections(AllocationProjection)[0].LedgerId;
+      if (allocationLedgerId !== ledgerId) {
         throw new Error("Test Failed: Expected Id Not Present");
       }
     };
@@ -39,7 +40,7 @@ export class Test {
       transactionSubmittedEvent.Destination = "payee";
       transactionSubmittedEvent.Amount = amount;
       transactionSubmittedEvent.Type = "purchase";
-      transactionSubmittedEvent.LedgerId = ledgerProjectionStore.Projections[0].Id;
+      transactionSubmittedEvent.LedgerId = projectionStore.GetProjections(LedgerProjection)[0].Id;
       transactionSubmittedEvent.Publish(transactionSubmittedEvent);
     };
 
@@ -50,9 +51,10 @@ export class Test {
     publishNewTransaction(1);
     publishNewTransaction(1);
     publishNewTransaction(1);
-    const theLedger = ledgerProjectionStore.Projections[0].Id;
-    publishNewAllocation(theLedger, -10);
-    console.log(ledgerProjectionStore.Projections[0]);
+    const theLedger = projectionStore.GetProjections(LedgerProjection)[0];
+    const theLedgerId = theLedger.Id;
+    publishNewAllocation(theLedgerId, -10);
+    console.log(theLedger);
     console.log("done!");
 
   }

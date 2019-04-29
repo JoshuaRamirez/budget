@@ -1,9 +1,13 @@
-import { IProjection } from "../Core/IProjection";
+import { Projection } from "../Core/Projection";
+import { TransactionProjection } from "./TransactionProjection";
 
-export class LedgerProjection implements IProjection {
+export class LedgerProjection extends Projection {
   public Account: any;
   public Balance: number;
   public Id: any;
-  public Transactions: any[];
+  public Transactions: TransactionProjection[];
   public Type: string;
+  constructor() {
+    super(LedgerProjection.name);
+  }
 }

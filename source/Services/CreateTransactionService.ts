@@ -1,10 +1,11 @@
+import { ProjectionStore } from "../Core/ProjectionStore";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
+import { LedgerProjection } from "../Projections/LedgerProjection";
 import { TransactionProjection } from "../Projections/TransactionProjection";
-import { LedgerProjectionStore } from "../ProjectionStores/LedgerProjectionStore";
 
 export class CreateTransactionService {
-  private ledgerProjectionStore: LedgerProjectionStore = LedgerProjectionStore.Instance;
+  private projectionStore = ProjectionStore.Instance;
   public Process(transactionSubmittedEvent: TransactionSubmittedEvent) {
     let newTransaction: TransactionProjection;
     const createTransactionProjection = () => {
@@ -18,8 +19,9 @@ export class CreateTransactionService {
     };
     const updateLedgerProjection = () => {
       const ledgerId = transactionSubmittedEvent.LedgerId;
-      const ledger = this.ledgerProjectionStore.GetById(ledgerId);
+      const ledger = this.projectionStore.GetProjection(LedgerProjection, ledgerId);
       ledger.Balance -= newTransaction.Amount;
+      ledger.Transactions.push(newTransaction);
     };
     const publishTransactionCreated = () => {
       const newTransactionCreatedEvent = new TransactionCreatedEvent();

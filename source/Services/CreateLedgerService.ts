@@ -1,17 +1,17 @@
+import { ProjectionStore } from "../Core/ProjectionStore";
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
-import { LedgerProjectionStore } from "../ProjectionStores/LedgerProjectionStore";
 
 export class CreateLedgerService {
-  private ledgerProjectionStore: LedgerProjectionStore = LedgerProjectionStore.Instance;
+  private projectionStore = ProjectionStore.Instance;
   public Process(ledgerRequestedEvent: LedgerRequestedEvent) {
     const createLedgerProjection = () => {
-      const newLedger = new LedgerProjection();
-      newLedger.Account = ledgerRequestedEvent.Account;
-      newLedger.Balance = 0;
-      newLedger.Transactions = [];
-      newLedger.Type = ledgerRequestedEvent.Type;
-      this.ledgerProjectionStore.Project(newLedger);
+      const ledgerProjection = new LedgerProjection();
+      ledgerProjection.Account = ledgerRequestedEvent.Account;
+      ledgerProjection.Balance = 0;
+      ledgerProjection.Transactions = [];
+      ledgerProjection.Type = ledgerRequestedEvent.Type;
+      this.projectionStore.Project(ledgerProjection);
     };
     createLedgerProjection();
   }
