@@ -9,12 +9,15 @@ export class Publisher<TEvent extends MainEvent<TEvent>> {
     EventStore.Instance.Record(event);
     Publisher.Subscriptions[event.EventName].forEach((handler) => handler(event));
   }
-  public Subscribe<TSubscriber extends ISubscriber<TEvent>>(eventType: (new () => TEvent),  subscriber: TSubscriber) {
+  public Subscribe<TSubscriber extends ISubscriber<TEvent>>(
+    eventType: (new () => TEvent),
+    subscriber: ISubscriber<TEvent>,
+  ) {
     const eventName = eventType.name;
     const subscriptions = Publisher.Subscriptions[eventName];
     if (!subscriptions) {
       Publisher.Subscriptions[eventName] = [];
     }
-    Publisher.Subscriptions[eventName].push(subscriber.Process);
+    Publisher.Subscriptions[eventName].push(subscriber.Process.bind(subscriber));
   }
 }

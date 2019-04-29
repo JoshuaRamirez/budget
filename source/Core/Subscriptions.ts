@@ -12,20 +12,11 @@ import { Publisher } from "./Publisher";
 
 export class Subscriptions {
   public Create() {
-
     const publisher = Publisher.Instance;
-
-    const createAccountService = new CreateAccountService();
-    const createAllocationService = new CreateAllocationService();
-    const createAllocationTransactionService = new CreateAllocationTransactionService();
-    const createLedgerService = new CreateLedgerService();
-    const createTransactionService = new CreateTransactionService();
-
-    publisher.Subscribe(AccountRequestedEvent, createAccountService);
-    publisher.Subscribe(AllocationRequestedEvent, createAllocationTransactionService);
-    publisher.Subscribe(LedgerRequestedEvent, createLedgerService);
-    publisher.Subscribe(TransactionCreatedEvent, createAllocationService);
-    publisher.Subscribe(TransactionSubmittedEvent, createTransactionService);
-
+    publisher.Subscribe(AccountRequestedEvent, CreateAccountService.Instance);
+    publisher.Subscribe(AllocationRequestedEvent, CreateAllocationTransactionService.Instance);
+    publisher.Subscribe(LedgerRequestedEvent, CreateLedgerService.Instance);
+    publisher.Subscribe(TransactionCreatedEvent, CreateAllocationService.Instance);
+    publisher.Subscribe(TransactionSubmittedEvent, CreateTransactionService.Instance);
   }
 }
