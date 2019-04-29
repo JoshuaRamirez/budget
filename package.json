@@ -7,6 +7,7 @@
     "test": "source/test"
   },
   "dependencies": {
+    "@types/node": "^11.13.8",
     "jshint": "^2.10.2"
   },
   "devDependencies": {
