@@ -7,6 +7,9 @@ export class Publisher<TEvent extends MainEvent<TEvent>> {
   public static Instance = new Publisher();
   public Publish(event: TEvent) {
     EventStore.Instance.Record(event);
+    if (!Publisher.Subscriptions[event.EventName]) {
+      return;
+    }
     Publisher.Subscriptions[event.EventName].forEach((handler) => handler(event));
   }
   public Subscribe<TSubscriber extends ISubscriber<TEvent>>(
