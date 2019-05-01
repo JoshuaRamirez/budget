@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "tsc source/main.ts && node main.js --experimental-modules --loader source/system/customLoader.mjs",
-    "test": "mocha",
+    "test": "mocha -r ts-node/register test/**/Test*.ts",
     "build": "tsc --p tsconfig.json",
     "lint": "tslint -p tsconfig.json"
   },
