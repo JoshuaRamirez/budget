@@ -2,9 +2,11 @@ import { ProjectionStore } from "./Core/ProjectionStore";
 import { Subscriptions } from "./Core/Subscriptions";
 import { AccountRequestedEvent } from "./Events/AccountRequestedEvent";
 import { AllocationRequestedEvent } from "./Events/AllocationRequestedEvent";
+import { PlannedExpenseRequestedEvent } from "./Events/PlannedExpenseRequestedEvent";
 import { TransactionSubmittedEvent } from "./Events/TransactionSubmittedEvent";
 import { AllocationProjection } from "./Projections/AllocationProjection";
 import { LedgerProjection } from "./Projections/LedgerProjection";
+import { PlannedExpenseProjection } from "./Projections/PlannedExpenseProjection";
 
 export class Test {
 
@@ -44,6 +46,16 @@ export class Test {
       transactionSubmittedEvent.Publish();
     };
 
+    const requestPlannedExpense = () => {
+      const event = new PlannedExpenseRequestedEvent();
+      event.RepeatPeriod = 1;
+      event.RepeatMeasurement = "Weeks";
+      event.RepeatCount = -1;
+      event.Description = "Testing";
+      event.Name = "Test Expense";
+      event.Publish();
+    };
+
     subscriptions.Create();
     publishNewAccountSubmitted();
     publishNewTransaction(1);
@@ -54,6 +66,9 @@ export class Test {
     const theLedger = projectionStore.GetProjections(LedgerProjection)[0];
     const theLedgerId = theLedger.Id;
     publishNewAllocation(theLedgerId, -10);
+    requestPlannedExpense();
+    const plannedExpense = projectionStore.GetProjections(PlannedExpenseProjection)[0];
+    console.log(plannedExpense);
     console.log(theLedger);
     console.log("done!");
 
