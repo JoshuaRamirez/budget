@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import {CreateAllocationService} from "../../source/Services/CreateAllocationService";
+import {CreateAllocationService} from "../../../source/Services/CreateAllocationService";
 
 describe("CreateAllocationService", () => {
 
