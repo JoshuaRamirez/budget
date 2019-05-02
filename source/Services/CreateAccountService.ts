@@ -7,7 +7,7 @@ import { AccountProjection } from "../Projections/AccountProjection";
 export class CreateAccountService implements ISubscriber<AccountRequestedEvent> {
   public static Instance = new CreateAccountService();
   public Process(event: AccountRequestedEvent) {
-    const createLedgerProjection = () => {
+    const createAccountProjection = () => {
       const accountProjection = new AccountProjection();
       accountProjection.Name = event.Name;
       accountProjection.Type = event.Type;
@@ -20,7 +20,7 @@ export class CreateAccountService implements ISubscriber<AccountRequestedEvent> 
       ledgerRequestedEvent.Type = "Account";
       ledgerRequestedEvent.Publish();
     };
-    const newAccount = createLedgerProjection();
+    const newAccount = createAccountProjection();
     requestNewLedger(newAccount);
   }
 }
