@@ -1,10 +1,12 @@
+import { Id } from "./Id";
+
 export class SagaStore {
   public static Instance = new SagaStore();
   private sagas = [];
   public SaveSaga(sagaName: string, sagaData) {
     const saga = {
       sagaData,
-      sagaId: Date.now(),
+      sagaId: Id.Generate(),
       sagaName,
     };
     if (!this.sagas[sagaName]) {
