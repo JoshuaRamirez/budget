@@ -1,30 +1,16 @@
-import { Id } from "./Id";
+import { Saga } from "./Saga";
 
 export class SagaStore {
   public static Instance = new SagaStore();
-  private sagas = [];
-  public SaveSaga(sagaName: string, sagaData) {
-    const saga = {
-      sagaData,
-      sagaId: Id.Generate(),
-      sagaName,
-    };
-    if (!this.sagas[sagaName]) {
-      this.sagas[sagaName] = [];
-    }
-    this.sagas[sagaName].push(saga);
-    return saga;
+  private sagas: Saga[] = [];
+  public SaveSaga<TSaga extends Saga>(saga: TSaga): void {
+    this.sagas.push(saga);
   }
-  public GetSaga(sagaName, sagaId) {
+  public GetSaga<TSaga extends Saga>(sagaId: number): TSaga {
     let foundSaga = null;
-    if (sagaName) {
-      if (!this.sagas[sagaName]) {
-        return undefined;
-      }
-      this.sagas[sagaName].forEach((saga) => {
-        if (saga.sagaId === sagaId) { foundSaga = saga; }
-      });
-    }
+    this.sagas.forEach((saga) => {
+      if (saga.Id === sagaId) { foundSaga = saga; }
+    });
     return foundSaga;
   }
 }

@@ -1,30 +1,29 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { SagaStore } from "../Core/SagaStore";
-import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
+import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 
 export class CreateAllocationTransactionService implements ISubscriber<TransactionSubmittedEvent> {
   public static Instance = new CreateAllocationTransactionService();
-  public Process(event: AllocationRequestedEvent) {
-    const startNewSaga = () => {
-      const sagaName = AllocationRequestedEvent.name;
-      const sagaData = {
-        originalEvent: event,
-      };
-      const newSaga = SagaStore.Instance.SaveSaga(sagaName, sagaData);
-      return newSaga;
-    };
-    const submitNewTransaction = () => {
-      const transactionSubmittedEvent = new TransactionSubmittedEvent();
-      transactionSubmittedEvent.Amount = event.Amount;
-      transactionSubmittedEvent.Destination = event.LedgerId;
-      transactionSubmittedEvent.LedgerId = event.LedgerId;
-      transactionSubmittedEvent.Source = "Allocation";
-      transactionSubmittedEvent.Type = "Allocation";
-      if (saga) { transactionSubmittedEvent.SagaId = saga.sagaId; }
-      transactionSubmittedEvent.Publish();
-    };
-    const saga = startNewSaga();
-    submitNewTransaction();
+  public Process(event: TransactionSubmittedEvent): void {
+    const saga = this.startNewSaga(event);
+    this.submitNewTransaction(event, saga);
+  }
+  private startNewSaga(event: TransactionSubmittedEvent): CreateAllocationSaga {
+    const saga = new CreateAllocationSaga();
+    saga.Amount = event.Amount;
+    saga.LedgerId = event.LedgerId;
+    SagaStore.Instance.SaveSaga(saga);
+    return saga;
+  }
+  private submitNewTransaction(event: TransactionSubmittedEvent, saga: CreateAllocationSaga) {
+    const transactionSubmittedEvent = new TransactionSubmittedEvent();
+    transactionSubmittedEvent.Amount = event.Amount;
+    transactionSubmittedEvent.Destination = event.LedgerId;
+    transactionSubmittedEvent.LedgerId = event.LedgerId;
+    transactionSubmittedEvent.Source = "Allocation";
+    transactionSubmittedEvent.Type = "Allocation";
+    transactionSubmittedEvent.SagaId = saga.Id;
+    transactionSubmittedEvent.Publish();
   }
 }
