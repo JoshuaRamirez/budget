@@ -8,25 +8,24 @@ import { TransactionProjection } from "../Projections/TransactionProjection";
 export class CreateTransactionService implements ISubscriber<TransactionSubmittedEvent> {
   public static Instance = new CreateTransactionService();
   public Process(event: TransactionSubmittedEvent) {
-    let newTransaction: TransactionProjection;
+    let transactionProjection: TransactionProjection;
     const createTransactionProjection = () => {
-      const projection = new TransactionProjection();
-      projection.Amount = event.Amount;
-      projection.Destination = event.Destination;
-      projection.LedgerId = event.LedgerId;
-      projection.Source = event.Source;
-      projection.Type = event.Type;
-      newTransaction = projection;
+      transactionProjection = new TransactionProjection();
+      transactionProjection.Amount = event.Amount;
+      transactionProjection.Destination = event.Destination;
+      transactionProjection.LedgerId = event.LedgerId;
+      transactionProjection.Source = event.Source;
+      transactionProjection.Type = event.Type;
     };
     const updateLedgerProjection = () => {
       const ledgerId = event.LedgerId;
-      const ledger = ProjectionStore.Instance.GetProjection(LedgerProjection, ledgerId);
-      ledger.Balance -= newTransaction.Amount;
-      ledger.TransactionIds.push(newTransaction.Id);
+      const ledgerProjection = ProjectionStore.Instance.GetProjection(LedgerProjection, ledgerId);
+      ledgerProjection.Balance -= transactionProjection.Amount;
+      ledgerProjection.TransactionIds.push(transactionProjection.Id);
     };
     const publishTransactionCreated = () => {
       const newTransactionCreatedEvent = new TransactionCreatedEvent();
-      newTransactionCreatedEvent.Transaction = newTransaction;
+      newTransactionCreatedEvent.Transaction = transactionProjection;
       newTransactionCreatedEvent.SagaId = event.SagaId;
       newTransactionCreatedEvent.Publish();
     };
