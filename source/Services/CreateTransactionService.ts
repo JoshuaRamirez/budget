@@ -18,6 +18,7 @@ export class CreateTransactionService implements ISubscriber<TransactionSubmitte
       transactionProjection.LedgerId = event.LedgerId;
       transactionProjection.Source = event.Source;
       transactionProjection.Type = event.Type;
+      ProjectionStore.Instance.Project(transactionProjection);
     };
     const updateLedgerProjection = () => {
       const ledgerId = event.LedgerId;
