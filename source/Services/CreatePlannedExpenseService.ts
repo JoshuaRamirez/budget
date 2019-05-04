@@ -1,9 +1,8 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { ProjectionStore } from "../Core/ProjectionStore";
+import { Publisher } from "../Core/Publisher";
 import { PlannedExpenseRequestedEvent } from "../Events/PlannedExpenseRequestedEvent";
 import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjection";
-import { Publisher } from "../Core/Publisher";
-import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 
 export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRequestedEvent> {
   public static Instance = new CreatePlannedExpenseService();
