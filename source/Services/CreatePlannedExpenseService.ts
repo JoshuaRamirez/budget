@@ -1,5 +1,4 @@
 import { ISubscriber } from "../Core/ISubscriber";
-import { ProjectionStore } from "../Core/ProjectionStore";
 import { Publisher } from "../Core/Publisher";
 import { PlannedExpenseRequestedEvent } from "../Events/PlannedExpenseRequestedEvent";
 import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjection";
@@ -16,7 +15,7 @@ export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRe
     plannedExpenseProjection.RepeatMeasurement = event.RepeatMeasurement;
     plannedExpenseProjection.RepeatPeriod = event.RepeatPeriod;
     plannedExpenseProjection.RepeatStart = event.RepeatStart;
-    ProjectionStore.Instance.Project(plannedExpenseProjection);
+    plannedExpenseProjection.Project();
     return plannedExpenseProjection;
   }
   public Subscribe() {

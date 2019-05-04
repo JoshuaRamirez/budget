@@ -1,5 +1,4 @@
 import { ISubscriber } from "../Core/ISubscriber";
-import { ProjectionStore } from "../Core/ProjectionStore";
 import { Publisher } from "../Core/Publisher";
 import { AccountRequestedEvent } from "../Events/AccountRequestedEvent";
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
@@ -12,7 +11,7 @@ export class CreateAccountService implements ISubscriber<AccountRequestedEvent> 
     const accountProjection = new AccountProjection();
     accountProjection.Name = event.Name;
     accountProjection.Type = event.Type;
-    ProjectionStore.Instance.Project(accountProjection);
+    accountProjection.Project();
     // Request Ledger
     const ledgerRequestedEvent = new LedgerRequestedEvent();
     ledgerRequestedEvent.Account = accountProjection;

@@ -1,5 +1,4 @@
 import { ISubscriber } from "../Core/ISubscriber";
-import { ProjectionStore } from "../Core/ProjectionStore";
 import { Publisher } from "../Core/Publisher";
 import { SagaStore } from "../Core/SagaStore";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
@@ -24,7 +23,7 @@ export class CreateAllocationService implements ISubscriber<TransactionCreatedEv
     allocationProjection.Amount = saga.Amount;
     allocationProjection.LedgerId = saga.LedgerId;
     allocationProjection.TransactionId = event.Transaction.Id;
-    ProjectionStore.Instance.Project(allocationProjection);
+    allocationProjection.Project();
   }
   public Subscribe() {
     Publisher.Instance.Subscribe(TransactionCreatedEvent, this);

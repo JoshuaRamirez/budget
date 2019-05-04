@@ -1,5 +1,4 @@
 import { ISubscriber } from "../Core/ISubscriber";
-import { ProjectionStore } from "../Core/ProjectionStore";
 import { Publisher } from "../Core/Publisher";
 import { SagaStore } from "../Core/SagaStore";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
@@ -26,7 +25,7 @@ export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent
     expenseProjection.LedgerId = event.Transaction.LedgerId;
     expenseProjection.PayeeId = saga.expenseRequestedEvent.PayeeId;
     expenseProjection.TransactionId = event.Transaction.Id;
-    ProjectionStore.Instance.Project(expenseProjection);
+    expenseProjection.Project();
   }
   public Subscribe() {
     Publisher.Instance.Subscribe(TransactionCreatedEvent, this);
