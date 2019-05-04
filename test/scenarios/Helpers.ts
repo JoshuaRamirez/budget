@@ -1,6 +1,7 @@
 import { ProjectionStore } from "../../source/Core/ProjectionStore";
 import { AccountRequestedEvent } from "../../source/Events/AccountRequestedEvent";
 import { AllocationRequestedEvent } from "../../source/Events/AllocationRequestedEvent";
+import { ExpenseRequestedEvent } from "../../source/Events/ExpenseRequestedEvent";
 import { PlannedExpenseRequestedEvent } from "../../source/Events/PlannedExpenseRequestedEvent";
 import { TransactionSubmittedEvent } from "../../source/Events/TransactionSubmittedEvent";
 import { LedgerProjection } from "../../source/Projections/LedgerProjection";
@@ -32,6 +33,17 @@ export const PublishNewTransaction = (amount) => {
   transactionSubmittedEvent.Type = "purchase";
   transactionSubmittedEvent.LedgerId = projectionStore.GetProjections(LedgerProjection)[0].Id;
   transactionSubmittedEvent.Publish();
+};
+
+export const PublishExpenseRequested = (amount, ledgerId, plannedExpenseId = null, payeeId = null) => {
+  const expenseRequestedEvent = new ExpenseRequestedEvent();
+  expenseRequestedEvent.Amount = amount;
+  expenseRequestedEvent.Category = "Test";
+  expenseRequestedEvent.Description = "Test";
+  expenseRequestedEvent.LedgerId = ledgerId;
+  expenseRequestedEvent.PayeeId = payeeId;
+  expenseRequestedEvent.PlannedExpenseId = plannedExpenseId;
+  expenseRequestedEvent.Publish();
 };
 
 export const RequestPlannedExpense = () => {
