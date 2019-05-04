@@ -21,6 +21,7 @@ export class CreateAllocationTransactionService implements ISubscriber<Allocatio
     transactionSubmittedEvent.Source = "Allocation";
     transactionSubmittedEvent.Type = "Allocation";
     transactionSubmittedEvent.SagaId = saga.Id;
+    transactionSubmittedEvent.SagaName = saga.Name;
     transactionSubmittedEvent.Publish();
   }
   public Subscribe() {
