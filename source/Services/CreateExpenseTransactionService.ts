@@ -10,7 +10,7 @@ export class CreateExpenseTransactionService implements ISubscriber<ExpenseReque
   public Process(event: ExpenseRequestedEvent): void {
     // Start New Saga
     const saga = new CreateExpenseSaga();
-    saga.expenseRequestedEvent = event;
+    saga.ExpenseRequestedEvent = event;
     SagaStore.Instance.SaveSaga(saga);
     // Submit New Transaction
     const transactionRequestedEvent = new TransactionRequestedEvent(saga.Name, saga.Id);
