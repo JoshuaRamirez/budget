@@ -1,4 +1,5 @@
 import { Id } from "./Id";
+import { ProjectionStore } from "./ProjectionStore";
 
 export abstract class Projection {
   public Id: any;
@@ -7,5 +8,7 @@ export abstract class Projection {
     this.Id = Id.Generate();
     this.ProjectionName = projectionName;
   }
-
+  public Project(): void {
+    ProjectionStore.Instance.Project(this);
+  }
 }
