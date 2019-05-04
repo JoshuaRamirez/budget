@@ -1,6 +1,5 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { Publisher } from "../Core/Publisher";
-import { SagaStore } from "../Core/SagaStore";
 import { ExpenseRequestedEvent } from "../Events/ExpenseRequestedEvent";
 import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
 import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
@@ -10,7 +9,7 @@ export class CreateExpenseTransactionService implements ISubscriber<ExpenseReque
   public Process(event: ExpenseRequestedEvent): void {
     // Start New Saga
     const saga = new CreateExpenseSaga(event);
-    SagaStore.Instance.SaveSaga(saga);
+    saga.Save();
     // Submit New Transaction
     const transactionRequestedEvent = new TransactionRequestedEvent(saga.Name, saga.Id);
     transactionRequestedEvent.Amount = event.Amount;

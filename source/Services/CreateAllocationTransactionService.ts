@@ -1,6 +1,5 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { Publisher } from "../Core/Publisher";
-import { SagaStore } from "../Core/SagaStore";
 import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
 import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
@@ -10,7 +9,7 @@ export class CreateAllocationTransactionService implements ISubscriber<Allocatio
   public Process(event: AllocationRequestedEvent): void {
     // Start New Saga
     const saga = new CreateAllocationSaga(event);
-    SagaStore.Instance.SaveSaga(saga);
+    saga.Save();
     // Publish TransactionCreatedEvent
     const transactionRequestedEvent = new TransactionRequestedEvent(saga.Name, saga.Id);
     transactionRequestedEvent.Amount = event.Amount;
