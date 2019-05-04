@@ -2,6 +2,8 @@ import { ISubscriber } from "../Core/ISubscriber";
 import { ProjectionStore } from "../Core/ProjectionStore";
 import { PlannedExpenseRequestedEvent } from "../Events/PlannedExpenseRequestedEvent";
 import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjection";
+import { Publisher } from "../Core/Publisher";
+import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 
 export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRequestedEvent> {
   public static Instance = new CreatePlannedExpenseService();
@@ -19,5 +21,8 @@ export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRe
       return plannedExpenseProjection;
     };
     createProjection();
+  }
+  public Subscribe() {
+    Publisher.Instance.Subscribe(PlannedExpenseRequestedEvent, this);
   }
 }

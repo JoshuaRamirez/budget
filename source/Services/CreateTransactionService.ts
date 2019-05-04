@@ -4,6 +4,8 @@ import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 import { TransactionProjection } from "../Projections/TransactionProjection";
+import { Publisher } from "../Core/Publisher";
+import { PlannedExpenseRequestedEvent } from "../Events/PlannedExpenseRequestedEvent";
 
 export class CreateTransactionService implements ISubscriber<TransactionSubmittedEvent> {
   public static Instance = new CreateTransactionService();
@@ -32,5 +34,8 @@ export class CreateTransactionService implements ISubscriber<TransactionSubmitte
     createTransactionProjection();
     updateLedgerProjection();
     publishTransactionCreated();
+  }
+  public Subscribe() {
+    Publisher.Instance.Subscribe(TransactionSubmittedEvent, this);
   }
 }

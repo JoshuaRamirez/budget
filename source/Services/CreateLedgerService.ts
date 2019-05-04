@@ -16,4 +16,6 @@ export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
     };
     createLedgerProjection();
   }
+  Subscribe() {
+  }
 }

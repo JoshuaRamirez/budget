@@ -1,5 +1,6 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { ProjectionStore } from "../Core/ProjectionStore";
+import { Publisher } from "../Core/Publisher";
 import { AccountRequestedEvent } from "../Events/AccountRequestedEvent";
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
 import { AccountProjection } from "../Projections/AccountProjection";
@@ -22,5 +23,8 @@ export class CreateAccountService implements ISubscriber<AccountRequestedEvent> 
     };
     const newAccount = createAccountProjection();
     requestNewLedger(newAccount);
+  }
+  public Subscribe() {
+    Publisher.Instance.Subscribe(AccountRequestedEvent, this);
   }
 }
