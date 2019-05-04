@@ -5,7 +5,6 @@ import { AccountRequestedEvent } from "../../../source/Events/AccountRequestedEv
 import { AllocationRequestedEvent } from "../../../source/Events/AllocationRequestedEvent";
 import { ExpenseCreatedEvent } from "../../../source/Events/ExpenseCreatedEvent";
 import { LedgerRequestedEvent } from "../../../source/Events/LedgerRequestedEvent";
-import { PayeeCreatedEvent } from "../../../source/Events/PayeeCreatedEvent";
 import { PlannedExpenseRequestedEvent } from "../../../source/Events/PlannedExpenseRequestedEvent";
 import { TransactionCreatedEvent } from "../../../source/Events/TransactionCreatedEvent";
 import { TransactionRequestedEvent } from "../../../source/Events/TransactionRequestedEvent";
@@ -30,9 +29,6 @@ describe("EventStore", () => {
     });
     it("should record LedgerRequestedEvent", () => {
       eventStore.Record<LedgerRequestedEvent>(new LedgerRequestedEvent());
-    });
-    it("should record PayeeCreatedEvent", () => {
-      eventStore.Record<PayeeCreatedEvent>(new PayeeCreatedEvent());
     });
     it("should record PlannedExpenseRequestedEvent", () => {
       eventStore.Record<PlannedExpenseRequestedEvent>(new PlannedExpenseRequestedEvent());
