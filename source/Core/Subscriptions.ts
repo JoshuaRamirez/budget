@@ -4,6 +4,7 @@ import { CreateAllocationTransactionService } from "../Services/CreateAllocation
 import { CreateExpenseService } from "../Services/CreateExpenseService";
 import { CreateExpenseTransactionService } from "../Services/CreateExpenseTransactionService";
 import { CreateLedgerService } from "../Services/CreateLedgerService";
+import { CreatePayeeService } from "../Services/CreatePayeeService";
 import { CreatePlannedExpenseService } from "../Services/CreatePlannedExpenseService";
 import { CreateTransactionService } from "../Services/CreateTransactionService";
 
@@ -17,5 +18,6 @@ export class Subscriptions {
     CreatePlannedExpenseService.Instance.Subscribe();
     CreateExpenseService.Instance.Subscribe();
     CreateExpenseTransactionService.Instance.Subscribe();
+    CreatePayeeService.Instance.Subscribe();
   }
 }
