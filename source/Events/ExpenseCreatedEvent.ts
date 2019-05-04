@@ -2,6 +2,8 @@ import { MainEvent } from "../Core/MainEvent";
 import { Publisher } from "../Core/Publisher";
 
 export class ExpenseCreatedEvent extends MainEvent<ExpenseCreatedEvent> {
+  public Description: string;
+  public LedgerId: any;
   public PayeeId: any;
   public PlannedExpenseId: any;
   public TransactionId: any;
