@@ -10,8 +10,13 @@ export class CreateAllocationService implements ISubscriber<TransactionCreatedEv
   public static Instance = new CreateAllocationService();
   public Process(event: TransactionCreatedEvent) {
     // Quit if Saga doesn't exist on Event
-    if (!event.SagaId) { return; }
-    // TODO: Check Saga Name
+    if (!event.SagaId) {
+      return;
+    }
+    // Quit if Saga doesn't match this Service
+    if (event.SagaName !== CreateAllocationSaga.name) {
+      return;
+    }
     const sagaId = event.SagaId;
     const saga = SagaStore.Instance.GetSaga<CreateAllocationSaga>(sagaId);
     saga.TransactionId = event.Transaction.Id; // TODO: Think about saga persistence in fb cloud
