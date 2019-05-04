@@ -9,6 +9,7 @@ import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 export class CreateAllocationService implements ISubscriber<TransactionCreatedEvent> {
   public static Instance = new CreateAllocationService();
   public Process(event: TransactionCreatedEvent) {
+    // TODO: Update below idiom flow
     if (!event.SagaId) { return; }
     const sagaId = event.SagaId;
     const saga = SagaStore.Instance.GetSaga<CreateAllocationSaga>(sagaId);

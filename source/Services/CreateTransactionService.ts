@@ -9,6 +9,7 @@ import { TransactionProjection } from "../Projections/TransactionProjection";
 export class CreateTransactionService implements ISubscriber<TransactionSubmittedEvent> {
   public static Instance = new CreateTransactionService();
   public Process(event: TransactionSubmittedEvent) {
+    // TODO: Update below idiom flow
     let transactionProjection: TransactionProjection;
     const createTransactionProjection = () => {
       transactionProjection = new TransactionProjection();

@@ -8,6 +8,7 @@ export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRe
   public static Instance = new CreatePlannedExpenseService();
   public Process(event: PlannedExpenseRequestedEvent) {
     const createProjection = () => {
+      // TODO: Update below idiom flow
       const plannedExpenseProjection = new PlannedExpenseProjection();
       plannedExpenseProjection.Description = event.Description;
       plannedExpenseProjection.ExpenseIds = [];

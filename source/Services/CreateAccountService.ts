@@ -8,6 +8,7 @@ import { AccountProjection } from "../Projections/AccountProjection";
 export class CreateAccountService implements ISubscriber<AccountRequestedEvent> {
   public static Instance = new CreateAccountService();
   public Process(event: AccountRequestedEvent) {
+    // TODO: Update below idiom flow
     const createAccountProjection = () => {
       const accountProjection = new AccountProjection();
       accountProjection.Name = event.Name;
