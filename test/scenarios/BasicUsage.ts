@@ -3,9 +3,12 @@ import "mocha";
 import { ProjectionStore } from "../../source/Core/ProjectionStore";
 import { Subscriptions } from "../../source/Core/Subscriptions";
 import { AllocationProjection } from "../../source/Projections/AllocationProjection";
+import { ExpenseProjection } from "../../source/Projections/ExpenseProjection";
 import { LedgerProjection } from "../../source/Projections/LedgerProjection";
 import { PlannedExpenseProjection } from "../../source/Projections/PlannedExpenseProjection";
+import { TransactionProjection } from "../../source/Projections/TransactionProjection";
 import {
+  PublishExpenseRequested,
   PublishNewAccountSubmitted,
   PublishNewAllocation,
   PublishNewTransaction,
@@ -89,8 +92,26 @@ describe("Scenarios", () => {
         const plannedExpense = projectionStore.GetProjections(PlannedExpenseProjection)[0];
         assert.exists(plannedExpense);
       });
+      it("When an ExpenseRequested event is Published for 4", () => {
+        PublishExpenseRequested(4, ledger.Id);
+      });
+      it("Then a new ExpenseProjection should exist", () => {
+        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
+        assert.exists(expenseProjection);
+      });
+      it("And a new Transaction should exist", () => {
+        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
+        const transaction = projectionStore.GetProjection(ExpenseProjection, expenseProjection.TransactionId);
+        assert.exists(transaction);
+      });
+      it("And the new Transaction should have an Amount of 4", () => {
+        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
+        const transaction = projectionStore.GetProjection(ExpenseProjection, expenseProjection.TransactionId);
+        assert.isTrue(transaction.Amount === 4);
+      });
+      it("And the Ledger Balance should be 1", () => {
+        assert.isTrue(ledger.Balance === 1);
+      });
     });
-
   });
-
 });
