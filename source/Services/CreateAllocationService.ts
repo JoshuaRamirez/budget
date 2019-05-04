@@ -9,8 +9,9 @@ import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 export class CreateAllocationService implements ISubscriber<TransactionCreatedEvent> {
   public static Instance = new CreateAllocationService();
   public Process(event: TransactionCreatedEvent) {
-    // TODO: Update below idiom flow
+    // Quit if Saga doesn't exist on Event
     if (!event.SagaId) { return; }
+    // TODO: Check Saga Name
     const sagaId = event.SagaId;
     const saga = SagaStore.Instance.GetSaga<CreateAllocationSaga>(sagaId);
     saga.TransactionId = event.Transaction.Id; // TODO: Think about saga persistence in fb cloud

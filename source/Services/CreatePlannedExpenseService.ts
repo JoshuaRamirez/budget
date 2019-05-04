@@ -7,6 +7,7 @@ import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjectio
 export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRequestedEvent> {
   public static Instance = new CreatePlannedExpenseService();
   public Process(event: PlannedExpenseRequestedEvent) {
+    // Create Expense Projection
     const plannedExpenseProjection = new PlannedExpenseProjection();
     plannedExpenseProjection.Description = event.Description;
     plannedExpenseProjection.ExpenseIds = [];

@@ -9,12 +9,15 @@ import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
 export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent> {
   public static Instance = new CreateExpenseService();
   public Process(event: TransactionCreatedEvent) {
+    // Quit if Saga doesn't exist on Event
     if (!event.SagaId) {
       return;
     }
+    // Quit if Saga doesn't match this Service
     if (event.SagaName !== CreateExpenseSaga.name) {
       return;
     }
+    // Create Expense Projection using Saga
     const saga = SagaStore.Instance.GetSaga<CreateExpenseSaga>(event.SagaId);
     const expenseProjection = new ExpenseProjection();
     expenseProjection.Amount = saga.expenseRequestedEvent.Amount;

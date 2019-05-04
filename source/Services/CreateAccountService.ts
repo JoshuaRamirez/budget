@@ -8,22 +8,16 @@ import { AccountProjection } from "../Projections/AccountProjection";
 export class CreateAccountService implements ISubscriber<AccountRequestedEvent> {
   public static Instance = new CreateAccountService();
   public Process(event: AccountRequestedEvent) {
-    // TODO: Update below idiom flow
-    const createAccountProjection = () => {
-      const accountProjection = new AccountProjection();
-      accountProjection.Name = event.Name;
-      accountProjection.Type = event.Type;
-      ProjectionStore.Instance.Project(accountProjection);
-      return accountProjection;
-    };
-    const requestNewLedger = (account) => {
-      const ledgerRequestedEvent = new LedgerRequestedEvent();
-      ledgerRequestedEvent.Account = account;
-      ledgerRequestedEvent.Type = "Account";
-      ledgerRequestedEvent.Publish();
-    };
-    const newAccount = createAccountProjection();
-    requestNewLedger(newAccount);
+    // Create Account Projection
+    const accountProjection = new AccountProjection();
+    accountProjection.Name = event.Name;
+    accountProjection.Type = event.Type;
+    ProjectionStore.Instance.Project(accountProjection);
+    // Request Ledger
+    const ledgerRequestedEvent = new LedgerRequestedEvent();
+    ledgerRequestedEvent.Account = accountProjection;
+    ledgerRequestedEvent.Type = "Account";
+    ledgerRequestedEvent.Publish();
   }
   public Subscribe() {
     Publisher.Instance.Subscribe(AccountRequestedEvent, this);
