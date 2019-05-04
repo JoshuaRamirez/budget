@@ -142,7 +142,7 @@ describe("Scenarios", () => {
         PublishPayeeRequestedEvent();
       });
       it("Then a new PayeeProjection should exist", () => {
-        const payeeProjection = projectionStore.GetProjections(PayeeProjection);
+        const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
         assert.exists(payeeProjection);
       });
     });
