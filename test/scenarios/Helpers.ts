@@ -49,6 +49,7 @@ export const PublishPayeeRequestedEvent = () => {
   payeeRequestedEvent.Description = "Test";
   payeeRequestedEvent.Name = Date.now().toString();
   payeeRequestedEvent.Type = "Test";
+  payeeRequestedEvent.Publish();
 };
 
 export const RequestPlannedExpenseEvent = () => {
