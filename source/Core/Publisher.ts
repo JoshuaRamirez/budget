@@ -2,7 +2,7 @@ import { Event } from "./Event";
 import { EventStore } from "./EventStore";
 import { ISubscriber } from "./ISubscriber";
 
-export class Publisher<TEvent extends Event<TEvent>> {
+export class Publisher<TEvent extends Event> {
   public static Subscriptions = {};
   public static Instance = new Publisher();
   public Publish(event: TEvent) {

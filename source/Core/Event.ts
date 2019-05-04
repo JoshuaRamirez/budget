@@ -1,11 +1,12 @@
 import { Id } from "./Id";
 import { IEvent } from "./IEvent";
 
-export abstract class Event<TEvent extends Event<TEvent>> implements IEvent {
-  public EventId: any = Id.Generate();
+export abstract class Event implements IEvent {
+  public EventId: any;
   public EventName: string;
   protected constructor(eventName: string) {
+    this.EventId = Id.Generate();
     this.EventName = eventName;
   }
-  public abstract Publish();
+  public abstract Publish(): void;
 }

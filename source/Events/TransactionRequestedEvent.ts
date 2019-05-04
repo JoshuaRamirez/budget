@@ -1,7 +1,7 @@
 import { Publisher } from "../Core/Publisher";
 import { SagaEvent } from "../Core/SagaEvent";
 
-export class TransactionRequestedEvent extends SagaEvent<TransactionRequestedEvent> {
+export class TransactionRequestedEvent extends SagaEvent {
   public Amount: number;
   public Destination: any;
   public LedgerId: any;

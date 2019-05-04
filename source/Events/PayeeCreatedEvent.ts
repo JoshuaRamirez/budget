@@ -1,7 +1,7 @@
 import { Event } from "../Core/Event";
 import { Publisher } from "../Core/Publisher";
 
-export class PayeeCreatedEvent extends Event<PayeeCreatedEvent> {
+export class PayeeCreatedEvent extends Event {
   public PayeeName: string;
   public Type: string;
   public TransactionIds: any[] = [];
