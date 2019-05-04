@@ -5,6 +5,7 @@ import { Subscriptions } from "../../source/Core/Subscriptions";
 import { AllocationProjection } from "../../source/Projections/AllocationProjection";
 import { ExpenseProjection } from "../../source/Projections/ExpenseProjection";
 import { LedgerProjection } from "../../source/Projections/LedgerProjection";
+import { PayeeProjection } from "../../source/Projections/PayeeProjection";
 import { PlannedExpenseProjection } from "../../source/Projections/PlannedExpenseProjection";
 import { TransactionProjection } from "../../source/Projections/TransactionProjection";
 import {
@@ -12,6 +13,7 @@ import {
   PublishNewAccountSubmitted,
   PublishNewAllocation,
   PublishNewTransaction,
+  PublishPayeeRequested,
   RequestPlannedExpense,
 } from "./Helpers";
 
@@ -135,6 +137,13 @@ describe("Scenarios", () => {
       });
       it("And the Ledger Balance should be 1", () => {
         assert.isTrue(ledger.Balance === 1);
+      });
+      it("When a PayeeRequested event is Published", () => {
+        PublishPayeeRequested();
+      });
+      it("Then a new PayeeProjection should exist", () => {
+        const payeeProjection = projectionStore.GetProjections(PayeeProjection);
+        assert.exists(payeeProjection);
       });
     });
   });
