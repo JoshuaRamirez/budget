@@ -9,24 +9,21 @@ import { LedgerProjection } from "../../source/Projections/LedgerProjection";
 
 const projectionStore = ProjectionStore.Instance;
 
-// TODO: Rename
-export const PublishNewAllocation = (ledgerId, amount) => {
+export const PublishAllocationRequestedEvent = (ledgerId, amount) => {
   const allocationRequestedEvent = new AllocationRequestedEvent();
   allocationRequestedEvent.Amount = amount;
   allocationRequestedEvent.LedgerId = ledgerId;
   allocationRequestedEvent.Publish();
 };
 
-// TODO: Rename
-export const PublishNewAccountRequested = () => {
+export const PublishAccountRequestedEvent = () => {
   const accountRequestedEvent = new AccountRequestedEvent();
   accountRequestedEvent.Name = "Wells Fargo Checking";
   accountRequestedEvent.Type = "Bank";
   accountRequestedEvent.Publish();
 };
 
-// TODO: Rename
-export const PublishNewTransaction = (amount) => {
+export const PublishTransactionRequestedEvent = (amount) => {
   const transactionRequestedEvent = new TransactionRequestedEvent();
   transactionRequestedEvent.Source = "payer";
   transactionRequestedEvent.Destination = "payee";
@@ -36,7 +33,7 @@ export const PublishNewTransaction = (amount) => {
   transactionRequestedEvent.Publish();
 };
 
-export const PublishExpenseRequested = (amount, ledgerId, plannedExpenseId = null, payeeId = null) => {
+export const PublishExpenseRequestedEvent = (amount, ledgerId, plannedExpenseId = null, payeeId = null) => {
   const expenseRequestedEvent = new ExpenseRequestedEvent();
   expenseRequestedEvent.Amount = amount;
   expenseRequestedEvent.Category = "Test";
@@ -47,14 +44,14 @@ export const PublishExpenseRequested = (amount, ledgerId, plannedExpenseId = nul
   expenseRequestedEvent.Publish();
 };
 
-export const PublishPayeeRequested = () => {
+export const PublishPayeeRequestedEvent = () => {
   const payeeRequestedEvent = new PayeeRequestedEvent();
   payeeRequestedEvent.Description = "Test";
   payeeRequestedEvent.Name = Date.now().toString();
   payeeRequestedEvent.Type = "Test";
 };
 
-export const RequestPlannedExpense = () => {
+export const RequestPlannedExpenseEvent = () => {
   const event = new PlannedExpenseRequestedEvent();
   event.RepeatPeriod = 1;
   event.RepeatMeasurement = "Weeks";
