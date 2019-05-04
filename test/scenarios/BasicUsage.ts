@@ -45,11 +45,19 @@ describe("Scenarios", () => {
       it("Then the Ledger balance should be -1", () => {
         assert.equal(ledger.Balance, -1);
       });
+      it("And a new Transaction should exist.", () => {
+        allocationProjections = projectionStore.GetProjections(TransactionProjection)[0];
+        assert.exists(TransactionProjection);
+      });
       it("When another $1 withdrawal transaction is created;", () => {
         PublishNewTransaction(1);
       });
       it("Then the Ledger balance should be -2", () => {
         assert.equal(ledger.Balance, -2);
+      });
+      it("And a new Transaction should exist.", () => {
+        allocationProjections = projectionStore.GetProjections(TransactionProjection)[1];
+        assert.exists(TransactionProjection);
       });
       it("When another $1 withdrawal transaction is created;", () => {
         PublishNewTransaction(1);
@@ -57,11 +65,19 @@ describe("Scenarios", () => {
       it("Then the Ledger balance should be -3", () => {
         assert.equal(ledger.Balance, -3);
       });
+      it("And a new Transaction should exist.", () => {
+        allocationProjections = projectionStore.GetProjections(TransactionProjection)[2];
+        assert.exists(TransactionProjection);
+      });
       it("When another $1 withdrawal transaction is created;", () => {
         PublishNewTransaction(1);
       });
       it("Then the Ledger balance should be -4", () => {
         assert.equal(ledger.Balance, -4);
+      });
+      it("And a new Transaction should exist.", () => {
+        allocationProjections = projectionStore.GetProjections(TransactionProjection)[3];
+        assert.exists(TransactionProjection);
       });
       it("When another $1 withdrawal transaction is created;", () => {
         PublishNewTransaction(1);
@@ -69,11 +85,19 @@ describe("Scenarios", () => {
       it("Then the Ledger balance should be -5", () => {
         assert.equal(ledger.Balance, -5);
       });
+      it("And a new Transaction should exist.", () => {
+        allocationProjections = projectionStore.GetProjections(TransactionProjection)[4];
+        assert.exists(TransactionProjection);
+      });
       it("When a new $10 Allocation is made to the Ledger", () => {
         PublishNewAllocation(ledger.Id, -10);
       });
       it("Then the Ledger balance should be 5", () => {
         assert.equal(ledger.Balance, 5);
+      });
+      it("And a new Transaction should exist.", () => {
+        allocationProjections = projectionStore.GetProjections(TransactionProjection)[5];
+        assert.exists(TransactionProjection);
       });
       it("And the Ledger should be linked to 6 Transactions", () => {
         assert.equal(ledger.TransactionIds.length, 6);
