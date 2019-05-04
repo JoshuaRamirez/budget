@@ -9,9 +9,7 @@ export class CreateAllocationTransactionService implements ISubscriber<Allocatio
   public static Instance = new CreateAllocationTransactionService();
   public Process(event: AllocationRequestedEvent): void {
     // Start New Saga
-    const saga = new CreateAllocationSaga();
-    saga.Amount = event.Amount;
-    saga.LedgerId = event.LedgerId;
+    const saga = new CreateAllocationSaga(event);
     SagaStore.Instance.SaveSaga(saga);
     // Publish TransactionCreatedEvent
     const transactionRequestedEvent = new TransactionRequestedEvent(saga.Name, saga.Id);

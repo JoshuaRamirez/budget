@@ -19,11 +19,11 @@ export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent
     // Create Expense Projection using Saga
     const saga = SagaStore.Instance.GetSaga<CreateExpenseSaga>(event.SagaId);
     const expenseProjection = new ExpenseProjection();
-    expenseProjection.Amount = saga.ExpenseRequestedEvent.Amount;
-    expenseProjection.Category = saga.ExpenseRequestedEvent.Category;
-    expenseProjection.Description = saga.ExpenseRequestedEvent.Description;
+    expenseProjection.Amount = saga.Amount;
+    expenseProjection.Category = saga.Category;
+    expenseProjection.Description = saga.Description;
     expenseProjection.LedgerId = event.Transaction.LedgerId;
-    expenseProjection.PayeeId = saga.ExpenseRequestedEvent.PayeeId;
+    expenseProjection.PayeeId = saga.PayeeId;
     expenseProjection.TransactionId = event.Transaction.Id;
     expenseProjection.Project();
   }
