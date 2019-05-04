@@ -7,6 +7,7 @@ import { LedgerProjection } from "../../source/Projections/LedgerProjection";
 
 const projectionStore = ProjectionStore.Instance;
 
+// TODO: Rename
 export const PublishNewAllocation = (ledgerId, amount) => {
   const allocationRequestedEvent = new AllocationRequestedEvent();
   allocationRequestedEvent.Amount = amount;
@@ -14,6 +15,7 @@ export const PublishNewAllocation = (ledgerId, amount) => {
   allocationRequestedEvent.Publish();
 };
 
+// TODO: Rename
 export const PublishNewAccountSubmitted = () => {
   const accountRequestedEvent = new AccountRequestedEvent();
   accountRequestedEvent.Name = "Wells Fargo Checking";
@@ -21,6 +23,7 @@ export const PublishNewAccountSubmitted = () => {
   accountRequestedEvent.Publish();
 };
 
+// TODO: Rename
 export const PublishNewTransaction = (amount) => {
   const transactionSubmittedEvent = new TransactionSubmittedEvent();
   transactionSubmittedEvent.Source = "payer";
