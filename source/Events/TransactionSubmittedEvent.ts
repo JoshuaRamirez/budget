@@ -8,8 +8,8 @@ export class TransactionSubmittedEvent extends SagaEvent<TransactionSubmittedEve
   public LedgerId: any;
   public Source: any;
   public Type: string;
-  constructor() {
-    super(TransactionSubmittedEvent.name);
+  constructor(sagaName: string = null, sagaId: any = null) {
+    super(TransactionSubmittedEvent.name, sagaName, sagaId);
   }
   public Publish() {
     Publisher.Instance.Publish(this);

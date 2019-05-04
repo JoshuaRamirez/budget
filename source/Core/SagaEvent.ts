@@ -1,8 +1,12 @@
 import { MainEvent } from "./MainEvent";
 
 export abstract class SagaEvent<TEvent extends SagaEvent<TEvent>> extends MainEvent<TEvent> {
-  // TODO: Create a constructor that takes in the SagaId and SagaName
   public SagaId: any;
   public SagaName: string;
+  protected constructor(eventName: string, sagaName: string, sagaId: any) {
+    super(eventName);
+    this.SagaName = sagaName;
+    this.SagaId = sagaId;
+  }
   public abstract Publish();
 }

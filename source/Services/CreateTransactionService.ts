@@ -27,9 +27,8 @@ export class CreateTransactionService implements ISubscriber<TransactionSubmitte
       ledgerProjection.TransactionIds.push(transactionProjection.Id);
     };
     const publishTransactionCreated = () => {
-      const newTransactionCreatedEvent = new TransactionCreatedEvent();
+      const newTransactionCreatedEvent = new TransactionCreatedEvent(event.SagaName, event.SagaId);
       newTransactionCreatedEvent.Transaction = transactionProjection;
-      newTransactionCreatedEvent.SagaId = event.SagaId;
       newTransactionCreatedEvent.Publish();
     };
     createTransactionProjection();

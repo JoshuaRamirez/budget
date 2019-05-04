@@ -38,10 +38,10 @@ describe("EventStore", () => {
       eventStore.Record<PlannedExpenseRequestedEvent>(new PlannedExpenseRequestedEvent());
     });
     it("should record TransactionCreatedEvent", () => {
-      eventStore.Record<TransactionCreatedEvent>(new TransactionCreatedEvent());
+      eventStore.Record<TransactionCreatedEvent>(new TransactionCreatedEvent(Date.now().toString(), Date.now()));
     });
     it("should record TransactionSubmittedEvent", () => {
-      eventStore.Record<TransactionSubmittedEvent>(new TransactionSubmittedEvent());
+      eventStore.Record<TransactionSubmittedEvent>(new TransactionSubmittedEvent(Date.now().toString(), Date.now()));
     });
   });
 });

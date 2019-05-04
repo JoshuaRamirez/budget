@@ -14,7 +14,7 @@ export class CreateAllocationTransactionService implements ISubscriber<Allocatio
     saga.LedgerId = event.LedgerId;
     SagaStore.Instance.SaveSaga(saga);
     // Submit New Transaction
-    const transactionSubmittedEvent = new TransactionSubmittedEvent();
+    const transactionSubmittedEvent = new TransactionSubmittedEvent(saga.Name, saga.Id);
     transactionSubmittedEvent.Amount = event.Amount;
     transactionSubmittedEvent.Destination = event.LedgerId;
     transactionSubmittedEvent.LedgerId = event.LedgerId;
