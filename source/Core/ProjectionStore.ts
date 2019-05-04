@@ -4,7 +4,6 @@ export class ProjectionStore {
   public static Instance = new ProjectionStore();
   private Projections = {};
   public Project<TProjection extends Projection>(projection: TProjection): void {
-    projection.Id = Date.now();
     if (!this.Projections[projection.ProjectionName]) {
       this.Projections[projection.ProjectionName] = [];
     }
