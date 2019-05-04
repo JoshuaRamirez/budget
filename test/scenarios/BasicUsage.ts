@@ -125,12 +125,12 @@ describe("Scenarios", () => {
       });
       it("And a new Transaction should exist", () => {
         const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
-        const transaction = projectionStore.GetProjection(ExpenseProjection, expenseProjection.TransactionId);
+        const transaction = projectionStore.GetProjection(TransactionProjection, expenseProjection.TransactionId);
         assert.exists(transaction);
       });
       it("And the new Transaction should have an Amount of 4", () => {
         const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
-        const transaction = projectionStore.GetProjection(ExpenseProjection, expenseProjection.TransactionId);
+        const transaction = projectionStore.GetProjection(TransactionProjection, expenseProjection.TransactionId);
         assert.isTrue(transaction.Amount === 4);
       });
       it("And the Ledger Balance should be 1", () => {
