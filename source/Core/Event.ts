@@ -1,7 +1,6 @@
 import { Id } from "./Id";
-import { IEvent } from "./IEvent";
 
-export abstract class Event implements IEvent {
+export abstract class Event {
   public EventId: any;
   public EventName: string;
   protected constructor(eventName: string) {
