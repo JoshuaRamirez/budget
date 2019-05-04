@@ -1,3 +1,4 @@
+import { Publisher } from "../Core/Publisher";
 import { SagaEvent } from "../Core/SagaEvent";
 
 // TODO Rename TransactionSubmitted to Requested
@@ -9,5 +10,8 @@ export class TransactionSubmittedEvent extends SagaEvent<TransactionSubmittedEve
   public Type: string;
   constructor() {
     super(TransactionSubmittedEvent.name);
+  }
+  public Publish() {
+    Publisher.Instance.Publish(this);
   }
 }

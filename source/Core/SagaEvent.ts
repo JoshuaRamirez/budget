@@ -1,5 +1,6 @@
 import { MainEvent } from "./MainEvent";
 
-export class SagaEvent<TEvent extends SagaEvent<TEvent>> extends MainEvent<TEvent> {
+export abstract class SagaEvent<TEvent extends SagaEvent<TEvent>> extends MainEvent<TEvent> {
   public SagaId: any;
+  public abstract Publish();
 }

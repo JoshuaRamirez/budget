@@ -1,4 +1,5 @@
 import { MainEvent } from "../Core/MainEvent";
+import { Publisher } from "../Core/Publisher";
 
 export class PlannedExpenseRequestedEvent extends MainEvent<PlannedExpenseRequestedEvent> {
   public Description: string;
@@ -9,5 +10,8 @@ export class PlannedExpenseRequestedEvent extends MainEvent<PlannedExpenseReques
   public RepeatStart: Date;
   constructor() {
     super(PlannedExpenseRequestedEvent.name);
+  }
+  public Publish() {
+    Publisher.Instance.Publish(this);
   }
 }
