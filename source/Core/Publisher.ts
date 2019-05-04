@@ -13,7 +13,7 @@ export class Publisher<TEvent extends MainEvent<TEvent>> {
     Publisher.Subscriptions[event.EventName].forEach((handler) => handler(event));
   }
   public Subscribe(
-    eventType: (new () => TEvent),
+    eventType: (new (x, y) => TEvent),
     subscriber: ISubscriber<TEvent>,
   ) {
     const eventName = eventType.name;
