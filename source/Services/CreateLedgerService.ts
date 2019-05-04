@@ -1,5 +1,6 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { ProjectionStore } from "../Core/ProjectionStore";
+import { Publisher } from "../Core/Publisher";
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
@@ -16,6 +17,7 @@ export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
     };
     createLedgerProjection();
   }
-  Subscribe() {
+  public Subscribe() {
+    Publisher.Instance.Subscribe(LedgerRequestedEvent, this);
   }
 }
