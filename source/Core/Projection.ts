@@ -1,7 +1,6 @@
 import { Id } from "./Id";
-import { IProjection } from "./IProjection";
 
-export abstract class Projection implements IProjection {
+export abstract class Projection {
   public Id: any;
   public ProjectionName: string;
   protected constructor(projectionName: string) {
