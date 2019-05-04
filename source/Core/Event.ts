@@ -1,8 +1,7 @@
 import { Id } from "./Id";
 import { IEvent } from "./IEvent";
 
-// TODO: Rename File
-export abstract class MainEvent<TEvent extends MainEvent<TEvent>> implements IEvent {
+export abstract class Event<TEvent extends Event<TEvent>> implements IEvent {
   public EventId: any = Id.Generate();
   public EventName: string;
   protected constructor(eventName: string) {

@@ -1,7 +1,7 @@
-import { MainEvent } from "../Core/MainEvent";
+import { Event } from "../Core/Event";
 import { Publisher } from "../Core/Publisher";
 
-export class AllocationRequestedEvent extends MainEvent<AllocationRequestedEvent> {
+export class AllocationRequestedEvent extends Event<AllocationRequestedEvent> {
   public Amount: number;
   public LedgerId: any;
   constructor() {

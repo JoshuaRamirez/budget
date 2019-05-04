@@ -1,7 +1,7 @@
-import { MainEvent } from "../Core/MainEvent";
+import { Event } from "../Core/Event";
 import { Publisher } from "../Core/Publisher";
 
-export class ExpenseCreatedEvent extends MainEvent<ExpenseCreatedEvent> {
+export class ExpenseCreatedEvent extends Event<ExpenseCreatedEvent> {
   public Description: string;
   public LedgerId: any;
   public PayeeId: any;
