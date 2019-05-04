@@ -5,18 +5,16 @@ import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 
 export class CreateAllocationTransactionService implements ISubscriber<TransactionSubmittedEvent> {
   public static Instance = new CreateAllocationTransactionService();
+
+
+
   public Process(event: TransactionSubmittedEvent): void {
-    const saga = this.startNewSaga(event);
-    this.submitNewTransaction(event, saga);
-  }
-  private startNewSaga(event: TransactionSubmittedEvent): CreateAllocationSaga {
+    // Start New Saga
     const saga = new CreateAllocationSaga();
     saga.Amount = event.Amount;
     saga.LedgerId = event.LedgerId;
     SagaStore.Instance.SaveSaga(saga);
-    return saga;
-  }
-  private submitNewTransaction(event: TransactionSubmittedEvent, saga: CreateAllocationSaga) {
+    // Submit New Transaction
     const transactionSubmittedEvent = new TransactionSubmittedEvent();
     transactionSubmittedEvent.Amount = event.Amount;
     transactionSubmittedEvent.Destination = event.LedgerId;
