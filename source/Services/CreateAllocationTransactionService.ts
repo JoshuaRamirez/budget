@@ -2,7 +2,7 @@ import { ISubscriber } from "../Core/ISubscriber";
 import { Publisher } from "../Core/Publisher";
 import { SagaStore } from "../Core/SagaStore";
 import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
-import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
+import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
 import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 
 export class CreateAllocationTransactionService implements ISubscriber<AllocationRequestedEvent> {
@@ -13,16 +13,16 @@ export class CreateAllocationTransactionService implements ISubscriber<Allocatio
     saga.Amount = event.Amount;
     saga.LedgerId = event.LedgerId;
     SagaStore.Instance.SaveSaga(saga);
-    // Publish TransactionSubmitted
-    const transactionSubmittedEvent = new TransactionSubmittedEvent(saga.Name, saga.Id);
-    transactionSubmittedEvent.Amount = event.Amount;
-    transactionSubmittedEvent.Destination = event.LedgerId;
-    transactionSubmittedEvent.LedgerId = event.LedgerId;
-    transactionSubmittedEvent.Source = "Allocation";
-    transactionSubmittedEvent.Type = "Allocation";
-    transactionSubmittedEvent.SagaId = saga.Id;
-    transactionSubmittedEvent.SagaName = saga.Name;
-    transactionSubmittedEvent.Publish();
+    // Publish TransactionCreatedEvent
+    const transactionRequestedEvent = new TransactionRequestedEvent(saga.Name, saga.Id);
+    transactionRequestedEvent.Amount = event.Amount;
+    transactionRequestedEvent.Destination = event.LedgerId;
+    transactionRequestedEvent.LedgerId = event.LedgerId;
+    transactionRequestedEvent.Source = "Allocation";
+    transactionRequestedEvent.Type = "Allocation";
+    transactionRequestedEvent.SagaId = saga.Id;
+    transactionRequestedEvent.SagaName = saga.Name;
+    transactionRequestedEvent.Publish();
   }
   public Subscribe() {
     Publisher.Instance.Subscribe(AllocationRequestedEvent, this);

@@ -8,7 +8,7 @@ import { LedgerRequestedEvent } from "../../../source/Events/LedgerRequestedEven
 import { PayeeCreatedEvent } from "../../../source/Events/PayeeCreatedEvent";
 import { PlannedExpenseRequestedEvent } from "../../../source/Events/PlannedExpenseRequestedEvent";
 import { TransactionCreatedEvent } from "../../../source/Events/TransactionCreatedEvent";
-import { TransactionSubmittedEvent } from "../../../source/Events/TransactionSubmittedEvent";
+import { TransactionRequestedEvent } from "../../../source/Events/TransactionRequestedEvent";
 
 describe("EventStore", () => {
   let eventStore: EventStore;
@@ -40,8 +40,8 @@ describe("EventStore", () => {
     it("should record TransactionCreatedEvent", () => {
       eventStore.Record<TransactionCreatedEvent>(new TransactionCreatedEvent(Date.now().toString(), Date.now()));
     });
-    it("should record TransactionSubmittedEvent", () => {
-      eventStore.Record<TransactionSubmittedEvent>(new TransactionSubmittedEvent(Date.now().toString(), Date.now()));
+    it("should record TransactionRequestedEvent", () => {
+      eventStore.Record<TransactionRequestedEvent>(new TransactionRequestedEvent(Date.now().toString(), Date.now()));
     });
   });
 });

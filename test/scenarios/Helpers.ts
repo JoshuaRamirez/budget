@@ -4,7 +4,7 @@ import { AllocationRequestedEvent } from "../../source/Events/AllocationRequeste
 import { ExpenseRequestedEvent } from "../../source/Events/ExpenseRequestedEvent";
 import { PayeeRequestedEvent } from "../../source/Events/PayeeRequestedEvent";
 import { PlannedExpenseRequestedEvent } from "../../source/Events/PlannedExpenseRequestedEvent";
-import { TransactionSubmittedEvent } from "../../source/Events/TransactionSubmittedEvent";
+import { TransactionRequestedEvent } from "../../source/Events/TransactionRequestedEvent";
 import { LedgerProjection } from "../../source/Projections/LedgerProjection";
 
 const projectionStore = ProjectionStore.Instance;
@@ -18,7 +18,7 @@ export const PublishNewAllocation = (ledgerId, amount) => {
 };
 
 // TODO: Rename
-export const PublishNewAccountSubmitted = () => {
+export const PublishNewAccountRequested = () => {
   const accountRequestedEvent = new AccountRequestedEvent();
   accountRequestedEvent.Name = "Wells Fargo Checking";
   accountRequestedEvent.Type = "Bank";
@@ -27,13 +27,13 @@ export const PublishNewAccountSubmitted = () => {
 
 // TODO: Rename
 export const PublishNewTransaction = (amount) => {
-  const transactionSubmittedEvent = new TransactionSubmittedEvent();
-  transactionSubmittedEvent.Source = "payer";
-  transactionSubmittedEvent.Destination = "payee";
-  transactionSubmittedEvent.Amount = amount;
-  transactionSubmittedEvent.Type = "purchase";
-  transactionSubmittedEvent.LedgerId = projectionStore.GetProjections(LedgerProjection)[0].Id;
-  transactionSubmittedEvent.Publish();
+  const transactionRequestedEvent = new TransactionRequestedEvent();
+  transactionRequestedEvent.Source = "payer";
+  transactionRequestedEvent.Destination = "payee";
+  transactionRequestedEvent.Amount = amount;
+  transactionRequestedEvent.Type = "purchase";
+  transactionRequestedEvent.LedgerId = projectionStore.GetProjections(LedgerProjection)[0].Id;
+  transactionRequestedEvent.Publish();
 };
 
 export const PublishExpenseRequested = (amount, ledgerId, plannedExpenseId = null, payeeId = null) => {

@@ -2,13 +2,13 @@ import { ISubscriber } from "../Core/ISubscriber";
 import { ProjectionStore } from "../Core/ProjectionStore";
 import { Publisher } from "../Core/Publisher";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
-import { TransactionSubmittedEvent } from "../Events/TransactionSubmittedEvent";
+import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 import { TransactionProjection } from "../Projections/TransactionProjection";
 
-export class CreateTransactionService implements ISubscriber<TransactionSubmittedEvent> {
+export class CreateTransactionService implements ISubscriber<TransactionRequestedEvent> {
   public static Instance = new CreateTransactionService();
-  public Process(event: TransactionSubmittedEvent) {
+  public Process(event: TransactionRequestedEvent) {
     // Create Transaction Projection
     const transactionProjection = new TransactionProjection();
     transactionProjection.Amount = event.Amount;
@@ -28,6 +28,6 @@ export class CreateTransactionService implements ISubscriber<TransactionSubmitte
     newTransactionCreatedEvent.Publish();
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(TransactionSubmittedEvent, this);
+    Publisher.Instance.Subscribe(TransactionRequestedEvent, this);
   }
 }

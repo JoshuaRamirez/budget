@@ -10,7 +10,7 @@ import { PlannedExpenseProjection } from "../../source/Projections/PlannedExpens
 import { TransactionProjection } from "../../source/Projections/TransactionProjection";
 import {
   PublishExpenseRequested,
-  PublishNewAccountSubmitted,
+  PublishNewAccountRequested,
   PublishNewAllocation,
   PublishNewTransaction,
   PublishPayeeRequested,
@@ -31,8 +31,8 @@ describe("Scenarios", () => {
         subscriptions = new Subscriptions();
         subscriptions.Create();
       });
-      it("When a NewAccountSubmitted event is published", () => {
-        PublishNewAccountSubmitted();
+      it("When a NewAccountCreatedEvent is published", () => {
+        PublishNewAccountRequested();
       });
       it("Then a Ledger should be created", () => {
         ledger = projectionStore.GetProjections(LedgerProjection)[0];
