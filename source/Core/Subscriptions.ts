@@ -7,6 +7,7 @@ import { CreateLedgerService } from "../Services/CreateLedgerService";
 import { CreatePayeeService } from "../Services/CreatePayeeService";
 import { CreatePlannedExpenseService } from "../Services/CreatePlannedExpenseService";
 import { CreateTransactionService } from "../Services/CreateTransactionService";
+import { LinkExpenseToPlannedExpenseService } from "../Services/LinkExpenseToPlannedExpenseService";
 
 export class Subscriptions {
   public Create() {
@@ -19,5 +20,6 @@ export class Subscriptions {
     CreateExpenseService.Instance.Subscribe();
     CreateExpenseTransactionService.Instance.Subscribe();
     CreatePayeeService.Instance.Subscribe();
+    LinkExpenseToPlannedExpenseService.Instance.Subscribe();
   }
 }
