@@ -8,6 +8,7 @@ import { CreatePayeeService } from "../Services/CreatePayeeService";
 import { CreatePlannedExpenseService } from "../Services/CreatePlannedExpenseService";
 import { CreateTransactionService } from "../Services/CreateTransactionService";
 import { LinkLedgerToTransactionService } from "../Services/LinkLedgerToTransactionService";
+import { LinkPayeeToExpenseService } from "../Services/LinkPayeeToExpenseService";
 import { LinkPlannedExpenseToExpenseService } from "../Services/LinkPlannedExpenseToExpenseService";
 import { UpdateLedgerBalanceService } from "../Services/UpdateLedgerBalanceService";
 
@@ -25,5 +26,6 @@ export class Subscriptions {
     LinkPlannedExpenseToExpenseService.Instance.Subscribe();
     LinkLedgerToTransactionService.Instance.Subscribe();
     UpdateLedgerBalanceService.Instance.Subscribe();
+    LinkPayeeToExpenseService.Instance.Subscribe();
   }
 }
