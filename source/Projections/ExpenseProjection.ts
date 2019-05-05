@@ -11,6 +11,7 @@ export class ExpenseProjection extends Projection {
   public TransactionId: any;
   public PayeeId: any;
   public Category: string;
+  public PlannedExpenseId: any
   constructor() {
     super(ExpenseProjection.name);
   }
