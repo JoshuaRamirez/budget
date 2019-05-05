@@ -153,6 +153,12 @@ describe("Scenarios", () => {
         const foundId = plannedExpenseProjection.ExpenseIds.find((x) => x === expenseProjection.TransactionId);
         assert.exists(foundId);
       });
+      it("And the Payee involved contains the ExpenseProjection Id", () => {
+        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
+        const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
+        const foundId = payeeProjection.ExpenseIds.find((x) => x === expenseProjection.TransactionId);
+        assert.exists(foundId);
+      });
     });
   });
 });
