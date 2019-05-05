@@ -10,11 +10,13 @@ export class CreateExpenseSaga extends Saga {
   public Category: string;
   public Description: string;
   public PayeeId: any;
+  public PlannedExpenseId: any;
   constructor(expenseRequestedEvent: ExpenseRequestedEvent) {
     super(CreateExpenseSaga.name);
     this.Amount = expenseRequestedEvent.Amount;
     this.Category = expenseRequestedEvent.Category;
     this.Description = expenseRequestedEvent.Description;
     this.PayeeId = expenseRequestedEvent.PayeeId;
+    this.PlannedExpenseId = expenseRequestedEvent.PlannedExpenseId;
   }
 }
