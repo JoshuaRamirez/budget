@@ -6,11 +6,11 @@ import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjectio
 export class LinkExpenseToPlannedExpenseService implements ISubscriber<ExpenseCreatedEvent> {
   public static Instance = new LinkExpenseToPlannedExpenseService();
   public Process(event: ExpenseCreatedEvent): void {
-    if (!event.PlannedExpenseId) {
+    if (!event.ExpenseProjection.PlannedExpenseId) {
       return;
     }
-    const plannedExpenseProjection = PlannedExpenseProjection.Get(event.PlannedExpenseId);
-    plannedExpenseProjection.ExpenseIds.push(event.PlannedExpenseId);
+    const plannedExpenseProjection = PlannedExpenseProjection.Get(event.ExpenseProjection.PlannedExpenseId);
+    plannedExpenseProjection.ExpenseIds.push(event.ExpenseProjection.PlannedExpenseId);
   }
   public Subscribe() {
     Publisher.Instance.Subscribe(ExpenseCreatedEvent, this);

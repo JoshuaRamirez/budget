@@ -1,13 +1,9 @@
 import { Event } from "../Core/Event";
 import { Publisher } from "../Core/Publisher";
+import { ExpenseProjection } from "../Projections/ExpenseProjection";
 
 export class ExpenseCreatedEvent extends Event {
-  public Description: string;
-  public LedgerId: any;
-  public PayeeId: any;
-  public PlannedExpenseId: any;
-  public TransactionId: any;
-  public Type: string;
+  public ExpenseProjection: ExpenseProjection;
   constructor() {
     super(ExpenseCreatedEvent.name);
   }
