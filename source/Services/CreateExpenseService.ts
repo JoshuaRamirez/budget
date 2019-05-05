@@ -25,6 +25,7 @@ export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent
     expenseProjection.LedgerId = event.Transaction.LedgerId;
     expenseProjection.PayeeId = saga.PayeeId;
     expenseProjection.TransactionId = event.Transaction.Id;
+    expenseProjection.PlannedExpenseId = saga.PlannedExpenseId
     expenseProjection.Project();
     // Update PayeeProjection if PayeeId provided & it matches a PayeeProjection
     if (!expenseProjection.PayeeId) {
