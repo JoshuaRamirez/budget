@@ -1,5 +1,6 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { Publisher } from "../Core/Publisher";
+import { ExpenseCreatedEvent } from "../Events/ExpenseCreatedEvent";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { ExpenseProjection } from "../Projections/ExpenseProjection";
 import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
@@ -26,6 +27,10 @@ export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent
     expenseProjection.TransactionId = event.Transaction.Id;
     expenseProjection.PlannedExpenseId = saga.PlannedExpenseId;
     expenseProjection.Project();
+    // Publish ExpenseCreatedEvent
+    const expenseCreatedEvent = new ExpenseCreatedEvent();
+    expenseCreatedEvent.ExpenseProjection = expenseProjection;
+    expenseCreatedEvent.Publish();
   }
   public Subscribe() {
     Publisher.Instance.Subscribe(TransactionCreatedEvent, this);
