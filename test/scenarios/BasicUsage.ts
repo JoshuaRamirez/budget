@@ -119,7 +119,8 @@ describe("Scenarios", () => {
         assert.exists(plannedExpense);
       });
       it("When an ExpenseRequested event is Published for 4", () => {
-        PublishExpenseRequestedEvent(4, ledger.Id);
+        const plannedExpense = projectionStore.GetProjections(PlannedExpenseProjection)[0];
+        PublishExpenseRequestedEvent(4, ledger.Id, plannedExpense.Id);
       });
       it("Then a new ExpenseProjection should exist", () => {
         const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
