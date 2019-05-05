@@ -12,7 +12,7 @@ export class CreateAccountService implements ISubscriber<AccountRequestedEvent> 
     accountProjection.Name = event.Name;
     accountProjection.Type = event.Type;
     accountProjection.Project();
-    // Request Ledger
+    // Publish LedgerRequestedEvent
     const ledgerRequestedEvent = new LedgerRequestedEvent();
     ledgerRequestedEvent.Account = accountProjection;
     ledgerRequestedEvent.Type = "Account";
