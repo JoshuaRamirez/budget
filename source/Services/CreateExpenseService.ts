@@ -1,6 +1,5 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { Publisher } from "../Core/Publisher";
-import { SagaStore } from "../Core/SagaStore";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { ExpenseProjection } from "../Projections/ExpenseProjection";
 import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
@@ -17,7 +16,7 @@ export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent
       return;
     }
     // Create Expense Projection using Saga
-    const saga = SagaStore.Instance.GetSaga<CreateExpenseSaga>(event.SagaId);
+    const saga = CreateExpenseSaga.Get(event.SagaId);
     const expenseProjection = new ExpenseProjection();
     expenseProjection.Amount = saga.Amount;
     expenseProjection.Category = saga.Category;

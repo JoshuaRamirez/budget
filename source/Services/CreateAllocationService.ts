@@ -1,6 +1,5 @@
 import { ISubscriber } from "../Core/ISubscriber";
 import { Publisher } from "../Core/Publisher";
-import { SagaStore } from "../Core/SagaStore";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { AllocationProjection } from "../Projections/AllocationProjection";
 import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
@@ -17,7 +16,7 @@ export class CreateAllocationService implements ISubscriber<TransactionCreatedEv
       return;
     }
     const sagaId = event.SagaId;
-    const saga = SagaStore.Instance.GetSaga<CreateAllocationSaga>(sagaId);
+    const saga = CreateAllocationSaga.Get(sagaId);
     saga.TransactionId = event.Transaction.Id; // TODO: Think about saga persistence in fb cloud
     const allocationProjection: AllocationProjection = new AllocationProjection();
     allocationProjection.Amount = saga.Amount;
