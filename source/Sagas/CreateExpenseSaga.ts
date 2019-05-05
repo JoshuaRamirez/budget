@@ -1,7 +1,11 @@
 import { Saga } from "../Core/Saga";
+import { SagaStore } from "../Core/SagaStore";
 import { ExpenseRequestedEvent } from "../Events/ExpenseRequestedEvent";
 
 export class CreateExpenseSaga extends Saga {
+  public static Get(sagaId: any): CreateExpenseSaga {
+    return SagaStore.Instance.GetSaga<CreateExpenseSaga>(sagaId);
+  }
   public Amount: number;
   public Category: string;
   public Description: string;
