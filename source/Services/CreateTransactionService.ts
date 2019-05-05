@@ -1,5 +1,4 @@
 import { ISubscriber } from "../Core/ISubscriber";
-import { ProjectionStore } from "../Core/ProjectionStore";
 import { Publisher } from "../Core/Publisher";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
@@ -19,7 +18,7 @@ export class CreateTransactionService implements ISubscriber<TransactionRequeste
     transactionProjection.Project();
     // Update Ledger Projection Balance
     const ledgerId = event.LedgerId;
-    const ledgerProjection = ProjectionStore.Instance.GetProjection(LedgerProjection, ledgerId);
+    const ledgerProjection = LedgerProjection.Get(ledgerId);
     ledgerProjection.Balance -= transactionProjection.Amount;
     ledgerProjection.TransactionIds.push(transactionProjection.Id);
     // Publish Transaction Created
