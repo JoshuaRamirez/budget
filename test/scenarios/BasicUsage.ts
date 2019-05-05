@@ -118,9 +118,17 @@ describe("Scenarios", () => {
         const plannedExpense = projectionStore.GetProjections(PlannedExpenseProjection)[0];
         assert.exists(plannedExpense);
       });
-      it("When an ExpenseRequested (With a Plan ID) event is Published for 4", () => {
+      it("When a PayeeRequested event is Published", () => {
+        PublishPayeeRequestedEvent();
+      });
+      it("Then a new PayeeProjection should exist", () => {
+        const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
+        assert.exists(payeeProjection);
+      });
+      it("When an ExpenseRequested (With a PlannedProjectionId & PayeeId) event is Published for 4", () => {
+        const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
         const plannedExpense = projectionStore.GetProjections(PlannedExpenseProjection)[0];
-        PublishExpenseRequestedEvent(4, ledger.Id, plannedExpense.Id);
+        PublishExpenseRequestedEvent(4, ledger.Id, plannedExpense.Id, payeeProjection.Id);
       });
       it("Then a new ExpenseProjection should exist", () => {
         const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
@@ -142,15 +150,8 @@ describe("Scenarios", () => {
       it("And the PlannedExpenseProjection contains the ExpenseProjection Id", () => {
         const plannedExpenseProjection = projectionStore.GetProjections(PlannedExpenseProjection)[0];
         const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
-        plannedExpenseProjection.ExpenseIds.find((x) => x === expenseProjection.TransactionId);
-        assert.exists(expenseProjection);
-      });
-      it("When a PayeeRequested event is Published", () => {
-        PublishPayeeRequestedEvent();
-      });
-      it("Then a new PayeeProjection should exist", () => {
-        const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
-        assert.exists(payeeProjection);
+        const foundId = plannedExpenseProjection.ExpenseIds.find((x) => x === expenseProjection.TransactionId);
+        assert.exists(foundId);
       });
     });
   });
