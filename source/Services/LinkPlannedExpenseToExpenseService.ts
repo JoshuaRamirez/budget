@@ -10,7 +10,7 @@ export class LinkPlannedExpenseToExpenseService implements ISubscriber<ExpenseCr
       return;
     }
     const plannedExpenseProjection = PlannedExpenseProjection.Get(event.ExpenseProjection.PlannedExpenseId);
-    plannedExpenseProjection.ExpenseIds.push(event.ExpenseProjection.PlannedExpenseId);
+    plannedExpenseProjection.ExpenseIds.push(event.ExpenseProjection.Id);
   }
   public Subscribe() {
     Publisher.Instance.Subscribe(ExpenseCreatedEvent, this);
