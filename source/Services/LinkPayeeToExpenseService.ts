@@ -4,6 +4,7 @@ import { ExpenseCreatedEvent } from "../Events/ExpenseCreatedEvent";
 import { PayeeProjection } from "../Projections/PayeeProjection";
 
 export class LinkPayeeToExpenseService implements ISubscriber<ExpenseCreatedEvent> {
+  public static Instance: LinkPayeeToExpenseService = new LinkPayeeToExpenseService();
   public Process(event: ExpenseCreatedEvent): void {
     if (!event.ExpenseProjection.PayeeId) {
       return;
