@@ -6,7 +6,7 @@ import { PayeeProjection } from "../Projections/PayeeProjection";
 export class CreatePayeeService implements ISubscriber<PayeeRequestedEvent> {
   public static Instance = new CreatePayeeService();
   public Process(event: PayeeRequestedEvent) {
-    // Create Expense Projection
+    // Create PayeeProjection
     const payeeProjection = new PayeeProjection();
     payeeProjection.Description = event.Description;
     payeeProjection.Name = event.Name;
