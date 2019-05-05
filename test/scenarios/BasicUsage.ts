@@ -139,6 +139,12 @@ describe("Scenarios", () => {
       it("And the Ledger Balance should be 1", () => {
         assert.isTrue(ledger.Balance === 1);
       });
+      it("And the PlannedExpenseProjection contains the ExpenseProjection Id", () => {
+        const plannedExpenseProjection = projectionStore.GetProjections(PlannedExpenseProjection)[0];
+        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
+        plannedExpenseProjection.ExpenseIds.find((x) => x === expenseProjection.TransactionId);
+        assert.exists(expenseProjection);
+      });
       it("When a PayeeRequested event is Published", () => {
         PublishPayeeRequestedEvent();
       });
