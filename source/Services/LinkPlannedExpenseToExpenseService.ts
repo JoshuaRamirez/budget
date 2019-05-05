@@ -3,8 +3,8 @@ import { Publisher } from "../Core/Publisher";
 import { ExpenseCreatedEvent } from "../Events/ExpenseCreatedEvent";
 import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjection";
 
-export class LinkExpenseToPlannedExpenseService implements ISubscriber<ExpenseCreatedEvent> {
-  public static Instance = new LinkExpenseToPlannedExpenseService();
+export class LinkPlannedExpenseToExpenseService implements ISubscriber<ExpenseCreatedEvent> {
+  public static Instance = new LinkPlannedExpenseToExpenseService();
   public Process(event: ExpenseCreatedEvent): void {
     if (!event.ExpenseProjection.PlannedExpenseId) {
       return;
