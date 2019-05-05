@@ -2,8 +2,8 @@ import { Projection } from "../Core/Projection";
 import { ProjectionStore } from "../Core/ProjectionStore";
 
 export class PlannedExpenseProjection extends Projection {
-  public static Get(PayeeId: any): PlannedExpenseProjection {
-    return ProjectionStore.Instance.GetProjection(PlannedExpenseProjection, PayeeId);
+  public static Get(id: any): PlannedExpenseProjection {
+    return ProjectionStore.Instance.GetProjection(PlannedExpenseProjection, id);
   }
   public Description: string;
   public ExpenseIds: any[] = [];

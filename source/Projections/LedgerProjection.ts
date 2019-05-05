@@ -2,8 +2,8 @@ import { Projection } from "../Core/Projection";
 import { ProjectionStore } from "../Core/ProjectionStore";
 
 export class LedgerProjection extends Projection {
-  public static Get(PayeeId: any): LedgerProjection {
-    return ProjectionStore.Instance.GetProjection(LedgerProjection, PayeeId);
+  public static Get(id: any): LedgerProjection {
+    return ProjectionStore.Instance.GetProjection(LedgerProjection, id);
   }
   public Account: any;
   public Balance: number;
