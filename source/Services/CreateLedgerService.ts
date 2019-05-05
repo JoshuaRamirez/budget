@@ -6,7 +6,7 @@ import { LedgerProjection } from "../Projections/LedgerProjection";
 export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
   public static Instance = new CreateLedgerService();
   public Process(event: LedgerRequestedEvent) {
-    // Create Ledger Projection
+    // Create LedgerProjection
     const ledgerProjection = new LedgerProjection();
     ledgerProjection.Account = event.Account;
     ledgerProjection.Balance = 0;

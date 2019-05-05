@@ -7,7 +7,7 @@ import { AccountProjection } from "../Projections/AccountProjection";
 export class CreateAccountService implements ISubscriber<AccountRequestedEvent> {
   public static Instance = new CreateAccountService();
   public Process(event: AccountRequestedEvent) {
-    // Create Account Projection
+    // Create AccountProjection
     const accountProjection = new AccountProjection();
     accountProjection.Name = event.Name;
     accountProjection.Type = event.Type;

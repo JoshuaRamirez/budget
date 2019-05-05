@@ -15,6 +15,7 @@ export class CreateAllocationService implements ISubscriber<TransactionCreatedEv
     if (event.SagaName !== CreateAllocationSaga.name) {
       return;
     }
+    // Create AllocationProjection using Saga
     const sagaId = event.SagaId;
     const saga = CreateAllocationSaga.Get(sagaId);
     saga.TransactionId = event.Transaction.Id; // TODO: Think about saga persistence in fb cloud

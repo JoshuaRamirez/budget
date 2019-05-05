@@ -7,7 +7,7 @@ import { TransactionProjection } from "../Projections/TransactionProjection";
 export class CreateTransactionService implements ISubscriber<TransactionRequestedEvent> {
   public static Instance = new CreateTransactionService();
   public Process(event: TransactionRequestedEvent) {
-    // Create Transaction Projection
+    // Create TransactionProjection
     const transactionProjection = new TransactionProjection();
     transactionProjection.Amount = event.Amount;
     transactionProjection.Destination = event.Destination;
@@ -15,7 +15,7 @@ export class CreateTransactionService implements ISubscriber<TransactionRequeste
     transactionProjection.Source = event.Source;
     transactionProjection.Type = event.Type;
     transactionProjection.Project();
-    // Publish Transaction Created
+    // Publish TransactionCreatedEvent
     const newTransactionCreatedEvent = new TransactionCreatedEvent(event.SagaName, event.SagaId);
     newTransactionCreatedEvent.Transaction = transactionProjection;
     newTransactionCreatedEvent.Publish();

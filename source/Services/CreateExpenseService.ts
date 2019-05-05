@@ -15,7 +15,7 @@ export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent
     if (event.SagaName !== CreateExpenseSaga.name) {
       return;
     }
-    // Create Expense Projection using Saga
+    // Create ExpenseProjection using Saga
     const saga = CreateExpenseSaga.Get(event.SagaId);
     const expenseProjection = new ExpenseProjection();
     expenseProjection.Amount = saga.Amount;
