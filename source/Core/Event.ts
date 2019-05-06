@@ -1,8 +1,8 @@
 import { Id } from "./Id";
 
 export abstract class Event {
-  public EventId: any;
-  public EventName: string;
+  public readonly EventId: any;
+  public readonly EventName: string;
   protected constructor(eventName: string) {
     this.EventId = Id.Generate();
     this.EventName = eventName;

@@ -2,8 +2,8 @@ import { Id } from "./Id";
 import { ProjectionStore } from "./ProjectionStore";
 
 export abstract class Projection {
-  public Id: any;
-  public ProjectionName: string;
+  public readonly Id: any;
+  public readonly ProjectionName: string;
   protected constructor(projectionName: string) {
     this.Id = Id.Generate();
     this.ProjectionName = projectionName;

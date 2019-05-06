@@ -17,8 +17,6 @@ export class CreateExpenseTransactionService implements ISubscriber<ExpenseReque
     transactionRequestedEvent.LedgerId = event.LedgerId;
     transactionRequestedEvent.Source = event.LedgerId;
     transactionRequestedEvent.Type = "Expense";
-    transactionRequestedEvent.SagaId = saga.Id;
-    transactionRequestedEvent.SagaName = saga.Name;
     transactionRequestedEvent.Publish();
   }
   public Subscribe() {
