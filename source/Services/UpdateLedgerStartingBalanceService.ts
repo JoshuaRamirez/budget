@@ -3,8 +3,8 @@ import { Publisher } from "../Core/Publisher";
 import { LedgerStartingBalanceUpdateRequested } from "../Events/LedgerStartingBalanceUpdateRequested";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
-export class UpdateLedgerStartingBalance implements ISubscriber<LedgerStartingBalanceUpdateRequested> {
-  public static Instance: UpdateLedgerStartingBalance = new UpdateLedgerStartingBalance();
+export class UpdateLedgerStartingBalanceService implements ISubscriber<LedgerStartingBalanceUpdateRequested> {
+  public static Instance: UpdateLedgerStartingBalanceService = new UpdateLedgerStartingBalanceService();
   public Process(event: LedgerStartingBalanceUpdateRequested): void {
     const ledger = LedgerProjection.Get(event.LedgerId);
     if (ledger.StartingBalance !== 0) {
