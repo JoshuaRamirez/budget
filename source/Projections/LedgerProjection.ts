@@ -7,6 +7,7 @@ export class LedgerProjection extends Projection {
   }
   public Account: any;
   public Balance: number;
+  public StartingBalance: number = 0;
   public TransactionIds: any[];
   public Type: string;
   constructor() {
