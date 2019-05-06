@@ -2,6 +2,7 @@ import { assert } from "chai";
 import "mocha";
 import { ProjectionStore } from "../../source/Core/ProjectionStore";
 import { Subscriptions } from "../../source/Core/Subscriptions";
+import { LedgerStartingBalanceUpdateRequested } from "../../source/Events/LedgerStartingBalanceUpdateRequested";
 import { AllocationProjection } from "../../source/Projections/AllocationProjection";
 import { ExpenseProjection } from "../../source/Projections/ExpenseProjection";
 import { LedgerProjection } from "../../source/Projections/LedgerProjection";
@@ -158,6 +159,24 @@ describe("Scenarios", () => {
         const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
         const foundId = payeeProjection.ExpenseIds.find((x) => x === expenseProjection.Id);
         assert.exists(foundId);
+      });
+      it("When the ledger's starting balance is changed from 0 to 100", () => {
+        const ledgerStartingBalanceUpdateRequested = new LedgerStartingBalanceUpdateRequested();
+        ledgerStartingBalanceUpdateRequested.LedgerId = ledger.Id;
+        ledgerStartingBalanceUpdateRequested.StartingBalance = 100;
+        ledgerStartingBalanceUpdateRequested.Publish();
+      });
+      it("The the Ledger's balance should be 101", () => {
+        assert.equal(ledger.Balance, 101);
+      });
+      it("When the ledger's starting balance is changed from 100 to 99", () => {
+        const ledgerStartingBalanceUpdateRequested = new LedgerStartingBalanceUpdateRequested();
+        ledgerStartingBalanceUpdateRequested.LedgerId = ledger.Id;
+        ledgerStartingBalanceUpdateRequested.StartingBalance = 99;
+        ledgerStartingBalanceUpdateRequested.Publish();
+      });
+      it("The the Ledger's balance should be 100", () => {
+        assert.equal(ledger.Balance, 100);
       });
     });
   });
