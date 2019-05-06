@@ -7,7 +7,6 @@ export class PlannedExpenseProjection extends Projection {
   }
   public Description: string;
   public ExpenseIds: any[] = [];
-  public Name: string;
   public RepeatPeriod: number;
   public RepeatMeasurement: string;
   public RepeatCount: number;

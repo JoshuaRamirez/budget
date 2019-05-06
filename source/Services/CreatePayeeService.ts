@@ -9,7 +9,7 @@ export class CreatePayeeService implements ISubscriber<PayeeRequestedEvent> {
     // Create PayeeProjection
     const payeeProjection = new PayeeProjection();
     payeeProjection.Description = event.Description;
-    payeeProjection.Name = event.Name;
+    payeeProjection.PayeeName = event.PayeeName;
     payeeProjection.Type = event.Type;
     payeeProjection.Project();
     return payeeProjection;

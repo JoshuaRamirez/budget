@@ -3,7 +3,6 @@ import { Publisher } from "../Core/Publisher";
 
 export class PlannedExpenseRequestedEvent extends Event {
   public Description: string;
-  public Name: string;
   public RepeatPeriod: number;
   public RepeatMeasurement: string;
   public RepeatCount: number;

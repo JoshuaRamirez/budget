@@ -3,7 +3,7 @@ import { Publisher } from "../Core/Publisher";
 
 export class PayeeRequestedEvent extends Event {
   public Description: string;
-  public Name: string;
+  public PayeeName: string;
   public Type: string;
   constructor() {
     super(PayeeRequestedEvent.name);

@@ -10,7 +10,6 @@ export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRe
     const plannedExpenseProjection = new PlannedExpenseProjection();
     plannedExpenseProjection.Description = event.Description;
     plannedExpenseProjection.ExpenseIds = [];
-    plannedExpenseProjection.Name = event.Name;
     plannedExpenseProjection.RepeatCount = event.RepeatCount;
     plannedExpenseProjection.RepeatMeasurement = event.RepeatMeasurement;
     plannedExpenseProjection.RepeatPeriod = event.RepeatPeriod;

@@ -5,7 +5,7 @@ export class AccountProjection extends Projection {
   public static Get(id: any): AccountProjection {
     return ProjectionStore.Instance.GetProjection(AccountProjection, id);
   }
-  public Name: string;
+  public AccountName: string;
   public Type: string;
   constructor() {
     super(AccountProjection.name);

@@ -18,7 +18,7 @@ export const PublishAllocationRequestedEvent = (ledgerId, amount) => {
 
 export const PublishAccountRequestedEvent = () => {
   const accountRequestedEvent = new AccountRequestedEvent();
-  accountRequestedEvent.Name = "Wells Fargo Checking";
+  accountRequestedEvent.AccountName = "Wells Fargo Checking";
   accountRequestedEvent.Type = "Bank";
   accountRequestedEvent.Publish();
 };
@@ -47,7 +47,6 @@ export const PublishExpenseRequestedEvent = (amount, ledgerId, plannedExpenseId 
 export const PublishPayeeRequestedEvent = () => {
   const payeeRequestedEvent = new PayeeRequestedEvent();
   payeeRequestedEvent.Description = "Test";
-  payeeRequestedEvent.Name = Date.now().toString();
   payeeRequestedEvent.Type = "Test";
   payeeRequestedEvent.Publish();
 };
@@ -58,6 +57,5 @@ export const RequestPlannedExpenseEvent = () => {
   event.RepeatMeasurement = "Weeks";
   event.RepeatCount = -1;
   event.Description = "Testing";
-  event.Name = "Test Expense";
   event.Publish();
 };
