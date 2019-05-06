@@ -11,6 +11,7 @@ import { LinkLedgerToTransactionService } from "../Services/LinkLedgerToTransact
 import { LinkPayeeToExpenseService } from "../Services/LinkPayeeToExpenseService";
 import { LinkPlannedExpenseToExpenseService } from "../Services/LinkPlannedExpenseToExpenseService";
 import { UpdateLedgerBalanceService } from "../Services/UpdateLedgerBalanceService";
+import { UpdateLedgerStartingBalance } from "../Services/UpdateLedgerStartingBalance";
 
 export class Subscriptions {
   public Create() {
@@ -27,5 +28,6 @@ export class Subscriptions {
     LinkLedgerToTransactionService.Instance.Subscribe();
     UpdateLedgerBalanceService.Instance.Subscribe();
     LinkPayeeToExpenseService.Instance.Subscribe();
+    UpdateLedgerStartingBalance.Instance.Subscribe();
   }
 }
