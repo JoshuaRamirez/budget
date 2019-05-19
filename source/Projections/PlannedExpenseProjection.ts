@@ -6,12 +6,13 @@ export class PlannedExpenseProjection extends Projection {
     return ProjectionStore.Instance.GetProjection(PlannedExpenseProjection, id);
   }
   public Description: string;
-  public ExpenseIds: any[] = [];
+  public ExpenseIds: any[];
   public RepeatPeriod: number;
   public RepeatMeasurement: string;
   public RepeatCount: number;
   public RepeatStart: Date;
   constructor() {
     super(PlannedExpenseProjection.name);
+    this.ExpenseIds = [];
   }
 }
