@@ -5,6 +5,7 @@ import { PayeeProjection } from "../Projections/PayeeProjection";
 
 export class CreatePayeeService implements ISubscriber<PayeeRequestedEvent> {
   public static Instance = new CreatePayeeService();
+  private handles = [];
   public Process(event: PayeeRequestedEvent) {
     // Create PayeeProjection
     const payeeProjection = new PayeeProjection();
@@ -15,6 +16,12 @@ export class CreatePayeeService implements ISubscriber<PayeeRequestedEvent> {
     return payeeProjection;
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(PayeeRequestedEvent, this);
+    const handle = Publisher.Instance.Subscribe(PayeeRequestedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(PayeeRequestedEvent, handle);
+    });
   }
 }

@@ -21,6 +21,19 @@ export class Publisher<TEvent extends Event> {
     if (!subscriptions) {
       Publisher.Subscriptions[eventName] = [];
     }
-    Publisher.Subscriptions[eventName].push(subscriber.Process.bind(subscriber));
+    const handle = subscriber.Process.bind(subscriber);
+    Publisher.Subscriptions[eventName].push(handle);
+    return handle;
+  }
+  public UnSubscribe(
+    eventType: (new (x, y) => TEvent),
+    handle: ISubscriber<TEvent>,
+  ) {
+    const eventName = eventType.name;
+    const subscriptions = Publisher.Subscriptions[eventName];
+    if (!subscriptions) { return; }
+    const index = subscriptions.indexOf(handle);
+    if (index < 0) { return; }
+    subscriptions.splice(index, 1);
   }
 }

@@ -6,6 +6,7 @@ import { TransactionProjection } from "../Projections/TransactionProjection";
 
 export class CreateTransactionService implements ISubscriber<TransactionRequestedEvent> {
   public static Instance = new CreateTransactionService();
+  private handles = [];
   public Process(event: TransactionRequestedEvent) {
     // Create TransactionProjection
     const transactionProjection = new TransactionProjection();
@@ -21,6 +22,12 @@ export class CreateTransactionService implements ISubscriber<TransactionRequeste
     newTransactionCreatedEvent.Publish();
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(TransactionRequestedEvent, this);
+    const handle = Publisher.Instance.Subscribe(TransactionRequestedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(TransactionRequestedEvent, handle);
+    });
   }
 }

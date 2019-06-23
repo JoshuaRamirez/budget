@@ -6,6 +6,7 @@ import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 
 export class CreateAllocationService implements ISubscriber<TransactionCreatedEvent> {
   public static Instance = new CreateAllocationService();
+  private handles = [];
   public Process(event: TransactionCreatedEvent) {
     // Quit if Saga doesn't exist on Event
     if (!event.SagaId) {
@@ -26,6 +27,12 @@ export class CreateAllocationService implements ISubscriber<TransactionCreatedEv
     allocationProjection.Project();
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(TransactionCreatedEvent, this);
+    const handle = Publisher.Instance.Subscribe(TransactionCreatedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(TransactionCreatedEvent, handle);
+    });
   }
 }

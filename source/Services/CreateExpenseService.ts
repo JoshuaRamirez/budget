@@ -7,6 +7,7 @@ import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
 
 export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent> {
   public static Instance = new CreateExpenseService();
+  private handles = [];
   public Process(event: TransactionCreatedEvent) {
     // Quit if Saga doesn't exist on Event
     if (!event.SagaId) {
@@ -33,6 +34,12 @@ export class CreateExpenseService implements ISubscriber<TransactionCreatedEvent
     expenseCreatedEvent.Publish();
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(TransactionCreatedEvent, this);
+    const handle = Publisher.Instance.Subscribe(TransactionCreatedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(TransactionCreatedEvent, handle);
+    });
   }
 }

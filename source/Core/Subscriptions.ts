@@ -14,20 +14,30 @@ import { UpdateLedgerBalanceService } from "../Services/UpdateLedgerBalanceServi
 import { UpdateLedgerStartingBalanceService } from "../Services/UpdateLedgerStartingBalanceService";
 
 export class Subscriptions {
-  public Create() {
-    CreateAccountService.Instance.Subscribe();
-    CreateAllocationTransactionService.Instance.Subscribe();
-    CreateLedgerService.Instance.Subscribe();
-    CreateAllocationService.Instance.Subscribe();
-    CreateTransactionService.Instance.Subscribe();
-    CreatePlannedExpenseService.Instance.Subscribe();
-    CreateExpenseService.Instance.Subscribe();
-    CreateExpenseTransactionService.Instance.Subscribe();
-    CreatePayeeService.Instance.Subscribe();
-    LinkPlannedExpenseToExpenseService.Instance.Subscribe();
-    LinkLedgerToTransactionService.Instance.Subscribe();
-    UpdateLedgerBalanceService.Instance.Subscribe();
-    LinkPayeeToExpenseService.Instance.Subscribe();
-    UpdateLedgerStartingBalanceService.Instance.Subscribe();
+  public static Create() {
+    this.targets.forEach((target) => {
+      target.Instance.Subscribe();
+    });
   }
+  public static Release() {
+    this.targets.forEach((target) => {
+      target.Instance.UnSubscribe();
+    });
+  }
+  private static targets = [
+    CreateAccountService,
+    CreateAllocationTransactionService,
+    CreateLedgerService,
+    CreateAllocationService,
+    CreateTransactionService,
+    CreatePlannedExpenseService,
+    CreateExpenseService,
+    CreateExpenseTransactionService,
+    CreatePayeeService,
+    LinkPlannedExpenseToExpenseService,
+    LinkLedgerToTransactionService,
+    UpdateLedgerBalanceService,
+    LinkPayeeToExpenseService,
+    UpdateLedgerStartingBalanceService,
+  ];
 }

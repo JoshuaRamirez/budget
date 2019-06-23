@@ -5,6 +5,7 @@ import { LedgerProjection } from "../Projections/LedgerProjection";
 
 export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
   public static Instance = new CreateLedgerService();
+  private handles = [];
   public Process(event: LedgerRequestedEvent) {
     // Create LedgerProjection
     const ledgerProjection = new LedgerProjection();
@@ -15,6 +16,12 @@ export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
     ledgerProjection.Project();
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(LedgerRequestedEvent, this);
+    const handle = Publisher.Instance.Subscribe(LedgerRequestedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(LedgerRequestedEvent, handle);
+    });
   }
 }

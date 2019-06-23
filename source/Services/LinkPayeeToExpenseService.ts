@@ -2,9 +2,9 @@ import { ISubscriber } from "../Core/ISubscriber";
 import { Publisher } from "../Core/Publisher";
 import { ExpenseCreatedEvent } from "../Events/ExpenseCreatedEvent";
 import { PayeeProjection } from "../Projections/PayeeProjection";
-
 export class LinkPayeeToExpenseService implements ISubscriber<ExpenseCreatedEvent> {
   public static Instance: LinkPayeeToExpenseService = new LinkPayeeToExpenseService();
+  private handles = [];
   public Process(event: ExpenseCreatedEvent): void {
     if (!event.ExpenseProjection.PayeeId) {
       return;
@@ -16,6 +16,12 @@ export class LinkPayeeToExpenseService implements ISubscriber<ExpenseCreatedEven
     payeeProjection.ExpenseIds.push(event.ExpenseProjection.Id);
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(ExpenseCreatedEvent, this);
+    const handle = Publisher.Instance.Subscribe(ExpenseCreatedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(ExpenseCreatedEvent, handle);
+    });
   }
 }

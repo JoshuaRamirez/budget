@@ -5,6 +5,7 @@ import { CategoryProjection } from "../Projections/CategoryProjection";
 
 export class CreateCategoryService implements ISubscriber<CategoryRequestedEvent> {
   public static Instance = new CreateCategoryService();
+  private handles = [];
   public Process(event: CategoryRequestedEvent) {
     const accountProjection = new CategoryProjection();
     accountProjection.CategoryName = event.CategoryName;
@@ -12,6 +13,12 @@ export class CreateCategoryService implements ISubscriber<CategoryRequestedEvent
     accountProjection.Project();
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(CategoryRequestedEvent, this);
+    const handle = Publisher.Instance.Subscribe(CategoryRequestedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(CategoryRequestedEvent, handle);
+    });
   }
 }

@@ -5,6 +5,7 @@ import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjectio
 
 export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRequestedEvent> {
   public static Instance = new CreatePlannedExpenseService();
+  private handles = [];
   public Process(event: PlannedExpenseRequestedEvent) {
     // Create PlannedExpenseProjection
     const plannedExpenseProjection = new PlannedExpenseProjection();
@@ -18,6 +19,12 @@ export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRe
     return plannedExpenseProjection;
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(PlannedExpenseRequestedEvent, this);
+    const handle = Publisher.Instance.Subscribe(PlannedExpenseRequestedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(PlannedExpenseRequestedEvent, handle);
+    });
   }
 }

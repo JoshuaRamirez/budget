@@ -6,6 +6,7 @@ import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 
 export class CreateAllocationTransactionService implements ISubscriber<AllocationRequestedEvent> {
   public static Instance = new CreateAllocationTransactionService();
+  private handles = [];
   public Process(event: AllocationRequestedEvent): void {
     // Start New Saga
     const saga = new CreateAllocationSaga(event);
@@ -20,6 +21,12 @@ export class CreateAllocationTransactionService implements ISubscriber<Allocatio
     transactionRequestedEvent.Publish();
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(AllocationRequestedEvent, this);
+    const handle = Publisher.Instance.Subscribe(AllocationRequestedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(AllocationRequestedEvent, handle);
+    });
   }
 }

@@ -6,6 +6,7 @@ import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
 
 export class CreateExpenseTransactionService implements ISubscriber<ExpenseRequestedEvent> {
   public static Instance = new CreateExpenseTransactionService();
+  private handles = [];
   public Process(event: ExpenseRequestedEvent): void {
     // Start New Saga
     const saga = new CreateExpenseSaga(event);
@@ -20,6 +21,12 @@ export class CreateExpenseTransactionService implements ISubscriber<ExpenseReque
     transactionRequestedEvent.Publish();
   }
   public Subscribe() {
-    Publisher.Instance.Subscribe(ExpenseRequestedEvent, this);
+    const handle = Publisher.Instance.Subscribe(ExpenseRequestedEvent, this);
+    this.handles.push(handle);
+  }
+  public UnSubscribe() {
+    this.handles.forEach((handle) => {
+      Publisher.Instance.UnSubscribe(ExpenseRequestedEvent, handle);
+    });
   }
 }
