@@ -24,13 +24,15 @@ describe("Scenarios", () => {
 
   describe("Features", () => {
 
+    after(() => {
+      Subscriptions.Release();
+    });
+
     describe("Basic Usage", () => {
       let allocationProjections;
-      let subscriptions;
       let ledger;
       it("Given all subscriptions are setup", () => {
-        subscriptions = new Subscriptions();
-        subscriptions.Create();
+        Subscriptions.Create();
       });
       it("When a NewAccountCreatedEvent is published", () => {
         PublishAccountRequestedEvent();
