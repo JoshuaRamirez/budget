@@ -1,0 +1,18 @@
+import { assert } from "chai";
+import "mocha";
+import {AccountProjection} from "../../../source/Projections/AccountProjection";
+
+describe("AccountProjection", () => {
+
+  it("should import", () => {
+    assert.exists(AccountProjection);
+  });
+  it("should instantiate", () => {
+    const accountProjection = new AccountProjection();
+    assert.exists(accountProjection);
+  });
+  it("should get", () => {
+    AccountProjection.Get(1);
+  });
+
+});
