@@ -2,7 +2,7 @@ import { assert } from "chai";
 import "mocha";
 import { ProjectionStore } from "../../source/Core/ProjectionStore";
 import { Subscriptions } from "../../source/Core/Subscriptions";
-import { LedgerStartingBalanceUpdateRequested } from "../../source/Events/LedgerStartingBalanceUpdateRequested";
+import { LedgerStartingBalanceUpdateRequestedEvent } from "../../source/Events/LedgerStartingBalanceUpdateRequestedEvent";
 import { AllocationProjection } from "../../source/Projections/AllocationProjection";
 import { ExpenseProjection } from "../../source/Projections/ExpenseProjection";
 import { LedgerProjection } from "../../source/Projections/LedgerProjection";
@@ -163,7 +163,7 @@ describe("Scenarios", () => {
         assert.exists(foundId);
       });
       it("When the ledger's starting balance is changed from 0 to 100", () => {
-        const ledgerStartingBalanceUpdateRequested = new LedgerStartingBalanceUpdateRequested();
+        const ledgerStartingBalanceUpdateRequested = new LedgerStartingBalanceUpdateRequestedEvent();
         ledgerStartingBalanceUpdateRequested.LedgerId = ledger.Id;
         ledgerStartingBalanceUpdateRequested.StartingBalance = 100;
         ledgerStartingBalanceUpdateRequested.Publish();
@@ -172,7 +172,7 @@ describe("Scenarios", () => {
         assert.equal(ledger.Balance, 101);
       });
       it("When the ledger's starting balance is changed from 100 to 99", () => {
-        const ledgerStartingBalanceUpdateRequested = new LedgerStartingBalanceUpdateRequested();
+        const ledgerStartingBalanceUpdateRequested = new LedgerStartingBalanceUpdateRequestedEvent();
         ledgerStartingBalanceUpdateRequested.LedgerId = ledger.Id;
         ledgerStartingBalanceUpdateRequested.StartingBalance = 99;
         ledgerStartingBalanceUpdateRequested.Publish();

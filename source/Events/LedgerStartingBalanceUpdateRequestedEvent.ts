@@ -1,11 +1,11 @@
 import { Event } from "../Core/Event";
 import { Publisher } from "../Core/Publisher";
 
-export class LedgerStartingBalanceUpdateRequested extends Event {
+export class LedgerStartingBalanceUpdateRequestedEvent extends Event {
   public LedgerId: any;
   public StartingBalance: number;
   constructor() {
-    super(LedgerStartingBalanceUpdateRequested.name);
+    super(LedgerStartingBalanceUpdateRequestedEvent.name);
   }
   public Publish(): void {
     Publisher.Instance.Publish(this);
