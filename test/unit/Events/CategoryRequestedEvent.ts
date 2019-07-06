@@ -2,7 +2,7 @@ import { assert } from "chai";
 import "mocha";
 import {CategoryRequestedEvent} from "../../../source/Events/CategoryRequestedEvent";
 
-describe("CreateCategoryRequestedEvent", () => {
+describe("CategoryRequestedEvent", () => {
 
   it("should import", () => {
     assert.exists(CategoryRequestedEvent);
