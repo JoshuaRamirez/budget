@@ -1,9 +1,9 @@
 import { assert } from "chai";
 import "mocha";
-import { ProjectionStore } from "../../source/Core/ProjectionStore";
-import { CategoryRequestedEvent } from "../../source/Events/CategoryRequestedEvent";
-import { CategoryProjection } from "../../source/Projections/CategoryProjection";
-import { CreateCategoryService } from "../../source/Services/CreateCategoryService";
+import { ProjectionStore } from "../../../source/Core/ProjectionStore";
+import { CategoryRequestedEvent } from "../../../source/Events/CategoryRequestedEvent";
+import { CategoryProjection } from "../../../source/Projections/CategoryProjection";
+import { CreateCategoryService } from "../../../source/Services/CreateCategoryService";
 
 
 describe("CreateCategoryService", () => {
