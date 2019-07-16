@@ -1,11 +1,12 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { PlannedExpenseRequestedEvent } from "../Events/PlannedExpenseRequestedEvent";
 import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjection";
 
-export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRequestedEvent> {
+export class CreatePlannedExpenseService extends Handler<PlannedExpenseRequestedEvent> {
   public static Instance = new CreatePlannedExpenseService();
-  private handles = [];
+  constructor() {
+    super(PlannedExpenseRequestedEvent);
+  }
   public Process(event: PlannedExpenseRequestedEvent) {
     // Create PlannedExpenseProjection
     const plannedExpenseProjection = new PlannedExpenseProjection();
@@ -17,14 +18,5 @@ export class CreatePlannedExpenseService implements ISubscriber<PlannedExpenseRe
     plannedExpenseProjection.RepeatStart = event.RepeatStart;
     plannedExpenseProjection.Project();
     return plannedExpenseProjection;
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(PlannedExpenseRequestedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(PlannedExpenseRequestedEvent, handle);
-    });
   }
 }

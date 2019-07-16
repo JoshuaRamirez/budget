@@ -1,12 +1,13 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { ExpenseRequestedEvent } from "../Events/ExpenseRequestedEvent";
 import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
 import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
 
-export class RequestExpenseTransactionService implements ISubscriber<ExpenseRequestedEvent> {
+export class RequestExpenseTransactionService extends Handler<ExpenseRequestedEvent> {
   public static Instance = new RequestExpenseTransactionService();
-  private handles = [];
+  constructor() {
+    super(ExpenseRequestedEvent);
+  }
   public Process(event: ExpenseRequestedEvent): void {
     // Start New Saga
     const saga = new CreateExpenseSaga(event);
@@ -19,14 +20,5 @@ export class RequestExpenseTransactionService implements ISubscriber<ExpenseRequ
     transactionRequestedEvent.Source = event.LedgerId;
     transactionRequestedEvent.Type = "Expense";
     transactionRequestedEvent.Publish();
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(ExpenseRequestedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(ExpenseRequestedEvent, handle);
-    });
   }
 }

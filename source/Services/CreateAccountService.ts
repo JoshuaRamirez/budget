@@ -1,12 +1,13 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { AccountRequestedEvent } from "../Events/AccountRequestedEvent";
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
 import { AccountProjection } from "../Projections/AccountProjection";
 
-export class CreateAccountService implements ISubscriber<AccountRequestedEvent> {
+export class CreateAccountService extends Handler<AccountRequestedEvent> {
   public static Instance = new CreateAccountService();
-  private handles = [];
+  constructor() {
+    super(AccountRequestedEvent);
+  }
   public Process(event: AccountRequestedEvent) {
     // Create AccountProjection
     const accountProjection = new AccountProjection();
@@ -18,14 +19,5 @@ export class CreateAccountService implements ISubscriber<AccountRequestedEvent> 
     ledgerRequestedEvent.Account = accountProjection;
     ledgerRequestedEvent.Type = "Account";
     ledgerRequestedEvent.Publish();
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(AccountRequestedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(AccountRequestedEvent, handle);
-    });
   }
 }

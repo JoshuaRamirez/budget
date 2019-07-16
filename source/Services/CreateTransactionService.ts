@@ -1,14 +1,15 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
 import { TransactionProjection } from "../Projections/TransactionProjection";
 import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
 
-export class CreateTransactionService implements ISubscriber<TransactionRequestedEvent> {
+export class CreateTransactionService extends Handler<TransactionRequestedEvent> {
   public static Instance = new CreateTransactionService();
-  private handles = [];
+  constructor() {
+    super(TransactionRequestedEvent);
+  }
   public Process(event: TransactionRequestedEvent) {
     // Quit if Saga doesn't exist on Event
     if (!event.SagaId) {
@@ -33,14 +34,5 @@ export class CreateTransactionService implements ISubscriber<TransactionRequeste
     const newTransactionCreatedEvent = new TransactionCreatedEvent(event.SagaName, event.SagaId);
     newTransactionCreatedEvent.Transaction = transactionProjection;
     newTransactionCreatedEvent.Publish();
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(TransactionRequestedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(TransactionRequestedEvent, handle);
-    });
   }
 }

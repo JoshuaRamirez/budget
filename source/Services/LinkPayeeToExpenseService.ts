@@ -1,10 +1,12 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { ExpenseCreatedEvent } from "../Events/ExpenseCreatedEvent";
 import { PayeeProjection } from "../Projections/PayeeProjection";
-export class LinkPayeeToExpenseService implements ISubscriber<ExpenseCreatedEvent> {
+
+export class LinkPayeeToExpenseService extends Handler<ExpenseCreatedEvent> {
   public static Instance: LinkPayeeToExpenseService = new LinkPayeeToExpenseService();
-  private handles = [];
+  constructor() {
+    super(ExpenseCreatedEvent);
+  }
   public Process(event: ExpenseCreatedEvent): void {
     if (!event.ExpenseProjection) {
       return;
@@ -17,14 +19,5 @@ export class LinkPayeeToExpenseService implements ISubscriber<ExpenseCreatedEven
       throw new Error("The ProjectionStore returns no valid PayeeProjection associated with the Saga's PayeeId.");
     }
     payeeProjection.ExpenseIds.push(event.ExpenseProjection.Id);
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(ExpenseCreatedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(ExpenseCreatedEvent, handle);
-    });
   }
 }

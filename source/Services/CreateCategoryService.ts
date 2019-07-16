@@ -1,24 +1,16 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { CategoryRequestedEvent } from "../Events/CategoryRequestedEvent";
 import { CategoryProjection } from "../Projections/CategoryProjection";
 
-export class CreateCategoryService implements ISubscriber<CategoryRequestedEvent> {
+export class CreateCategoryService extends Handler<CategoryRequestedEvent> {
   public static Instance = new CreateCategoryService();
-  private handles = [];
+  constructor() {
+    super(CategoryRequestedEvent);
+  }
   public Process(event: CategoryRequestedEvent) {
     const accountProjection = new CategoryProjection();
     accountProjection.CategoryName = event.CategoryName;
     accountProjection.Type = event.Type;
     accountProjection.Project();
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(CategoryRequestedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(CategoryRequestedEvent, handle);
-    });
   }
 }

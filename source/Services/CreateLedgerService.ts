@@ -1,11 +1,12 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { LedgerRequestedEvent } from "../Events/LedgerRequestedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
-export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
+export class CreateLedgerService extends Handler<LedgerRequestedEvent> {
   public static Instance = new CreateLedgerService();
-  private handles = [];
+  constructor() {
+    super(LedgerRequestedEvent);
+  }
   public Process(event: LedgerRequestedEvent) {
     // Create LedgerProjection
     const ledgerProjection = new LedgerProjection();
@@ -14,14 +15,5 @@ export class CreateLedgerService implements ISubscriber<LedgerRequestedEvent> {
     ledgerProjection.TransactionIds = [];
     ledgerProjection.Type = event.Type;
     ledgerProjection.Project();
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(LedgerRequestedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(LedgerRequestedEvent, handle);
-    });
   }
 }

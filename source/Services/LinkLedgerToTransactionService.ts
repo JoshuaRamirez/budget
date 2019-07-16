@@ -1,24 +1,16 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
 // TODO: Rename Link L to T to Add T to L
-export class LinkLedgerToTransactionService implements ISubscriber<TransactionCreatedEvent> {
+export class LinkLedgerToTransactionService extends Handler<TransactionCreatedEvent> {
   public static Instance: LinkLedgerToTransactionService = new LinkLedgerToTransactionService();
-  private handles = [];
+  constructor() {
+    super(TransactionCreatedEvent);
+  }
   public Process(event: TransactionCreatedEvent): void {
     const ledgerId = event.Transaction.LedgerId;
     const ledgerProjection = LedgerProjection.Get(ledgerId);
     ledgerProjection.TransactionIds.push(event.Transaction.Id);
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(TransactionCreatedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(TransactionCreatedEvent, handle);
-    });
   }
 }

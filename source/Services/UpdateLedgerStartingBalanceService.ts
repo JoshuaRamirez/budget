@@ -1,11 +1,12 @@
-import { ISubscriber } from "../Core/ISubscriber";
-import { Publisher } from "../Core/Publisher";
+import { Handler } from "../Core/Handler";
 import { LedgerStartingBalanceUpdateRequestedEvent } from "../Events/LedgerStartingBalanceUpdateRequestedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
-export class UpdateLedgerStartingBalanceService implements ISubscriber<LedgerStartingBalanceUpdateRequestedEvent> {
+export class UpdateLedgerStartingBalanceService extends Handler<LedgerStartingBalanceUpdateRequestedEvent> {
   public static Instance: UpdateLedgerStartingBalanceService = new UpdateLedgerStartingBalanceService();
-  private handles = [];
+  constructor() {
+    super(LedgerStartingBalanceUpdateRequestedEvent);
+  }
   public Process(event: LedgerStartingBalanceUpdateRequestedEvent): void {
     const ledger = LedgerProjection.Get(event.LedgerId);
     if (ledger.StartingBalance !== 0) {
@@ -13,14 +14,5 @@ export class UpdateLedgerStartingBalanceService implements ISubscriber<LedgerSta
     }
     ledger.StartingBalance = event.StartingBalance;
     ledger.Balance += ledger.StartingBalance;
-  }
-  public Subscribe() {
-    const handle = Publisher.Instance.Subscribe(LedgerStartingBalanceUpdateRequestedEvent, this);
-    this.handles.push(handle);
-  }
-  public UnSubscribe() {
-    this.handles.forEach((handle) => {
-      Publisher.Instance.UnSubscribe(LedgerStartingBalanceUpdateRequestedEvent, handle);
-    });
   }
 }
