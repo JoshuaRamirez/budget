@@ -15,16 +15,16 @@ import { UpdateLedgerStartingBalanceService } from "../Services/UpdateLedgerStar
 
 export class Subscriptions {
   public static Create() {
-    this.targets.forEach((target) => {
+    this.services.forEach((target) => {
       target.Instance.Subscribe();
     });
   }
   public static Release() {
-    this.targets.forEach((target) => {
+    this.services.forEach((target) => {
       target.Instance.UnSubscribe();
     });
   }
-  private static targets = [
+  private static services = [
     CreateAccountService,
     CreateAllocationTransactionService,
     CreateLedgerService,
