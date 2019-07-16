@@ -6,6 +6,9 @@ export class LinkPayeeToExpenseService implements ISubscriber<ExpenseCreatedEven
   public static Instance: LinkPayeeToExpenseService = new LinkPayeeToExpenseService();
   private handles = [];
   public Process(event: ExpenseCreatedEvent): void {
+    if (!event.ExpenseProjection) {
+      return;
+    }
     if (!event.ExpenseProjection.PayeeId) {
       return;
     }
