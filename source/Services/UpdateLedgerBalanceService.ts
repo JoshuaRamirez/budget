@@ -3,6 +3,7 @@ import { Publisher } from "../Core/Publisher";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
+// TODO: Consider making constructor private so that the singleton is the only one with handles.
 export class UpdateLedgerBalanceService implements ISubscriber<TransactionCreatedEvent> {
   public static Instance: UpdateLedgerBalanceService = new UpdateLedgerBalanceService();
   private handles = [];
