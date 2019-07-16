@@ -7,7 +7,7 @@ describe("LinkPlannedExpenseToExpenseService", () => {
     assert.exists(LinkPlannedExpenseToExpenseService);
   });
   it("should instantiate with singleton", () => {
-    const service = new LinkPlannedExpenseToExpenseService();
+    const service = LinkPlannedExpenseToExpenseService.Instance;
     assert.exists(service);
   });
 });
