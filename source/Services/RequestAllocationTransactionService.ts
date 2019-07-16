@@ -4,8 +4,8 @@ import { AllocationRequestedEvent } from "../Events/AllocationRequestedEvent";
 import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
 import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 
-export class CreateAllocationTransactionService implements ISubscriber<AllocationRequestedEvent> {
-  public static Instance = new CreateAllocationTransactionService();
+export class RequestAllocationTransactionService implements ISubscriber<AllocationRequestedEvent> {
+  public static Instance = new RequestAllocationTransactionService();
   private handles = [];
   public Process(event: AllocationRequestedEvent): void {
     // Start New Saga

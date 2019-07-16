@@ -1,21 +1,21 @@
 import { assert } from "chai";
 import "mocha";
-import {CreateExpenseTransactionService} from "../../../source/Services/CreateExpenseTransactionService";
+import {RequestExpenseTransactionService} from "../../../source/Services/RequestExpenseTransactionService";
 
-describe("CreateExpenseTransactionService", () => {
+describe("RequestExpenseTransactionService", () => {
   it("should import", () => {
-    assert.exists(CreateExpenseTransactionService);
+    assert.exists(RequestExpenseTransactionService);
   });
   it("should instantiate", () => {
-    const service = new CreateExpenseTransactionService();
+    const service = new RequestExpenseTransactionService();
     assert.exists(service);
   });
   it("should instantiate with singleton", () => {
-    const service = CreateExpenseTransactionService.Instance;
+    const service = RequestExpenseTransactionService.Instance;
     assert.exists(service);
   });
   it("should instantiate with singleton", () => {
-    const service = CreateExpenseTransactionService.Instance;
+    const service = RequestExpenseTransactionService.Instance;
     assert.exists(service);
   });
 });

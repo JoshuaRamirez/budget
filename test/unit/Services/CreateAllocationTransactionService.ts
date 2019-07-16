@@ -1,22 +1,22 @@
 import { assert } from "chai";
 import "mocha";
 import { AllocationRequestedEvent } from "../../../source/Events/AllocationRequestedEvent";
-import {CreateAllocationTransactionService} from "../../../source/Services/CreateAllocationTransactionService";
+import {RequestAllocationTransactionService} from "../../../source/Services/RequestAllocationTransactionService";
 
-describe("CreateAllocationTransactionService", () => {
+describe("RequestAllocationTransactionService", () => {
   it("should import", () => {
-    assert.exists(CreateAllocationTransactionService);
+    assert.exists(RequestAllocationTransactionService);
   });
   it("should instantiate", () => {
-    const service = new CreateAllocationTransactionService();
+    const service = new RequestAllocationTransactionService();
     assert.exists(service);
   });
   it("should instantiate with singleton", () => {
-    const service = CreateAllocationTransactionService.Instance;
+    const service = RequestAllocationTransactionService.Instance;
     assert.exists(service);
   });
   it("should process", () => {
-    const service = CreateAllocationTransactionService.Instance;
+    const service = RequestAllocationTransactionService.Instance;
     const event = new AllocationRequestedEvent();
     service.Process(event);
   });

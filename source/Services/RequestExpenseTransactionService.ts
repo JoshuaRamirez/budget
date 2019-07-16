@@ -4,8 +4,8 @@ import { ExpenseRequestedEvent } from "../Events/ExpenseRequestedEvent";
 import { TransactionRequestedEvent } from "../Events/TransactionRequestedEvent";
 import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
 
-export class CreateExpenseTransactionService implements ISubscriber<ExpenseRequestedEvent> {
-  public static Instance = new CreateExpenseTransactionService();
+export class RequestExpenseTransactionService implements ISubscriber<ExpenseRequestedEvent> {
+  public static Instance = new RequestExpenseTransactionService();
   private handles = [];
   public Process(event: ExpenseRequestedEvent): void {
     // Start New Saga
