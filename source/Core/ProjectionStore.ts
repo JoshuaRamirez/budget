@@ -23,4 +23,14 @@ export class ProjectionStore {
     }
     return this.Projections[projectionName];
   }
+  public Clear<TProjection extends Projection>(type: (new () => TProjection)): TProjection[] {
+    const projectionName = type.name;
+    if (!this.Projections[projectionName]) {
+      return;
+    }
+    this.Projections[projectionName] = [];
+  }
+  public ClearAll() {
+    this.Projections = {};
+  }
 }
