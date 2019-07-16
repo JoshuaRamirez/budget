@@ -7,7 +7,7 @@ export class TransactionRequestedEvent extends SagaEvent {
   public LedgerId: any;
   public Source: any;
   public Type: string;
-  constructor(sagaName: string = null, sagaId: any = null) {
+  constructor(sagaName: string, sagaId: any) {
     super(TransactionRequestedEvent.name, sagaName, sagaId);
   }
   public Publish() {
