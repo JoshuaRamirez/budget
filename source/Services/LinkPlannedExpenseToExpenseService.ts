@@ -7,6 +7,9 @@ export class LinkPlannedExpenseToExpenseService implements ISubscriber<ExpenseCr
   public static Instance = new LinkPlannedExpenseToExpenseService();
   private handles = [];
   public Process(event: ExpenseCreatedEvent): void {
+    if (!event.ExpenseProjection) {
+      return;
+    }
     if (!event.ExpenseProjection.PlannedExpenseId) {
       return;
     }
