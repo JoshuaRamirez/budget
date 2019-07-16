@@ -6,12 +6,11 @@ export class LedgerProjection extends Projection {
     return ProjectionStore.Instance.GetProjection(LedgerProjection, id);
   }
   public Account: any;
-  public Balance: number;
-  public StartingBalance: number;
-  public TransactionIds: any[];
+  public Balance: number = 0;
+  public StartingBalance: number = 0;
+  public TransactionIds: any[] = [];
   public Type: string;
   constructor() {
     super(LedgerProjection.name);
-    this.StartingBalance = 0;
   }
 }
