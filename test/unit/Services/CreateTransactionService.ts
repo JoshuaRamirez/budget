@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import "mocha";
+import { TransactionRequestedEvent } from "../../../source/Events/TransactionRequestedEvent";
 import {CreateTransactionService} from "../../../source/Services/CreateTransactionService";
 
 describe("CreateTransactionService", () => {
@@ -9,5 +10,10 @@ describe("CreateTransactionService", () => {
   it("should instantiate with singleton", () => {
     const service = CreateTransactionService.Instance;
     assert.exists(service);
+  });
+  it("should process", () => {
+    const service = CreateTransactionService.Instance;
+    const event = new TransactionRequestedEvent("A", 1);
+    service.Process(event);
   });
 });
