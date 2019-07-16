@@ -3,7 +3,7 @@ import { SagaEvent } from "../Core/SagaEvent";
 
 export class TransactionRequestedEvent extends SagaEvent {
   public Amount: number;
-  public Destination: any;
+  public Destination: any; // TODO: What's this?
   public LedgerId: any;
   public Source: any;
   public Type: string;
