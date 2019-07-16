@@ -8,7 +8,7 @@ export abstract class Projection {
     this.Id = Id.Generate();
     this.Name = name;
   }
-  public Project(): void {
+  public Project(): void { // TODO: Rename to Save
     ProjectionStore.Instance.Project(this);
   }
 }
