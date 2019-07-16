@@ -5,7 +5,7 @@ import { AccountProjection } from "../Projections/AccountProjection";
 
 export class CreateAccountService extends Handler<AccountRequestedEvent> {
   public static Instance = new CreateAccountService();
-  constructor() {
+  private constructor() {
     super(AccountRequestedEvent);
   }
   public Process(event: AccountRequestedEvent) {

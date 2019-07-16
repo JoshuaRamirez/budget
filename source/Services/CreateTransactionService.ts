@@ -7,7 +7,7 @@ import { CreateExpenseSaga } from "../Sagas/CreateExpenseSaga";
 
 export class CreateTransactionService extends Handler<TransactionRequestedEvent> {
   public static Instance = new CreateTransactionService();
-  constructor() {
+  private constructor() {
     super(TransactionRequestedEvent);
   }
   public Process(event: TransactionRequestedEvent) {

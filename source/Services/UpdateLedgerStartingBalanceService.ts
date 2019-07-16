@@ -4,7 +4,7 @@ import { LedgerProjection } from "../Projections/LedgerProjection";
 
 export class UpdateLedgerStartingBalanceService extends Handler<LedgerStartingBalanceUpdateRequestedEvent> {
   public static Instance: UpdateLedgerStartingBalanceService = new UpdateLedgerStartingBalanceService();
-  constructor() {
+  private constructor() {
     super(LedgerStartingBalanceUpdateRequestedEvent);
   }
   public Process(event: LedgerStartingBalanceUpdateRequestedEvent): void {

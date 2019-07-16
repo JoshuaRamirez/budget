@@ -5,7 +5,7 @@ import { CreateAllocationSaga } from "../Sagas/CreateAllocationSaga";
 
 export class RequestAllocationTransactionService extends Handler<AllocationRequestedEvent> {
   public static Instance = new RequestAllocationTransactionService();
-  constructor() {
+  private constructor() {
     super(AllocationRequestedEvent);
   }
   public Process(event: AllocationRequestedEvent): void {

@@ -5,7 +5,7 @@ import { LedgerProjection } from "../Projections/LedgerProjection";
 // TODO: Rename Link L to T to Add T to L
 export class LinkLedgerToTransactionService extends Handler<TransactionCreatedEvent> {
   public static Instance: LinkLedgerToTransactionService = new LinkLedgerToTransactionService();
-  constructor() {
+  private constructor() {
     super(TransactionCreatedEvent);
   }
   public Process(event: TransactionCreatedEvent): void {

@@ -4,7 +4,7 @@ import { PayeeProjection } from "../Projections/PayeeProjection";
 
 export class LinkPayeeToExpenseService extends Handler<ExpenseCreatedEvent> {
   public static Instance: LinkPayeeToExpenseService = new LinkPayeeToExpenseService();
-  constructor() {
+  private constructor() {
     super(ExpenseCreatedEvent);
   }
   public Process(event: ExpenseCreatedEvent): void {

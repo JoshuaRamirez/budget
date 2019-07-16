@@ -4,7 +4,7 @@ import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjectio
 
 export class CreatePlannedExpenseService extends Handler<PlannedExpenseRequestedEvent> {
   public static Instance = new CreatePlannedExpenseService();
-  constructor() {
+  private constructor() {
     super(PlannedExpenseRequestedEvent);
   }
   public Process(event: PlannedExpenseRequestedEvent) {

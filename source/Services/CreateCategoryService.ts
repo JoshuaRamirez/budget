@@ -4,7 +4,7 @@ import { CategoryProjection } from "../Projections/CategoryProjection";
 
 export class CreateCategoryService extends Handler<CategoryRequestedEvent> {
   public static Instance = new CreateCategoryService();
-  constructor() {
+  private constructor() {
     super(CategoryRequestedEvent);
   }
   public Process(event: CategoryRequestedEvent) {

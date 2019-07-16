@@ -5,7 +5,7 @@ import { LedgerProjection } from "../Projections/LedgerProjection";
 // TODO: Consider making constructor private so that the singleton is the only one with handles.
 export class UpdateLedgerBalanceService extends Handler<TransactionCreatedEvent> {
   public static Instance: UpdateLedgerBalanceService = new UpdateLedgerBalanceService();
-  constructor() {
+  private constructor() {
     super(TransactionCreatedEvent);
   }
   public Process(event: TransactionCreatedEvent): void {
