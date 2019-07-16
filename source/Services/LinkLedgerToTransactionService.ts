@@ -3,6 +3,7 @@ import { Publisher } from "../Core/Publisher";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 
+// TODO: Rename Link L to T to Add T to L
 export class LinkLedgerToTransactionService implements ISubscriber<TransactionCreatedEvent> {
   public static Instance: LinkLedgerToTransactionService = new LinkLedgerToTransactionService();
   private handles = [];
