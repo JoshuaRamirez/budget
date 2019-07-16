@@ -2,7 +2,7 @@ import { assert } from "chai";
 import "mocha";
 import {LedgerStartingBalanceUpdateRequestedEvent} from "../../../source/Events/LedgerStartingBalanceUpdateRequestedEvent";
 
-describe("LedgerStartingBalanceUpdateRequestedEventEvent", () => {
+describe("LedgerStartingBalanceUpdateRequestedEvent", () => {
   it("should import", () => {
     assert.exists(LedgerStartingBalanceUpdateRequestedEvent);
   });
