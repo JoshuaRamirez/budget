@@ -3,7 +3,7 @@ import { Publisher } from "../Core/Publisher";
 import { ExpenseProjection } from "../Projections/ExpenseProjection";
 
 export class ExpenseCreatedEvent extends Event {
-  public ExpenseProjection: ExpenseProjection;
+  public ExpenseProjection: ExpenseProjection; // TODO: Use ID instead.
   constructor() {
     super(ExpenseCreatedEvent.name);
   }
