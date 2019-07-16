@@ -8,6 +8,9 @@ export class UpdateLedgerStartingBalanceService extends Handler<LedgerStartingBa
     super(LedgerStartingBalanceUpdateRequestedEvent);
   }
   public Process(event: LedgerStartingBalanceUpdateRequestedEvent): void {
+    if (!event.LedgerId) {
+      return;
+    }
     const ledger = LedgerProjection.Get(event.LedgerId);
     if (ledger.StartingBalance !== 0) {
       ledger.Balance -= ledger.StartingBalance;

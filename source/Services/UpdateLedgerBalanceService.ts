@@ -9,6 +9,12 @@ export class UpdateLedgerBalanceService extends Handler<TransactionCreatedEvent>
     super(TransactionCreatedEvent);
   }
   public Process(event: TransactionCreatedEvent): void {
+    if (!event.Transaction) {
+      return;
+    }
+    if (!event.Transaction.LedgerId) {
+      return;
+    }
     const ledgerId = event.Transaction.LedgerId;
     const ledgerProjection = LedgerProjection.Get(ledgerId);
     ledgerProjection.Balance -= event.Transaction.Amount;

@@ -9,6 +9,12 @@ export class LinkLedgerToTransactionService extends Handler<TransactionCreatedEv
     super(TransactionCreatedEvent);
   }
   public Process(event: TransactionCreatedEvent): void {
+    if (!event.Transaction) {
+      return;
+    }
+    if (!event.Transaction.LedgerId) {
+      return;
+    }
     const ledgerId = event.Transaction.LedgerId;
     const ledgerProjection = LedgerProjection.Get(ledgerId);
     ledgerProjection.TransactionIds.push(event.Transaction.Id);
