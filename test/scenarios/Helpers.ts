@@ -23,16 +23,6 @@ export const PublishAccountRequestedEvent = () => {
   accountRequestedEvent.Publish();
 };
 
-export const PublishTransactionRequestedEvent = (amount) => {
-  const transactionRequestedEvent = new TransactionRequestedEvent();
-  transactionRequestedEvent.Source = "payer";
-  transactionRequestedEvent.Destination = "payee";
-  transactionRequestedEvent.Amount = amount;
-  transactionRequestedEvent.Type = "purchase";
-  transactionRequestedEvent.LedgerId = projectionStore.GetProjections(LedgerProjection)[0].Id;
-  transactionRequestedEvent.Publish();
-};
-
 export const PublishExpenseRequestedEvent = (amount, ledgerId, plannedExpenseId = null, payeeId = null) => {
   const expenseRequestedEvent = new ExpenseRequestedEvent();
   expenseRequestedEvent.Amount = amount;
