@@ -9,10 +9,9 @@ import { CreateCategoryService } from "../../../source/Services/CreateCategorySe
 describe("CreateCategoryService", () => {
   it("should create projection", () => {
     const service = CreateCategoryService.Instance;
+    service.Subscribe();
     const event = new CategoryRequestedEvent();
-    event.CategoryName = "CategoryName";
-    event.Type = "Type";
-    service.Process(event);
+    event.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections(CategoryProjection);
     const projection = projections[0];
