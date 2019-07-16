@@ -24,8 +24,14 @@ describe("Scenarios", () => {
 
   describe("Features", () => {
 
+    before(() => {
+      Subscriptions.Release();
+      ProjectionStore.Instance.ClearAll();
+    });
+
     after(() => {
       Subscriptions.Release();
+      ProjectionStore.Instance.ClearAll();
     });
 
     describe("Basic Usage", () => {
