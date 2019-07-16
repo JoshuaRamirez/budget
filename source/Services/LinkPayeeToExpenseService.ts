@@ -10,7 +10,7 @@ export class LinkPayeeToExpenseService implements ISubscriber<ExpenseCreatedEven
       return;
     }
     const payeeProjection = PayeeProjection.Get(event.ExpenseProjection.PayeeId);
-    if (!payeeProjection) {
+    if (!payeeProjection) { // TODO: Evaluate below error message and association with saga
       throw new Error("The ProjectionStore returns no valid PayeeProjection associated with the Saga's PayeeId.");
     }
     payeeProjection.ExpenseIds.push(event.ExpenseProjection.Id);
