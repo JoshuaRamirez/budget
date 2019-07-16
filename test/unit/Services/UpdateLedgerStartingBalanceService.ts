@@ -6,10 +6,6 @@ describe("UpdateLedgerStartingBalanceService", () => {
   it("should import", () => {
     assert.exists(UpdateLedgerStartingBalanceService);
   });
-  it("should instantiate", () => {
-    const service = new UpdateLedgerStartingBalanceService();
-    assert.exists(service);
-  });
   it("should instantiate with singleton", () => {
     const service = UpdateLedgerStartingBalanceService.Instance;
     assert.exists(service);

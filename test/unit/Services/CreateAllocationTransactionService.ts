@@ -7,10 +7,6 @@ describe("RequestAllocationTransactionService", () => {
   it("should import", () => {
     assert.exists(RequestAllocationTransactionService);
   });
-  it("should instantiate", () => {
-    const service = new RequestAllocationTransactionService();
-    assert.exists(service);
-  });
   it("should instantiate with singleton", () => {
     const service = RequestAllocationTransactionService.Instance;
     assert.exists(service);

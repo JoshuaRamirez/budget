@@ -7,10 +7,6 @@ describe("CreateExpenseService", () => {
   it("should import", () => {
     assert.exists(CreateExpenseService);
   });
-  it("should instantiate", () => {
-    const service = new CreateExpenseService();
-    assert.exists(service);
-  });
   it("should instantiate with singleton", () => {
     const service = CreateExpenseService.Instance;
     assert.exists(service);
