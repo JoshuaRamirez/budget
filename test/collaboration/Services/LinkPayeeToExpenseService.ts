@@ -17,7 +17,7 @@ describe("LinkPayeeToExpenseService", () => {
     expenseProjection.PayeeId = payeeProjection.Id;
     expenseProjection.Project();
     const event = new ExpenseCreatedEvent();
-    event.ExpenseProjection = expenseProjection;
+    event.ExpenseId = expenseProjection.Id;
     event.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections(PayeeProjection);

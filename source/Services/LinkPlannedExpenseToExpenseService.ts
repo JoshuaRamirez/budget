@@ -1,5 +1,6 @@
 import { Handler } from "../Core/Handler";
 import { ExpenseCreatedEvent } from "../Events/ExpenseCreatedEvent";
+import { ExpenseProjection } from "../Projections/ExpenseProjection";
 import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjection";
 
 export class LinkPlannedExpenseToExpenseService extends Handler<ExpenseCreatedEvent> {
@@ -8,13 +9,17 @@ export class LinkPlannedExpenseToExpenseService extends Handler<ExpenseCreatedEv
     super(ExpenseCreatedEvent);
   }
   public Process(event: ExpenseCreatedEvent): void {
-    if (!event.ExpenseProjection) {
+    if (!event.ExpenseId) {
       return;
     }
-    if (!event.ExpenseProjection.PlannedExpenseId) {
+    const expenseProjection = ExpenseProjection.Get(event.ExpenseId);
+    if (!expenseProjection) {
       return;
     }
-    const plannedExpenseProjection = PlannedExpenseProjection.Get(event.ExpenseProjection.PlannedExpenseId);
-    plannedExpenseProjection.ExpenseIds.push(event.ExpenseProjection.Id);
+    if (!expenseProjection.PlannedExpenseId) {
+      return;
+    }
+    const plannedExpenseProjection = PlannedExpenseProjection.Get(expenseProjection.PlannedExpenseId);
+    plannedExpenseProjection.ExpenseIds.push(expenseProjection.Id);
   }
 }

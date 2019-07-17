@@ -31,7 +31,7 @@ export class CreateExpenseService extends Handler<TransactionCreatedEvent> {
     expenseProjection.Project();
     // Publish ExpenseCreatedEvent
     const expenseCreatedEvent = new ExpenseCreatedEvent();
-    expenseCreatedEvent.ExpenseProjection = expenseProjection;
+    expenseCreatedEvent.ExpenseId = expenseProjection.Id;
     expenseCreatedEvent.Publish();
   }
 }
