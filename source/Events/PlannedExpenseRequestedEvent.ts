@@ -7,9 +7,6 @@ export class PlannedExpenseRequestedEvent extends Event {
   public RepeatMeasurement: string;
   public RepeatCount: number;
   public RepeatStart: Date;
-  constructor() {
-    super(PlannedExpenseRequestedEvent.name);
-  }
   public Publish() {
     Publisher.Instance.Publish(this);
   }

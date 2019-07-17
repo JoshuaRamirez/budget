@@ -8,9 +8,6 @@ export class ExpenseRequestedEvent extends Event {
   public PayeeId: any;
   public PlannedExpenseId: any;
   public Category: string;
-  constructor() {
-    super(ExpenseRequestedEvent.name);
-  }
   public Publish() {
     Publisher.Instance.Publish(this);
   }

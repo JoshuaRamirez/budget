@@ -4,9 +4,6 @@ import { Publisher } from "../Core/Publisher";
 export class AccountRequestedEvent extends Event {
   public AccountName: string;
   public Type: string;
-  constructor() {
-    super(AccountRequestedEvent.name);
-  }
   public Publish() {
     Publisher.Instance.Publish(this);
   }

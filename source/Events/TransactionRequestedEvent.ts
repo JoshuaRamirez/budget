@@ -8,7 +8,7 @@ export class TransactionRequestedEvent extends SagaEvent {
   public Source: any;
   public Type: string;
   constructor(sagaName: string, sagaId: any) {
-    super(TransactionRequestedEvent.name, sagaName, sagaId);
+    super(sagaName, sagaId);
   }
   public Publish() {
     Publisher.Instance.Publish(this);

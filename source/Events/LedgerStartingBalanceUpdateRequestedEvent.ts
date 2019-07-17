@@ -4,9 +4,6 @@ import { Publisher } from "../Core/Publisher";
 export class LedgerStartingBalanceUpdateRequestedEvent extends Event {
   public LedgerId: any;
   public StartingBalance: number;
-  constructor() {
-    super(LedgerStartingBalanceUpdateRequestedEvent.name);
-  }
   public Publish(): void {
     Publisher.Instance.Publish(this);
   }

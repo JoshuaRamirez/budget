@@ -5,9 +5,6 @@ export class PayeeRequestedEvent extends Event {
   public Description: string;
   public PayeeName: string;
   public Type: string;
-  constructor() {
-    super(PayeeRequestedEvent.name);
-  }
   public Publish() {
     Publisher.Instance.Publish(this);
   }

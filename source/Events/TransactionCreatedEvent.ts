@@ -5,7 +5,7 @@ import { TransactionProjection } from "../Projections/TransactionProjection";
 export class TransactionCreatedEvent extends SagaEvent {
   public Transaction: TransactionProjection; // TODO: Convert to ID
   constructor(sagaName: string, sagaId: any) {
-    super(TransactionCreatedEvent.name, sagaName, sagaId);
+    super(sagaName, sagaId);
   }
   public Publish() {
     Publisher.Instance.Publish(this);
