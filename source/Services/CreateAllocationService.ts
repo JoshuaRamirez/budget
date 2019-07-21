@@ -20,11 +20,11 @@ export class CreateAllocationService extends Handler<TransactionCreatedEvent> {
     // Create AllocationProjection using Saga
     const sagaId = event.SagaId;
     const saga = CreateAllocationSaga.Get(sagaId);
-    saga.TransactionId = event.Transaction.Id; // TODO: Think about saga persistence in fb cloud
+    saga.TransactionId = event.TransactionId;
     const allocationProjection: AllocationProjection = new AllocationProjection();
     allocationProjection.Amount = saga.Amount;
     allocationProjection.LedgerId = saga.LedgerId;
-    allocationProjection.TransactionId = event.Transaction.Id;
+    allocationProjection.TransactionId = event.TransactionId;
     allocationProjection.Project();
   }
 }

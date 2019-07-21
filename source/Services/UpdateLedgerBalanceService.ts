@@ -1,22 +1,26 @@
 import { Handler } from "../Core/Handler";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
+import { TransactionProjection } from "../Projections/TransactionProjection";
 
-// TODO: Consider making constructor private so that the singleton is the only one with handles.
 export class UpdateLedgerBalanceService extends Handler<TransactionCreatedEvent> {
   public static Instance: UpdateLedgerBalanceService = new UpdateLedgerBalanceService();
   private constructor() {
     super(TransactionCreatedEvent);
   }
   public Process(event: TransactionCreatedEvent): void {
-    if (!event.Transaction) {
+    if (!event.TransactionId) {
       return;
     }
-    if (!event.Transaction.LedgerId) {
+    const transactionProjection = TransactionProjection.Get(event.TransactionId);
+    if (!transactionProjection) {
       return;
     }
-    const ledgerId = event.Transaction.LedgerId;
+    if (!transactionProjection.LedgerId) {
+      return;
+    }
+    const ledgerId = transactionProjection.LedgerId;
     const ledgerProjection = LedgerProjection.Get(ledgerId);
-    ledgerProjection.Balance -= event.Transaction.Amount;
+    ledgerProjection.Balance -= transactionProjection.Amount;
   }
 }

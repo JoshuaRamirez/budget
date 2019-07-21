@@ -17,7 +17,9 @@ describe("CreateExpenseService", () => {
     const saga = new CreateExpenseSaga(allocationRequestedEvent);
     saga.Save();
     const transactionCreatedEvent = new TransactionCreatedEvent(saga.Name, saga.Id);
-    transactionCreatedEvent.Transaction = new TransactionProjection();
+    const transactionProjection = new TransactionProjection();
+    transactionProjection.Project();
+    transactionCreatedEvent.TransactionId = transactionProjection.Id;
     transactionCreatedEvent.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections(ExpenseProjection);

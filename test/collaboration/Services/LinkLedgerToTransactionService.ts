@@ -28,7 +28,7 @@ describe("LinkLedgerToTransactionService", () => {
     const allocationRequestedSaga = new AllocationRequestedEvent();
     const saga = new CreateAllocationSaga(allocationRequestedSaga);
     const event = new TransactionCreatedEvent(saga.Name, saga.Id);
-    event.Transaction = transactionProjection;
+    event.TransactionId = transactionProjection.Id;
     event.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections(LedgerProjection);
@@ -46,7 +46,7 @@ describe("LinkLedgerToTransactionService", () => {
     const expenseRequestedSaga = new ExpenseRequestedEvent();
     const saga = new CreateExpenseSaga(expenseRequestedSaga);
     const event = new TransactionCreatedEvent(saga.Name, saga.Id);
-    event.Transaction = transactionProjection;
+    event.TransactionId = transactionProjection.Id;
     event.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections(LedgerProjection);

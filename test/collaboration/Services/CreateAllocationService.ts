@@ -16,8 +16,10 @@ describe("CreateAllocationService", () => {
     const allocationRequestedEvent = new AllocationRequestedEvent();
     const saga = new CreateAllocationSaga(allocationRequestedEvent);
     saga.Save();
+    const transactionProjection = new TransactionProjection();
+    transactionProjection.Project();
     const transactionCreatedEvent = new TransactionCreatedEvent(saga.Name, saga.Id);
-    transactionCreatedEvent.Transaction = new TransactionProjection();
+    transactionCreatedEvent.TransactionId = transactionProjection.Id;
     transactionCreatedEvent.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections(AllocationProjection);

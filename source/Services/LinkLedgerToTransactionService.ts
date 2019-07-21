@@ -1,6 +1,7 @@
 import { Handler } from "../Core/Handler";
 import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
+import { TransactionProjection } from "../Projections/TransactionProjection";
 
 // TODO: Rename Link L to T to Add T to L
 export class LinkLedgerToTransactionService extends Handler<TransactionCreatedEvent> {
@@ -9,14 +10,18 @@ export class LinkLedgerToTransactionService extends Handler<TransactionCreatedEv
     super(TransactionCreatedEvent);
   }
   public Process(event: TransactionCreatedEvent): void {
-    if (!event.Transaction) {
+    if (!event.TransactionId) {
       return;
     }
-    if (!event.Transaction.LedgerId) {
+    const transactionProjection = TransactionProjection.Get(event.TransactionId);
+    if (!transactionProjection) {
       return;
     }
-    const ledgerId = event.Transaction.LedgerId;
+    if (!transactionProjection.LedgerId) {
+      return;
+    }
+    const ledgerId = transactionProjection.LedgerId;
     const ledgerProjection = LedgerProjection.Get(ledgerId);
-    ledgerProjection.TransactionIds.push(event.Transaction.Id);
+    ledgerProjection.TransactionIds.push(transactionProjection.Id);
   }
 }

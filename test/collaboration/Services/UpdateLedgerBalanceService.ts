@@ -29,7 +29,7 @@ describe("UpdateLedgerBalanceService", () => {
     const allocationRequestedEvent = new AllocationRequestedEvent();
     const createAllocationSaga = new CreateAllocationSaga(allocationRequestedEvent);
     const transactionCreatedEvent = new TransactionCreatedEvent(createAllocationSaga.Name, createAllocationSaga.Id);
-    transactionCreatedEvent.Transaction = transactionProjection;
+    transactionCreatedEvent.TransactionId = transactionProjection.Id;
     transactionCreatedEvent.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections(LedgerProjection);
@@ -48,7 +48,7 @@ describe("UpdateLedgerBalanceService", () => {
     const expenseRequestedEvent = new ExpenseRequestedEvent();
     const createExpenseSaga = new CreateExpenseSaga(expenseRequestedEvent);
     const transactionCreatedEvent = new TransactionCreatedEvent(createExpenseSaga.Name, createExpenseSaga.Id);
-    transactionCreatedEvent.Transaction = transactionProjection;
+    transactionCreatedEvent.TransactionId = transactionProjection.Id;
     transactionCreatedEvent.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections(LedgerProjection);

@@ -32,7 +32,7 @@ export class CreateTransactionService extends Handler<TransactionRequestedEvent>
     transactionProjection.Project();
     // Publish TransactionCreatedEvent
     const newTransactionCreatedEvent = new TransactionCreatedEvent(event.SagaName, event.SagaId);
-    newTransactionCreatedEvent.Transaction = transactionProjection;
+    newTransactionCreatedEvent.TransactionId = transactionProjection.Id;
     newTransactionCreatedEvent.Publish();
   }
 }
