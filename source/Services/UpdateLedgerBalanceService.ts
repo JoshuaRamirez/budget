@@ -22,5 +22,6 @@ export class UpdateLedgerBalanceService extends Handler<TransactionCreatedEvent>
     const ledgerId = transactionProjection.LedgerId;
     const ledgerProjection = LedgerProjection.Get(ledgerId);
     ledgerProjection.Balance -= transactionProjection.Amount;
+    ledgerProjection.Update();
   }
 }

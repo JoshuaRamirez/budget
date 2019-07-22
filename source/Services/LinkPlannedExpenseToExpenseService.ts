@@ -21,5 +21,6 @@ export class LinkPlannedExpenseToExpenseService extends Handler<ExpenseCreatedEv
     }
     const plannedExpenseProjection = PlannedExpenseProjection.Get(expenseProjection.PlannedExpenseId);
     plannedExpenseProjection.ExpenseIds.push(expenseProjection.Id);
+    plannedExpenseProjection.Update();
   }
 }

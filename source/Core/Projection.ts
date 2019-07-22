@@ -1,14 +1,13 @@
+import { identifier, serializable } from "serializr";
 import { Id } from "./Id";
-import { ProjectionStore } from "./ProjectionStore";
 
 export abstract class Projection {
-  public readonly Id: any;
-  public readonly Name: string;
+  @serializable(identifier()) public readonly Id: any;
+  @serializable public readonly Name: string;
   protected constructor(name: string) {
     this.Id = Id.Generate();
     this.Name = name;
   }
-  public Project(): void { // TODO: Rename to Save
-    ProjectionStore.Instance.Project(this);
-  }
+  public abstract Project();
+  public abstract Update();
 }

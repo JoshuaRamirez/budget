@@ -17,5 +17,6 @@ export class UpdateLedgerStartingBalanceService extends Handler<LedgerStartingBa
     }
     ledger.StartingBalance = event.StartingBalance;
     ledger.Balance += ledger.StartingBalance;
+    ledger.Update();
   }
 }

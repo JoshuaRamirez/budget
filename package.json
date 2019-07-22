@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@types/node": "^11.13.8",
-    "jshint": "^2.10.2"
+    "jshint": "^2.10.2",
+    "serializr": "^1.5.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

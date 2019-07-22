@@ -24,5 +24,6 @@ export class LinkPayeeToExpenseService extends Handler<ExpenseCreatedEvent> {
       throw new Error("The ProjectionStore returns no valid PayeeProjection associated with the Saga's PayeeId.");
     }
     payeeProjection.ExpenseIds.push(expenseProjection.Id);
+    payeeProjection.Update();
   }
 }

@@ -23,5 +23,6 @@ export class LinkLedgerToTransactionService extends Handler<TransactionCreatedEv
     const ledgerId = transactionProjection.LedgerId;
     const ledgerProjection = LedgerProjection.Get(ledgerId);
     ledgerProjection.TransactionIds.push(transactionProjection.Id);
+    ledgerProjection.Update();
   }
 }
