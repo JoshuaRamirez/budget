@@ -16,8 +16,8 @@ export class CreateAccountService extends Handler<AccountRequestedEvent> {
     accountProjection.Project();
     // Publish LedgerRequestedEvent
     const ledgerRequestedEvent = new LedgerRequestedEvent();
-    ledgerRequestedEvent.Account = accountProjection;
-    ledgerRequestedEvent.Type = "Account";
+    ledgerRequestedEvent.AccountId = accountProjection.Id;
+    ledgerRequestedEvent.Type = "AccountId";
     ledgerRequestedEvent.Publish();
   }
 }

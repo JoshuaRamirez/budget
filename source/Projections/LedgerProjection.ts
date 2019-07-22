@@ -5,7 +5,7 @@ export class LedgerProjection extends Projection {
   public static Get(id: any): LedgerProjection {
     return ProjectionStore.Instance.GetProjection(LedgerProjection, id);
   }
-  public Account: any;
+  public AccountId: any;
   public Balance: number = 0;
   public StartingBalance: number = 0;
   public TransactionIds: any[] = [];
