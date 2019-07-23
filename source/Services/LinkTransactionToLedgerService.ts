@@ -3,9 +3,8 @@ import { TransactionCreatedEvent } from "../Events/TransactionCreatedEvent";
 import { LedgerProjection } from "../Projections/LedgerProjection";
 import { TransactionProjection } from "../Projections/TransactionProjection";
 
-// TODO: Rename Link L to T to Add T to L
-export class LinkLedgerToTransactionService extends Handler<TransactionCreatedEvent> {
-  public static Instance: LinkLedgerToTransactionService = new LinkLedgerToTransactionService();
+export class LinkTransactionToLedgerService extends Handler<TransactionCreatedEvent> {
+  public static Instance: LinkTransactionToLedgerService = new LinkTransactionToLedgerService();
   private constructor() {
     super(TransactionCreatedEvent);
   }

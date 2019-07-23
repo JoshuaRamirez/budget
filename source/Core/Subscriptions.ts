@@ -5,9 +5,9 @@ import { CreateLedgerService } from "../Services/CreateLedgerService";
 import { CreatePayeeService } from "../Services/CreatePayeeService";
 import { CreatePlannedExpenseService } from "../Services/CreatePlannedExpenseService";
 import { CreateTransactionService } from "../Services/CreateTransactionService";
-import { LinkLedgerToTransactionService } from "../Services/LinkLedgerToTransactionService";
-import { LinkPayeeToExpenseService } from "../Services/LinkPayeeToExpenseService";
-import { LinkPlannedExpenseToExpenseService } from "../Services/LinkPlannedExpenseToExpenseService";
+import { LinkExpenseToPayeeService } from "../Services/LinkExpenseToPayeeService";
+import { LinkExpenseToPlannedExpenseService } from "../Services/LinkExpenseToPlannedExpenseService";
+import { LinkTransactionToLedgerService } from "../Services/LinkTransactionToLedgerService";
 import { RequestAllocationTransactionService } from "../Services/RequestAllocationTransactionService";
 import { RequestExpenseTransactionService } from "../Services/RequestExpenseTransactionService";
 import { UpdateLedgerBalanceService } from "../Services/UpdateLedgerBalanceService";
@@ -32,9 +32,9 @@ export class Subscriptions {
     CreatePlannedExpenseService,
     CreateExpenseService,
     CreatePayeeService,
-    LinkLedgerToTransactionService,
-    LinkPayeeToExpenseService,
-    LinkPlannedExpenseToExpenseService,
+    LinkTransactionToLedgerService,
+    LinkExpenseToPayeeService,
+    LinkExpenseToPlannedExpenseService,
     RequestAllocationTransactionService,
     RequestExpenseTransactionService,
     UpdateLedgerBalanceService,

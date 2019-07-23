@@ -3,8 +3,8 @@ import { ExpenseCreatedEvent } from "../Events/ExpenseCreatedEvent";
 import { ExpenseProjection } from "../Projections/ExpenseProjection";
 import { PayeeProjection } from "../Projections/PayeeProjection";
 
-export class LinkPayeeToExpenseService extends Handler<ExpenseCreatedEvent> {
-  public static Instance: LinkPayeeToExpenseService = new LinkPayeeToExpenseService();
+export class LinkExpenseToPayeeService extends Handler<ExpenseCreatedEvent> {
+  public static Instance: LinkExpenseToPayeeService = new LinkExpenseToPayeeService();
   private constructor() {
     super(ExpenseCreatedEvent);
   }

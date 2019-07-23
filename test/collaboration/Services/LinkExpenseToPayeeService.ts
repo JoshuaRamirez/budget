@@ -4,12 +4,12 @@ import { ProjectionStore } from "../../../source/Core/ProjectionStore";
 import { ExpenseCreatedEvent } from "../../../source/Events/ExpenseCreatedEvent";
 import { ExpenseProjection } from "../../../source/Projections/ExpenseProjection";
 import { PayeeProjection } from "../../../source/Projections/PayeeProjection";
-import { LinkPayeeToExpenseService } from "../../../source/Services/LinkPayeeToExpenseService";
+import { LinkExpenseToPayeeService } from "../../../source/Services/LinkExpenseToPayeeService";
 
 
-describe("LinkPayeeToExpenseService", () => {
+describe("LinkExpenseToPayeeService", () => {
   it("should create projection", () => {
-    const service = LinkPayeeToExpenseService.Instance;
+    const service = LinkExpenseToPayeeService.Instance;
     service.Subscribe();
     const payeeProjection = new PayeeProjection();
     payeeProjection.Project();

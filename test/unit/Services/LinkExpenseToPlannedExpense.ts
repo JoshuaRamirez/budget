@@ -1,18 +1,18 @@
 import { assert } from "chai";
 import "mocha";
 import { ExpenseCreatedEvent } from "../../../source/Events/ExpenseCreatedEvent";
-import {LinkPlannedExpenseToExpenseService} from "../../../source/Services/LinkPlannedExpenseToExpenseService";
+import {LinkExpenseToPlannedExpenseService} from "../../../source/Services/LinkExpenseToPlannedExpenseService";
 
-describe("LinkPlannedExpenseToExpenseService", () => {
+describe("LinkExpenseToPlannedExpenseService", () => {
   it("should import", () => {
-    assert.exists(LinkPlannedExpenseToExpenseService);
+    assert.exists(LinkExpenseToPlannedExpenseService);
   });
   it("should instantiate with singleton", () => {
-    const service = LinkPlannedExpenseToExpenseService.Instance;
+    const service = LinkExpenseToPlannedExpenseService.Instance;
     assert.exists(service);
   });
   it("should process", () => {
-    const service = LinkPlannedExpenseToExpenseService.Instance;
+    const service = LinkExpenseToPlannedExpenseService.Instance;
     const event = new ExpenseCreatedEvent();
     service.Process(event);
   });

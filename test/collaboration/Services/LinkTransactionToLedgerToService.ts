@@ -9,16 +9,16 @@ import { LedgerProjection } from "../../../source/Projections/LedgerProjection";
 import { TransactionProjection } from "../../../source/Projections/TransactionProjection";
 import { CreateAllocationSaga } from "../../../source/Sagas/CreateAllocationSaga";
 import { CreateExpenseSaga } from "../../../source/Sagas/CreateExpenseSaga";
-import { LinkLedgerToTransactionService } from "../../../source/Services/LinkLedgerToTransactionService";
+import { LinkTransactionToLedgerService } from "../../../source/Services/LinkTransactionToLedgerService";
 
 
-describe("LinkLedgerToTransactionService", () => {
+describe("LinkTransactionToLedgerService", () => {
   beforeEach(() => {
     Subscriptions.Release();
     ProjectionStore.Instance.ClearAll();
   });
   it("should link transaction from allocation", () => {
-    const service = LinkLedgerToTransactionService.Instance;
+    const service = LinkTransactionToLedgerService.Instance;
     service.Subscribe();
     const ledgerProjection = new LedgerProjection();
     ledgerProjection.Project();
@@ -36,7 +36,7 @@ describe("LinkLedgerToTransactionService", () => {
     assert.equal(projection.TransactionIds[0], transactionProjection.Id);
   });
   it("should link transaction from expense", () => {
-    const service = LinkLedgerToTransactionService.Instance;
+    const service = LinkTransactionToLedgerService.Instance;
     service.Subscribe();
     const ledgerProjection = new LedgerProjection();
     ledgerProjection.Project();
