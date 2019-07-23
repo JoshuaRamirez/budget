@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import "mocha";
 import { AllocationRequestedEvent } from "../../../source/Events/AllocationRequestedEvent";
-import {RequestAllocationTransactionService} from "../../../source/Services/RequestAllocationTransactionService";
+import {RequestAllocationTransactionService} from "../../../source/Services/Requests/RequestAllocationTransactionService";
 
 describe("RequestAllocationTransactionService", () => {
   it("should import", () => {
