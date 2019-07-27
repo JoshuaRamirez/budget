@@ -1,13 +1,8 @@
-import { ProjectionStore } from "../../source/Core/ProjectionStore";
 import { AccountRequestedEvent } from "../../source/Events/AccountRequestedEvent";
 import { AllocationRequestedEvent } from "../../source/Events/AllocationRequestedEvent";
 import { ExpenseRequestedEvent } from "../../source/Events/ExpenseRequestedEvent";
 import { PayeeRequestedEvent } from "../../source/Events/PayeeRequestedEvent";
 import { PlannedExpenseRequestedEvent } from "../../source/Events/PlannedExpenseRequestedEvent";
-import { TransactionRequestedEvent } from "../../source/Events/TransactionRequestedEvent";
-import { LedgerProjection } from "../../source/Projections/LedgerProjection";
-
-const projectionStore = ProjectionStore.Instance;
 
 export const PublishAllocationRequestedEvent = (ledgerId, amount) => {
   const allocationRequestedEvent = new AllocationRequestedEvent();
