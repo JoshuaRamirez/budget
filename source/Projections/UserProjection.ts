@@ -11,6 +11,7 @@ export class UserProjection extends Projection {
   @serializable public FirstName: string;
   @serializable public LastName: string;
   @serializable public Email: string;
+  @serializable public Type: string;
   @serializable(list(primitive())) public AccountIds: any[];
   @serializable(list(primitive())) public CategoryIds: any[];
   @serializable(list(primitive())) public IncomeAccountId: any;
