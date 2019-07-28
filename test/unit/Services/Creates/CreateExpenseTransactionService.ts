@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import "mocha";
-import { ExpenseRequestedEvent } from "../../../source/Events/ExpenseRequestedEvent";
-import {RequestExpenseTransactionService} from "../../../source/Services/Requests/RequestExpenseTransactionService";
+import { ExpenseRequestedEvent } from "../../../../source/Events/ExpenseRequestedEvent";
+import {RequestExpenseTransactionService} from "../../../../source/Services/Requests/RequestExpenseTransactionService";
 
 describe("RequestExpenseTransactionService", () => {
   it("should import", () => {

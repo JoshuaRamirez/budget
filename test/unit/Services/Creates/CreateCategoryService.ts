@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import "mocha";
-import { CategoryRequestedEvent } from "../../../source/Events/CategoryRequestedEvent";
-import {CreateCategoryService} from "../../../source/Services/Creates/CreateCategoryService";
+import { CategoryRequestedEvent } from "../../../../source/Events/CategoryRequestedEvent";
+import {CreateCategoryService} from "../../../../source/Services/Creates/CreateCategoryService";
 
 describe("CreateCategoryService", () => {
   it("should import", () => {

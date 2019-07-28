@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import "mocha";
-import { TransactionCreatedEvent } from "../../../source/Events/TransactionCreatedEvent";
-import {LinkTransactionToLedgerService} from "../../../source/Services/Links/LinkTransactionToLedgerService";
+import { TransactionCreatedEvent } from "../../../../source/Events/TransactionCreatedEvent";
+import {LinkTransactionToLedgerService} from "../../../../source/Services/Links/LinkTransactionToLedgerService";
 
 describe("LinkTransactionToLedgerService", () => {
   it("should import", () => {

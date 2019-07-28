@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import {LedgerRequestedEvent} from "../../../source/Events/LedgerRequestedEvent";
+import {LedgerRequestedEvent} from "../../../../source/Events/LedgerRequestedEvent";
 
 describe("LedgerRequestedEvent", () => {
   it("should import", () => {
