@@ -1,4 +1,3 @@
-import { RegistrationCooperation } from "../Cooperation/RegistrationCooperation";
 import { CreateAccountService } from "../Services/Creates/CreateAccountService";
 import { CreateAllocationService } from "../Services/Creates/CreateAllocationService";
 import { CreateExpenseService } from "../Services/Creates/CreateExpenseService";
