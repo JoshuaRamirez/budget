@@ -1,6 +1,7 @@
 import { deserialize, serialize } from "serializr";
 import { Projection } from "./Projection";
 
+// TODO: Begin thinking about User Id in each projection.
 export class ProjectionStore {
   public static Instance = new ProjectionStore();
   private Projections = {};
