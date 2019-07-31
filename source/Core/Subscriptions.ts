@@ -1,3 +1,4 @@
+import { RegistrationCooperation } from "../Cooperation/RegistrationCooperation";
 import { CreateAccountService } from "../Services/Creates/CreateAccountService";
 import { CreateAllocationService } from "../Services/Creates/CreateAllocationService";
 import { CreateExpenseService } from "../Services/Creates/CreateExpenseService";
@@ -12,32 +13,33 @@ import { RequestAllocationTransactionService } from "../Services/Requests/Reques
 import { RequestExpenseTransactionService } from "../Services/Requests/RequestExpenseTransactionService";
 import { UpdateLedgerBalanceService } from "../Services/Updates/UpdateLedgerBalanceService";
 import { UpdateLedgerStartingBalanceService } from "../Services/Updates/UpdateLedgerStartingBalanceService";
+import { ISubscribable } from "./ISubscribable";
 
 export class Subscriptions {
   public static Create() {
-    this.services.forEach((target) => {
-      target.Instance.Subscribe();
+    this.handlers.forEach((handler) => {
+      handler.Subscribe();
     });
   }
   public static Release() {
-    this.services.forEach((target) => {
-      target.Instance.UnSubscribe();
+    this.handlers.forEach((handler) => {
+      handler.UnSubscribe();
     });
   }
-  private static services = [
-    CreateAccountService,
-    CreateLedgerService,
-    CreateAllocationService,
-    CreateTransactionService,
-    CreatePlannedExpenseService,
-    CreateExpenseService,
-    CreatePayeeService,
-    LinkTransactionToLedgerService,
-    LinkExpenseToPayeeService,
-    LinkExpenseToPlannedExpenseService,
-    RequestAllocationTransactionService,
-    RequestExpenseTransactionService,
-    UpdateLedgerBalanceService,
-    UpdateLedgerStartingBalanceService,
+  private static handlers: ISubscribable[] = [
+    CreateAccountService.Instance,
+    CreateLedgerService.Instance,
+    CreateAllocationService.Instance,
+    CreateTransactionService.Instance,
+    CreatePlannedExpenseService.Instance,
+    CreateExpenseService.Instance,
+    CreatePayeeService.Instance,
+    LinkTransactionToLedgerService.Instance,
+    LinkExpenseToPayeeService.Instance,
+    LinkExpenseToPlannedExpenseService.Instance,
+    RequestAllocationTransactionService.Instance,
+    RequestExpenseTransactionService.Instance,
+    UpdateLedgerBalanceService.Instance,
+    UpdateLedgerStartingBalanceService.Instance,
   ];
 }
