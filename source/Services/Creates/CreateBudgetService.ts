@@ -8,9 +8,9 @@ export class CreateBudgetService extends Handler<BudgetRequestedEvent> {
     super(BudgetRequestedEvent);
   }
   public Process(event: BudgetRequestedEvent) {
-    const accountProjection = new BudgetProjection();
-    accountProjection.BudgetName = event.BudgetName;
-    accountProjection.Type = event.Type;
-    accountProjection.Project();
+    const budgetProjection = new BudgetProjection();
+    budgetProjection.BudgetName = event.BudgetName;
+    budgetProjection.Type = event.Type;
+    budgetProjection.Project();
   }
 }
