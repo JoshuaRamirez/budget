@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import {CategoryRequestedEvent} from "../../../../source/Events/CategoryRequestedEvent";
+import {CategoryRequestedEvent} from "../../../source/Events/CategoryRequestedEvent";
 
 describe("CategoryRequestedEvent", () => {
 
