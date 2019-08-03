@@ -10,6 +10,7 @@ import { UpdateLedgerStartingBalanceService } from "../../../../source/Services/
 describe("UpdateLedgerStartingBalanceService", () => {
   beforeEach(() => {
     Subscriptions.Release();
+    Subscriptions.Create();
     ProjectionStore.Instance.ClearAll();
   });
   it("should update projection", () => {

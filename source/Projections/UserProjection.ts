@@ -12,10 +12,10 @@ export class UserProjection extends Projection {
   @serializable public LastName: string;
   @serializable public Email: string;
   @serializable public Type: string;
-  @serializable(list(primitive())) public AccountIds: any[];
-  @serializable(list(primitive())) public CategoryIds: any[];
-  @serializable(list(primitive())) public IncomeAccountId: any;
-  @serializable(list(primitive())) public PayeeIds: any[];
+  @serializable(list(primitive())) public AccountIds: any[] = [];
+  @serializable(list(primitive())) public CategoryIds: any[] = [];
+  @serializable(list(primitive())) public IncomeAccountId: any = [];
+  @serializable(list(primitive())) public PayeeIds: any[] = [];
   constructor() {
     super(UserProjection.name);
   }

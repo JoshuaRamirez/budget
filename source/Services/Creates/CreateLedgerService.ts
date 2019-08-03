@@ -1,4 +1,5 @@
 import { Handler } from "../../Core/Handler";
+import { LedgerCreatedEvent } from "../../Events/LedgerCreatedEvent";
 import { LedgerRequestedEvent } from "../../Events/LedgerRequestedEvent";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
 
@@ -15,5 +16,9 @@ export class CreateLedgerService extends Handler<LedgerRequestedEvent> {
     ledgerProjection.TransactionIds = [];
     ledgerProjection.Type = event.Type;
     ledgerProjection.Project();
+    // Publish LedgerCreatedEvent
+    const ledgerCreated = new LedgerCreatedEvent();
+    ledgerCreated.LedgerId = ledgerProjection.Id;
+    ledgerCreated.Publish();
   }
 }

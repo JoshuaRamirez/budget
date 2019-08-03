@@ -1,5 +1,5 @@
 import { Handler } from "../../Core/Handler";
-import { AccountRequestedEvent } from "../../Events/AccountRequestedEvent";
+import { UserCreatedEvent } from "../../Events/UserCreatedEvent";
 import { UserRequestedEvent } from "../../Events/UserRequestedEvent";
 import { UserProjection } from "../../Projections/UserProjection";
 
@@ -14,10 +14,9 @@ export class CreateUserService extends Handler<UserRequestedEvent> {
     userProjection.UserName = event.UserName;
     userProjection.Type = event.Type;
     userProjection.Project();
-    // Publish AccountRequestedEvent
-    const accountRequestedEvent = new AccountRequestedEvent();
-    accountRequestedEvent.Type = "Income";
-    accountRequestedEvent.AccountName = "Income";
-    accountRequestedEvent.Publish();
+    // Publish UserCreatedEvent
+    const userCreatedEvent = new UserCreatedEvent();
+    userCreatedEvent.UserId = userProjection.Id;
+    userCreatedEvent.Publish();
   }
 }

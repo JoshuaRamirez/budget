@@ -1,27 +1,18 @@
-import { Handler } from "../../Core/Handler";
+import { LinkManyToOneService } from "../../Core/LinkManyToOneService";
 import { TransactionCreatedEvent } from "../../Events/TransactionCreatedEvent";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
 import { TransactionProjection } from "../../Projections/TransactionProjection";
 
-export class LinkTransactionToLedgerService extends Handler<TransactionCreatedEvent> {
+export class LinkTransactionToLedgerService extends LinkManyToOneService<TransactionCreatedEvent> {
   public static Instance: LinkTransactionToLedgerService = new LinkTransactionToLedgerService();
   private constructor() {
-    super(TransactionCreatedEvent);
-  }
-  public Process(event: TransactionCreatedEvent): void {
-    if (!event.TransactionId) {
-      return;
-    }
-    const transactionProjection = TransactionProjection.Get(event.TransactionId);
-    if (!transactionProjection) {
-      return;
-    }
-    if (!transactionProjection.LedgerId) {
-      return;
-    }
-    const ledgerId = transactionProjection.LedgerId;
-    const ledgerProjection = LedgerProjection.Get(ledgerId);
-    ledgerProjection.TransactionIds.push(transactionProjection.Id);
-    ledgerProjection.Update();
+    super(
+      TransactionCreatedEvent,
+      TransactionProjection,
+      "TransactionId",
+      "TransactionIds",
+      LedgerProjection,
+      "LedgerId",
+    );
   }
 }

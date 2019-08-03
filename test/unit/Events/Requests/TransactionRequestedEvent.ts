@@ -7,11 +7,11 @@ describe("TransactionRequestedEvent", () => {
     assert.exists(TransactionRequestedEvent);
   });
   it("should instantiate", () => {
-    const event = new TransactionRequestedEvent("A", 1);
+    const event = new TransactionRequestedEvent();
     assert.exists(event);
   });
   it("should publish", () => {
-    const event = new TransactionRequestedEvent("A", 1);
+    const event = new TransactionRequestedEvent();
     event.Publish();
   });
 });

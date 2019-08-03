@@ -6,7 +6,6 @@ export class AllocationProjection extends Projection {
   public static Get(id: any): AllocationProjection {
     return ProjectionStore.Instance.GetProjection(AllocationProjection, id);
   }
-  @serializable public Amount: number;
   @serializable public LedgerId: any;
   @serializable public TransactionId: any;
   constructor() {

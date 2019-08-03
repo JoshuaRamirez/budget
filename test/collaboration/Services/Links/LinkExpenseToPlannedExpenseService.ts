@@ -1,6 +1,7 @@
 import { assert } from "chai";
 import "mocha";
 import { ProjectionStore } from "../../../../source/Core/ProjectionStore";
+import { Subscriptions } from "../../../../source/Core/Subscriptions";
 import { ExpenseCreatedEvent } from "../../../../source/Events/ExpenseCreatedEvent";
 import { ExpenseProjection } from "../../../../source/Projections/ExpenseProjection";
 import { PlannedExpenseProjection } from "../../../../source/Projections/PlannedExpenseProjection";
@@ -8,9 +9,12 @@ import { LinkExpenseToPlannedExpenseService } from "../../../../source/Services/
 
 
 describe("LinkExpenseToPlannedExpenseService", () => {
-  it("should create projection", () => {
-    const service = LinkExpenseToPlannedExpenseService.Instance;
-    service.Subscribe();
+  beforeEach(() => {
+    Subscriptions.Release();
+    Subscriptions.Create();
+    ProjectionStore.Instance.ClearAll();
+  });
+  it("should add the expense id to the planned expense link list", () => {
     const plannedExpense = new PlannedExpenseProjection();
     plannedExpense.Project();
     const expenseProjection = new ExpenseProjection();

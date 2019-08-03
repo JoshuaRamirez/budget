@@ -3,6 +3,7 @@ import "mocha";
 import { ProjectionStore } from "../../source/Core/ProjectionStore";
 import { Subscriptions } from "../../source/Core/Subscriptions";
 import { LedgerStartingBalanceUpdateRequestedEvent } from "../../source/Events/LedgerStartingBalanceUpdateRequestedEvent";
+import { TransactionRequestedEvent } from "../../source/Events/TransactionRequestedEvent";
 import { AllocationProjection } from "../../source/Projections/AllocationProjection";
 import { ExpenseProjection } from "../../source/Projections/ExpenseProjection";
 import { LedgerProjection } from "../../source/Projections/LedgerProjection";
@@ -10,10 +11,12 @@ import { PayeeProjection } from "../../source/Projections/PayeeProjection";
 import { PlannedExpenseProjection } from "../../source/Projections/PlannedExpenseProjection";
 import { TransactionProjection } from "../../source/Projections/TransactionProjection";
 import {
+  GetLast,
   PublishAccountRequestedEvent,
   PublishAllocationRequestedEvent,
   PublishExpenseRequestedEvent,
   PublishPayeeRequestedEvent,
+  PublishTransactionRequestedEvent,
   RequestPlannedExpenseEvent,
 } from "./Helpers";
 
@@ -62,7 +65,9 @@ describe("Scenarios", () => {
       });
       it("When a new $10 Allocation is made to the Ledger", () => {
         const ledger = LedgerProjection.Get(ledgerId);
-        PublishAllocationRequestedEvent(ledger.Id, -10);
+        PublishTransactionRequestedEvent(-10, ledger.Id);
+        const transaction = GetLast(TransactionProjection);
+        PublishAllocationRequestedEvent(transaction.Id,  ledger.Id);
       });
       it("Then the Ledger balance should be 110", () => {
         const ledger = LedgerProjection.Get(ledgerId);
@@ -77,8 +82,8 @@ describe("Scenarios", () => {
         assert.equal(ledger.TransactionIds.length, 1);
       });
       it("And the Allocation should have been created", () => {
-        const allocationProjections = projectionStore.GetProjections(AllocationProjection);
-        assert.equal(allocationProjections.length, 1);
+        const allocationProjection = GetLast(AllocationProjection);
+        assert.exists(allocationProjection);
       });
       it("And the Allocation should be linked to the Ledger", () => {
         const allocationProjections = projectionStore.GetProjections(AllocationProjection);
@@ -99,37 +104,39 @@ describe("Scenarios", () => {
         assert.exists(payeeProjection);
       });
       it("When an ExpenseRequested (With a PlannedProjectionId & PayeeId) event is Published for 10", () => {
+        const transaction = new TransactionRequestedEvent();
+        transaction.Amount = 10;
+        transaction.LedgerId = ledgerId;
+        transaction.Publish();
         const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
         const plannedExpense = projectionStore.GetProjections(PlannedExpenseProjection)[0];
-        PublishExpenseRequestedEvent(10, ledgerId, plannedExpense.Id, payeeProjection.Id);
+        PublishExpenseRequestedEvent(transaction.Id,  ledgerId, plannedExpense.Id, payeeProjection.Id);
       });
       it("Then a new ExpenseProjection should exist", () => {
         const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
         assert.exists(expenseProjection);
       });
       it("And a new Transaction should exist", () => {
-        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
-        const transaction = projectionStore.GetProjection(TransactionProjection, expenseProjection.TransactionId);
+        const transaction = GetLast(TransactionProjection);
         assert.exists(transaction);
       });
       it("And the new Transaction should have an Amount of 10", () => {
-        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
-        const transaction = projectionStore.GetProjection(TransactionProjection, expenseProjection.TransactionId);
+        const transaction = GetLast(TransactionProjection);
         assert.equal(transaction.Amount, 10);
       });
       it("And the Ledger Balance should be 100", () => {
         const ledger = LedgerProjection.Get(ledgerId);
-        assert.equal(100, ledger.Balance);
+        assert.equal(ledger.Balance, 100);
       });
       it("And the PlannedExpenseProjection contains the ExpenseProjection Id", () => {
-        const plannedExpenseProjection = projectionStore.GetProjections(PlannedExpenseProjection)[0];
-        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
+        const plannedExpenseProjection = GetLast(PlannedExpenseProjection);
+        const expenseProjection = GetLast(ExpenseProjection);
         const foundId = plannedExpenseProjection.ExpenseIds.find((x) => x === expenseProjection.Id);
         assert.exists(foundId);
       });
       it("And the Payee involved contains the ExpenseProjection Id", () => {
-        const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
-        const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
+        const expenseProjection = GetLast(ExpenseProjection);
+        const payeeProjection = GetLast(PayeeProjection);
         const foundId = payeeProjection.ExpenseIds.find((x) => x === expenseProjection.Id);
         assert.exists(foundId);
       });

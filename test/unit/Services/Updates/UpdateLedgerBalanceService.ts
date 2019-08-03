@@ -13,7 +13,7 @@ describe("UpdateLedgerBalanceService", () => {
   });
   it("should process", () => {
     const service = UpdateLedgerBalanceService.Instance;
-    const event = new TransactionCreatedEvent("A", 1);
+    const event = new TransactionCreatedEvent();
     service.Process(event);
   });
 });

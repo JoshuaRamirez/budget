@@ -13,7 +13,7 @@ describe("CreateTransactionService", () => {
   });
   it("should process", () => {
     const service = CreateTransactionService.Instance;
-    const event = new TransactionRequestedEvent("A", 1);
+    const event = new TransactionRequestedEvent();
     service.Process(event);
   });
 });

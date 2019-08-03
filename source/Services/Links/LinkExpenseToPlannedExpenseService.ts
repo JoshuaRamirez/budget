@@ -1,26 +1,18 @@
-import { Handler } from "../../Core/Handler";
+import { LinkManyToOneService } from "../../Core/LinkManyToOneService";
 import { ExpenseCreatedEvent } from "../../Events/ExpenseCreatedEvent";
 import { ExpenseProjection } from "../../Projections/ExpenseProjection";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
 
-export class LinkExpenseToPlannedExpenseService extends Handler<ExpenseCreatedEvent> {
+export class LinkExpenseToPlannedExpenseService extends LinkManyToOneService<ExpenseCreatedEvent> {
   public static Instance = new LinkExpenseToPlannedExpenseService();
   private constructor() {
-    super(ExpenseCreatedEvent);
-  }
-  public Process(event: ExpenseCreatedEvent): void {
-    if (!event.ExpenseId) {
-      return;
-    }
-    const expenseProjection = ExpenseProjection.Get(event.ExpenseId);
-    if (!expenseProjection) {
-      return;
-    }
-    if (!expenseProjection.PlannedExpenseId) {
-      return;
-    }
-    const plannedExpenseProjection = PlannedExpenseProjection.Get(expenseProjection.PlannedExpenseId);
-    plannedExpenseProjection.ExpenseIds.push(expenseProjection.Id);
-    plannedExpenseProjection.Update();
+    super(
+      ExpenseCreatedEvent,
+      ExpenseProjection,
+      "ExpenseId",
+      "ExpenseIds",
+      PlannedExpenseProjection,
+      "PlannedExpenseId",
+    );
   }
 }

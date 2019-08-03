@@ -1,35 +1,21 @@
 import { Handler } from "../../Core/Handler";
 import { ExpenseCreatedEvent } from "../../Events/ExpenseCreatedEvent";
-import { TransactionCreatedEvent } from "../../Events/TransactionCreatedEvent";
+import { ExpenseRequestedEvent } from "../../Events/ExpenseRequestedEvent";
 import { ExpenseProjection } from "../../Projections/ExpenseProjection";
-import { TransactionProjection } from "../../Projections/TransactionProjection";
-import { CreateExpenseSaga } from "../../Sagas/CreateExpenseSaga";
 
-export class CreateExpenseService extends Handler<TransactionCreatedEvent> {
+export class CreateExpenseService extends Handler<ExpenseRequestedEvent> {
   public static Instance = new CreateExpenseService();
   private constructor() {
-    super(TransactionCreatedEvent);
+    super(ExpenseRequestedEvent);
   }
-  public Process(event: TransactionCreatedEvent) {
-    // Quit if Saga doesn't exist on Event
-    if (!event.SagaId) {
-      return;
-    }
-    // Quit if Saga doesn't match this Service
-    if (event.SagaName !== CreateExpenseSaga.name) {
-      return;
-    }
-    // Create ExpenseProjection using Saga
-    const saga = CreateExpenseSaga.Get(event.SagaId);
-    const transactionProjection = TransactionProjection.Get(event.TransactionId);
+  public Process(event: ExpenseRequestedEvent) {
+    // Create ExpenseProjection
     const expenseProjection = new ExpenseProjection();
-    expenseProjection.Amount = saga.Amount;
-    expenseProjection.Category = saga.Category;
-    expenseProjection.Description = saga.Description;
-    expenseProjection.LedgerId = transactionProjection.LedgerId; // TODO: Consider getting this from the saga
-    expenseProjection.PayeeId = saga.PayeeId;
+    expenseProjection.Description = event.Description;
+    expenseProjection.LedgerId = event.LedgerId;
+    expenseProjection.PayeeId = event.PayeeId;
     expenseProjection.TransactionId = event.TransactionId;
-    expenseProjection.PlannedExpenseId = saga.PlannedExpenseId;
+    expenseProjection.PlannedExpenseId = event.PlannedExpenseId;
     expenseProjection.Project();
     // Publish ExpenseCreatedEvent
     const expenseCreatedEvent = new ExpenseCreatedEvent();

@@ -6,6 +6,9 @@ export class LedgerProjection extends Projection {
   public static Get(id: any): LedgerProjection {
     return ProjectionStore.Instance.GetProjection(LedgerProjection, id);
   }
+  public static All(): LedgerProjection[] {
+    return ProjectionStore.Instance.GetProjections(LedgerProjection);
+  }
   @serializable public AccountId: any;
   @serializable public Balance: number = 0;
   @serializable public StartingBalance: number = 0;

@@ -1,6 +1,6 @@
 import { Handler } from "../../Core/Handler";
+import { AccountCreatedEvent } from "../../Events/AccountCreatedEvent";
 import { AccountRequestedEvent } from "../../Events/AccountRequestedEvent";
-import { LedgerRequestedEvent } from "../../Events/LedgerRequestedEvent";
 import { AccountProjection } from "../../Projections/AccountProjection";
 
 export class CreateAccountService extends Handler<AccountRequestedEvent> {
@@ -13,11 +13,11 @@ export class CreateAccountService extends Handler<AccountRequestedEvent> {
     const accountProjection = new AccountProjection();
     accountProjection.AccountName = event.AccountName;
     accountProjection.Type = event.Type;
+    accountProjection.UserId = event.UserId;
     accountProjection.Project();
-    // Publish LedgerRequestedEvent
-    const ledgerRequestedEvent = new LedgerRequestedEvent();
-    ledgerRequestedEvent.AccountId = accountProjection.Id;
-    ledgerRequestedEvent.Type = "AccountId";
-    ledgerRequestedEvent.Publish();
+    // Publish AccountCreatedEvent
+    const accountCreated = new AccountCreatedEvent();
+    accountCreated.AccountId = accountProjection.Id;
+    accountCreated.Publish();
   }
 }

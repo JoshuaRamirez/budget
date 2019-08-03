@@ -13,7 +13,7 @@ describe("LinkTransactionToLedgerService", () => {
   });
   it("should process", () => {
     const service = LinkTransactionToLedgerService.Instance;
-    const event = new TransactionCreatedEvent("A", 1);
+    const event = new TransactionCreatedEvent();
     service.Process(event);
   });
 });

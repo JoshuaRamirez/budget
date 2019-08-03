@@ -1,34 +1,34 @@
 import { assert } from "chai";
 import "mocha";
 import { ProjectionStore } from "../../../../source/Core/ProjectionStore";
+import { Subscriptions } from "../../../../source/Core/Subscriptions";
 import { UserRequestedEvent } from "../../../../source/Events/UserRequestedEvent";
 import { AccountProjection } from "../../../../source/Projections/AccountProjection";
 import { LedgerProjection } from "../../../../source/Projections/LedgerProjection";
 import { UserProjection } from "../../../../source/Projections/UserProjection";
-import { CreateAccountService } from "../../../../source/Services/Creates/CreateAccountService";
-import { CreateLedgerService } from "../../../../source/Services/Creates/CreateLedgerService";
 import { CreateUserService } from "../../../../source/Services/Creates/CreateUserService";
 
 
 describe("CreateUserService", () => {
+  beforeEach(() => {
+    Subscriptions.Release();
+    Subscriptions.Create();
+    ProjectionStore.Instance.ClearAll();
+  });
   it("should create initial projections", () => {
-    const service = CreateUserService.Instance;
-    const service2 = CreateAccountService.Instance;
-    const service3 = CreateLedgerService.Instance;
-    service.Subscribe();
-    service2.Subscribe();
-    service3.Subscribe();
     const event = new UserRequestedEvent();
     event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    let projections = projectionStore.GetProjections(UserProjection);
-    let projection = projections[0];
-    assert.exists(projection);
-    projections = projectionStore.GetProjections(AccountProjection);
-    projection = projections[0];
-    assert.exists(projection);
-    projections = projectionStore.GetProjections(LedgerProjection);
-    projection = projections[0];
-    assert.exists(projection);
+    const userProjections = projectionStore.GetProjections(UserProjection);
+    const userProjection: UserProjection = userProjections[0];
+    assert.exists(userProjection);
+    const accountProjections = projectionStore.GetProjections(AccountProjection);
+    const accountProjection: AccountProjection = accountProjections[0];
+    assert.exists(accountProjection);
+    const ledgerProjections = projectionStore.GetProjections(LedgerProjection);
+    const ledgerProjection: LedgerProjection = ledgerProjections[0];
+    assert.exists(ledgerProjection);
+    assert.equal(userProjection.AccountIds[0], accountProjection.Id);
+    assert.equal(accountProjection.LedgerId, ledgerProjection.Id);
   });
 });

@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { TransactionCreatedEvent } from "../../../../source/Events/TransactionCreatedEvent";
+import { ExpenseRequestedEvent } from "../../../../source/Events/ExpenseRequestedEvent";
 import {CreateExpenseService} from "../../../../source/Services/Creates/CreateExpenseService";
 
 describe("CreateExpenseService", () => {
@@ -13,7 +13,7 @@ describe("CreateExpenseService", () => {
   });
   it("should process", () => {
     const service = CreateExpenseService.Instance;
-    const event = new TransactionCreatedEvent("a", 1);
+    const event = new ExpenseRequestedEvent();
     service.Process(event);
   });
 });

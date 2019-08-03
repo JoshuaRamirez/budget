@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { TransactionCreatedEvent } from "../../../../source/Events/TransactionCreatedEvent";
+import { AllocationRequestedEvent } from "../../../../source/Events/AllocationRequestedEvent";
 import {CreateAllocationService} from "../../../../source/Services/Creates/CreateAllocationService";
 
 describe("CreateAllocationService", () => {
@@ -13,7 +13,7 @@ describe("CreateAllocationService", () => {
   });
   it("should process", () => {
     const service = CreateAllocationService.Instance;
-    const event = new TransactionCreatedEvent("a", "1");
+    const event = new AllocationRequestedEvent();
     service.Process(event);
   });
 });
