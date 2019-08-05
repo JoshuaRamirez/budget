@@ -13,8 +13,8 @@ export class BudgetProjection extends Projection {
   @serializable public IsRepeating: boolean;
   @serializable(list(primitive())) public ExpenseIds: any[];
   @serializable(list(primitive())) public DepositIds: any[];
-  @serializable(list(primitive())) public SubBudgets: any[];
-  @serializable(list(primitive())) public SuperBudgets: any[];
+  @serializable(list(primitive())) public SubBudgetIds: any[];
+  @serializable(list(primitive())) public SuperBudgetIds: any[];
   @serializable public Type: string;
   constructor() {
     super(BudgetProjection.name);
