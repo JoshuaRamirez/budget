@@ -1,8 +1,12 @@
-import { list, primitive, serializable } from "serializr";
+import { date, list, primitive, serializable } from "serializr";
+import { IPlannedTransaction } from "../Core/PlannedTransaction";
 import { Projection } from "../Core/Projection";
 import { ProjectionStore } from "../Core/ProjectionStore";
 
-export class PlannedDepositProjection extends Projection {
+export class PlannedDepositProjection extends Projection implements IPlannedTransaction {
+  public static All(): PlannedDepositProjection[] {
+    return ProjectionStore.Instance.GetProjections(PlannedDepositProjection);
+  }
   public static Get(id: any): PlannedDepositProjection {
     return ProjectionStore.Instance.GetProjection(PlannedDepositProjection, id);
   }
@@ -12,7 +16,7 @@ export class PlannedDepositProjection extends Projection {
   @serializable public RepeatPeriod: number;
   @serializable public RepeatMeasurement: string;
   @serializable public RepeatCount: number;
-  @serializable public RepeatStart: Date;
+  @serializable(date()) public RepeatStart: Date;
   constructor() {
     super(PlannedDepositProjection.name);
     this.DepositIds = [];
