@@ -14,9 +14,10 @@ export class ProjectionStore {
   public Update(type: any, projection: Projection): void {
     if (!this.Projections[projection.Name]) {
       this.Save(projection);
+    } else {
+      this.delete(type, projection.Id);
+      this.Save(projection);
     }
-    this.delete(type, projection.Id);
-    this.Save(projection);
   }
   public GetProjection(type: any, id: any): any {
     if (!this.Projections[type.name]) {
@@ -71,6 +72,9 @@ export class ProjectionStore {
       return;
     }
     const projectionIndex = this.find(type,  id);
+    if (projectionIndex === -1) {
+      return;
+    }
     this.Projections[name].splice(projectionIndex, 1);
   }
   private find(type: any, id: any) {
