@@ -10,6 +10,7 @@ export class CreatePlannedExpenseService extends Handler<PlannedExpenseRequested
   public Process(event: PlannedExpenseRequestedEvent) {
     // Create PlannedExpenseProjection
     const plannedExpenseProjection = new PlannedExpenseProjection();
+    plannedExpenseProjection.Amount = event.Amount;
     plannedExpenseProjection.Description = event.Description;
     plannedExpenseProjection.ExpenseIds = [];
     plannedExpenseProjection.RepeatCount = event.RepeatCount;
