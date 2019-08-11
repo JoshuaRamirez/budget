@@ -2,13 +2,13 @@ import { Event } from "./Event";
 import { Handler } from "./Handler";
 
 export class EventLink<TSubscriptionEvent extends Event, TPublicationEvent extends Event> extends Handler<TSubscriptionEvent> {
-  private readonly action: (input: TSubscriptionEvent) => TPublicationEvent;
-  public constructor(subscriptionEventType: any, action: (input: TSubscriptionEvent) => TPublicationEvent) {
+  private readonly publicationEventFactory: (input: TSubscriptionEvent) => TPublicationEvent;
+  public constructor(subscriptionEventType: any, publicationEventFactory: (input: TSubscriptionEvent) => TPublicationEvent) {
     super(subscriptionEventType);
-    this.action = action;
+    this.publicationEventFactory = publicationEventFactory;
   }
   public Process(subscriptionEvent: TSubscriptionEvent): void {
-    const publicationEvent = this.action(subscriptionEvent);
+    const publicationEvent = this.publicationEventFactory(subscriptionEvent);
     publicationEvent.Publish();
   }
 }
