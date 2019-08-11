@@ -3,8 +3,8 @@ import { EventLink } from "../../Core/EventLink";
 import { AccountCreatedEvent } from "../../Events/AccountCreatedEvent";
 import { LedgerRequestedEvent } from "../../Events/LedgerRequestedEvent";
 
-export class RequestLedgerService extends EventChain {
-  public static Instance = new RequestLedgerService();
+export class PublishLedgerRequestedService extends EventChain {
+  public static Instance = new PublishLedgerRequestedService();
   constructor() {
     super();
     this.Link(new EventLink(AccountCreatedEvent, this.onAccountCreated));

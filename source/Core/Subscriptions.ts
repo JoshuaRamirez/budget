@@ -13,8 +13,8 @@ import { LinkExpenseToPayeeService } from "../Services/Links/LinkExpenseToPayeeS
 import { LinkExpenseToPlannedExpenseService } from "../Services/Links/LinkExpenseToPlannedExpenseService";
 import { LinkLedgerToAccountService } from "../Services/Links/LinkLedgerToAccountService";
 import { LinkTransactionToLedgerService } from "../Services/Links/LinkTransactionToLedgerService";
-import { RequestAccountService } from "../Services/Requests/RequestAccountService";
-import { RequestLedgerService } from "../Services/Requests/RequestLedgerService";
+import { PublishAccountRequestedService } from "../Services/Publishers/PublishAccountRequestedService";
+import { PublishLedgerRequestedService } from "../Services/Publishers/PublishLedgerRequestedService";
 import { UpdateLedgerBalanceService } from "../Services/Updates/UpdateLedgerBalanceService";
 import { UpdateLedgerStartingBalanceService } from "../Services/Updates/UpdateLedgerStartingBalanceService";
 import { ISubscribable } from "./ISubscribable";
@@ -46,8 +46,8 @@ export class Subscriptions {
     LinkExpenseToPlannedExpenseService.Instance,
     LinkLedgerToAccountService.Instance,
     LinkTransactionToLedgerService.Instance,
-    RequestAccountService.Instance,
-    RequestLedgerService.Instance,
+    PublishAccountRequestedService.Instance,
+    PublishLedgerRequestedService.Instance,
     UpdateLedgerBalanceService.Instance,
     UpdateLedgerStartingBalanceService.Instance,
   ];
