@@ -1,4 +1,7 @@
-export interface IPlannedTransaction {
+import { Projection } from "./Projection";
+
+export interface IPlannedTransaction extends Projection {
+  Id: any;
   Amount: number;
   Description: string;
   RepeatPeriod: number;
