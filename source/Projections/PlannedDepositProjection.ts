@@ -13,6 +13,7 @@ export class PlannedDepositProjection extends Projection implements IPlannedTran
   @serializable public Amount: number;
   @serializable public Description: string;
   @serializable(list(primitive())) public DepositIds: any[];
+  @serializable(list(primitive())) public ForecastIds: any[];
   @serializable public RepeatPeriod: number;
   @serializable public RepeatMeasurement: string;
   @serializable public RepeatCount: number;

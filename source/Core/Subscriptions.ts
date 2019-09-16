@@ -3,14 +3,22 @@ import { CreateAllocationService } from "../Services/Creates/CreateAllocationSer
 import { CreateBudgetService } from "../Services/Creates/CreateBudgetService";
 import { CreateCategoryService } from "../Services/Creates/CreateCategoryService";
 import { CreateExpenseService } from "../Services/Creates/CreateExpenseService";
+import { CreateForecastService } from "../Services/Creates/CreateForecastProjection";
 import { CreateLedgerService } from "../Services/Creates/CreateLedgerService";
 import { CreatePayeeService } from "../Services/Creates/CreatePayeeService";
+import { CreatePlannedDepositService } from "../Services/Creates/CreatePlannedDepositService";
 import { CreatePlannedExpenseService } from "../Services/Creates/CreatePlannedExpenseService";
 import { CreateTransactionService } from "../Services/Creates/CreateTransactionService";
 import { CreateUserService } from "../Services/Creates/CreateUserService";
+import { ForecastPlannedTransactionsService } from "../Services/ForecastPlannedTransactions";
 import { LinkAccountToUserService } from "../Services/Links/LinkAccountToUserService";
+import { LinkDepositToPlannedDepositService } from "../Services/Links/LinkDepositToPlannedDepositService";
 import { LinkExpenseToPayeeService } from "../Services/Links/LinkExpenseToPayeeService";
 import { LinkExpenseToPlannedExpenseService } from "../Services/Links/LinkExpenseToPlannedExpenseService";
+import { LinkForecastToPlannedDepositService } from "../Services/Links/LinkForecastToPlannedDepositService";
+import { LinkForecastToPlannedDepositsService } from "../Services/Links/LinkForecastToPlannedDepositsService";
+import { LinkForecastToPlannedExpenseService } from "../Services/Links/LinkForecastToPlannedExpenseService";
+import { LinkForecastToPlannedExpensesService } from "../Services/Links/LinkForecastToPlannedExpensesService";
 import { LinkLedgerToAccountService } from "../Services/Links/LinkLedgerToAccountService";
 import { LinkTransactionToLedgerService } from "../Services/Links/LinkTransactionToLedgerService";
 import { PublishAccountRequestedService } from "../Services/Publishers/PublishAccountRequestedService";
@@ -36,19 +44,27 @@ export class Subscriptions {
     CreateBudgetService.Instance,
     CreateCategoryService.Instance,
     CreateExpenseService.Instance,
+    CreateForecastService.Instance,
     CreateLedgerService.Instance,
     CreatePayeeService.Instance,
+    CreatePlannedDepositService.Instance,
     CreatePlannedExpenseService.Instance,
     CreateTransactionService.Instance,
     CreateUserService.Instance,
     LinkAccountToUserService.Instance,
+    LinkDepositToPlannedDepositService.Instance,
     LinkExpenseToPayeeService.Instance,
     LinkExpenseToPlannedExpenseService.Instance,
+    LinkForecastToPlannedDepositsService.Instance,
+    LinkForecastToPlannedDepositService.Instance,
+    LinkForecastToPlannedExpensesService.Instance,
+    LinkForecastToPlannedExpenseService.Instance,
     LinkLedgerToAccountService.Instance,
     LinkTransactionToLedgerService.Instance,
     PublishAccountRequestedService.Instance,
     PublishLedgerRequestedService.Instance,
     UpdateLedgerBalanceService.Instance,
     UpdateLedgerStartingBalanceService.Instance,
+    ForecastPlannedTransactionsService.Instance,
   ];
 }
