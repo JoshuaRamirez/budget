@@ -12,7 +12,7 @@ export class ProjectionStore {
     this.write(projection.Name, projection);
   }
   public Update(type: any, projection: Projection): void {
-    if (!this.Projections[projection.Name]) {
+    if (!this.Projections[projection.ProjectionName]) {
       this.Save(projection);
     } else {
       this.delete(type, projection.Id);
