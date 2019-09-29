@@ -5,11 +5,11 @@ import { Projection } from "./Projection";
 export class ProjectionStore {
   public static Instance = new ProjectionStore();
   private Projections = {};
-  public Save(projection: any): void {
-    if (!this.Projections[projection.Name]) {
-      this.Projections[projection.Name] = [];
+  public Save(projection: Projection): void {
+    if (!this.Projections[projection.ProjectionName]) {
+      this.Projections[projection.ProjectionName] = [];
     }
-    this.write(projection.Name, projection);
+    this.write(projection.ProjectionName, projection);
   }
   public Update(type: any, projection: Projection): void {
     if (!this.Projections[projection.ProjectionName]) {
