@@ -21,7 +21,7 @@ export class Publisher<TEvent extends Event> {
     if (!subscriptions) {
       Publisher.Subscriptions[eventName] = [];
     }
-    const handle = subscriber.Process.bind(subscriber);
+    const handle = subscriber.Handle.bind(subscriber);
     Publisher.Subscriptions[eventName].push(handle);
     return handle;
   }

@@ -13,7 +13,7 @@ export abstract class LinkManyToOneService<TSubscribingEvent extends Event> exte
   ) {
     super(EventType);
   }
-  public Process(event: TSubscribingEvent): void {
+  public Handle(event: TSubscribingEvent): void {
     if (!event[this.SubjectIdFieldName]) {
       return;
     }

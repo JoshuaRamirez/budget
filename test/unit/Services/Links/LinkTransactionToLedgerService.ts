@@ -14,6 +14,6 @@ describe("LinkTransactionToLedgerService", () => {
   it("should process", () => {
     const service = LinkTransactionToLedgerService.Instance;
     const event = new TransactionCreatedEvent();
-    service.Process(event);
+    service.Handle(event);
   });
 });

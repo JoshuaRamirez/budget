@@ -14,6 +14,6 @@ describe("CreateAccountService", () => {
   it("should process", () => {
     const service = CreateAccountService.Instance;
     const event = new AccountRequestedEvent();
-    service.Process(event);
+    service.Handle(event);
   });
 });

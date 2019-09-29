@@ -7,7 +7,7 @@ export class CreatePayerService extends Handler<PayerRequestedEvent> {
   private constructor() {
     super(PayerRequestedEvent);
   }
-  public Process(event: PayerRequestedEvent) {
+  public Handle(event: PayerRequestedEvent) {
     // Create PayerProjection
     const payerProjection = new PayerProjection();
     payerProjection.Description = event.Description;

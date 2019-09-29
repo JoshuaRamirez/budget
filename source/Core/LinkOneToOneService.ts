@@ -12,7 +12,7 @@ export abstract class LinkOneToOneService<TSubscribingEvent extends Event> exten
   ) {
     super(EventType);
   }
-  public Process(event: TSubscribingEvent): void {
+  public Handle(event: TSubscribingEvent): void {
     if (!event[this.SubjectIdFieldName]) {
       return;
     }

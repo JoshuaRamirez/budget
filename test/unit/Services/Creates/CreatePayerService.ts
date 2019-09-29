@@ -14,6 +14,6 @@ describe("CreatePayerService", () => {
   it("should process", () => {
     const service = CreatePayerService.Instance;
     const event = new PayerRequestedEvent();
-    service.Process(event);
+    service.Handle(event);
   });
 });

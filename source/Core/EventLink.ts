@@ -7,7 +7,7 @@ export class EventLink<TSubscriptionEvent extends Event, TPublicationEvent exten
     super(subscriptionEventType);
     this.publicationEventFactory = publicationEventFactory;
   }
-  public Process(subscriptionEvent: TSubscriptionEvent): void {
+  public Handle(subscriptionEvent: TSubscriptionEvent): void {
     const publicationEvent = this.publicationEventFactory(subscriptionEvent);
     publicationEvent.Publish();
   }

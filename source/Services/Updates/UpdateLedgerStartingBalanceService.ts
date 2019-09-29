@@ -7,7 +7,7 @@ export class UpdateLedgerStartingBalanceService extends Handler<LedgerStartingBa
   private constructor() {
     super(LedgerStartingBalanceUpdateRequestedEvent);
   }
-  public Process(event: LedgerStartingBalanceUpdateRequestedEvent): void {
+  public Handle(event: LedgerStartingBalanceUpdateRequestedEvent): void {
     if (!event.LedgerId) {
       return;
     }

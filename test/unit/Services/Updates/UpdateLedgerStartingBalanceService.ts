@@ -14,6 +14,6 @@ describe("UpdateLedgerStartingBalanceService", () => {
   it("should process", () => {
     const service = UpdateLedgerStartingBalanceService.Instance;
     const event = new LedgerStartingBalanceUpdateRequestedEvent();
-    service.Process(event);
+    service.Handle(event);
   });
 });

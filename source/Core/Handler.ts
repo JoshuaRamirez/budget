@@ -8,7 +8,7 @@ export abstract class Handler<TEvent extends Event> implements ISubscriber<TEven
   protected constructor(eventType: any) {
     this.eventType = eventType;
   }
-  public abstract Process(event: TEvent): void;
+  public abstract Handle(event: TEvent): void;
   public Subscribe() {
     const handle = Publisher.Instance.Subscribe(this.eventType, this);
     this.handles.push(handle);

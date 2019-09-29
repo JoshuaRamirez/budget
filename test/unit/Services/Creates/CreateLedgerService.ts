@@ -14,6 +14,6 @@ describe("CreateLedgerService", () => {
   it("should process", () => {
     const service = CreateLedgerService.Instance;
     const event = new LedgerRequestedEvent();
-    service.Process(event);
+    service.Handle(event);
   });
 });

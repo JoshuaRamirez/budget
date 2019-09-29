@@ -14,6 +14,6 @@ describe("CreateDepositService", () => {
   it("should process", () => {
     const service = CreateDepositService.Instance;
     const event = new DepositRequestedEvent();
-    service.Process(event);
+    service.Handle(event);
   });
 });

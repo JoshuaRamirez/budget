@@ -68,7 +68,7 @@ export class ForecastPlannedTransactionsService extends Handler<ForecastCalculat
   private constructor() {
     super(ForecastCalculationRequestEvent);
   }
-  public Process(event: ForecastCalculationRequestEvent) {
+  public Handle(event: ForecastCalculationRequestEvent) {
     if (event.StartDate > event.EndDate) {
       return;
     }

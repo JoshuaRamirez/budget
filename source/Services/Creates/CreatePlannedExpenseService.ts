@@ -7,7 +7,7 @@ export class CreatePlannedExpenseService extends Handler<PlannedExpenseRequested
   private constructor() {
     super(PlannedExpenseRequestedEvent);
   }
-  public Process(event: PlannedExpenseRequestedEvent) {
+  public Handle(event: PlannedExpenseRequestedEvent) {
     // Create PlannedExpenseProjection
     const plannedExpenseProjection = new PlannedExpenseProjection();
     plannedExpenseProjection.Amount = event.Amount;

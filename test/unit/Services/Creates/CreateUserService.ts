@@ -14,6 +14,6 @@ describe("CreateUserService", () => {
   it("should process", () => {
     const service = CreateUserService.Instance;
     const event = new UserRequestedEvent();
-    service.Process(event);
+    service.Handle(event);
   });
 });

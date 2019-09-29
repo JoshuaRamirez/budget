@@ -8,7 +8,7 @@ export class CreateLedgerService extends Handler<LedgerRequestedEvent> {
   private constructor() {
     super(LedgerRequestedEvent);
   }
-  public Process(event: LedgerRequestedEvent) {
+  public Handle(event: LedgerRequestedEvent) {
     // Create LedgerProjection
     const ledgerProjection = new LedgerProjection();
     ledgerProjection.AccountId = event.AccountId;
