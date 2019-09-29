@@ -9,11 +9,16 @@ export class LedgerProjection extends Projection {
   public static All(): LedgerProjection[] {
     return ProjectionStore.Instance.GetProjections(LedgerProjection);
   }
+
+  // Foreign Keys
   @serializable public AccountId: any;
+  @serializable(list(primitive())) public TransactionIds: any[] = [];
+
+  // Fields
   @serializable public Balance: number = 0;
   @serializable public StartingBalance: number = 0;
-  @serializable(list(primitive())) public TransactionIds: any[] = [];
   @serializable public Type: string;
+
   constructor() {
     super(LedgerProjection.name);
   }

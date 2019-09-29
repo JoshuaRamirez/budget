@@ -6,16 +6,21 @@ export class UserProjection extends Projection {
   public static Get(id: any): UserProjection {
     return ProjectionStore.Instance.GetProjection(UserProjection, id);
   }
-  @serializable public UserName: string;
-  @serializable public Password: string;
-  @serializable public FirstName: string;
-  @serializable public LastName: string;
-  @serializable public Email: string;
-  @serializable public Type: string;
+
+  // Foreign Keys
   @serializable(list(primitive())) public AccountIds: any[] = [];
   @serializable(list(primitive())) public CategoryIds: any[] = [];
   @serializable(list(primitive())) public IncomeAccountId: any = [];
   @serializable(list(primitive())) public PayeeIds: any[] = [];
+
+  // Fields
+  @serializable public Email: string;
+  @serializable public FirstName: string;
+  @serializable public LastName: string;
+  @serializable public Password: string;
+  @serializable public UserName: string;
+  @serializable public Type: string;
+
   constructor() {
     super(UserProjection.name);
   }

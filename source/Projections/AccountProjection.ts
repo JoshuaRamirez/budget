@@ -6,10 +6,15 @@ export class AccountProjection extends Projection {
   public static Get(id: any): AccountProjection {
     return ProjectionStore.Instance.GetProjection(AccountProjection, id);
   }
+
+  // Foreign Keys
   @serializable public LedgerId: any;
+  @serializable public UserId: any;
+
+  // Properties
   @serializable public AccountName: string;
   @serializable public Type: string;
-  @serializable public UserId: any;
+
   constructor() {
     super(AccountProjection.name);
   }

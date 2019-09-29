@@ -6,8 +6,11 @@ export class CategoryProjection extends Projection {
   public static Get(id: any): CategoryProjection {
     return ProjectionStore.Instance.GetProjection(CategoryProjection, id);
   }
+
+  // Fields
   @serializable public CategoryName: string;
   @serializable public Type: string;
+
   constructor() {
     super(CategoryProjection.name);
   }

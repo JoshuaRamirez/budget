@@ -10,14 +10,19 @@ export class PlannedDepositProjection extends Projection implements IPlannedTran
   public static Get(id: any): PlannedDepositProjection {
     return ProjectionStore.Instance.GetProjection(PlannedDepositProjection, id);
   }
-  @serializable public Amount: number;
-  @serializable public Description: string;
+
+  // Foreign Keys
   @serializable(list(primitive())) public DepositIds: any[];
   @serializable(list(primitive())) public ForecastIds: any[];
+
+  // Fields
+  @serializable public Amount: number;
+  @serializable public Description: string;
   @serializable public RepeatPeriod: number;
   @serializable public RepeatMeasurement: string;
   @serializable public RepeatCount: number;
   @serializable(date()) public RepeatStart: Date;
+
   constructor() {
     super(PlannedDepositProjection.name);
     this.DepositIds = [];

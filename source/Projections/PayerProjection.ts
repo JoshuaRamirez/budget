@@ -6,10 +6,15 @@ export class PayerProjection extends Projection {
   public static Get(id: any): PayerProjection {
     return ProjectionStore.Instance.GetProjection(PayerProjection, id);
   }
-  @serializable public Description: string;
+
+  // Foreign Keys
   @serializable(list(primitive())) public DepositIds: any[];
+
+  // Fields
+  @serializable public Description: string;
   @serializable public PayerName: string;
   @serializable public Type: string;
+
   constructor() {
     super(PayerProjection.name);
   }

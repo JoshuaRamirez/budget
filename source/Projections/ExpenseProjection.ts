@@ -6,13 +6,18 @@ export class ExpenseProjection extends Projection {
   public static Get(id: any): ExpenseProjection {
     return ProjectionStore.Instance.GetProjection(ExpenseProjection, id);
   }
-  @serializable public Amount: number;
-  @serializable public Description: string;
+
+  // Foreign Keys
   @serializable public LedgerId: any;
-  @serializable public TransactionId: any;
   @serializable public PayeeId: any;
-  @serializable public Category: string;
   @serializable public PlannedExpenseId: any;
+  @serializable public TransactionId: any;
+
+  // Fields
+  @serializable public Amount: number;
+  @serializable public Category: string;
+  @serializable public Description: string;
+
   constructor() {
     super(ExpenseProjection.name);
   }
