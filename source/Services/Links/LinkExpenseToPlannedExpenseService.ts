@@ -7,12 +7,14 @@ export class LinkExpenseToPlannedExpenseService extends LinkManyToOneService<Exp
   public static Instance = new LinkExpenseToPlannedExpenseService();
   private constructor() {
     super(
-      ExpenseCreatedEvent,
-      ExpenseProjection,
-      "ExpenseId",
-      "ExpenseIds",
-      PlannedExpenseProjection,
-      "PlannedExpenseId",
+      {
+        EventType: ExpenseCreatedEvent,
+        SubjectAggregationFieldName: "ExpenseIds",
+        SubjectIdFieldName: "ExpenseId",
+        SubjectType: ExpenseProjection,
+        TargetIdFieldName: "PlannedExpenseId",
+        TargetType: PlannedExpenseProjection,
+      },
     );
   }
 }

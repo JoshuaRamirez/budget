@@ -7,12 +7,14 @@ export class LinkDepositToPlannedDepositService extends LinkManyToOneService<Dep
   public static Instance = new LinkDepositToPlannedDepositService();
   private constructor() {
     super(
-      DepositCreatedEvent,
-      DepositProjection,
-      "DepositId",
-      "DepositIds",
-      PlannedDepositProjection,
-      "PlannedDepositId",
+      {
+        EventType: DepositCreatedEvent,
+        SubjectAggregationFieldName: "DepositIds",
+        SubjectIdFieldName: "DepositId",
+        SubjectType: DepositProjection,
+        TargetIdFieldName: "PlannedDepositId",
+        TargetType: PlannedDepositProjection,
+      },
     );
   }
 }

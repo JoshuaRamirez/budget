@@ -7,12 +7,14 @@ export class LinkExpenseToPayeeService extends LinkManyToOneService<ExpenseCreat
   public static Instance: LinkExpenseToPayeeService = new LinkExpenseToPayeeService();
   private constructor() {
     super(
-      ExpenseCreatedEvent,
-      ExpenseProjection,
-      "ExpenseId",
-      "ExpenseIds",
-      PayeeProjection,
-      "PayeeId",
+      {
+        EventType: ExpenseCreatedEvent,
+        SubjectAggregationFieldName: "ExpenseIds",
+        SubjectIdFieldName: "ExpenseId",
+        SubjectType: ExpenseProjection,
+        TargetIdFieldName: "PayeeId",
+        TargetType: PayeeProjection,
+      },
     );
   }
 }

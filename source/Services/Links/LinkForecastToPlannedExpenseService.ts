@@ -8,12 +8,14 @@ export class LinkForecastToPlannedExpenseService extends LinkManyToOneService<Li
   public static Instance = new LinkForecastToPlannedExpenseService();
   private constructor() {
     super(
-      ForecastCreatedEvent,
-      ForecastProjection,
-      "ForecastId",
-      "PlannedExpenseIds",
-      PlannedExpenseProjection,
-      "ForecastId",
+      {
+        EventType: ForecastCreatedEvent,
+        SubjectAggregationFieldName: "PlannedExpenseIds",
+        SubjectIdFieldName: "ForecastId",
+        SubjectType: ForecastProjection,
+        TargetIdFieldName: "ForecastId",
+        TargetType: PlannedExpenseProjection,
+      },
     );
   }
 }

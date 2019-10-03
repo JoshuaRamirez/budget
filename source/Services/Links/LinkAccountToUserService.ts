@@ -7,12 +7,14 @@ export class LinkAccountToUserService extends LinkManyToOneService<AccountCreate
   public static Instance: LinkAccountToUserService = new LinkAccountToUserService();
   private constructor() {
     super(
-      AccountCreatedEvent,
-      AccountProjection,
-      "AccountId",
-      "AccountIds",
-      UserProjection,
-      "UserId",
+      {
+        EventType: AccountCreatedEvent,
+        SubjectAggregationFieldName: "AccountIds",
+        SubjectIdFieldName: "AccountId",
+        SubjectType: AccountProjection,
+        TargetIdFieldName: "UserId",
+        TargetType: UserProjection,
+      },
     );
   }
 }

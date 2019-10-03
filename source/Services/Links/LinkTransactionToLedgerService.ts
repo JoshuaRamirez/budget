@@ -7,12 +7,14 @@ export class LinkTransactionToLedgerService extends LinkManyToOneService<Transac
   public static Instance: LinkTransactionToLedgerService = new LinkTransactionToLedgerService();
   private constructor() {
     super(
-      TransactionCreatedEvent,
-      TransactionProjection,
-      "TransactionId",
-      "TransactionIds",
-      LedgerProjection,
-      "LedgerId",
+      {
+        EventType: TransactionCreatedEvent,
+        SubjectAggregationFieldName: "TransactionIds",
+        SubjectIdFieldName: "TransactionId",
+        SubjectType: TransactionProjection,
+        TargetIdFieldName: "LedgerId",
+        TargetType: LedgerProjection,
+      },
     );
   }
 }
