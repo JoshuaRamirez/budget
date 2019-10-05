@@ -6,15 +6,15 @@ import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjec
 export class LinkForecastToPlannedDepositsService extends LinkManyToManyService<LinkForecastToPlannedDepositsRequestedEvent, LinkForecastToPlannedDepositsRequestedEvent> {
   public static Instance = new LinkForecastToPlannedDepositsService();
   private constructor() {
-    super(
-      LinkForecastToPlannedDepositsRequestedEvent,
-      ForecastProjection,
-      "ForecastId",
-      "ForecastIds",
-      PlannedDepositProjection,
-      "PlannedDepositId",
-      "PlannedDepositIds",
-      new LinkForecastToPlannedDepositsRequestedEvent(),
-    );
+    super({
+      EventType: LinkForecastToPlannedDepositsRequestedEvent,
+      SubjectAggregationFieldName: "ForecastIds",
+      SubjectIdFieldName: "ForecastId",
+      SubjectType: ForecastProjection,
+      TargetAggregationFieldName: "PlannedDepositIds",
+      TargetEvent: new LinkForecastToPlannedDepositsRequestedEvent(),
+      TargetIdFieldName: "PlannedDepositId",
+      TargetType: PlannedDepositProjection,
+    });
   }
 }

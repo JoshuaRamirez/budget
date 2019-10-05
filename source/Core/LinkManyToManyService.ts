@@ -1,31 +1,35 @@
 import { Event } from "./Event";
 import { Handler } from "./Handler";
 
+export interface IManyToManyDeclaration<TTargetEvent> {
+  EventType: any;
+  SubjectType: any;
+  SubjectIdFieldName: string;
+  SubjectAggregationFieldName: string;
+  TargetType: any;
+  TargetIdFieldName: string;
+  TargetAggregationFieldName: string;
+  TargetEvent: TTargetEvent; // Why is this type a thing?
+}
+
 export abstract class LinkManyToManyService<TSubscribingEvent extends Event, TTargetEvent extends Event> extends Handler<TSubscribingEvent> {
-  protected constructor(
-    private readonly EventType: any,
-    private readonly SubjectType: any,
-    private readonly SubjectIdFieldName: string,
-    private readonly SubjectAggregationFieldName: string,
-    private readonly TargetType: any,
-    private readonly TargetIdFieldName: string,
-    private readonly TargetAggregationFieldName: string,
-    private readonly TargetEvent: TTargetEvent,
-  ) {
-    super(EventType);
+  private readonly declaration;
+  protected constructor(declaration: IManyToManyDeclaration<TTargetEvent>) {
+    super(declaration.EventType);
+    this.declaration = declaration;
   }
   public Handle(event: TSubscribingEvent): void {
-    if (!event[this.SubjectIdFieldName]) {
+    if (!event[this.declaration.SubjectIdFieldName]) {
       return;
     }
-    const subjectId = event[this.SubjectIdFieldName];
+    const subjectId = event[this.declaration.SubjectIdFieldName];
     if (!subjectId) {
       return;
     }
-    if (!this.TargetAggregationFieldName) {
+    if (!this.declaration.TargetAggregationFieldName) {
       return;
     }
-    const targetAggregationIds: any[] = event[this.TargetAggregationFieldName];
+    const targetAggregationIds: any[] = event[this.declaration.TargetAggregationFieldName];
     if (!targetAggregationIds) {
        return;
     }
@@ -34,9 +38,9 @@ export abstract class LinkManyToManyService<TSubscribingEvent extends Event, TTa
     }
     targetAggregationIds.forEach((target) => {
       const targetId = target.Id;
-      this.TargetEvent[this.SubjectIdFieldName] = subjectId;
-      this.TargetEvent[this.TargetIdFieldName] = targetId;
-      this.TargetEvent.Publish();
+      this.declaration.TargetEvent[this.declaration.SubjectIdFieldName] = subjectId;
+      this.declaration.TargetEvent[this.declaration.TargetIdFieldName] = targetId;
+      this.declaration.TargetEvent.Publish();
     });
 
   }

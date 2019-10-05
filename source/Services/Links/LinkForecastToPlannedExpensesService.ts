@@ -6,15 +6,15 @@ import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjec
 export class LinkForecastToPlannedExpensesService extends LinkManyToManyService<LinkForecastToPlannedExpensesRequestedEvent, LinkForecastToPlannedExpensesRequestedEvent> {
   public static Instance = new LinkForecastToPlannedExpensesService();
   private constructor() {
-    super(
-      LinkForecastToPlannedExpensesRequestedEvent,
-      ForecastProjection,
-      "ForecastId",
-      "ForecastIds",
-      PlannedExpenseProjection,
-      "PlannedExpenseId",
-      "PlannedExpenseIds",
-      new LinkForecastToPlannedExpensesRequestedEvent(),
-    );
+    super({
+      EventType: LinkForecastToPlannedExpensesRequestedEvent,
+      SubjectAggregationFieldName: "ForecastIds",
+      SubjectIdFieldName: "ForecastId",
+      SubjectType: ForecastProjection,
+      TargetAggregationFieldName: "PlannedExpenseIds",
+      TargetEvent: new LinkForecastToPlannedExpensesRequestedEvent(),
+      TargetIdFieldName: "PlannedExpenseId",
+      TargetType: PlannedExpenseProjection,
+    });
   }
 }
