@@ -13,44 +13,32 @@ export interface IManyToOneDeclaration {
 
 // Link Subject to Target where the Target has many Subjects
 export abstract class LinkManyToOneService<TSubscribingEvent extends Event> extends Handler<TSubscribingEvent> {
-
-  private readonly EventType: any;
-  private readonly SubjectType: any;
-  private readonly SubjectIdFieldName: string;
-  private readonly SubjectAggregationFieldName: string;
-  private readonly TargetType: any;
-  private readonly TargetIdFieldName: string;
-
+  private readonly declaration: IManyToOneDeclaration;
   protected constructor(declaration: IManyToOneDeclaration) {
     super(declaration.EventType);
-    this.TargetIdFieldName = declaration.TargetIdFieldName;
-    this.TargetType = declaration.TargetType;
-    this.SubjectAggregationFieldName = declaration.SubjectAggregationFieldName;
-    this.SubjectIdFieldName = declaration.SubjectIdFieldName;
-    this.SubjectType = declaration.SubjectType;
-    this.EventType = declaration.EventType;
+    this.declaration = declaration;
   }
   public Handle(event: TSubscribingEvent): void {
-    if (!event[this.SubjectIdFieldName]) {
+    if (!event[this.declaration.SubjectIdFieldName]) {
       return;
     }
-    const subjectId = event[this.SubjectIdFieldName];
+    const subjectId = event[this.declaration.SubjectIdFieldName];
     if (!subjectId) {
       return;
     }
-    const subjectProjection = ProjectionStore.Instance.GetProjection(this.SubjectType, subjectId);
+    const subjectProjection = ProjectionStore.Instance.GetProjection(this.declaration.SubjectType, subjectId);
     if (!subjectProjection) {
       return;
     }
-    const targetId = subjectProjection[this.TargetIdFieldName];
+    const targetId = subjectProjection[this.declaration.TargetIdFieldName];
     if (!targetId) {
       return;
     }
-    const targetProjection = ProjectionStore.Instance.GetProjection(this.TargetType, targetId);
+    const targetProjection = ProjectionStore.Instance.GetProjection(this.declaration.TargetType, targetId);
     if (!targetProjection) {
       return;
     }
-    targetProjection[this.SubjectAggregationFieldName].push(subjectProjection.Id);
+    targetProjection[this.declaration.SubjectAggregationFieldName].push(subjectProjection.Id);
     targetProjection.Update();
   }
 }
