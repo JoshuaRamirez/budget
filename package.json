@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "directories": {
-    "test": "source/test"
+    "test": "Source/test"
   },
   "dependencies": {
     "@types/node": "^11.13.8",
@@ -21,8 +21,8 @@
     "typescript": "^3.4.5"
   },
   "scripts": {
-    "start": "tsc source/main.ts && node main.js --experimental-modules --loader source/system/customLoader.mjs",
-    "test": "mocha -r ts-node/register 'test/**/*.ts'",
+    "start": "tsc Source/main.ts && node main.js --experimental-modules --loader Source/system/customLoader.mjs",
+    "test": "mocha -r ts-node/register 'Test/**/*.ts'",
     "build": "tsc --p tsconfig.json",
     "lint": "tslint -p tsconfig.json"
   },
