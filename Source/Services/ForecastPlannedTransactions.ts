@@ -19,8 +19,26 @@ class Context {
   public ExistingPlannedExpenseProjections: PlannedExpenseProjection[];
 }
 
+// TODO: Rename file to match class name.
 export class ForecastPlannedTransactionsService extends Handler<ForecastCalculationRequestEvent> {
   public static Instance = new ForecastPlannedTransactionsService();
+  public static PlanInstanceDates(plannedTransaction: IPlannedTransaction, startDate: Date, endDate: Date) {
+    const repeatPeriod = plannedTransaction.RepeatPeriod;
+    const repeatCount = plannedTransaction.RepeatCount;
+    const instanceCount = ForecastPlannedTransactionsService.getInstanceCount(startDate, endDate, repeatPeriod, repeatCount);
+    const plannedInstanceDates: Date[] = [];
+    for (let i = 0; i < instanceCount; i++) {
+      const day = new Date(startDate);
+      day.setDate(startDate.getDate() + (i * repeatPeriod));
+      if (day <= endDate) {
+        plannedInstanceDates.push(day);
+      }
+      if (day > endDate) {
+        throw new Error("Inconceivable!");
+      }
+    }
+    return plannedInstanceDates;
+  }
   private static getInstanceCount(repeatStart: Date, endDate: Date, repeatPeriod: number, repeatCount: number) {
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     const firstDate = new Date(repeatStart);
@@ -44,25 +62,6 @@ export class ForecastPlannedTransactionsService extends Handler<ForecastCalculat
       day.setDate(day.getDate() + 1);
     }
     return forecastProjections;
-  }
-  private static planInstanceDates(plannedTransaction: IPlannedTransaction, context: Context) {
-    const endDate = context.EndDate;
-    const repeatPeriod = plannedTransaction.RepeatPeriod;
-    const repeatCount = plannedTransaction.RepeatCount;
-    const startDate = context.StartDate;
-    const instanceCount = ForecastPlannedTransactionsService.getInstanceCount(startDate, endDate, repeatPeriod, repeatCount);
-    const plannedInstanceDates: Date[] = [];
-    for (let i = 0; i < instanceCount; i++) {
-      const day = new Date(startDate);
-      day.setDate(startDate.getDate() + (i * repeatPeriod));
-      if (day <= endDate) {
-        plannedInstanceDates.push(day);
-      }
-      if (day > endDate) {
-        throw new Error("Inconceivable!");
-      }
-    }
-    return plannedInstanceDates;
   }
   private constructor() {
     super(ForecastCalculationRequestEvent);
@@ -116,7 +115,7 @@ export class ForecastPlannedTransactionsService extends Handler<ForecastCalculat
   }
   private calculateForecastBalances(type: PlannedTransactionType, plannedTransaction: IPlannedTransaction, context: Context) {
     const forecastProjections = context.NewForecastProjections;
-    const plannedInstanceDates = ForecastPlannedTransactionsService.planInstanceDates(plannedTransaction, context);
+    const plannedInstanceDates = ForecastPlannedTransactionsService.PlanInstanceDates(plannedTransaction, context.StartDate, context.EndDate);
     let runningTotal = forecastProjections[0].Amount;
     let transactionalAmount = plannedTransaction.Amount;
     if (type === PlannedTransactionType.Expense) {
