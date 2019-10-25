@@ -14,7 +14,6 @@ enum PlannedTransactionType {
 class Context {
   public StartDate: Date;
   public EndDate: Date;
-  public StartingBalance: number;
   public NewForecastProjections: ForecastProjection[];
   public ExistingPlannedDepositProjections: PlannedDepositProjection[];
   public ExistingPlannedExpenseProjections: PlannedExpenseProjection[];
