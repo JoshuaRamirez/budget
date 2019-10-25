@@ -9,6 +9,8 @@ export class EventLink<TSubscriptionEvent extends Event, TPublicationEvent exten
   }
   public Handle(subscriptionEvent: TSubscriptionEvent): void {
     const publicationEvent = this.makePublicationEvent(subscriptionEvent);
-    publicationEvent.Publish();
+    if (publicationEvent) {
+      publicationEvent.Publish();
+    }
   }
 }
