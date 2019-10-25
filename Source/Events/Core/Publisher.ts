@@ -7,10 +7,10 @@ export class Publisher<TEvent extends Event> {
   public static Instance = new Publisher();
   public Publish(event: TEvent) {
     EventStore.Instance.Record(event);
-    if (!Publisher.Subscriptions[event.Name]) {
+    if (!Publisher.Subscriptions[event.EventName]) {
       return;
     }
-    Publisher.Subscriptions[event.Name].forEach((handler) => handler(event));
+    Publisher.Subscriptions[event.EventName].forEach((handler) => handler(event));
   }
   public Subscribe(
     eventType: (new (x, y) => TEvent),

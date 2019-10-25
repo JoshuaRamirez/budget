@@ -23,21 +23,21 @@ export abstract class LinkServiceFieldValidator {
     }
   }
   protected static validateEventScalarFieldValue(event: Event, fieldName: string, validationMessage: LinkServiceEventValidationMessage) {
-    const eventName = event.Name;
+    const eventName = event.EventName;
     const fieldValue = event[fieldName];
     if (!fieldValue || !fieldValue.toString().length) {
       throw new LinkServiceEventFieldInvalidError(eventName, fieldName, fieldValue, validationMessage);
     }
   }
   protected static validateEventArrayFieldValue(event: Event, fieldName: string, validationMessage: LinkServiceEventValidationMessage) {
-    const eventName = event.Name;
+    const eventName = event.EventName;
     const fieldValue = event[fieldName];
     if (!fieldValue || !Array.isArray(fieldValue)) {
       throw new LinkServiceEventFieldInvalidError(eventName, fieldName, fieldValue, validationMessage);
     }
   }
   protected static validateEventFieldNameExists(event: Event, fieldName: string, validationMessage: LinkServiceEventValidationMessage) {
-    const eventName = event.Name;
+    const eventName = event.EventName;
     if (!event.hasOwnProperty(fieldName)) {
       throw new LinkServiceEventFieldInvalidError(eventName, fieldName, undefined, validationMessage);
     }

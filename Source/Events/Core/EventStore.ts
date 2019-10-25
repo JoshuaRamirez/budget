@@ -4,9 +4,9 @@ export class EventStore {
   public static Instance = new EventStore();
   private store = {};
   public Record<TEvent extends Event>(event: TEvent) {
-    if (!this.store[event.Name]) {
-      this.store[event.Name] = [];
+    if (!this.store[event.EventName]) {
+      this.store[event.EventName] = [];
     }
-    this.store[event.Name].push(event);
+    this.store[event.EventName].push(event);
   }
 }
