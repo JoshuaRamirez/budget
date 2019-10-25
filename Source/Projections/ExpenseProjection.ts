@@ -8,6 +8,7 @@ export class ExpenseProjection extends Projection {
   }
 
   // Foreign Keys
+  @serializable public CategoryId: any;
   @serializable public LedgerId: any;
   @serializable public PayeeId: any;
   @serializable public PlannedExpenseId: any;
@@ -15,7 +16,6 @@ export class ExpenseProjection extends Projection {
 
   // Fields
   @serializable public Amount: number;
-  @serializable public Category: string;
   @serializable public Description: string;
 
   constructor() {
