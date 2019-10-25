@@ -9,16 +9,16 @@ import { IMultiTargetEventFields } from "./IMultiTargetEventFields";
 import { ISingleSubjectEventFields } from "./ISingleSubjectEventFields";
 import { ISingleTargetEventFields } from "./ISingleTargetEventFields";
 
-export function isISingleSubjectEventFields(declaration: ISingleSubjectEventFields | object): declaration is ISingleSubjectEventFields {
+function isISingleSubjectEventFields(declaration: ISingleSubjectEventFields | object): declaration is ISingleSubjectEventFields {
   return (declaration as ISingleSubjectEventFields).TargetSubjectIdFieldName !== undefined;
 }
-export function isIMultiSubjectEventFields(declaration: IMultiSubjectEventFields | object): declaration is IMultiSubjectEventFields {
+function isIMultiSubjectEventFields(declaration: IMultiSubjectEventFields | object): declaration is IMultiSubjectEventFields {
   return (declaration as IMultiSubjectEventFields).TargetSubjectIdsFieldName !== undefined;
 }
-export function isISingleTargetEventFields(declaration: ISingleTargetEventFields | object): declaration is ISingleTargetEventFields {
+function isISingleTargetEventFields(declaration: ISingleTargetEventFields | object): declaration is ISingleTargetEventFields {
   return (declaration as ISingleTargetEventFields).TargetIdFieldName !== undefined;
 }
-export function isIMultiTargetEventFields(declaration: IMultiTargetEventFields | object): declaration is IMultiTargetEventFields {
+function isIMultiTargetEventFields(declaration: IMultiTargetEventFields | object): declaration is IMultiTargetEventFields {
   return (declaration as IMultiTargetEventFields).TargetIdsFieldName !== undefined;
 }
 
