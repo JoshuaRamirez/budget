@@ -11,9 +11,6 @@ export class CreateForecastService extends Handler<ForecastRequestedEvent> {
   public Handle(event: ForecastRequestedEvent) {
     // Create ForecastProjection
     const forecastProjection = new ForecastProjection();
-    if (event.ForecastId) {
-      forecastProjection.ReplaceId(event.ForecastId);
-    }
     forecastProjection.Amount = event.Amount;
     forecastProjection.CategoryId = event.CategoryId;
     forecastProjection.Date = event.Date;
