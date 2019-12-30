@@ -5,7 +5,7 @@ import { ISubscriber } from "./ISubscriber";
 export abstract class Handler<TEvent extends Event> implements ISubscriber<TEvent> {
   private readonly eventType: any;
   private handles = [];
-  protected constructor(eventType: any) {
+  protected constructor(eventType: typeof Event) {
     this.eventType = eventType;
   }
   public abstract Handle(event: TEvent): void;
