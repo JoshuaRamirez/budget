@@ -6,7 +6,6 @@ export class ForecastRequestedEvent extends Event {
   public Amount: number;
   public CategoryId: any;
   public Date: Date;
-  public ForecastId: any;
   public Notes: string;
   public PlannedDepositIds: any[];
   public PlannedExpenseIds: any[];
