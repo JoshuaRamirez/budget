@@ -3,7 +3,7 @@ import { Handler } from "./Handler";
 
 export class EventLink<TSubscriptionEvent extends Event, TPublicationEvent extends Event> extends Handler<TSubscriptionEvent> {
   private readonly makePublicationEvent: (input: TSubscriptionEvent) => TPublicationEvent;
-  public constructor(subscriptionEventType: any, publicationEventFactory: (input: TSubscriptionEvent) => TPublicationEvent) {
+  public constructor(subscriptionEventType: typeof Event, publicationEventFactory: (input: TSubscriptionEvent) => TPublicationEvent) {
     super(subscriptionEventType);
     this.makePublicationEvent = publicationEventFactory;
   }
