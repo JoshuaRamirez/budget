@@ -1,3 +1,4 @@
+import { PlannedDepositCreatedEvent } from "../../Events/PlannedDepositCreatedEvent";
 import { PlannedDepositRequestedEvent } from "../../Events/PlannedDepositRequestedEvent";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
 import { Handler } from "../Core/Handler";
@@ -18,6 +19,9 @@ export class CreatePlannedDepositService extends Handler<PlannedDepositRequested
     plannedDepositProjection.RepeatPeriod = event.RepeatPeriod;
     plannedDepositProjection.RepeatStart = event.RepeatStart;
     plannedDepositProjection.Project();
-    return plannedDepositProjection;
+    // Publish PlannedExpenseCreated Event
+    const plannedDepositCreatedEvent = new PlannedDepositCreatedEvent();
+    plannedDepositCreatedEvent.PlannedDepositId = plannedDepositProjection.Id;
+    plannedDepositCreatedEvent.Publish();
   }
 }

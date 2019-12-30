@@ -1,3 +1,4 @@
+import { PlannedExpenseCreatedEvent } from "../../Events/PlannedExpenseCreatedEvent";
 import { PlannedExpenseRequestedEvent } from "../../Events/PlannedExpenseRequestedEvent";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
 import { Handler } from "../Core/Handler";
@@ -18,6 +19,9 @@ export class CreatePlannedExpenseService extends Handler<PlannedExpenseRequested
     plannedExpenseProjection.RepeatPeriod = event.RepeatPeriod;
     plannedExpenseProjection.RepeatStart = event.RepeatStart;
     plannedExpenseProjection.Project();
-    return plannedExpenseProjection;
+    // Publish PlannedExpenseCreated Event
+    const plannedExpenseCreatedEvent = new PlannedExpenseCreatedEvent();
+    plannedExpenseCreatedEvent.PlannedExpenseId = plannedExpenseProjection.Id;
+    plannedExpenseCreatedEvent.Publish();
   }
 }
