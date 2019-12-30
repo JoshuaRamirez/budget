@@ -8,6 +8,8 @@ import { LedgerCreatedEvent } from "../Source/Events/LedgerCreatedEvent";
 import { LedgerRequestedEvent } from "../Source/Events/LedgerRequestedEvent";
 import { PayeeRequestedEvent } from "../Source/Events/PayeeRequestedEvent";
 import { PlannedExpenseRequestedEvent } from "../Source/Events/PlannedExpenseRequestedEvent";
+import { PlannedTransactionCreationRequestedEvent } from "../Source/Events/PlannedTransactionCreationRequestedEvent";
+import { ProposedTransactionCreationRequestedEvent } from "../Source/Events/ProposedTransactionCreationRequestedEvent";
 import { TransactionCreatedEvent } from "../Source/Events/TransactionCreatedEvent";
 import { TransactionRequestedEvent } from "../Source/Events/TransactionRequestedEvent";
 import { UserRequestedEvent } from "../Source/Events/UserRequestedEvent";
@@ -22,6 +24,8 @@ import { PayeeProjection } from "../Source/Projections/PayeeProjection";
 import { PayerProjection } from "../Source/Projections/PayerProjection";
 import { PlannedDepositProjection } from "../Source/Projections/PlannedDepositProjection";
 import { PlannedExpenseProjection } from "../Source/Projections/PlannedExpenseProjection";
+import { PlannedTransactionProjection } from "../Source/Projections/PlannedTransactionProjection";
+import { ProposedTransactionProjection } from "../Source/Projections/ProposedTransactionProjection";
 import { TransactionProjection } from "../Source/Projections/TransactionProjection";
 import { UserProjection } from "../Source/Projections/UserProjection";
 
@@ -105,6 +109,19 @@ const newCategoryProjection = () => {
   return categoryProjection;
 };
 
+export const newPlannedTransaction = () => {
+  const plannedTransactionProjection = new PlannedTransactionProjection();
+  plannedTransactionProjection.Project();
+  return plannedTransactionProjection;
+};
+
+export const newProposedTransaction = () => {
+  const proposedTransaction = new ProposedTransactionProjection();
+  proposedTransaction.PlannedTransactionId = newPlannedTransaction().Id;
+  proposedTransaction.Project();
+  return proposedTransaction;
+};
+
 export const NewLedgerRequestedEvent = () => {
   const ledgerRequestedEvent = new LedgerRequestedEvent();
   ledgerRequestedEvent.AccountId = newAccountProjection().Id;
@@ -132,6 +149,18 @@ export const NewTransactionRequestedEvent = () => {
   const transactionRequestedEvent = new TransactionRequestedEvent();
   transactionRequestedEvent.LedgerId = newLedgerProjection().Id;
   return transactionRequestedEvent;
+};
+
+
+export const NewProposedTransactionCreationRequestedEvent = () => {
+  const event = new ProposedTransactionCreationRequestedEvent();
+  event.PlannedTransactionId = newPlannedTransaction().Id;
+  return event;
+};
+
+export const NewPlannedTransactionCreationRequestedEvent = () => {
+  const event = new PlannedTransactionCreationRequestedEvent();
+  return event;
 };
 
 export const NewDepositCreatedEvent = () => {
