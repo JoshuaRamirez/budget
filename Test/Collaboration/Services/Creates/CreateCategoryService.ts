@@ -3,8 +3,8 @@ import "mocha";
 import { CategoryRequestedEvent } from "../../../../Source/Events/CategoryRequestedEvent";
 import { CategoryProjection } from "../../../../Source/Projections/CategoryProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
-import { Subscriptions } from "../../../../Source/Services/Core/Subscriptions";
 import { CreateCategoryService } from "../../../../Source/Services/Creates/CreateCategoryService";
+import { Subscriptions } from "../../../../Source/Subscriptions";
 
 
 describe("CreateCategoryService", () => {

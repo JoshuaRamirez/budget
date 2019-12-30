@@ -3,8 +3,8 @@ import "mocha";
 import { PayeeRequestedEvent } from "../../../../Source/Events/PayeeRequestedEvent";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { PayeeProjection } from "../../../../Source/Projections/PayeeProjection";
-import { Subscriptions } from "../../../../Source/Services/Core/Subscriptions";
 import { CreatePayeeService } from "../../../../Source/Services/Creates/CreatePayeeService";
+import { Subscriptions } from "../../../../Source/Subscriptions";
 
 
 describe("CreatePayeeService", () => {

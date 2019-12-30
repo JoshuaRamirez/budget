@@ -4,8 +4,8 @@ import { TransactionCreatedEvent } from "../../../../Source/Events/TransactionCr
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
 import { TransactionProjection } from "../../../../Source/Projections/TransactionProjection";
-import { Subscriptions } from "../../../../Source/Services/Core/Subscriptions";
 import { UpdateLedgerBalanceService } from "../../../../Source/Services/Updates/UpdateLedgerBalanceService";
+import { Subscriptions } from "../../../../Source/Subscriptions";
 
 
 describe("UpdateLedgerBalanceService", () => {

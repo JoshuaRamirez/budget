@@ -2,8 +2,8 @@ import { assert } from "chai";
 import "mocha";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
-import { Subscriptions } from "../../../../Source/Services/Core/Subscriptions";
 import { LinkTransactionToLedgerService } from "../../../../Source/Services/Links/LinkTransactionToLedgerService";
+import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewTransactionCreatedEvent } from "../../../Helpers";
 
 

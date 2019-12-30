@@ -11,7 +11,7 @@ import { PayeeProjection } from "../../Source/Projections/PayeeProjection";
 import { PlannedExpenseProjection } from "../../Source/Projections/PlannedExpenseProjection";
 import { TransactionProjection } from "../../Source/Projections/TransactionProjection";
 import { UserProjection } from "../../Source/Projections/UserProjection";
-import { Subscriptions } from "../../Source/Services/Core/Subscriptions";
+import { Subscriptions } from "../../Source/Subscriptions";
 import {
   GetLast,
   PublishAccountRequestedEvent,

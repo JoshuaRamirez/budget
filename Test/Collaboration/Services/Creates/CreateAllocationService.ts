@@ -3,8 +3,8 @@ import "mocha";
 import { AllocationRequestedEvent } from "../../../../Source/Events/AllocationRequestedEvent";
 import { AllocationProjection } from "../../../../Source/Projections/AllocationProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
-import { Subscriptions } from "../../../../Source/Services/Core/Subscriptions";
 import { CreateAllocationService } from "../../../../Source/Services/Creates/CreateAllocationService";
+import { Subscriptions } from "../../../../Source/Subscriptions";
 
 
 describe("CreateAllocationService", () => {

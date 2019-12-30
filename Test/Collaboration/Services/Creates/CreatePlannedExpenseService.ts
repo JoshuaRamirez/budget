@@ -3,8 +3,8 @@ import "mocha";
 import { PlannedExpenseRequestedEvent } from "../../../../Source/Events/PlannedExpenseRequestedEvent";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { PlannedExpenseProjection } from "../../../../Source/Projections/PlannedExpenseProjection";
-import { Subscriptions } from "../../../../Source/Services/Core/Subscriptions";
 import { CreatePlannedExpenseService } from "../../../../Source/Services/Creates/CreatePlannedExpenseService";
+import { Subscriptions } from "../../../../Source/Subscriptions";
 
 
 describe("CreatePlannedExpenseService", () => {

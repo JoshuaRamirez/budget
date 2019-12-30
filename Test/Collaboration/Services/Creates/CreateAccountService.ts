@@ -3,8 +3,8 @@ import "mocha";
 import { UserRequestedEvent } from "../../../../Source/Events/UserRequestedEvent";
 import { AccountProjection } from "../../../../Source/Projections/AccountProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
-import { Subscriptions } from "../../../../Source/Services/Core/Subscriptions";
 import { CreateAccountService } from "../../../../Source/Services/Creates/CreateAccountService";
+import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewAccountRequestedEvent } from "../../../Helpers";
 
 

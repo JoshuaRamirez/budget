@@ -5,8 +5,8 @@ import { AccountProjection } from "../../../../Source/Projections/AccountProject
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
 import { UserProjection } from "../../../../Source/Projections/UserProjection";
-import { Subscriptions } from "../../../../Source/Services/Core/Subscriptions";
 import { CreateUserService } from "../../../../Source/Services/Creates/CreateUserService";
+import { Subscriptions } from "../../../../Source/Subscriptions";
 
 
 describe("CreateUserService", () => {
