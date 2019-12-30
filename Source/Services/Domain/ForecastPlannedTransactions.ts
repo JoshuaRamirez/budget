@@ -1,10 +1,10 @@
-import { ForecastCalculationRequestEvent } from "../Events/ForecastCalculationRequested";
-import { ForecastRequestedEvent } from "../Events/ForecastRequestedEvent";
-import { PlannedDepositProjection } from "../Projections/PlannedDepositProjection";
-import { PlannedExpenseProjection } from "../Projections/PlannedExpenseProjection";
-import { PlannedTransactionProjection } from "../Projections/PlannedTransactionProjection";
-import { Handler } from "./Core/Handler";
-import { TransactionScheduling } from "./Domain/Core/TransactionScheduling";
+import { ForecastCalculationRequestEvent } from "../../Events/ForecastCalculationRequested";
+import { ForecastRequestedEvent } from "../../Events/ForecastRequestedEvent";
+import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
+import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
+import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
+import { Handler } from "../Core/Handler";
+import { TransactionScheduling } from "./Core/TransactionScheduling";
 
 // TODO: Rename file to match class name.
 export class ForecastPlannedTransactionsService extends Handler<ForecastCalculationRequestEvent> {
