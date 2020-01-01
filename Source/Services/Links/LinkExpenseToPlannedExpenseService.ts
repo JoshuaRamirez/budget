@@ -13,7 +13,7 @@ export class LinkExpenseToPlannedExpenseService extends LinkService<ExpenseCreat
       TargetIdFieldName: "PlannedExpenseId",
       TargetSubjectIdsFieldName: "ExpenseIds",
       TargetType: PlannedExpenseProjection,
-      TriggeringSubjectIdFieldName: "ExpenseId",
+      SubjectIdFieldName: "ExpenseId",
     });
     super(declaration);
   }

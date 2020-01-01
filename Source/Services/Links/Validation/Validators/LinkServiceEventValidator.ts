@@ -35,14 +35,14 @@ export class LinkServiceEventValidator<TEvent extends Event> extends LinkService
   private validateTriggeringSubjectIdFieldExists() {
     const declaration = this.declaration;
     const event = this.event;
-    const fieldName = declaration.TriggeringSubjectIdFieldName;
+    const fieldName = declaration.SubjectIdFieldName;
     const validationMessage = LinkServiceEventValidationMessage.TriggeringSubjectIdMissing;
     LinkServiceEventValidator.validateEventFieldNameExists(event, fieldName, validationMessage);
   }
   private validateTriggeringSubjectIdFieldValue() {
     const declaration = this.declaration;
     const event = this.event;
-    const fieldName = declaration.TriggeringSubjectIdFieldName;
+    const fieldName = declaration.SubjectIdFieldName;
     const validationMessage = LinkServiceEventValidationMessage.TriggeringSubjectIdInvalid;
     LinkServiceEventValidator.validateEventScalarFieldValue(event, fieldName, validationMessage);
   }

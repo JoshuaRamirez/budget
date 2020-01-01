@@ -13,7 +13,7 @@ export class LinkForecastToPlannedExpensesService extends LinkService<ForecastCr
       SubjectType: ForecastProjection,
       TargetSubjectIdsFieldName: "ForecastIds",
       TargetType: PlannedExpenseProjection,
-      TriggeringSubjectIdFieldName: "ForecastId",
+      SubjectIdFieldName: "ForecastId",
     });
     super(declaration);
   }

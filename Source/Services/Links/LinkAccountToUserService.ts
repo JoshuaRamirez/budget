@@ -13,7 +13,7 @@ export class LinkAccountToUserService extends LinkService<AccountCreatedEvent> {
       TargetIdFieldName: "UserId",
       TargetSubjectIdsFieldName: "AccountIds",
       TargetType: UserProjection,
-      TriggeringSubjectIdFieldName: "AccountId",
+      SubjectIdFieldName: "AccountId",
     });
     super(declaration);
   }

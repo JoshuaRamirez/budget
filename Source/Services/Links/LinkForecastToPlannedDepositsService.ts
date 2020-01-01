@@ -13,7 +13,7 @@ export class LinkForecastToPlannedDepositsService extends LinkService<ForecastCr
       SubjectType: ForecastProjection,
       TargetSubjectIdsFieldName: "ForecastIds",
       TargetType: PlannedDepositProjection,
-      TriggeringSubjectIdFieldName: "ForecastId",
+      SubjectIdFieldName: "ForecastId",
     });
     super(declaration);
   }

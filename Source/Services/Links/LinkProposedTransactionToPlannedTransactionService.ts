@@ -13,7 +13,7 @@ export class LinkProposedTransactionToPlannedTransactionService extends LinkServ
       TargetIdFieldName: "PlannedTransactionId",
       TargetSubjectIdsFieldName: "ProposedTransactionIds",
       TargetType: PlannedTransactionProjection,
-      TriggeringSubjectIdFieldName: "ProposedTransactionId",
+      SubjectIdFieldName: "ProposedTransactionId",
     });
     super(declaration);
   }

@@ -7,7 +7,7 @@ export class LinkManyToOneDeclaration implements ILinkManyToOneDeclaration {
   public readonly TargetIdFieldName: string;
   public readonly TargetType: any;
   public readonly TargetSubjectIdsFieldName: string;
-  public readonly TriggeringSubjectIdFieldName: string;
+  public readonly SubjectIdFieldName: string;
   constructor(declaration: ILinkManyToOneDeclaration) {
     if (!declaration) {
       throw new Error("Missing object instance in the provided Declaration.");

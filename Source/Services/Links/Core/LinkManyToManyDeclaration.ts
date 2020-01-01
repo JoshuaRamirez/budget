@@ -7,7 +7,7 @@ export class LinkManyToManyDeclaration implements ILinkManyToManyDeclaration {
   public readonly SubjectTargetIdsFieldName: string;
   public readonly TargetSubjectIdsFieldName: string;
   public readonly TargetType: any;
-  public readonly TriggeringSubjectIdFieldName: string;
+  public readonly SubjectIdFieldName: string;
   constructor(declaration: ILinkManyToManyDeclaration) {
     if (!declaration) {
       throw new Error("Missing object instance in the provided Declaration.");

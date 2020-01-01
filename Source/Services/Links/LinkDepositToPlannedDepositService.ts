@@ -13,7 +13,7 @@ export class LinkDepositToPlannedDepositService extends LinkService<DepositCreat
       TargetIdFieldName: "PlannedDepositId",
       TargetSubjectIdsFieldName: "DepositIds",
       TargetType: PlannedDepositProjection,
-      TriggeringSubjectIdFieldName: "DepositId",
+      SubjectIdFieldName: "DepositId",
     });
     super(declaration);
   }

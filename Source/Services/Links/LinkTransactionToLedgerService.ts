@@ -13,7 +13,7 @@ export class LinkTransactionToLedgerService extends LinkService<TransactionCreat
       TargetIdFieldName: "LedgerId",
       TargetSubjectIdsFieldName: "TransactionIds",
       TargetType: LedgerProjection,
-      TriggeringSubjectIdFieldName: "TransactionId",
+      SubjectIdFieldName: "TransactionId",
     });
     super(declaration);
   }

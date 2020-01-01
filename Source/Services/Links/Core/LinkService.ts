@@ -34,7 +34,7 @@ export abstract class LinkService<TSubscribingEvent extends Event> extends Handl
   public Handle(event: TSubscribingEvent): void {
     const linkServiceEventValidator = new LinkServiceEventValidator<TSubscribingEvent>(this.declaration, event);
     linkServiceEventValidator.Validate();
-    const subject = ProjectionStore.Instance.GetProjection(this.declaration.SubjectType, event[this.declaration.TriggeringSubjectIdFieldName]);
+    const subject = ProjectionStore.Instance.GetProjection(this.declaration.SubjectType, event[this.declaration.SubjectIdFieldName]);
     const targetIds = [];
     if (isISingleTargetEventFields(this.declaration)) {
       targetIds.push(event[this.declaration.TargetIdFieldName]);

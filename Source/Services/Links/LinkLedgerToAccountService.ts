@@ -13,7 +13,7 @@ export class LinkLedgerToAccountService extends LinkService<LedgerCreatedEvent> 
       TargetIdFieldName: "AccountId",
       TargetSubjectIdFieldName: "LedgerId",
       TargetType: AccountProjection,
-      TriggeringSubjectIdFieldName: "LedgerId",
+      SubjectIdFieldName: "LedgerId",
     });
     super(declaration);
   }

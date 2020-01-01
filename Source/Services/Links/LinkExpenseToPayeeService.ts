@@ -13,7 +13,7 @@ export class LinkExpenseToPayeeService extends LinkService<ExpenseCreatedEvent> 
       TargetIdFieldName: "PayeeId",
       TargetSubjectIdsFieldName: "ExpenseIds",
       TargetType: PayeeProjection,
-      TriggeringSubjectIdFieldName: "ExpenseId",
+      SubjectIdFieldName: "ExpenseId",
     });
     super(declaration);
   }
