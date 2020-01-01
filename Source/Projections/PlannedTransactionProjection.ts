@@ -25,7 +25,6 @@ export class PlannedTransactionProjection extends Projection implements IPlanned
   @serializable(list(primitive())) public ProposedTransactionIds: any[] = [];
   // TODO: Increment the below when creating new transactions (proposed or real or both)
   @serializable public TimesRepeated: number;
-  // TODO: Rename to StartDate & Add an EndDate that can be processed
   @serializable(date()) public StartDate: Date;
   @serializable public TransactionType: string;
 
