@@ -17,7 +17,7 @@ export class CreatePlannedTransactionService extends Handler<PlannedTransactionC
     plannedTransactionProjection.RepeatCount = event.RepeatCount;
     plannedTransactionProjection.RepeatMeasurement = event.RepeatMeasurement;
     plannedTransactionProjection.RepeatPeriod = event.RepeatPeriod;
-    plannedTransactionProjection.RepeatStart = event.RepeatStart;
+    plannedTransactionProjection.StartDate = event.RepeatStart;
     plannedTransactionProjection.TransactionType = event.TransactionType;
     plannedTransactionProjection.Project();
     // Publish PlannedTransactionCreatedEvent

@@ -21,7 +21,7 @@ export class PlannedExpenseProjection extends Projection implements IPlannedTran
   @serializable public RepeatPeriod: number;
   @serializable public RepeatMeasurement: string;
   @serializable public RepeatCount: number;
-  @serializable(date()) public RepeatStart: Date;
+  @serializable(date()) public StartDate: Date;
 
   constructor() {
     super(PlannedExpenseProjection.name);

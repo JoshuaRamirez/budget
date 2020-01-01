@@ -20,13 +20,13 @@ export class PublishProposedTransactionCreationRequestedService extends EventCha
     const today = User.GetDate();
     // TODO: It appears that the projection should keep a counter of how many times it's been repeated. That way I can do the below:
     if (plannedTransactionProjection.RepeatCount >= plannedTransactionProjection.TimesRepeated) { return; }
-    if (plannedTransactionProjection.RepeatStart > today) { return; }
+    if (plannedTransactionProjection.StartDate > today) { return; }
     const proposedTransactionCreationRequestedEvent = new ProposedTransactionCreationRequestedEvent();
     proposedTransactionCreationRequestedEvent.Amount = plannedTransactionProjection.Amount;
     proposedTransactionCreationRequestedEvent.Description = plannedTransactionProjection.Description;
     proposedTransactionCreationRequestedEvent.PlannedTransactionId = plannedTransactionProjection.Id;
     if (plannedTransactionProjection.ProposedTransactionIds.length === 0) {
-      proposedTransactionCreationRequestedEvent.Date = plannedTransactionProjection.RepeatStart;
+      proposedTransactionCreationRequestedEvent.Date = plannedTransactionProjection.StartDate;
     }
     if (plannedTransactionProjection.ProposedTransactionIds.length > 0) {
       const lastProposedTransaction = PlannedTransactionProjection.Last();

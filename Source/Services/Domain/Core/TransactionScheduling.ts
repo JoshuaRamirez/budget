@@ -7,7 +7,7 @@ export class TransactionScheduling {
     toDays.forEach((currentDay) => {
       plannedTransactions.forEach((plannedTransaction: PlannedTransactionProjection) => {
         const hasPlanStarted = (() => {
-          return currentDay.date >= plannedTransaction.RepeatStart;
+          return currentDay.date >= plannedTransaction.StartDate;
         })();
         const isRecurrenceCountReached = (() => {
           if (!plannedTransaction.RepeatCount) { return false; }
@@ -16,7 +16,7 @@ export class TransactionScheduling {
         })();
         const isForCurrentDay = (() => {
           const currentDateNumber = currentDay.date.getDate();
-          const startDateNumber = plannedTransaction.RepeatStart.getDate();
+          const startDateNumber = plannedTransaction.StartDate.getDate();
           const differenceInDays = currentDateNumber - startDateNumber;
           const remainder = differenceInDays % plannedTransaction.RepeatPeriod;
           return remainder === 0;
@@ -62,7 +62,7 @@ export class TransactionScheduling {
   }
 
   public static validatedPlannedTransaction(plannedTransaction: IPlannedTransaction) {
-    if (!plannedTransaction.RepeatStart) {
+    if (!plannedTransaction.StartDate) {
       throw new Error("Missing Data in IPlannedTransaction: RepeatStart");
     }
     if (!plannedTransaction.RepeatPeriod) {

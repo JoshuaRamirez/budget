@@ -17,7 +17,7 @@ export class CreatePlannedDepositService extends Handler<PlannedDepositRequested
     plannedDepositProjection.RepeatCount = event.RepeatCount;
     plannedDepositProjection.RepeatMeasurement = event.RepeatMeasurement;
     plannedDepositProjection.RepeatPeriod = event.RepeatPeriod;
-    plannedDepositProjection.RepeatStart = event.RepeatStart;
+    plannedDepositProjection.StartDate = event.RepeatStart;
     plannedDepositProjection.Project();
     // Publish PlannedExpenseCreated Event
     const plannedDepositCreatedEvent = new PlannedDepositCreatedEvent();

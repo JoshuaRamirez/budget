@@ -7,5 +7,5 @@ export interface IPlannedTransaction extends Projection {
   RepeatPeriod: number;
   RepeatMeasurement: string;
   RepeatCount: number;
-  RepeatStart: Date;
+  StartDate: Date;
 }

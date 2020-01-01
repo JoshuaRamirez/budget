@@ -17,7 +17,7 @@ export class CreatePlannedExpenseService extends Handler<PlannedExpenseRequested
     plannedExpenseProjection.RepeatCount = event.RepeatCount;
     plannedExpenseProjection.RepeatMeasurement = event.RepeatMeasurement;
     plannedExpenseProjection.RepeatPeriod = event.RepeatPeriod;
-    plannedExpenseProjection.RepeatStart = event.RepeatStart;
+    plannedExpenseProjection.StartDate = event.RepeatStart;
     plannedExpenseProjection.Project();
     // Publish PlannedExpenseCreated Event
     const plannedExpenseCreatedEvent = new PlannedExpenseCreatedEvent();

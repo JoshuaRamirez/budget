@@ -16,7 +16,7 @@ export class ChainPlannedDepositCreatedToPlannedTransactionRequestedService exte
       targetEvent.RepeatCount = subject.RepeatCount;
       targetEvent.RepeatMeasurement = subject.RepeatMeasurement;
       targetEvent.RepeatPeriod = subject.RepeatPeriod;
-      targetEvent.RepeatStart = subject.RepeatStart;
+      targetEvent.RepeatStart = subject.StartDate;
       targetEvent.TransactionType = "Deposit";
       return targetEvent;
     });
