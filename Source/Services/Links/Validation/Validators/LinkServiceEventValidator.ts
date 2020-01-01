@@ -63,14 +63,14 @@ export class LinkServiceEventValidator<TEvent extends Event> extends LinkService
   private validateTargetIdsFieldExists() {
     const declaration = (this.declaration as unknown as IMultiTargetEventFields);
     const event = this.event;
-    const fieldName = declaration.TargetIdsFieldName;
+    const fieldName = declaration.SubjectTargetIdsFieldName;
     const validationMessage = LinkServiceEventValidationMessage.TargetIdsFieldNameMissing;
     LinkServiceEventValidator.validateEventFieldNameExists(event,  fieldName, validationMessage);
   }
   private validateTargetIdsFieldValue() {
     const declaration = (this.declaration as unknown as IMultiTargetEventFields);
     const event = this.event;
-    const fieldName = declaration.TargetIdsFieldName;
+    const fieldName = declaration.SubjectTargetIdsFieldName;
     const validationMessage = LinkServiceEventValidationMessage.TargetIdsFieldNameInvalid;
     LinkServiceEventValidator.validateEventArrayFieldValue(event, fieldName, validationMessage);
   }

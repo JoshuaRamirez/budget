@@ -1,3 +1,3 @@
 export interface IMultiTargetEventFields {
-  readonly TargetIdsFieldName: string;
+  readonly SubjectTargetIdsFieldName: string;
 }

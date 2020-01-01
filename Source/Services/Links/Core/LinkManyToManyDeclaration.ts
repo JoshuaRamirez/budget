@@ -4,7 +4,7 @@ import { ILinkManyToManyDeclaration } from "./ILinkManyToManyDeclaration";
 export class LinkManyToManyDeclaration implements ILinkManyToManyDeclaration {
   public readonly EventType: any;
   public readonly SubjectType: any;
-  public readonly TargetIdsFieldName: string;
+  public readonly SubjectTargetIdsFieldName: string;
   public readonly TargetSubjectIdsFieldName: string;
   public readonly TargetType: any;
   public readonly TriggeringSubjectIdFieldName: string;

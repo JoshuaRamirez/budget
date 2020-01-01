@@ -19,7 +19,7 @@ function isISingleTargetEventFields(declaration: ISingleTargetEventFields | obje
   return (declaration as ISingleTargetEventFields).TargetIdFieldName !== undefined;
 }
 function isIMultiTargetEventFields(declaration: IMultiTargetEventFields | object): declaration is IMultiTargetEventFields {
-  return (declaration as IMultiTargetEventFields).TargetIdsFieldName !== undefined;
+  return (declaration as IMultiTargetEventFields).SubjectTargetIdsFieldName !== undefined;
 }
 
 export abstract class LinkService<TSubscribingEvent extends Event> extends Handler<TSubscribingEvent> {
@@ -40,7 +40,7 @@ export abstract class LinkService<TSubscribingEvent extends Event> extends Handl
       targetIds.push(event[this.declaration.TargetIdFieldName]);
     }
     if (isIMultiTargetEventFields(this.declaration)) {
-      targetIds.concat(...event[this.declaration.TargetIdsFieldName]);
+      targetIds.concat(...event[this.declaration.SubjectTargetIdsFieldName]);
     }
     targetIds.forEach((targetId) => {
       const target = ProjectionStore.Instance.GetProjection(this.declaration.TargetType, targetId);
