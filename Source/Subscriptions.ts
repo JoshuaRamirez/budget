@@ -13,7 +13,7 @@ import { CreatePlannedTransactionService } from "./Services/Creates/CreatePlanne
 import { CreateProposedTransactionService } from "./Services/Creates/CreateProposedTransactionService";
 import { CreateTransactionService } from "./Services/Creates/CreateTransactionService";
 import { CreateUserService } from "./Services/Creates/CreateUserService";
-import { ForecastPlannedTransactionsService } from "./Services/Domain/ForecastPlannedTransactions";
+import { ForecastPlannedTransactionsService } from "./Services/Domain/ForecastPlannedTransactionsService";
 import { LinkAccountToUserService } from "./Services/Links/LinkAccountToUserService";
 import { LinkDepositToPlannedDepositService } from "./Services/Links/LinkDepositToPlannedDepositService";
 import { LinkExpenseToPayeeService } from "./Services/Links/LinkExpenseToPayeeService";

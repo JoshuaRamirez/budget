@@ -6,7 +6,6 @@ import { PlannedTransactionProjection } from "../../Projections/PlannedTransacti
 import { Handler } from "../Core/Handler";
 import { TransactionScheduling } from "./Core/TransactionScheduling";
 
-// TODO: Rename file to match class name.
 export class ForecastPlannedTransactionsService extends Handler<ForecastCalculationRequestEvent> {
   public static Instance = new ForecastPlannedTransactionsService();
   private constructor() {
