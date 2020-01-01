@@ -9,11 +9,11 @@ export class LinkProposedTransactionToPlannedTransactionService extends LinkServ
   private constructor() {
     const declaration = new LinkManyToOneDeclaration({
       EventType: ProposedTransactionCreatedEvent,
+      SubjectIdFieldName: "ProposedTransactionId",
       SubjectType: ProposedTransactionProjection,
       TargetIdFieldName: "PlannedTransactionId",
       TargetSubjectIdsFieldName: "ProposedTransactionIds",
       TargetType: PlannedTransactionProjection,
-      SubjectIdFieldName: "ProposedTransactionId",
     });
     super(declaration);
   }

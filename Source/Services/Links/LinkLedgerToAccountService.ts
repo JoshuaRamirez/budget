@@ -9,11 +9,11 @@ export class LinkLedgerToAccountService extends LinkService<LedgerCreatedEvent> 
   private constructor() {
     const declaration = new LinkOneToOneDeclaration({
       EventType: LedgerCreatedEvent,
+      SubjectIdFieldName: "LedgerId",
       SubjectType: LedgerProjection,
       TargetIdFieldName: "AccountId",
       TargetSubjectIdFieldName: "LedgerId",
       TargetType: AccountProjection,
-      SubjectIdFieldName: "LedgerId",
     });
     super(declaration);
   }

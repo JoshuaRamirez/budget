@@ -9,11 +9,11 @@ export class LinkDepositToPlannedDepositService extends LinkService<DepositCreat
   private constructor() {
     const declaration = new LinkManyToOneDeclaration({
       EventType: DepositCreatedEvent,
+      SubjectIdFieldName: "DepositId",
       SubjectType: DepositProjection,
       TargetIdFieldName: "PlannedDepositId",
       TargetSubjectIdsFieldName: "DepositIds",
       TargetType: PlannedDepositProjection,
-      SubjectIdFieldName: "DepositId",
     });
     super(declaration);
   }

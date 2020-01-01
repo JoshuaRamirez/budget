@@ -9,11 +9,11 @@ export class LinkTransactionToLedgerService extends LinkService<TransactionCreat
   private constructor() {
     const declaration = new LinkManyToOneDeclaration({
       EventType: TransactionCreatedEvent,
+      SubjectIdFieldName: "TransactionId",
       SubjectType: TransactionProjection,
       TargetIdFieldName: "LedgerId",
       TargetSubjectIdsFieldName: "TransactionIds",
       TargetType: LedgerProjection,
-      SubjectIdFieldName: "TransactionId",
     });
     super(declaration);
   }

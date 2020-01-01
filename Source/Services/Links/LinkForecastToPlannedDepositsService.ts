@@ -9,11 +9,11 @@ export class LinkForecastToPlannedDepositsService extends LinkService<ForecastCr
   private constructor() {
     const declaration = new LinkManyToManyDeclaration({
       EventType: ForecastCreatedEvent,
+      SubjectIdFieldName: "ForecastId",
       SubjectTargetIdsFieldName: "PlannedDepositIds",
       SubjectType: ForecastProjection,
       TargetSubjectIdsFieldName: "ForecastIds",
       TargetType: PlannedDepositProjection,
-      SubjectIdFieldName: "ForecastId",
     });
     super(declaration);
   }

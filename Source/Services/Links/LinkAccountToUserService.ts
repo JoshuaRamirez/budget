@@ -9,11 +9,11 @@ export class LinkAccountToUserService extends LinkService<AccountCreatedEvent> {
   private constructor() {
     const declaration = new LinkManyToOneDeclaration({
       EventType: AccountCreatedEvent,
+      SubjectIdFieldName: "AccountId",
       SubjectType: AccountProjection,
       TargetIdFieldName: "UserId",
       TargetSubjectIdsFieldName: "AccountIds",
       TargetType: UserProjection,
-      SubjectIdFieldName: "AccountId",
     });
     super(declaration);
   }

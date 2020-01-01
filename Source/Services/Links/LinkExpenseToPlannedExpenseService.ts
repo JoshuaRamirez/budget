@@ -9,11 +9,11 @@ export class LinkExpenseToPlannedExpenseService extends LinkService<ExpenseCreat
   private constructor() {
     const declaration = new LinkManyToOneDeclaration({
       EventType: ExpenseCreatedEvent,
+      SubjectIdFieldName: "ExpenseId",
       SubjectType: ExpenseProjection,
       TargetIdFieldName: "PlannedExpenseId",
       TargetSubjectIdsFieldName: "ExpenseIds",
       TargetType: PlannedExpenseProjection,
-      SubjectIdFieldName: "ExpenseId",
     });
     super(declaration);
   }
