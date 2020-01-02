@@ -5,12 +5,12 @@ import { PlannedTransactionProjection } from "../../Projections/PlannedTransacti
 import { Continuation } from "../Core/Continuation";
 import { ContinuationHandler } from "../Core/ContinuationHandler";
 
-export class PublishProposedTransactionCreationRequestedService extends Continuation {
-  public static Instance = new PublishProposedTransactionCreationRequestedService();
+export class RequestProposedTransactionService extends Continuation {
+  public static Instance = new RequestProposedTransactionService();
   public static processNewDay() {
     const plannedTransactionProjections = PlannedTransactionProjection.All();
     plannedTransactionProjections.forEach((plannedTransactionProjection) => {
-      const proposedTransactionCreationRequestedEvent = PublishProposedTransactionCreationRequestedService.makeNewProposedTransactionCreationRequestedEventConditionally(plannedTransactionProjection);
+      const proposedTransactionCreationRequestedEvent = RequestProposedTransactionService.makeNewProposedTransactionCreationRequestedEventConditionally(plannedTransactionProjection);
       if (proposedTransactionCreationRequestedEvent) {
         proposedTransactionCreationRequestedEvent.Publish();
       }
@@ -38,14 +38,14 @@ export class PublishProposedTransactionCreationRequestedService extends Continua
   }
   private static processTransactionCreatedEvent(event: PlannedTransactionCreatedEvent) {
     const plannedTransactionProjection = PlannedTransactionProjection.Get(event.PlannedTransactionId);
-    const proposedTransactionCreationRequestedEvent = PublishProposedTransactionCreationRequestedService.makeNewProposedTransactionCreationRequestedEventConditionally(plannedTransactionProjection);
+    const proposedTransactionCreationRequestedEvent = RequestProposedTransactionService.makeNewProposedTransactionCreationRequestedEventConditionally(plannedTransactionProjection);
     return proposedTransactionCreationRequestedEvent;
   }
   constructor() {
     super();
-    const continuationHandler = new ContinuationHandler(PlannedTransactionCreatedEvent, PublishProposedTransactionCreationRequestedService.processTransactionCreatedEvent);
+    const continuationHandler = new ContinuationHandler(PlannedTransactionCreatedEvent, RequestProposedTransactionService.processTransactionCreatedEvent);
     this.Link(continuationHandler);
-    PublishProposedTransactionCreationRequestedService.processNewDay();
+    RequestProposedTransactionService.processNewDay();
     this.startTimer();
   }
   private startTimer() {
@@ -56,8 +56,8 @@ export class PublishProposedTransactionCreationRequestedService extends Continua
     setTimeout(this.repeatDaily, difference);
   }
   private repeatDaily() {
-    PublishProposedTransactionCreationRequestedService.processNewDay();
+    RequestProposedTransactionService.processNewDay();
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    setInterval(PublishProposedTransactionCreationRequestedService.processNewDay, oneDay);
+    setInterval(RequestProposedTransactionService.processNewDay, oneDay);
   }
 }

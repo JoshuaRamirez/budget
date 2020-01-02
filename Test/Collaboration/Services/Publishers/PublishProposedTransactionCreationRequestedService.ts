@@ -5,7 +5,7 @@ import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionS
 import { ProposedTransactionProjection } from "../../../../Source/Projections/ProposedTransactionProjection";
 import { Subscriptions } from "../../../../Source/Subscriptions";
 
-describe("PublishProposedTransactionCreationRequestedService", () => {
+describe("RequestProposedTransactionService", () => {
   beforeEach(() => {
     Subscriptions.Release();
     Subscriptions.Create();
