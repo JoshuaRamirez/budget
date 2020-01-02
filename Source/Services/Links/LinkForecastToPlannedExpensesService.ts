@@ -1,7 +1,7 @@
 import { ForecastCreatedEvent } from "../../Events/ForecastCreatedEvent";
 import { ForecastProjection } from "../../Projections/ForecastProjection";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
-import { LinkManyToManyDeclaration } from "./Core/LinkManyToManyDeclaration";
+import { LinkManySubjectsToManyTargetsDeclaration } from "./Core/LinkManySubjectsToManyTargetsDeclaration";
 import { LinkService } from "./Core/LinkService";
 
 export class LinkForecastToPlannedExpensesService
@@ -9,7 +9,7 @@ extends LinkService<ForecastCreatedEvent, ForecastProjection, PlannedExpenseProj
   public static Instance = new LinkForecastToPlannedExpensesService();
   private constructor() {
     const declaration = new
-    LinkManyToManyDeclaration<ForecastCreatedEvent, ForecastProjection, PlannedExpenseProjection>
+    LinkManySubjectsToManyTargetsDeclaration<ForecastCreatedEvent, ForecastProjection, PlannedExpenseProjection>
     ({
       EventType: ForecastCreatedEvent,
       SubjectIdFieldName: "ForecastId",

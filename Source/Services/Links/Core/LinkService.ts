@@ -5,10 +5,10 @@ import { Handler } from "../../Core/Handler";
 import { LinkServiceEventValidator } from "../Validation/Validators/LinkServiceEventValidator";
 import { LinkServiceProjectionValidator } from "../Validation/Validators/LinkServiceProjectionValidator";
 import { IDeclaration } from "./IDeclaration";
-import { IMultiSubjectEventFields } from "./IMultiSubjectEventFields";
-import { IMultiTargetEventFields } from "./IMultiTargetEventFields";
-import { ISingleSubjectEventFields } from "./ISingleSubjectEventFields";
-import { ISingleTargetEventFields } from "./ISingleTargetEventFields";
+import { IMultiSubjectField } from "./IMultiSubjectField";
+import { IMultiTargetField } from "./IMultiTargetField";
+import { ISingleSubjectField } from "./ISingleSubjectField";
+import { ISingleTargetField } from "./ISingleTargetField";
 
 // TODO: Find a way to remove these Generic Type Params and use something else to determine multi/single logic.
 export abstract class LinkService
@@ -54,20 +54,20 @@ extends Handler<TEvent> {
       target.Update();
     });
   }
-  private isISingleSubjectField(declaration: ISingleSubjectEventFields<TTargetProjection> | object):
-  declaration is ISingleSubjectEventFields<TTargetProjection> {
-    return (declaration as ISingleSubjectEventFields<TTargetProjection>).TargetSubjectIdFieldName !== undefined;
+  private isISingleSubjectField(declaration: ISingleSubjectField<TTargetProjection> | object):
+  declaration is ISingleSubjectField<TTargetProjection> {
+    return (declaration as ISingleSubjectField<TTargetProjection>).TargetSubjectIdFieldName !== undefined;
   }
-  private isIMultiSubjectProjectionField(declaration: IMultiSubjectEventFields<TTargetProjection> | object):
-  declaration is IMultiSubjectEventFields<TTargetProjection> {
-    return (declaration as IMultiSubjectEventFields<TTargetProjection>).TargetSubjectIdsFieldName !== undefined;
+  private isIMultiSubjectProjectionField(declaration: IMultiSubjectField<TTargetProjection> | object):
+  declaration is IMultiSubjectField<TTargetProjection> {
+    return (declaration as IMultiSubjectField<TTargetProjection>).TargetSubjectIdsFieldName !== undefined;
   }
-  private isISingleTargetField(declaration: ISingleTargetEventFields<TSubjectProjection> | object):
-  declaration is ISingleTargetEventFields<TSubjectProjection> {
-    return (declaration as ISingleTargetEventFields<TSubjectProjection>).SubjectTargetIdFieldName !== undefined;
+  private isISingleTargetField(declaration: ISingleTargetField<TSubjectProjection> | object):
+  declaration is ISingleTargetField<TSubjectProjection> {
+    return (declaration as ISingleTargetField<TSubjectProjection>).SubjectTargetIdFieldName !== undefined;
   }
-  private isIMultiTargetField(declaration: IMultiTargetEventFields<TSubjectProjection>| object):
-  declaration is IMultiTargetEventFields<TSubjectProjection> {
-    return (declaration as IMultiTargetEventFields<TSubjectProjection>).SubjectTargetIdsFieldName !== undefined;
+  private isIMultiTargetField(declaration: IMultiTargetField<TSubjectProjection>| object):
+  declaration is IMultiTargetField<TSubjectProjection> {
+    return (declaration as IMultiTargetField<TSubjectProjection>).SubjectTargetIdsFieldName !== undefined;
   }
 }

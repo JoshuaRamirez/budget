@@ -1,7 +1,7 @@
 import { ProposedTransactionCreatedEvent } from "../../Events/ProposedTransactionCreatedEvent";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
 import { ProposedTransactionProjection } from "../../Projections/ProposedTransactionProjection";
-import { LinkManyToOneDeclaration } from "./Core/LinkManyToOneDeclaration";
+import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";
 import { LinkService } from "./Core/LinkService";
 
 export class LinkProposedTransactionToPlannedTransactionService
@@ -9,7 +9,7 @@ extends LinkService<ProposedTransactionCreatedEvent, ProposedTransactionProjecti
   public static Instance = new LinkProposedTransactionToPlannedTransactionService();
   private constructor() {
     const declaration = new
-    LinkManyToOneDeclaration<ProposedTransactionCreatedEvent, ProposedTransactionProjection, PlannedTransactionProjection>
+    LinkManySubjectsToOneTargetDeclaration<ProposedTransactionCreatedEvent, ProposedTransactionProjection, PlannedTransactionProjection>
     ({
       EventType: ProposedTransactionCreatedEvent,
       SubjectIdFieldName: "ProposedTransactionId",

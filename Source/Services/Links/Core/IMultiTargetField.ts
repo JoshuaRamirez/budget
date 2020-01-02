@@ -1,5 +1,5 @@
 import { Projection } from "../../../Projections/Core/Projection";
 
-export interface IMultiTargetEventFields<TSubjectProjection extends Projection> {
+export interface IMultiTargetField<TSubjectProjection extends Projection> {
   readonly SubjectTargetIdsFieldName: keyof TSubjectProjection;
 }

@@ -1,7 +1,7 @@
 import { AccountCreatedEvent } from "../../Events/AccountCreatedEvent";
 import { AccountProjection } from "../../Projections/AccountProjection";
 import { UserProjection } from "../../Projections/UserProjection";
-import { LinkManyToOneDeclaration } from "./Core/LinkManyToOneDeclaration";
+import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";
 import { LinkService } from "./Core/LinkService";
 
 export class LinkAccountToUserService
@@ -9,7 +9,7 @@ extends LinkService<AccountCreatedEvent, AccountProjection, UserProjection> {
   public static Instance: LinkAccountToUserService = new LinkAccountToUserService();
   private constructor() {
     const declaration = new
-    LinkManyToOneDeclaration<AccountCreatedEvent, AccountProjection, UserProjection>
+    LinkManySubjectsToOneTargetDeclaration<AccountCreatedEvent, AccountProjection, UserProjection>
     ({
       EventType: AccountCreatedEvent,
       SubjectIdFieldName: "AccountId",

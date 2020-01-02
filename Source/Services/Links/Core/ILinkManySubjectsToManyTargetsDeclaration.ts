@@ -1,10 +1,10 @@
 import { Event } from "../../../Events/Core/Event";
 import { Projection } from "../../../Projections/Core/Projection";
 import { IDeclaration } from "./IDeclaration";
-import { ISingleSubjectEventFields } from "./ISingleSubjectEventFields";
-import { ISingleTargetEventFields } from "./ISingleTargetEventFields";
+import { IMultiSubjectField } from "./IMultiSubjectField";
+import { IMultiTargetField } from "./IMultiTargetField";
 
-export interface ILinkOneToOneDeclaration
+export interface ILinkManySubjectsToManyTargetsDeclaration
 <
   TEvent extends Event,
   TSubjectProjection extends Projection,
@@ -12,5 +12,5 @@ export interface ILinkOneToOneDeclaration
 >
 extends
   IDeclaration<TEvent>,
-  ISingleSubjectEventFields<TTargetProjection>,
-  ISingleTargetEventFields<TSubjectProjection> {}
+  IMultiSubjectField<TTargetProjection>,
+  IMultiTargetField<TSubjectProjection> {}

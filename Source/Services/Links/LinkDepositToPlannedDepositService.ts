@@ -1,7 +1,7 @@
 import { DepositCreatedEvent } from "../../Events/DepositCreatedEvent";
 import { DepositProjection } from "../../Projections/DepositProjection";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
-import { LinkManyToOneDeclaration } from "./Core/LinkManyToOneDeclaration";
+import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";
 import { LinkService } from "./Core/LinkService";
 
 export class LinkDepositToPlannedDepositService
@@ -9,7 +9,7 @@ extends LinkService<DepositCreatedEvent, DepositProjection, PlannedDepositProjec
   public static Instance = new LinkDepositToPlannedDepositService();
   private constructor() {
     const declaration = new
-    LinkManyToOneDeclaration<DepositCreatedEvent, DepositProjection, PlannedDepositProjection>
+    LinkManySubjectsToOneTargetDeclaration<DepositCreatedEvent, DepositProjection, PlannedDepositProjection>
     ({
       EventType: DepositCreatedEvent,
       SubjectIdFieldName: "DepositId",

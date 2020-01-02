@@ -1,7 +1,7 @@
 import { ExpenseCreatedEvent } from "../../Events/ExpenseCreatedEvent";
 import { ExpenseProjection } from "../../Projections/ExpenseProjection";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
-import { LinkManyToOneDeclaration } from "./Core/LinkManyToOneDeclaration";
+import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";
 import { LinkService } from "./Core/LinkService";
 
 export class LinkExpenseToPlannedExpenseService
@@ -9,7 +9,7 @@ extends LinkService<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjec
   public static Instance = new LinkExpenseToPlannedExpenseService();
   private constructor() {
     const declaration = new
-    LinkManyToOneDeclaration<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjection>
+    LinkManySubjectsToOneTargetDeclaration<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjection>
     ({
       EventType: ExpenseCreatedEvent,
       SubjectIdFieldName: "ExpenseId",
