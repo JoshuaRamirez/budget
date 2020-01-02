@@ -1,15 +1,15 @@
 import { PlannedTransactionCreatedEvent } from "../../Events/Created/PlannedTransactionCreatedEvent";
-import { PlannedTransactionCreationRequestedEvent } from "../../Events/Requested/Creation/PlannedTransactionCreationRequestedEvent";
+import { PlannedTransactionRequestedEvent } from "../../Events/Requested/Creation/PlannedTransactionRequestedEvent";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
 import { Handler } from "../Core/Handler";
 
 
-export class CreatePlannedTransactionService extends Handler<PlannedTransactionCreationRequestedEvent>  {
+export class CreatePlannedTransactionService extends Handler<PlannedTransactionRequestedEvent>  {
   public static Instance = new CreatePlannedTransactionService();
   private constructor() {
-    super(PlannedTransactionCreationRequestedEvent);
+    super(PlannedTransactionRequestedEvent);
   }
-  public Handle(event: PlannedTransactionCreationRequestedEvent) {
+  public Handle(event: PlannedTransactionRequestedEvent) {
     // Create PlannedTransactionProjection
     const plannedTransactionProjection = new PlannedTransactionProjection();
     plannedTransactionProjection.Amount = event.Amount;

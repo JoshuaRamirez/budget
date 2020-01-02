@@ -1,7 +1,7 @@
 import { Event } from "../../Core/Event";
 import { Publisher } from "../../Core/Publisher";
 
-export class PlannedTransactionCreationRequestedEvent extends Event {
+export class PlannedTransactionRequestedEvent extends Event {
   public Amount: number;
   public Description: string;
   public RepeatPeriod: number;

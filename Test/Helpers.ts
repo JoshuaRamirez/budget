@@ -9,7 +9,7 @@ import { ExpenseRequestedEvent } from "../Source/Events/Requested/Creation/Expen
 import { LedgerRequestedEvent } from "../Source/Events/Requested/Creation/LedgerRequestedEvent";
 import { PayeeRequestedEvent } from "../Source/Events/Requested/Creation/PayeeRequestedEvent";
 import { PlannedExpenseRequestedEvent } from "../Source/Events/Requested/Creation/PlannedExpenseRequestedEvent";
-import { PlannedTransactionCreationRequestedEvent } from "../Source/Events/Requested/Creation/PlannedTransactionCreationRequestedEvent";
+import { PlannedTransactionRequestedEvent } from "../Source/Events/Requested/Creation/PlannedTransactionRequestedEvent";
 import { ProposedTransactionCreationRequestedEvent } from "../Source/Events/Requested/Creation/ProposedTransactionCreationRequestedEvent";
 import { TransactionRequestedEvent } from "../Source/Events/Requested/Creation/TransactionRequestedEvent";
 import { UserRequestedEvent } from "../Source/Events/Requested/Creation/UserRequestedEvent";
@@ -159,7 +159,7 @@ export const NewProposedTransactionCreationRequestedEvent = () => {
 };
 
 export const NewPlannedTransactionCreationRequestedEvent = () => {
-  const event = new PlannedTransactionCreationRequestedEvent();
+  const event = new PlannedTransactionRequestedEvent();
   return event;
 };
 

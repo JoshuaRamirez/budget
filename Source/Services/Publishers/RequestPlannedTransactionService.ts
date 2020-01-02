@@ -1,5 +1,5 @@
 import { PlannedDepositCreatedEvent } from "../../Events/Created/PlannedDepositCreatedEvent";
-import { PlannedTransactionCreationRequestedEvent } from "../../Events/Requested/Creation/PlannedTransactionCreationRequestedEvent";
+import { PlannedTransactionRequestedEvent } from "../../Events/Requested/Creation/PlannedTransactionRequestedEvent";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
 import { Continuation } from "../Core/Continuation";
 import { ContinuationHandler } from "../Core/ContinuationHandler";
@@ -10,7 +10,7 @@ export class RequestPlannedTransactionService extends Continuation {
     super();
     const continuationHandler = new ContinuationHandler(PlannedDepositCreatedEvent, (subjectEvent: PlannedDepositCreatedEvent) => {
       const subject = PlannedDepositProjection.Get(subjectEvent.PlannedDepositId);
-      const targetEvent = new PlannedTransactionCreationRequestedEvent();
+      const targetEvent = new PlannedTransactionRequestedEvent();
       targetEvent.Amount = subject.Amount;
       targetEvent.Description = subject.Description;
       targetEvent.RepeatCount = subject.RepeatCount;

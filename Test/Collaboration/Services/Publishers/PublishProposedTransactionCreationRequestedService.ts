@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { User } from "../../../../Source/Core/User";
-import { PlannedTransactionCreationRequestedEvent } from "../../../../Source/Events/Requested/Creation/PlannedTransactionCreationRequestedEvent";
+import { PlannedTransactionRequestedEvent } from "../../../../Source/Events/Requested/Creation/PlannedTransactionRequestedEvent";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { ProposedTransactionProjection } from "../../../../Source/Projections/ProposedTransactionProjection";
 import { Subscriptions } from "../../../../Source/Subscriptions";
@@ -12,7 +12,7 @@ describe("RequestProposedTransactionService", () => {
     ProjectionStore.Instance.ClearAll();
   });
   const makePlannedTransactionRequestForToday = (repeatStart = new Date()) => {
-    const plannedTransactionCreationRequestedEvent = new PlannedTransactionCreationRequestedEvent();
+    const plannedTransactionCreationRequestedEvent = new PlannedTransactionRequestedEvent();
     plannedTransactionCreationRequestedEvent.Amount = 10;
     plannedTransactionCreationRequestedEvent.Description = "Test";
     plannedTransactionCreationRequestedEvent.RepeatCount = 1;
