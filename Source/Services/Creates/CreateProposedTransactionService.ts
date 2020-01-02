@@ -1,14 +1,14 @@
 import { ProposedTransactionCreatedEvent } from "../../Events/Created/ProposedTransactionCreatedEvent";
-import { ProposedTransactionCreationRequestedEvent } from "../../Events/Requested/Creation/ProposedTransactionCreationRequestedEvent";
+import { ProposedTransactionRequestedEvent } from "../../Events/Requested/Creation/ProposedTransactionRequestedEvent";
 import { ProposedTransactionProjection } from "../../Projections/ProposedTransactionProjection";
 import { Handler } from "../Core/Handler";
 
-export class CreateProposedTransactionService extends Handler<ProposedTransactionCreationRequestedEvent>  {
+export class CreateProposedTransactionService extends Handler<ProposedTransactionRequestedEvent>  {
   public static Instance = new CreateProposedTransactionService();
   private constructor() {
-    super(ProposedTransactionCreationRequestedEvent);
+    super(ProposedTransactionRequestedEvent);
   }
-  public Handle(event: ProposedTransactionCreationRequestedEvent) {
+  public Handle(event: ProposedTransactionRequestedEvent) {
     // Create ProposedTransactionProjection
     const proposedTransactionProjection = new ProposedTransactionProjection();
     proposedTransactionProjection.Amount = event.Amount;

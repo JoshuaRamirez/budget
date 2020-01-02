@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { ProposedTransactionCreationRequestedEvent } from "../../../../Source/Events/Requested/Creation/ProposedTransactionCreationRequestedEvent";
+import { ProposedTransactionRequestedEvent } from "../../../../Source/Events/Requested/Creation/ProposedTransactionRequestedEvent";
 import { CreateProposedTransactionService } from "../../../../Source/Services/Creates/CreateProposedTransactionService";
 
 describe("CreateProposedTransactionService", () => {
@@ -13,7 +13,7 @@ describe("CreateProposedTransactionService", () => {
   });
   it("should process", () => {
     const service = CreateProposedTransactionService.Instance;
-    const event = new ProposedTransactionCreationRequestedEvent();
+    const event = new ProposedTransactionRequestedEvent();
     service.Handle(event);
   });
 });
