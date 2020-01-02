@@ -1,4 +1,5 @@
 import { LinkServiceValidationErrorType } from "../Validation/Messages/LinkServiceValidationErrorType";
+import { MessageToken } from "../Validation/Messages/MessageToken";
 
 export class LinkServiceFieldValidationError extends Error {
   public constructor(
@@ -8,21 +9,8 @@ export class LinkServiceFieldValidationError extends Error {
     validationErrorMessage: string,
     validationErrorType: LinkServiceValidationErrorType,
   ) {
-    if (!offendingObjectName || !offendingObjectName.length) {
-      throw new Error("This class must be constructed with a valid 'offendingObjectName' value.");
-    }
-    if (!offendingFieldName || !offendingFieldName.length) {
-      throw new Error("This class must be constructed with a valid 'offendingPropertyName' value.");
-    }
-    if (validationErrorType !== LinkServiceValidationErrorType.InvalidFieldValue && (offendingFieldValue === undefined)) {
-      throw new Error("This class must be constructed with a valid 'offendingFieldValue' value.");
-    }
-    if (!validationErrorMessage || !validationErrorMessage.length) {
-      throw new Error("This class must be constructed with a valid 'validationErrorMessage' value.");
-    }
-    if (!validationErrorType || !validationErrorType.toString().length) {
-      throw new Error("This class must be constructed with a valid 'validationErrorType' value.");
-    }
+    validationErrorMessage = validationErrorMessage.replace("{" + MessageToken.FieldName.toString() + "}", offendingFieldName);
+    validationErrorMessage = validationErrorMessage.replace("{" + MessageToken.ObjectName.toString() + "}", offendingObjectName);
     const message =
       `Link Service Validation Error:` +
       `\n${validationErrorMessage}` +

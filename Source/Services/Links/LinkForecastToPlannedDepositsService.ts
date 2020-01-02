@@ -4,10 +4,13 @@ import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjec
 import { LinkManyToManyDeclaration } from "./Core/LinkManyToManyDeclaration";
 import { LinkService } from "./Core/LinkService";
 
-export class LinkForecastToPlannedDepositsService extends LinkService<ForecastCreatedEvent> {
+export class LinkForecastToPlannedDepositsService
+extends LinkService<ForecastCreatedEvent, ForecastProjection, PlannedDepositProjection> {
   public static Instance = new LinkForecastToPlannedDepositsService();
   private constructor() {
-    const declaration = new LinkManyToManyDeclaration({
+    const declaration = new
+    LinkManyToManyDeclaration<ForecastCreatedEvent, ForecastProjection, PlannedDepositProjection>
+    ({
       EventType: ForecastCreatedEvent,
       SubjectIdFieldName: "ForecastId",
       SubjectTargetIdsFieldName: "PlannedDepositIds",

@@ -1,7 +1,9 @@
-export interface IDeclaration {
+import { Event } from "../../../Events/Core/Event";
+
+export interface IDeclaration<TEvent extends Event> {
   readonly EventType: any;
   readonly SubjectType: any;
   readonly TargetType: any;
-  readonly SubjectIdFieldName: string;
+  readonly SubjectIdFieldName: keyof TEvent;
 }
 

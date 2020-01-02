@@ -1,4 +1,4 @@
 export enum LinkServiceValidationErrorType {
-  MissingFieldName = "Missing Field Name.",
-  InvalidFieldValue = "Invalid Field Value.",
+  FieldMissing = "Missing Field Presence.",
+  FieldValueMissing = "Missing Valid Field Value.",
 }

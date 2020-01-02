@@ -4,10 +4,13 @@ import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjec
 import { LinkManyToOneDeclaration } from "./Core/LinkManyToOneDeclaration";
 import { LinkService } from "./Core/LinkService";
 
-export class LinkExpenseToPlannedExpenseService extends LinkService<ExpenseCreatedEvent> {
+export class LinkExpenseToPlannedExpenseService
+extends LinkService<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjection> {
   public static Instance = new LinkExpenseToPlannedExpenseService();
   private constructor() {
-    const declaration = new LinkManyToOneDeclaration({
+    const declaration = new
+    LinkManyToOneDeclaration<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjection>
+    ({
       EventType: ExpenseCreatedEvent,
       SubjectIdFieldName: "ExpenseId",
       SubjectType: ExpenseProjection,

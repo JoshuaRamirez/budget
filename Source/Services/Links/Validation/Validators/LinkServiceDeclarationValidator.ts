@@ -1,125 +1,53 @@
 import { Event } from "../../../../Events/Core/Event";
+import { Projection } from "../../../../Projections/Core/Projection";
 import { IDeclaration } from "../../Core/IDeclaration";
+import { ILinkManyToManyDeclaration } from "../../Core/ILinkManyToManyDeclaration";
+import { ILinkManyToOneDeclaration } from "../../Core/ILinkManyToOneDeclaration";
+import { ILinkOneToOneDeclaration } from "../../Core/ILinkOneToOneDeclaration";
 import { LinkManyToManyDeclaration } from "../../Core/LinkManyToManyDeclaration";
 import { LinkManyToOneDeclaration } from "../../Core/LinkManyToOneDeclaration";
 import { LinkOneToOneDeclaration } from "../../Core/LinkOneToOneDeclaration";
-import { LinkServiceDeclarationValidationMessage } from "../Messages/LinkServiceDeclarationValidationMessage";
 import { LinkServiceFieldValidator } from "./LinkServiceFieldValidator";
 
-export class LinkServiceDeclarationValidator<TEvent extends Event> extends LinkServiceFieldValidator  {
-  private readonly declaration: IDeclaration;
-  public constructor(declaration: IDeclaration) {
+export class LinkServiceDeclarationValidator<TEvent extends Event, TSubjectProjection extends Projection, TTargetProjection extends Projection> extends LinkServiceFieldValidator<TEvent>  {
+  private readonly declaration: IDeclaration<TEvent>;
+  public constructor(declaration: IDeclaration<TEvent>) {
     super();
     this.declaration = declaration;
   }
   public Validate() {
-    this.validateEventTypeExists();
-    this.validateEventTypeValue();
-    this.validateSubjectTypeExists();
-    this.validateSubjectTypeValue();
-    this.validateTargetTypeExists();
-    this.validateTargetTypeValue();
-    this.validateTriggeringSubjectIdFieldNameExists();
-    this.validateTriggeringSubjectIdFieldNameValue();
+    const declaration = this.declaration;
+    this.scalarFieldIsValid(declaration, "EventType");
+    this.scalarFieldIsValid(declaration, "SubjectType");
+    this.scalarFieldIsValid(declaration, "SubjectIdFieldName");
+    this.scalarFieldIsValid(declaration, "TargetType");
     if (this.declaration instanceof LinkOneToOneDeclaration) {
-      this.validateTargetIdFieldNameExists();
-      this.validateTargetIdFieldNameValue();
+      const oneToOneDeclaration = (declaration as ILinkOneToOneDeclaration<TEvent, TTargetProjection>);
+      this.oneToOneFieldIsValid(oneToOneDeclaration, "TargetIdFieldName");
     }
     if (this.declaration instanceof LinkManyToOneDeclaration) {
-      this.validateTargetIdFieldNameExists();
-      this.validateTargetIdFieldNameValue();
-      this.validateTargetSubjectIdsFieldNameExists();
-      this.validateTargetSubjectIdsFieldNameValue();
+      const manyToOneDeclaration = (declaration as ILinkManyToOneDeclaration<TEvent, TTargetProjection>);
+      this.manyToOneFieldIsValid(manyToOneDeclaration, "TargetIdFieldName");
+      this.manyToOneFieldIsValid(manyToOneDeclaration, "TargetSubjectIdsFieldName");
     }
     if (this.declaration instanceof LinkManyToManyDeclaration) {
-      this.validateTargetIdsFieldNameExists();
-      this.validateTargetIdsFieldNameValue();
-      this.validateTargetSubjectIdsFieldNameExists();
-      this.validateTargetSubjectIdsFieldNameValue();
+      const manyToManyDeclaration = (declaration as ILinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      this.manyToManyFieldIsValid(manyToManyDeclaration, "SubjectTargetIdsFieldName");
+      this.manyToManyFieldIsValid(manyToManyDeclaration, "TargetSubjectIdsFieldName");
+      this.manyToManyFieldIsValid(manyToManyDeclaration, "SubjectTargetIdsFieldName");
     }
   }
-  private validateEventTypeExists() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.EventTypeMissing;
-    const fieldName = "EventType";
-    LinkServiceDeclarationValidator.validateDeclarationFieldNameExists(declaration, fieldName, validationMessage);
+  private oneToOneFieldIsValid<TKey extends keyof ILinkOneToOneDeclaration<TEvent, TTargetProjection>>(declaration: ILinkOneToOneDeclaration<TEvent, TTargetProjection>, fieldName: TKey) {
+    this.scalarFieldIsValid(declaration, fieldName.toString());
   }
-  private validateEventTypeValue() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.EventTypeInvalid;
-    const fieldName = "EventType";
-    LinkServiceDeclarationValidator.validateDeclarationScalarFieldValue(declaration, fieldName, validationMessage);
+  private manyToOneFieldIsValid<TKey extends keyof ILinkManyToOneDeclaration<TEvent, TTargetProjection>>(declaration: ILinkManyToOneDeclaration<TEvent, TTargetProjection>, fieldName: TKey) {
+    this.scalarFieldIsValid(declaration, fieldName.toString());
   }
-  private validateSubjectTypeExists() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.SubjectTypeMissing;
-    const fieldName = "SubjectType";
-    LinkServiceDeclarationValidator.validateDeclarationFieldNameExists(declaration, fieldName, validationMessage);
+  private manyToManyFieldIsValid<TKey extends keyof ILinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection>>(declaration: ILinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection>, fieldName: TKey) {
+    this.scalarFieldIsValid(declaration, fieldName.toString());
   }
-  private validateSubjectTypeValue() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.SubjectTypeInvalid;
-    const fieldName = "SubjectType";
-    LinkServiceDeclarationValidator.validateDeclarationScalarFieldValue(declaration, fieldName, validationMessage);
-  }
-  private validateTriggeringSubjectIdFieldNameExists() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TriggeringSubjectIdFieldNameMissing;
-    const fieldName = "TriggeringSubjectIdFieldName";
-    LinkServiceDeclarationValidator.validateDeclarationFieldNameExists(declaration, fieldName, validationMessage);
-  }
-  private validateTriggeringSubjectIdFieldNameValue() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TriggeringSubjectIdFieldNameInvalid;
-    const fieldName = "TriggeringSubjectIdFieldName";
-    LinkServiceDeclarationValidator.validateDeclarationScalarFieldValue(declaration, fieldName, validationMessage);
-  }
-  private validateTargetSubjectIdsFieldNameExists() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TargetSubjectIdsFieldNameMissing;
-    const fieldName = "TargetSubjectIds";
-    LinkServiceDeclarationValidator.validateDeclarationFieldNameExists(declaration, fieldName, validationMessage);
-  }
-  private validateTargetSubjectIdsFieldNameValue() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TargetSubjectIdsFieldNameInvalid;
-    const fieldName = "TargetSubjectIds";
-    LinkServiceDeclarationValidator.validateDeclarationArrayFieldValue(declaration, fieldName, validationMessage);
-  }
-  private validateTargetTypeExists() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TargetTypeMissing;
-    const fieldName = "TargetType";
-    LinkServiceDeclarationValidator.validateDeclarationFieldNameExists(declaration, fieldName, validationMessage);
-  }
-  private validateTargetTypeValue() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TargetTypeInvalid;
-    const fieldName = "TargetType";
-    LinkServiceDeclarationValidator.validateDeclarationScalarFieldValue(declaration, fieldName, validationMessage);
-  }
-  private validateTargetIdFieldNameExists() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TargetIdFieldNameMissing;
-    const fieldName = "TargetIdFieldName";
-    LinkServiceDeclarationValidator.validateDeclarationFieldNameExists(declaration, fieldName, validationMessage);
-  }
-  private validateTargetIdFieldNameValue() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TargetIdFieldNameInvalid;
-    const fieldName = "TargetIdFieldName";
-    LinkServiceDeclarationValidator.validateDeclarationScalarFieldValue(declaration, fieldName, validationMessage);
-  }
-  private validateTargetIdsFieldNameExists() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TargetIdsFieldNameMissing;
-    const fieldName = "TargetIdsFieldName";
-    LinkServiceDeclarationValidator.validateDeclarationFieldNameExists(declaration, fieldName, validationMessage);
-  }
-  private validateTargetIdsFieldNameValue() {
-    const declaration = this.declaration;
-    const validationMessage = LinkServiceDeclarationValidationMessage.TargetIdsFieldNameInvalid;
-    const fieldName = "TargetIdsFieldName";
-    LinkServiceDeclarationValidator.validateDeclarationArrayFieldValue(declaration, fieldName, validationMessage);
+  private scalarFieldIsValid(declaration: IDeclaration<TEvent>, fieldName: string) {
+    super.fieldExists(declaration, fieldName);
+    super.fieldIsScalar(declaration, fieldName);
   }
 }
