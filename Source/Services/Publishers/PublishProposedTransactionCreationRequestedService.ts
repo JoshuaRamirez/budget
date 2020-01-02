@@ -3,7 +3,7 @@ import { PlannedTransactionCreatedEvent } from "../../Events/PlannedTransactionC
 import { ProposedTransactionCreationRequestedEvent } from "../../Events/ProposedTransactionCreationRequestedEvent";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
 import { Continuation } from "../Core/Continuation";
-import { EventLink } from "../Core/EventLink";
+import { ContinuationHandler } from "../Core/ContinuationHandler";
 
 export class PublishProposedTransactionCreationRequestedService extends Continuation {
   public static Instance = new PublishProposedTransactionCreationRequestedService();
@@ -43,8 +43,8 @@ export class PublishProposedTransactionCreationRequestedService extends Continua
   }
   constructor() {
     super();
-    const eventLink = new EventLink(PlannedTransactionCreatedEvent, PublishProposedTransactionCreationRequestedService.processTransactionCreatedEvent);
-    this.Link(eventLink);
+    const continuationHandler = new ContinuationHandler(PlannedTransactionCreatedEvent, PublishProposedTransactionCreationRequestedService.processTransactionCreatedEvent);
+    this.Link(continuationHandler);
     PublishProposedTransactionCreationRequestedService.processNewDay();
     this.startTimer();
   }

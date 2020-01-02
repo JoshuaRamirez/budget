@@ -1,7 +1,7 @@
 import { AccountRequestedEvent } from "../../Events/AccountRequestedEvent";
 import { UserCreatedEvent } from "../../Events/UserCreatedEvent";
 import { Continuation } from "../Core/Continuation";
-import { EventLink } from "../Core/EventLink";
+import { ContinuationHandler } from "../Core/ContinuationHandler";
 
 export class PublishAccountRequestedService extends Continuation {
   public static Instance = new PublishAccountRequestedService();
@@ -14,7 +14,7 @@ export class PublishAccountRequestedService extends Continuation {
   }
   constructor() {
     super();
-    const eventLink = new EventLink(UserCreatedEvent, PublishAccountRequestedService.makeAccountRequestedEvent);
-    this.Link(eventLink);
+    const continuationHandler = new ContinuationHandler(UserCreatedEvent, PublishAccountRequestedService.makeAccountRequestedEvent);
+    this.Link(continuationHandler);
   }
 }

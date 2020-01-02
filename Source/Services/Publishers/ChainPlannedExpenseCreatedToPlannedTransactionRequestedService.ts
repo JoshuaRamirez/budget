@@ -2,13 +2,13 @@ import { PlannedExpenseCreatedEvent } from "../../Events/PlannedExpenseCreatedEv
 import { PlannedTransactionCreationRequestedEvent } from "../../Events/PlannedTransactionCreationRequestedEvent";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
 import { Continuation } from "../Core/Continuation";
-import { EventLink } from "../Core/EventLink";
+import { ContinuationHandler } from "../Core/ContinuationHandler";
 
 export class ChainPlannedExpenseCreatedToPlannedTransactionRequestedService extends Continuation {
   public static Instance = new ChainPlannedExpenseCreatedToPlannedTransactionRequestedService();
   constructor() {
     super();
-    const eventLink = new EventLink(PlannedExpenseCreatedEvent, (subjectEvent: PlannedExpenseCreatedEvent) => {
+    const continuationHandler = new ContinuationHandler(PlannedExpenseCreatedEvent, (subjectEvent: PlannedExpenseCreatedEvent) => {
       const subject = PlannedExpenseProjection.Get(subjectEvent.PlannedExpenseId);
       const targetEvent = new PlannedTransactionCreationRequestedEvent();
       targetEvent.Amount = subject.Amount;
@@ -20,6 +20,6 @@ export class ChainPlannedExpenseCreatedToPlannedTransactionRequestedService exte
       targetEvent.TransactionType = "Expense";
       return targetEvent;
     });
-    this.Link(eventLink);
+    this.Link(continuationHandler);
   }
 }

@@ -2,13 +2,13 @@ import { PlannedDepositCreatedEvent } from "../../Events/PlannedDepositCreatedEv
 import { PlannedTransactionCreationRequestedEvent } from "../../Events/PlannedTransactionCreationRequestedEvent";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
 import { Continuation } from "../Core/Continuation";
-import { EventLink } from "../Core/EventLink";
+import { ContinuationHandler } from "../Core/ContinuationHandler";
 
 export class ChainPlannedDepositCreatedToPlannedTransactionRequestedService extends Continuation {
   public static Instance = new ChainPlannedDepositCreatedToPlannedTransactionRequestedService();
   constructor() {
     super();
-    const eventLink = new EventLink(PlannedDepositCreatedEvent, (subjectEvent: PlannedDepositCreatedEvent) => {
+    const continuationHandler = new ContinuationHandler(PlannedDepositCreatedEvent, (subjectEvent: PlannedDepositCreatedEvent) => {
       const subject = PlannedDepositProjection.Get(subjectEvent.PlannedDepositId);
       const targetEvent = new PlannedTransactionCreationRequestedEvent();
       targetEvent.Amount = subject.Amount;
@@ -20,6 +20,6 @@ export class ChainPlannedDepositCreatedToPlannedTransactionRequestedService exte
       targetEvent.TransactionType = "Deposit";
       return targetEvent;
     });
-    this.Link(eventLink);
+    this.Link(continuationHandler);
   }
 }
