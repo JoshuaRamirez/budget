@@ -25,10 +25,10 @@ import { LinkForecastToPlannedExpensesService } from "./Services/Links/LinkForec
 import { LinkLedgerToAccountService } from "./Services/Links/LinkLedgerToAccountService";
 import { LinkProposedTransactionToPlannedTransactionService } from "./Services/Links/LinkProposedTransactionToPlannedTransactionService";
 import { LinkTransactionToLedgerService } from "./Services/Links/LinkTransactionToLedgerService";
-import { RequestAccountService } from "./Services/Publishers/RequestAccountService";
-import { RequestLedgerService } from "./Services/Publishers/RequestLedgerService";
-import { RequestPlannedTransactionService } from "./Services/Publishers/RequestPlannedTransactionService";
-import { RequestProposedTransactionService } from "./Services/Publishers/RequestProposedTransactionService";
+import { RequestAccountService } from "./Services/Requestors/RequestAccountService";
+import { RequestLedgerService } from "./Services/Requestors/RequestLedgerService";
+import { RequestPlannedTransactionService } from "./Services/Requestors/RequestPlannedTransactionService";
+import { RequestProposedTransactionService } from "./Services/Requestors/RequestProposedTransactionService";
 
 export class Subscriptions {
   public static Create() {
