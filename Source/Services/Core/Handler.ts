@@ -1,8 +1,8 @@
 import { Event } from "../../Events/Core/Event";
 import { Publisher } from "../../Events/Core/Publisher";
-import { ISubscriber } from "./ISubscriber";
+import { IReceiver } from "./IReceiver";
 
-export abstract class Handler<TEvent extends Event> implements ISubscriber<TEvent> {
+export abstract class Handler<TEvent extends Event> implements IReceiver<TEvent> {
   private readonly eventType: any;
   private handles = [];
   protected constructor(eventType: typeof Event) {

@@ -1,4 +1,4 @@
-import { ISubscriber } from "../../Services/Core/ISubscriber";
+import { IReceiver } from "../../Services/Core/IReceiver";
 import { Event } from "./Event";
 import { EventStore } from "./EventStore";
 
@@ -16,7 +16,7 @@ export class Publisher<TEvent extends Event> {
   }
   public Subscribe(
     eventType: (new (x, y) => TEvent),
-    subscriber: ISubscriber<TEvent>,
+    subscriber: IReceiver<TEvent>,
   ) {
     const eventName = eventType.name;
     const subscriptions = Publisher.Subscriptions[eventName];
@@ -29,7 +29,7 @@ export class Publisher<TEvent extends Event> {
   }
   public UnSubscribe(
     eventType: (new (x, y) => TEvent),
-    handle: ISubscriber<TEvent>,
+    handle: IReceiver<TEvent>,
   ) {
     const eventName = eventType.name;
     const subscriptions = Publisher.Subscriptions[eventName];
