@@ -1,10 +1,10 @@
 import { PlannedDepositCreatedEvent } from "../../Events/PlannedDepositCreatedEvent";
 import { PlannedTransactionCreationRequestedEvent } from "../../Events/PlannedTransactionCreationRequestedEvent";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
-import { EventChain } from "../Core/EventChain";
+import { Continuation } from "../Core/Continuation";
 import { EventLink } from "../Core/EventLink";
 
-export class ChainPlannedDepositCreatedToPlannedTransactionRequestedService extends EventChain {
+export class ChainPlannedDepositCreatedToPlannedTransactionRequestedService extends Continuation {
   public static Instance = new ChainPlannedDepositCreatedToPlannedTransactionRequestedService();
   constructor() {
     super();

@@ -2,10 +2,10 @@ import { User } from "../../Core/User";
 import { PlannedTransactionCreatedEvent } from "../../Events/PlannedTransactionCreatedEvent";
 import { ProposedTransactionCreationRequestedEvent } from "../../Events/ProposedTransactionCreationRequestedEvent";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
-import { EventChain } from "../Core/EventChain";
+import { Continuation } from "../Core/Continuation";
 import { EventLink } from "../Core/EventLink";
 
-export class PublishProposedTransactionCreationRequestedService extends EventChain {
+export class PublishProposedTransactionCreationRequestedService extends Continuation {
   public static Instance = new PublishProposedTransactionCreationRequestedService();
   public static processNewDay() {
     const plannedTransactionProjections = PlannedTransactionProjection.All();

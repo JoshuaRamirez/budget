@@ -1,9 +1,9 @@
 import { AccountRequestedEvent } from "../../Events/AccountRequestedEvent";
 import { UserCreatedEvent } from "../../Events/UserCreatedEvent";
-import { EventChain } from "../Core/EventChain";
+import { Continuation } from "../Core/Continuation";
 import { EventLink } from "../Core/EventLink";
 
-export class PublishAccountRequestedService extends EventChain {
+export class PublishAccountRequestedService extends Continuation {
   public static Instance = new PublishAccountRequestedService();
   private static makeAccountRequestedEvent(userCreatedEvent: UserCreatedEvent): AccountRequestedEvent {
     const accountRequestedEvent = new AccountRequestedEvent();

@@ -1,9 +1,9 @@
 import { AccountCreatedEvent } from "../../Events/AccountCreatedEvent";
 import { LedgerRequestedEvent } from "../../Events/LedgerRequestedEvent";
-import { EventChain } from "../Core/EventChain";
+import { Continuation } from "../Core/Continuation";
 import { EventLink } from "../Core/EventLink";
 
-export class PublishLedgerRequestedService extends EventChain {
+export class PublishLedgerRequestedService extends Continuation {
   public static Instance = new PublishLedgerRequestedService();
   private static onAccountCreated(accountCreatedEvent: AccountCreatedEvent) {
     const ledgerRequestedEvent = new LedgerRequestedEvent();
