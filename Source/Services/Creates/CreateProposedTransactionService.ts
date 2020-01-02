@@ -8,7 +8,7 @@ export class CreateProposedTransactionService extends Handler<ProposedTransactio
   private constructor() {
     super(ProposedTransactionRequestedEvent);
   }
-  public Handle(event: ProposedTransactionRequestedEvent) {
+  public Receive(event: ProposedTransactionRequestedEvent) {
     // Create ProposedTransactionProjection
     const proposedTransactionProjection = new ProposedTransactionProjection();
     proposedTransactionProjection.Amount = event.Amount;

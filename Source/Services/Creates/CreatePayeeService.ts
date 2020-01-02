@@ -7,7 +7,7 @@ export class CreatePayeeService extends Handler<PayeeRequestedEvent> {
   private constructor() {
     super(PayeeRequestedEvent);
   }
-  public Handle(event: PayeeRequestedEvent) {
+  public Receive(event: PayeeRequestedEvent) {
     // Create PayeeProjection
     const payeeProjection = new PayeeProjection();
     payeeProjection.Description = event.Description;

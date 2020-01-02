@@ -8,7 +8,7 @@ export class CreateExpenseService extends Handler<ExpenseRequestedEvent> {
   private constructor() {
     super(ExpenseRequestedEvent);
   }
-  public Handle(event: ExpenseRequestedEvent) {
+  public Receive(event: ExpenseRequestedEvent) {
     // Create ExpenseProjection
     const expenseProjection = new ExpenseProjection();
     expenseProjection.Description = event.Description;

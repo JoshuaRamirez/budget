@@ -7,7 +7,7 @@ export class CreateCategoryService extends Handler<CategoryRequestedEvent> {
   private constructor() {
     super(CategoryRequestedEvent);
   }
-  public Handle(event: CategoryRequestedEvent) {
+  public Receive(event: CategoryRequestedEvent) {
     const accountProjection = new CategoryProjection();
     accountProjection.CategoryName = event.CategoryName;
     accountProjection.Type = event.Type;

@@ -20,7 +20,7 @@ extends LinkService<ExpenseCreatedEvent, ExpenseProjection, PayeeProjection> {
     });
     super(declaration);
   }
-  public Handle(event: ExpenseCreatedEvent): void {
-    super.Handle(event);
+  public Receive(event: ExpenseCreatedEvent): void {
+    super.Receive(event);
   }
 }

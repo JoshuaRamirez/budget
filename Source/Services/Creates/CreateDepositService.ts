@@ -8,7 +8,7 @@ export class CreateDepositService extends Handler<DepositRequestedEvent> {
   private constructor() {
     super(DepositRequestedEvent);
   }
-  public Handle(event: DepositRequestedEvent) {
+  public Receive(event: DepositRequestedEvent) {
     // Create DepositProjection
     const depositProjection = new DepositProjection();
     depositProjection.CategoryId = event.CategoryId;

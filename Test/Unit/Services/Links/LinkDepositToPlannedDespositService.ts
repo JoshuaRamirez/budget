@@ -14,6 +14,6 @@ describe("LinkDepositToPlannedDepositService", () => {
   it("should process", () => {
     const linkDepositToPlannedDepositService = LinkDepositToPlannedDepositService.Instance;
     const depositCreatedEvent = NewDepositCreatedEvent();
-    linkDepositToPlannedDepositService.Handle(depositCreatedEvent);
+    linkDepositToPlannedDepositService.Receive(depositCreatedEvent);
   });
 });

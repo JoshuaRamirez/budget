@@ -19,7 +19,7 @@ export class LinkTransactionToLedgerService extends LinkService<TransactionCreat
     });
     super(declaration);
   }
-  public Handle(event: TransactionCreatedEvent): void {
-    super.Handle(event);
+  public Receive(event: TransactionCreatedEvent): void {
+    super.Receive(event);
   }
 }

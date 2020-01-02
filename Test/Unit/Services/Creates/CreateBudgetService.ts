@@ -14,6 +14,6 @@ describe("CreateBudgetService", () => {
   it("should process", () => {
     const service = CreateBudgetService.Instance;
     const event = new BudgetRequestedEvent();
-    service.Handle(event);
+    service.Receive(event);
   });
 });

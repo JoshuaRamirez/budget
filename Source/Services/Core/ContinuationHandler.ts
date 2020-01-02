@@ -7,7 +7,7 @@ export class ContinuationHandler<TSubscriptionEvent extends Event, TPublicationE
     super(subscriptionEventType);
     this.continuation = continuation;
   }
-  public Handle(subscriptionEvent: TSubscriptionEvent): void {
+  public Receive(subscriptionEvent: TSubscriptionEvent): void {
     const publicationEvent = this.continuation(subscriptionEvent);
     if (publicationEvent) {
       publicationEvent.Publish();

@@ -14,6 +14,6 @@ describe("CreateAllocationService", () => {
   it("should process", () => {
     const service = CreateAllocationService.Instance;
     const event = new AllocationRequestedEvent();
-    service.Handle(event);
+    service.Receive(event);
   });
 });

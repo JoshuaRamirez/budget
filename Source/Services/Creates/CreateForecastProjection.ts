@@ -8,7 +8,7 @@ export class CreateForecastService extends Handler<ForecastRequestedEvent> {
   private constructor() {
     super(ForecastRequestedEvent);
   }
-  public Handle(event: ForecastRequestedEvent) {
+  public Receive(event: ForecastRequestedEvent) {
     // Create ForecastProjection
     const forecastProjection = new ForecastProjection();
     forecastProjection.Amount = event.Amount;

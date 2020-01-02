@@ -14,6 +14,6 @@ describe("CreatePlannedTransactionService", () => {
   it("should process", () => {
     const service = CreatePlannedTransactionService.Instance;
     const event = new PlannedTransactionRequestedEvent();
-    service.Handle(event);
+    service.Receive(event);
   });
 });

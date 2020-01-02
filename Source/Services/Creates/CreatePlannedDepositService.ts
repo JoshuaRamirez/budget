@@ -8,7 +8,7 @@ export class CreatePlannedDepositService extends Handler<PlannedDepositRequested
   private constructor() {
     super(PlannedDepositRequestedEvent);
   }
-  public Handle(event: PlannedDepositRequestedEvent) {
+  public Receive(event: PlannedDepositRequestedEvent) {
     // Create PlannedDepositProjection
     const plannedDepositProjection = new PlannedDepositProjection();
     plannedDepositProjection.Amount = event.Amount;

@@ -9,7 +9,7 @@ export class CreatePlannedTransactionService extends Handler<PlannedTransactionR
   private constructor() {
     super(PlannedTransactionRequestedEvent);
   }
-  public Handle(event: PlannedTransactionRequestedEvent) {
+  public Receive(event: PlannedTransactionRequestedEvent) {
     // Create PlannedTransactionProjection
     const plannedTransactionProjection = new PlannedTransactionProjection();
     plannedTransactionProjection.Amount = event.Amount;

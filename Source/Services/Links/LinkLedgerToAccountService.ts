@@ -20,7 +20,7 @@ extends LinkService<LedgerCreatedEvent, LedgerProjection, AccountProjection> {
     });
     super(declaration);
   }
-  public Handle(event: LedgerCreatedEvent): void {
-    super.Handle(event);
+  public Receive(event: LedgerCreatedEvent): void {
+    super.Receive(event);
   }
 }

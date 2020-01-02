@@ -14,6 +14,6 @@ describe("CreateCategoryService", () => {
   it("should process", () => {
     const service = CreateCategoryService.Instance;
     const event = new CategoryRequestedEvent();
-    service.Handle(event);
+    service.Receive(event);
   });
 });

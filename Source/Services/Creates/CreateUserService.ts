@@ -8,7 +8,7 @@ export class CreateUserService extends Handler<UserRequestedEvent> {
   private constructor() {
     super(UserRequestedEvent);
   }
-  public Handle(event: UserRequestedEvent) {
+  public Receive(event: UserRequestedEvent) {
     // Create UserProjection
     const userProjection = new UserProjection();
     userProjection.UserName = event.UserName;

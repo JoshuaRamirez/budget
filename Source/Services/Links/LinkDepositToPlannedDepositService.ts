@@ -20,7 +20,7 @@ extends LinkService<DepositCreatedEvent, DepositProjection, PlannedDepositProjec
     });
     super(declaration);
   }
-  public Handle(event: DepositCreatedEvent): void {
-    super.Handle(event);
+  public Receive(event: DepositCreatedEvent): void {
+    super.Receive(event);
   }
 }

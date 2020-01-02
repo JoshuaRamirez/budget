@@ -8,7 +8,7 @@ export class CreateAccountService extends Handler<AccountRequestedEvent> {
   private constructor() {
     super(AccountRequestedEvent);
   }
-  public Handle(event: AccountRequestedEvent) {
+  public Receive(event: AccountRequestedEvent) {
     // Create AccountProjection
     const accountProjection = new AccountProjection();
     accountProjection.AccountName = event.AccountName;

@@ -7,7 +7,7 @@ export class CreateAllocationService extends Handler<AllocationRequestedEvent> {
   private constructor() {
     super(AllocationRequestedEvent);
   }
-  public Handle(event: AllocationRequestedEvent) {
+  public Receive(event: AllocationRequestedEvent) {
     // Create Allocation Projection
     const allocationProjection: AllocationProjection = new AllocationProjection();
     allocationProjection.LedgerId = event.LedgerId;

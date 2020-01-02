@@ -14,6 +14,6 @@ describe("LinkExpenseToPlannedExpenseService", () => {
   it("should process", () => {
     const service = LinkExpenseToPlannedExpenseService.Instance;
     const event = NewExpenseCreatedEvent();
-    service.Handle(event);
+    service.Receive(event);
   });
 });

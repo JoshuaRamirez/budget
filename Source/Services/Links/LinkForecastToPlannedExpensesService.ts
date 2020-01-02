@@ -20,7 +20,7 @@ extends LinkService<ForecastCreatedEvent, ForecastProjection, PlannedExpenseProj
     });
     super(declaration);
   }
-  public Handle(event: ForecastCreatedEvent): void {
-    super.Handle(event);
+  public Receive(event: ForecastCreatedEvent): void {
+    super.Receive(event);
   }
 }

@@ -8,7 +8,7 @@ export class UpdateLedgerBalanceService extends Handler<TransactionCreatedEvent>
   private constructor() {
     super(TransactionCreatedEvent);
   }
-  public Handle(event: TransactionCreatedEvent): void {
+  public Receive(event: TransactionCreatedEvent): void {
     if (!event.TransactionId) {
       return;
     }

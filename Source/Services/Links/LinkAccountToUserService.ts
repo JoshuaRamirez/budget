@@ -20,7 +20,7 @@ extends LinkService<AccountCreatedEvent, AccountProjection, UserProjection> {
     });
     super(declaration);
   }
-  public Handle(event: AccountCreatedEvent): void {
-    super.Handle(event);
+  public Receive(event: AccountCreatedEvent): void {
+    super.Receive(event);
   }
 }

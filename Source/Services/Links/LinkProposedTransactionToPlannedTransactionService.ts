@@ -20,7 +20,7 @@ extends LinkService<ProposedTransactionCreatedEvent, ProposedTransactionProjecti
     });
     super(declaration);
   }
-  public Handle(event: ProposedTransactionCreatedEvent): void {
-    super.Handle(event);
+  public Receive(event: ProposedTransactionCreatedEvent): void {
+    super.Receive(event);
   }
 }

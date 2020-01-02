@@ -26,7 +26,7 @@ extends Handler<TEvent> {
     super(declaration.EventType);
     this.declaration = declaration;
   }
-  public Handle(event: TEvent): void {
+  public Receive(event: TEvent): void {
     const linkServiceEventValidator = new LinkServiceEventValidator<TEvent, TSubjectProjection>(this.declaration, event);
     linkServiceEventValidator.Validate();
     const subjectProjection = ProjectionStore.Instance.GetProjection(this.declaration.SubjectType, event[this.declaration.SubjectIdFieldName.toString()]);
