@@ -24,7 +24,7 @@ import { LinkLedgerToAccountService } from "./Services/Links/LinkLedgerToAccount
 import { LinkProposedTransactionToPlannedTransactionService } from "./Services/Links/LinkProposedTransactionToPlannedTransactionService";
 import { LinkTransactionToLedgerService } from "./Services/Links/LinkTransactionToLedgerService";
 import { ChainPlannedExpenseCreatedToPlannedTransactionRequestedService } from "./Services/Publishers/ChainPlannedExpenseCreatedToPlannedTransactionRequestedService";
-import { PublishAccountRequestedService } from "./Services/Publishers/PublishAccountRequestedService";
+import { RequestAccountService } from "./Services/Publishers/RequestAccountService";
 import { RequestLedgerService } from "./Services/Publishers/RequestLedgerService";
 import { RequestPlannedTransactionService } from "./Services/Publishers/RequestPlannedTransactionService";
 import { RequestProposedTransactionService } from "./Services/Publishers/RequestProposedTransactionService";
@@ -80,7 +80,7 @@ export class Subscriptions {
     LinkProposedTransactionToPlannedTransactionService.Instance,
   ];
   private static eventChainServices = [
-    PublishAccountRequestedService.Instance,
+    RequestAccountService.Instance,
     RequestLedgerService.Instance,
     RequestProposedTransactionService.Instance,
     ChainPlannedExpenseCreatedToPlannedTransactionRequestedService.Instance,
