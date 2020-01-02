@@ -13,8 +13,8 @@ extends LinkService<ProposedTransactionCreatedEvent, ProposedTransactionProjecti
     ({
       EventType: ProposedTransactionCreatedEvent,
       SubjectIdFieldName: "ProposedTransactionId",
+      SubjectTargetIdFieldName: "PlannedTransactionId",
       SubjectType: ProposedTransactionProjection,
-      TargetIdFieldName: "PlannedTransactionId",
       TargetSubjectIdsFieldName: "ProposedTransactionIds",
       TargetType: PlannedTransactionProjection,
     });

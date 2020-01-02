@@ -167,14 +167,12 @@ export const NewDepositCreatedEvent = () => {
   const depositProjection = newDepositProjection();
   const depositCreatedEvent = new DepositCreatedEvent();
   depositCreatedEvent.DepositId = depositProjection.Id;
-  depositCreatedEvent.PlannedDepositId = depositProjection.PlannedDepositId;
   return depositCreatedEvent;
 };
 
 export const NewTransactionCreatedEvent = () => {
   const transactionProjection = newTransactionProjection();
   const transactionCreatedEvent = new TransactionCreatedEvent();
-  transactionCreatedEvent.LedgerId = transactionProjection.LedgerId;
   transactionCreatedEvent.TransactionId = transactionProjection.Id;
   return transactionCreatedEvent;
 };
@@ -183,7 +181,6 @@ export const NewLedgerCreatedEvent = () => {
   const ledgerProjection = newLedgerProjection();
   const ledgerCreatedEvent = new LedgerCreatedEvent();
   ledgerCreatedEvent.LedgerId = ledgerProjection.Id;
-  ledgerCreatedEvent.AccountId = ledgerProjection.AccountId;
   return ledgerCreatedEvent;
 };
 
@@ -191,7 +188,6 @@ export const NewAccountCreatedEvent = () => {
   const accountProjection = newAccountProjection();
   const accountCreatedEvent = new AccountCreatedEvent();
   accountCreatedEvent.AccountId = accountProjection.Id;
-  accountCreatedEvent.UserId = accountProjection.UserId;
   return accountCreatedEvent;
 };
 
@@ -199,9 +195,6 @@ export const NewExpenseCreatedEvent = () => {
   const expenseProjection = newExpenseProjection();
   const expenseCreatedEvent = new ExpenseCreatedEvent();
   expenseCreatedEvent.ExpenseId = expenseProjection.Id;
-  expenseCreatedEvent.LedgerId = expenseProjection.LedgerId;
-  expenseCreatedEvent.PayeeId = expenseProjection.PayeeId;
-  expenseCreatedEvent.PlannedExpenseId = expenseProjection.PlannedExpenseId;
   return expenseCreatedEvent;
 };
 

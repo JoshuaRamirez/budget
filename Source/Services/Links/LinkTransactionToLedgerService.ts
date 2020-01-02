@@ -12,8 +12,8 @@ export class LinkTransactionToLedgerService extends LinkService<TransactionCreat
     ({
       EventType: TransactionCreatedEvent,
       SubjectIdFieldName: "TransactionId",
+      SubjectTargetIdFieldName: "LedgerId",
       SubjectType: TransactionProjection,
-      TargetIdFieldName: "LedgerId",
       TargetSubjectIdsFieldName: "TransactionIds",
       TargetType: LedgerProjection,
     });

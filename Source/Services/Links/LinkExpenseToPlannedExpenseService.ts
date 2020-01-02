@@ -13,8 +13,8 @@ extends LinkService<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjec
     ({
       EventType: ExpenseCreatedEvent,
       SubjectIdFieldName: "ExpenseId",
+      SubjectTargetIdFieldName: "PlannedExpenseId",
       SubjectType: ExpenseProjection,
-      TargetIdFieldName: "PlannedExpenseId",
       TargetSubjectIdsFieldName: "ExpenseIds",
       TargetType: PlannedExpenseProjection,
     });

@@ -20,7 +20,6 @@ export class CreateTransactionService extends Handler<TransactionRequestedEvent>
     // Publish TransactionCreatedEvent
     const newTransactionCreatedEvent = new TransactionCreatedEvent();
     newTransactionCreatedEvent.TransactionId = transactionProjection.Id;
-    newTransactionCreatedEvent.LedgerId = transactionProjection.LedgerId;
     newTransactionCreatedEvent.Publish();
   }
 }

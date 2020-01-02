@@ -3,14 +3,20 @@ import { Projection } from "../../../Projections/Core/Projection";
 import { LinkServiceDeclarationValidator } from "../Validation/Validators/LinkServiceDeclarationValidator";
 import { ILinkOneToOneDeclaration } from "./ILinkOneToOneDeclaration";
 
-export class LinkOneToOneDeclaration<TEvent extends Event, TSubjectProjection extends Projection, TTargetProjection extends Projection> implements ILinkOneToOneDeclaration<TEvent, TTargetProjection> {
+export class LinkOneToOneDeclaration
+<
+  TEvent extends Event,
+  TSubjectProjection extends Projection,
+  TTargetProjection extends Projection
+>
+implements ILinkOneToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection> {
   public readonly EventType: TEvent;
   public readonly SubjectType: any;
   public readonly TargetType: any;
-  public readonly TargetIdFieldName: keyof TEvent;
+  public readonly SubjectTargetIdFieldName: keyof TSubjectProjection;
   public readonly TargetSubjectIdFieldName: keyof TTargetProjection;
   public readonly SubjectIdFieldName: keyof TEvent;
-  constructor(declaration: ILinkOneToOneDeclaration<TEvent, TTargetProjection>) {
+  constructor(declaration: ILinkOneToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>) {
     if (!declaration) {
       throw new Error("Missing object instance in the provided Declaration.");
     }

@@ -3,7 +3,13 @@ import { Projection } from "../../../Projections/Core/Projection";
 import { LinkServiceDeclarationValidator } from "../Validation/Validators/LinkServiceDeclarationValidator";
 import { ILinkManyToManyDeclaration } from "./ILinkManyToManyDeclaration";
 
-export class LinkManyToManyDeclaration<TEvent extends Event, TSubjectProjection extends Projection, TTargetProjection extends Projection> implements ILinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection> {
+export class LinkManyToManyDeclaration
+<
+  TEvent extends Event,
+  TSubjectProjection extends Projection,
+  TTargetProjection extends Projection
+>
+implements ILinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection> {
   public readonly EventType: any;
   public readonly SubjectType: any;
   public readonly SubjectTargetIdsFieldName: keyof TSubjectProjection;

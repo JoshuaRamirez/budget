@@ -18,7 +18,6 @@ export class CreateProposedTransactionService extends Handler<ProposedTransactio
     proposedTransactionProjection.Project();
     // Publish ProposedTransactionCreatedEvent
     const proposedTransactionCreatedEvent = new ProposedTransactionCreatedEvent();
-    proposedTransactionCreatedEvent.PlannedTransactionId = proposedTransactionProjection.PlannedTransactionId;
     proposedTransactionCreatedEvent.ProposedTransactionId = proposedTransactionProjection.Id;
     proposedTransactionCreatedEvent.Publish();
   }

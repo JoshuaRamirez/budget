@@ -18,7 +18,6 @@ export class CreateAccountService extends Handler<AccountRequestedEvent> {
     // Publish AccountCreatedEvent
     const accountCreated = new AccountCreatedEvent();
     accountCreated.AccountId = accountProjection.Id;
-    accountCreated.UserId = accountProjection.UserId;
     accountCreated.Publish();
   }
 }

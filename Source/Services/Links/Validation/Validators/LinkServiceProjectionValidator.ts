@@ -1,8 +1,6 @@
 import { Event} from "../../../../Events/Core/Event";
 import { Projection } from "../../../../Projections/Core/Projection";
 import { IDeclaration } from "../../Core/IDeclaration";
-import { IMultiSubjectEventFields } from "../../Core/IMultiSubjectEventFields";
-import { ISingleSubjectEventFields } from "../../Core/ISingleSubjectEventFields";
 import { LinkManyToManyDeclaration } from "../../Core/LinkManyToManyDeclaration";
 import { LinkManyToOneDeclaration } from "../../Core/LinkManyToOneDeclaration";
 import { LinkOneToOneDeclaration } from "../../Core/LinkOneToOneDeclaration";
@@ -22,27 +20,26 @@ export class LinkServiceProjectionValidator<TEvent extends Event, TSubjectProjec
   }
   public Validate() {
     if (this.declaration instanceof LinkManyToManyDeclaration) {
-      const fields = (this.declaration as unknown as IMultiSubjectEventFields<TTargetProjection>);
-      this.manyToManyProjectionFieldIsValid(this.targetProjection, fields.TargetSubjectIdsFieldName.toString());
+      const fields = (this.declaration as unknown as LinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      this.arrayFieldIsValid(this.subjectProjection, fields.SubjectTargetIdsFieldName.toString());
+      this.arrayFieldIsValid(this.targetProjection, fields.TargetSubjectIdsFieldName.toString());
     }
     if (this.declaration instanceof LinkManyToOneDeclaration) {
-      const fields = (this.declaration as unknown as IMultiSubjectEventFields<TTargetProjection>);
-      this.manyToOneProjectionFieldIsValid(this.targetProjection, fields.TargetSubjectIdsFieldName.toString());
+      const fields = (this.declaration as unknown as LinkManyToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      this.scalarFieldIsValid(this.subjectProjection, fields.SubjectTargetIdFieldName.toString());
+      this.arrayFieldIsValid(this.targetProjection, fields.TargetSubjectIdsFieldName.toString());
     }
     if (this.declaration instanceof LinkOneToOneDeclaration) {
-      const fields = (this.declaration as unknown as ISingleSubjectEventFields<TTargetProjection>);
-      this.oneToOneProjectionFieldIsValid(this.targetProjection, fields.TargetSubjectIdFieldName.toString());
+      const fields = (this.declaration as unknown as LinkOneToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      this.scalarFieldIsValid(this.subjectProjection, fields.SubjectTargetIdFieldName.toString());
+      this.scalarFieldIsValid(this.targetProjection, fields.TargetSubjectIdFieldName.toString());
     }
   }
-  private manyToOneProjectionFieldIsValid(projection: Projection, fieldName: string) {
+  private arrayFieldIsValid(projection: Projection, fieldName: string) {
     super.fieldExists(projection, fieldName);
     super.fieldIsArray(projection, fieldName);
   }
-  private manyToManyProjectionFieldIsValid(projection: Projection, fieldName: string) {
-    super.fieldExists(projection, fieldName);
-    super.fieldIsArray(projection, fieldName);
-  }
-  private oneToOneProjectionFieldIsValid(projection: Projection, fieldName: string) {
+  private scalarFieldIsValid(projection: Projection, fieldName: string) {
     super.fieldExists(projection, fieldName);
   }
 }

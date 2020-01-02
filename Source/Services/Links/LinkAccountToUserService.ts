@@ -13,8 +13,8 @@ extends LinkService<AccountCreatedEvent, AccountProjection, UserProjection> {
     ({
       EventType: AccountCreatedEvent,
       SubjectIdFieldName: "AccountId",
+      SubjectTargetIdFieldName: "UserId",
       SubjectType: AccountProjection,
-      TargetIdFieldName: "UserId",
       TargetSubjectIdsFieldName: "AccountIds",
       TargetType: UserProjection,
     });

@@ -23,7 +23,6 @@ describe("UpdateLedgerBalanceService", () => {
     transactionProjection.Project();
     const transactionCreatedEvent = new TransactionCreatedEvent();
     transactionCreatedEvent.TransactionId = transactionProjection.Id;
-    transactionCreatedEvent.LedgerId = transactionProjection.LedgerId;
     transactionCreatedEvent.Publish();
     const projectionStore = ProjectionStore.Instance;
     const projections = projectionStore.GetProjections<LedgerProjection>(LedgerProjection);

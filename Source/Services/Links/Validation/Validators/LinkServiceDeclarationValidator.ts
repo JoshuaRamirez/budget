@@ -22,25 +22,25 @@ export class LinkServiceDeclarationValidator<TEvent extends Event, TSubjectProje
     this.scalarFieldIsValid(declaration, "SubjectIdFieldName");
     this.scalarFieldIsValid(declaration, "TargetType");
     if (this.declaration instanceof LinkOneToOneDeclaration) {
-      const oneToOneDeclaration = (declaration as ILinkOneToOneDeclaration<TEvent, TTargetProjection>);
-      this.oneToOneFieldIsValid(oneToOneDeclaration, "TargetIdFieldName");
+      const oneToOneDeclaration = (declaration as ILinkOneToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      this.oneToOneFieldIsValid(oneToOneDeclaration, "SubjectTargetIdFieldName");
+      this.oneToOneFieldIsValid(oneToOneDeclaration, "TargetSubjectIdFieldName");
     }
     if (this.declaration instanceof LinkManyToOneDeclaration) {
-      const manyToOneDeclaration = (declaration as ILinkManyToOneDeclaration<TEvent, TTargetProjection>);
-      this.manyToOneFieldIsValid(manyToOneDeclaration, "TargetIdFieldName");
+      const manyToOneDeclaration = (declaration as ILinkManyToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      this.manyToOneFieldIsValid(manyToOneDeclaration, "SubjectTargetIdFieldName");
       this.manyToOneFieldIsValid(manyToOneDeclaration, "TargetSubjectIdsFieldName");
     }
     if (this.declaration instanceof LinkManyToManyDeclaration) {
       const manyToManyDeclaration = (declaration as ILinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
       this.manyToManyFieldIsValid(manyToManyDeclaration, "SubjectTargetIdsFieldName");
       this.manyToManyFieldIsValid(manyToManyDeclaration, "TargetSubjectIdsFieldName");
-      this.manyToManyFieldIsValid(manyToManyDeclaration, "SubjectTargetIdsFieldName");
     }
   }
-  private oneToOneFieldIsValid<TKey extends keyof ILinkOneToOneDeclaration<TEvent, TTargetProjection>>(declaration: ILinkOneToOneDeclaration<TEvent, TTargetProjection>, fieldName: TKey) {
+  private oneToOneFieldIsValid<TKey extends keyof ILinkOneToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>>(declaration: ILinkOneToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>, fieldName: TKey) {
     this.scalarFieldIsValid(declaration, fieldName.toString());
   }
-  private manyToOneFieldIsValid<TKey extends keyof ILinkManyToOneDeclaration<TEvent, TTargetProjection>>(declaration: ILinkManyToOneDeclaration<TEvent, TTargetProjection>, fieldName: TKey) {
+  private manyToOneFieldIsValid<TKey extends keyof ILinkManyToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>>(declaration: ILinkManyToOneDeclaration<TEvent, TSubjectProjection, TTargetProjection>, fieldName: TKey) {
     this.scalarFieldIsValid(declaration, fieldName.toString());
   }
   private manyToManyFieldIsValid<TKey extends keyof ILinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection>>(declaration: ILinkManyToManyDeclaration<TEvent, TSubjectProjection, TTargetProjection>, fieldName: TKey) {

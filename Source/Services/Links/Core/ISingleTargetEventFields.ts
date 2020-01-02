@@ -1,5 +1,5 @@
-import { Event } from "../../../Events/Core/Event";
+import { Projection } from "../../../Projections/Core/Projection";
 
-export interface ISingleTargetEventFields<TEvent extends Event> {
-  readonly TargetIdFieldName: keyof TEvent;
+export interface ISingleTargetEventFields<TSubjectProjection extends Projection> {
+  readonly SubjectTargetIdFieldName: keyof TSubjectProjection;
 }

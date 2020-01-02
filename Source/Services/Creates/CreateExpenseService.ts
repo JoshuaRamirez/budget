@@ -20,9 +20,6 @@ export class CreateExpenseService extends Handler<ExpenseRequestedEvent> {
     // Publish ExpenseCreatedEvent
     const expenseCreatedEvent = new ExpenseCreatedEvent();
     expenseCreatedEvent.ExpenseId = expenseProjection.Id;
-    expenseCreatedEvent.PayeeId = expenseProjection.PayeeId;
-    expenseCreatedEvent.PlannedExpenseId = expenseProjection.PlannedExpenseId;
-    expenseCreatedEvent.LedgerId = expenseProjection.LedgerId;
     expenseCreatedEvent.Publish();
   }
 }

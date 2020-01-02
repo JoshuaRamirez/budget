@@ -21,8 +21,6 @@ export class CreateForecastService extends Handler<ForecastRequestedEvent> {
     // Publish ForecastCreatedEvent
     const forecastCreatedEvent = new ForecastCreatedEvent();
     forecastCreatedEvent.ForecastId = forecastProjection.Id;
-    forecastCreatedEvent.PlannedDepositIds = event.PlannedDepositIds;
-    forecastCreatedEvent.PlannedExpenseIds = event.PlannedExpenseIds;
     forecastCreatedEvent.Publish();
   }
 }

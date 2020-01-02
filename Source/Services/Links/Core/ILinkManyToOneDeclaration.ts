@@ -4,7 +4,13 @@ import { IDeclaration } from "./IDeclaration";
 import { IMultiSubjectEventFields } from "./IMultiSubjectEventFields";
 import { ISingleTargetEventFields } from "./ISingleTargetEventFields";
 
-export interface ILinkManyToOneDeclaration<TEvent extends Event, TTargetProjection extends Projection> extends
+export interface ILinkManyToOneDeclaration
+<
+  TEvent extends Event,
+  TSubjectProjection extends Projection,
+  TTargetProjection extends Projection
+>
+extends
   IDeclaration<TEvent>,
   IMultiSubjectEventFields<TTargetProjection>,
-  ISingleTargetEventFields<TEvent> {}
+  ISingleTargetEventFields<TSubjectProjection> {}

@@ -13,8 +13,8 @@ extends LinkService<DepositCreatedEvent, DepositProjection, PlannedDepositProjec
     ({
       EventType: DepositCreatedEvent,
       SubjectIdFieldName: "DepositId",
+      SubjectTargetIdFieldName: "PlannedDepositId",
       SubjectType: DepositProjection,
-      TargetIdFieldName: "PlannedDepositId",
       TargetSubjectIdsFieldName: "DepositIds",
       TargetType: PlannedDepositProjection,
     });

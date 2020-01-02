@@ -13,8 +13,8 @@ extends LinkService<LedgerCreatedEvent, LedgerProjection, AccountProjection> {
     ({
       EventType: LedgerCreatedEvent,
       SubjectIdFieldName: "LedgerId",
+      SubjectTargetIdFieldName: "AccountId",
       SubjectType: LedgerProjection,
-      TargetIdFieldName: "AccountId",
       TargetSubjectIdFieldName: "LedgerId",
       TargetType: AccountProjection,
     });

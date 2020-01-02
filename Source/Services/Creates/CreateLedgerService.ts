@@ -19,7 +19,6 @@ export class CreateLedgerService extends Handler<LedgerRequestedEvent> {
     // Publish LedgerCreatedEvent
     const ledgerCreated = new LedgerCreatedEvent();
     ledgerCreated.LedgerId = ledgerProjection.Id;
-    ledgerCreated.AccountId = ledgerProjection.AccountId;
     ledgerCreated.Publish();
   }
 }
