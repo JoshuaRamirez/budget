@@ -1,9 +1,9 @@
 import { LedgerCreatedEvent } from "../../Events/Created/LedgerCreatedEvent";
 import { LedgerRequestedEvent } from "../../Events/Requested/Creation/LedgerRequestedEvent";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateLedgerService extends Handler<LedgerRequestedEvent> {
+export class CreateLedgerService extends Receiver<LedgerRequestedEvent> {
   public static Instance = new CreateLedgerService();
   private constructor() {
     super(LedgerRequestedEvent);

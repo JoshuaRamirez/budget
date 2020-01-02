@@ -1,9 +1,9 @@
 import { TransactionCreatedEvent } from "../../Events/Created/TransactionCreatedEvent";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
 import { TransactionProjection } from "../../Projections/TransactionProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class UpdateLedgerBalanceService extends Handler<TransactionCreatedEvent> {
+export class UpdateLedgerBalanceService extends Receiver<TransactionCreatedEvent> {
   public static Instance: UpdateLedgerBalanceService = new UpdateLedgerBalanceService();
   private constructor() {
     super(TransactionCreatedEvent);

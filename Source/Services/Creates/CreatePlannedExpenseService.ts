@@ -1,9 +1,9 @@
 import { PlannedExpenseCreatedEvent } from "../../Events/Created/PlannedExpenseCreatedEvent";
 import { PlannedExpenseRequestedEvent } from "../../Events/Requested/Creation/PlannedExpenseRequestedEvent";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreatePlannedExpenseService extends Handler<PlannedExpenseRequestedEvent> {
+export class CreatePlannedExpenseService extends Receiver<PlannedExpenseRequestedEvent> {
   public static Instance = new CreatePlannedExpenseService();
   private constructor() {
     super(PlannedExpenseRequestedEvent);

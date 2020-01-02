@@ -1,9 +1,9 @@
 import { ProposedTransactionCreatedEvent } from "../../Events/Created/ProposedTransactionCreatedEvent";
 import { ProposedTransactionRequestedEvent } from "../../Events/Requested/Creation/ProposedTransactionRequestedEvent";
 import { ProposedTransactionProjection } from "../../Projections/ProposedTransactionProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateProposedTransactionService extends Handler<ProposedTransactionRequestedEvent>  {
+export class CreateProposedTransactionService extends Receiver<ProposedTransactionRequestedEvent>  {
   public static Instance = new CreateProposedTransactionService();
   private constructor() {
     super(ProposedTransactionRequestedEvent);

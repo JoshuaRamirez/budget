@@ -1,9 +1,9 @@
 import { ExpenseCreatedEvent } from "../../Events/Created/ExpenseCreatedEvent";
 import { ExpenseRequestedEvent } from "../../Events/Requested/Creation/ExpenseRequestedEvent";
 import { ExpenseProjection } from "../../Projections/ExpenseProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateExpenseService extends Handler<ExpenseRequestedEvent> {
+export class CreateExpenseService extends Receiver<ExpenseRequestedEvent> {
   public static Instance = new CreateExpenseService();
   private constructor() {
     super(ExpenseRequestedEvent);

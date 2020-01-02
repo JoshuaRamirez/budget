@@ -1,8 +1,8 @@
 import { BudgetRequestedEvent } from "../../Events/Requested/Creation/BudgetRequestedEvent";
 import { BudgetProjection } from "../../Projections/BudgetProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateBudgetService extends Handler<BudgetRequestedEvent> {
+export class CreateBudgetService extends Receiver<BudgetRequestedEvent> {
   public static Instance = new CreateBudgetService();
   private constructor() {
     super(BudgetRequestedEvent);

@@ -1,7 +1,7 @@
 import { Event } from "../../../Events/Core/Event";
 import { Projection } from "../../../Projections/Core/Projection";
 import { ProjectionStore } from "../../../Projections/Core/ProjectionStore";
-import { Handler } from "../../Core/Handler";
+import { Receiver } from "../../Core/Receiver";
 import { LinkServiceEventValidator } from "../Validation/Validators/LinkServiceEventValidator";
 import { LinkServiceProjectionValidator } from "../Validation/Validators/LinkServiceProjectionValidator";
 import { IDeclaration } from "./IDeclaration";
@@ -17,7 +17,7 @@ export abstract class LinkService
   TSubjectProjection extends Projection,
   TTargetProjection extends Projection
 >
-extends Handler<TEvent> {
+extends Receiver<TEvent> {
   private readonly declaration: IDeclaration<TEvent>;
   protected constructor(declaration: IDeclaration<TEvent>) {
     if (!declaration) {

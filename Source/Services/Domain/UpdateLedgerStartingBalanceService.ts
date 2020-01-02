@@ -1,8 +1,8 @@
 import { LedgerStartingBalanceUpdateRequestedEvent } from "../../Events/Requested/Mutation/LedgerStartingBalanceUpdateRequestedEvent";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class UpdateLedgerStartingBalanceService extends Handler<LedgerStartingBalanceUpdateRequestedEvent> {
+export class UpdateLedgerStartingBalanceService extends Receiver<LedgerStartingBalanceUpdateRequestedEvent> {
   public static Instance: UpdateLedgerStartingBalanceService = new UpdateLedgerStartingBalanceService();
   private constructor() {
     super(LedgerStartingBalanceUpdateRequestedEvent);

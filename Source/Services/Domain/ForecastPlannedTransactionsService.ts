@@ -3,10 +3,10 @@ import { ForecastCalculationRequestEvent } from "../../Events/Requested/Mutation
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 import { TransactionScheduling } from "./Core/TransactionScheduling";
 
-export class ForecastPlannedTransactionsService extends Handler<ForecastCalculationRequestEvent> {
+export class ForecastPlannedTransactionsService extends Receiver<ForecastCalculationRequestEvent> {
   public static Instance = new ForecastPlannedTransactionsService();
   private constructor() {
     super(ForecastCalculationRequestEvent);

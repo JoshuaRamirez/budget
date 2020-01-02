@@ -1,9 +1,9 @@
 import { DepositCreatedEvent } from "../../Events/Created/DepositCreatedEvent";
 import { DepositRequestedEvent } from "../../Events/Requested/Creation/DepositRequestedEvent";
 import { DepositProjection } from "../../Projections/DepositProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateDepositService extends Handler<DepositRequestedEvent> {
+export class CreateDepositService extends Receiver<DepositRequestedEvent> {
   public static Instance = new CreateDepositService();
   private constructor() {
     super(DepositRequestedEvent);

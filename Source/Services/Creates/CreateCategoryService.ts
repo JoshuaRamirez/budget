@@ -1,8 +1,8 @@
 import { CategoryRequestedEvent } from "../../Events/Requested/Creation/CategoryRequestedEvent";
 import { CategoryProjection } from "../../Projections/CategoryProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateCategoryService extends Handler<CategoryRequestedEvent> {
+export class CreateCategoryService extends Receiver<CategoryRequestedEvent> {
   public static Instance = new CreateCategoryService();
   private constructor() {
     super(CategoryRequestedEvent);

@@ -1,9 +1,9 @@
 import { AccountCreatedEvent } from "../../Events/Created/AccountCreatedEvent";
 import { AccountRequestedEvent } from "../../Events/Requested/Creation/AccountRequestedEvent";
 import { AccountProjection } from "../../Projections/AccountProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateAccountService extends Handler<AccountRequestedEvent> {
+export class CreateAccountService extends Receiver<AccountRequestedEvent> {
   public static Instance = new CreateAccountService();
   private constructor() {
     super(AccountRequestedEvent);

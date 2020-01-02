@@ -1,8 +1,8 @@
 import { PayeeRequestedEvent } from "../../Events/Requested/Creation/PayeeRequestedEvent";
 import { PayeeProjection } from "../../Projections/PayeeProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreatePayeeService extends Handler<PayeeRequestedEvent> {
+export class CreatePayeeService extends Receiver<PayeeRequestedEvent> {
   public static Instance = new CreatePayeeService();
   private constructor() {
     super(PayeeRequestedEvent);

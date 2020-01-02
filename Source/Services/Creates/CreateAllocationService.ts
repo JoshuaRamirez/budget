@@ -1,8 +1,8 @@
 import { AllocationRequestedEvent } from "../../Events/Requested/Creation/AllocationRequestedEvent";
 import { AllocationProjection } from "../../Projections/AllocationProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateAllocationService extends Handler<AllocationRequestedEvent> {
+export class CreateAllocationService extends Receiver<AllocationRequestedEvent> {
   public static Instance = new CreateAllocationService();
   private constructor() {
     super(AllocationRequestedEvent);

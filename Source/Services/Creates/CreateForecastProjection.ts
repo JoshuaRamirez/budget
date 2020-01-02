@@ -1,9 +1,9 @@
 import { ForecastCreatedEvent } from "../../Events/Created/ForecastCreatedEvent";
 import { ForecastRequestedEvent } from "../../Events/Requested/Creation/ForecastRequestedEvent";
 import { ForecastProjection } from "../../Projections/ForecastProjection";
-import { Handler } from "../Core/Handler";
+import { Receiver } from "../Core/Receiver";
 
-export class CreateForecastService extends Handler<ForecastRequestedEvent> {
+export class CreateForecastService extends Receiver<ForecastRequestedEvent> {
   public static Instance = new CreateForecastService();
   private constructor() {
     super(ForecastRequestedEvent);

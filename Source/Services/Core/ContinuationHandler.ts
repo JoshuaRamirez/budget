@@ -1,7 +1,7 @@
 import { Event } from "../../Events/Core/Event";
-import { Handler } from "./Handler";
+import { Receiver } from "./Receiver";
 
-export class ContinuationHandler<TSubscriptionEvent extends Event, TPublicationEvent extends Event> extends Handler<TSubscriptionEvent> {
+export class ContinuationHandler<TSubscriptionEvent extends Event, TPublicationEvent extends Event> extends Receiver<TSubscriptionEvent> {
   private readonly continuation: (input: TSubscriptionEvent) => TPublicationEvent;
   public constructor(subscriptionEventType: typeof Event, continuation: (input: TSubscriptionEvent) => TPublicationEvent) {
     super(subscriptionEventType);
