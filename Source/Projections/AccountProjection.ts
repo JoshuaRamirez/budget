@@ -8,8 +8,8 @@ export class AccountProjection extends Projection {
   }
 
   // Foreign Keys
-  @serializable public LedgerId: any;
-  @serializable public UserId: any;
+  @serializable public LedgerId: any = null;
+  @serializable public UserId: any = null;
 
   // Properties
   @serializable public AccountName: string;
