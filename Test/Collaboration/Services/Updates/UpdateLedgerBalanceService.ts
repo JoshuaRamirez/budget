@@ -4,7 +4,7 @@ import { TransactionCreatedEvent } from "../../../../Source/Events/Created/Trans
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
 import { TransactionProjection } from "../../../../Source/Projections/TransactionProjection";
-import { UpdateLedgerBalanceService } from "../../../../Source/Services/Updates/UpdateLedgerBalanceService";
+import { UpdateLedgerBalanceService } from "../../../../Source/Services/Domain/UpdateLedgerBalanceService";
 import { Subscriptions } from "../../../../Source/Subscriptions";
 
 

@@ -14,6 +14,7 @@ import { CreateProposedTransactionService } from "./Services/Creates/CreatePropo
 import { CreateTransactionService } from "./Services/Creates/CreateTransactionService";
 import { CreateUserService } from "./Services/Creates/CreateUserService";
 import { ForecastPlannedTransactionsService } from "./Services/Domain/ForecastPlannedTransactionsService";
+import { UpdateLedgerBalanceService } from "./Services/Domain/UpdateLedgerBalanceService";
 import { LinkAccountToUserService } from "./Services/Links/LinkAccountToUserService";
 import { LinkDepositToPlannedDepositService } from "./Services/Links/LinkDepositToPlannedDepositService";
 import { LinkExpenseToPayeeService } from "./Services/Links/LinkExpenseToPayeeService";
@@ -28,7 +29,6 @@ import { RequestAccountService } from "./Services/Publishers/RequestAccountServi
 import { RequestLedgerService } from "./Services/Publishers/RequestLedgerService";
 import { RequestPlannedTransactionService } from "./Services/Publishers/RequestPlannedTransactionService";
 import { RequestProposedTransactionService } from "./Services/Publishers/RequestProposedTransactionService";
-import { UpdateLedgerBalanceService } from "./Services/Updates/UpdateLedgerBalanceService";
 import { UpdateLedgerStartingBalanceService } from "./Services/Updates/UpdateLedgerStartingBalanceService";
 
 export class Subscriptions {
