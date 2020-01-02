@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { TransactionCreatedEvent } from "../../../../Source/Events/TransactionCreatedEvent";
+import { TransactionCreatedEvent } from "../../../../Source/Events/Created/TransactionCreatedEvent";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
 import { TransactionProjection } from "../../../../Source/Projections/TransactionProjection";

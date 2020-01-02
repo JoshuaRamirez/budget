@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { PlannedExpenseRequestedEvent } from "../../../../Source/Events/PlannedExpenseRequestedEvent";
+import { PlannedExpenseRequestedEvent } from "../../../../Source/Events/Requested/Creation/PlannedExpenseRequestedEvent";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { PlannedExpenseProjection } from "../../../../Source/Projections/PlannedExpenseProjection";
 import { CreatePlannedExpenseService } from "../../../../Source/Services/Creates/CreatePlannedExpenseService";

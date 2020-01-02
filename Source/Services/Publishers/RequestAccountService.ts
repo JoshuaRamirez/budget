@@ -1,5 +1,5 @@
-import { AccountRequestedEvent } from "../../Events/AccountRequestedEvent";
-import { UserCreatedEvent } from "../../Events/UserCreatedEvent";
+import { UserCreatedEvent } from "../../Events/Created/UserCreatedEvent";
+import { AccountRequestedEvent } from "../../Events/Requested/Creation/AccountRequestedEvent";
 import { Continuation } from "../Core/Continuation";
 import { ContinuationHandler } from "../Core/ContinuationHandler";
 

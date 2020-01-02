@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { PayerRequestedEvent } from "../../../../Source/Events/PayerRequestedEvent";
+import { PayerRequestedEvent } from "../../../../Source/Events/Requested/Creation/PayerRequestedEvent";
 import {CreatePayerService} from "../../../../Source/Services/Creates/CreatePayerService";
 
 describe("CreatePayerService", () => {

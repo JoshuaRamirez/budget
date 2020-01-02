@@ -1,5 +1,5 @@
-import { ForecastCalculationRequestEvent } from "../../Events/ForecastCalculationRequested";
-import { ForecastRequestedEvent } from "../../Events/ForecastRequestedEvent";
+import { ForecastRequestedEvent } from "../../Events/Requested/Creation/ForecastRequestedEvent";
+import { ForecastCalculationRequestEvent } from "../../Events/Requested/Mutation/ForecastCalculationRequested";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";

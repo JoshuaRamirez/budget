@@ -1,5 +1,5 @@
-import { DepositCreatedEvent } from "../../Events/DepositCreatedEvent";
-import { DepositRequestedEvent } from "../../Events/DepositRequestedEvent";
+import { DepositCreatedEvent } from "../../Events/Created/DepositCreatedEvent";
+import { DepositRequestedEvent } from "../../Events/Requested/Creation/DepositRequestedEvent";
 import { DepositProjection } from "../../Projections/DepositProjection";
 import { Handler } from "../Core/Handler";
 

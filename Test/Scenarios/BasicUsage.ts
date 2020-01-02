@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import "mocha";
-import { LedgerStartingBalanceUpdateRequestedEvent } from "../../Source/Events/LedgerStartingBalanceUpdateRequestedEvent";
-import { TransactionRequestedEvent } from "../../Source/Events/TransactionRequestedEvent";
+import { TransactionRequestedEvent } from "../../Source/Events/Requested/Creation/TransactionRequestedEvent";
+import { LedgerStartingBalanceUpdateRequestedEvent } from "../../Source/Events/Requested/Mutation/LedgerStartingBalanceUpdateRequestedEvent";
 import { AccountProjection } from "../../Source/Projections/AccountProjection";
 import { AllocationProjection } from "../../Source/Projections/AllocationProjection";
 import { ProjectionStore } from "../../Source/Projections/Core/ProjectionStore";

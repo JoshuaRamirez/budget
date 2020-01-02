@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { BudgetRequestedEvent } from "../../../../Source/Events/BudgetRequestedEvent";
+import { BudgetRequestedEvent } from "../../../../Source/Events/Requested/Creation/BudgetRequestedEvent";
 import { BudgetProjection } from "../../../../Source/Projections/BudgetProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { CreateBudgetService } from "../../../../Source/Services/Creates/CreateBudgetService";

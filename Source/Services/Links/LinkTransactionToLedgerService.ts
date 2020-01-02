@@ -1,4 +1,4 @@
-import { TransactionCreatedEvent } from "../../Events/TransactionCreatedEvent";
+import { TransactionCreatedEvent } from "../../Events/Created/TransactionCreatedEvent";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
 import { TransactionProjection } from "../../Projections/TransactionProjection";
 import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";

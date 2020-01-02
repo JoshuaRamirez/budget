@@ -1,5 +1,5 @@
-import { LedgerCreatedEvent } from "../../Events/LedgerCreatedEvent";
-import { LedgerRequestedEvent } from "../../Events/LedgerRequestedEvent";
+import { LedgerCreatedEvent } from "../../Events/Created/LedgerCreatedEvent";
+import { LedgerRequestedEvent } from "../../Events/Requested/Creation/LedgerRequestedEvent";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
 import { Handler } from "../Core/Handler";
 

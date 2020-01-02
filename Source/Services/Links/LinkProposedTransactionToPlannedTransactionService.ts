@@ -1,4 +1,4 @@
-import { ProposedTransactionCreatedEvent } from "../../Events/ProposedTransactionCreatedEvent";
+import { ProposedTransactionCreatedEvent } from "../../Events/Created/ProposedTransactionCreatedEvent";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
 import { ProposedTransactionProjection } from "../../Projections/ProposedTransactionProjection";
 import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";

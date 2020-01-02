@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { AllocationRequestedEvent } from "../../../../Source/Events/AllocationRequestedEvent";
+import { AllocationRequestedEvent } from "../../../../Source/Events/Requested/Creation/AllocationRequestedEvent";
 import { AllocationProjection } from "../../../../Source/Projections/AllocationProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { CreateAllocationService } from "../../../../Source/Services/Creates/CreateAllocationService";

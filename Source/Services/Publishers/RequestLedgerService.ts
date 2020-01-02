@@ -1,5 +1,5 @@
-import { AccountCreatedEvent } from "../../Events/AccountCreatedEvent";
-import { LedgerRequestedEvent } from "../../Events/LedgerRequestedEvent";
+import { AccountCreatedEvent } from "../../Events/Created/AccountCreatedEvent";
+import { LedgerRequestedEvent } from "../../Events/Requested/Creation/LedgerRequestedEvent";
 import { Continuation } from "../Core/Continuation";
 import { ContinuationHandler } from "../Core/ContinuationHandler";
 

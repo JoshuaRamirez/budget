@@ -1,4 +1,4 @@
-import { ForecastCreatedEvent } from "../../Events/ForecastCreatedEvent";
+import { ForecastCreatedEvent } from "../../Events/Created/ForecastCreatedEvent";
 import { ForecastProjection } from "../../Projections/ForecastProjection";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
 import { LinkManySubjectsToManyTargetsDeclaration } from "./Core/LinkManySubjectsToManyTargetsDeclaration";

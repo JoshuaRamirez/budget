@@ -1,4 +1,4 @@
-import { BudgetRequestedEvent } from "../../Events/BudgetRequestedEvent";
+import { BudgetRequestedEvent } from "../../Events/Requested/Creation/BudgetRequestedEvent";
 import { BudgetProjection } from "../../Projections/BudgetProjection";
 import { Handler } from "../Core/Handler";
 

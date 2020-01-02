@@ -1,9 +1,9 @@
 import { assert } from "chai";
 import "mocha";
 import { Event } from "../../../Source/Events/Core/Event";
-import { ForecastCalculationRequestEvent } from "../../../Source/Events/ForecastCalculationRequested";
-import { PlannedDepositRequestedEvent } from "../../../Source/Events/PlannedDepositRequestedEvent";
-import { PlannedExpenseRequestedEvent } from "../../../Source/Events/PlannedExpenseRequestedEvent";
+import { PlannedDepositRequestedEvent } from "../../../Source/Events/Requested/Creation/PlannedDepositRequestedEvent";
+import { PlannedExpenseRequestedEvent } from "../../../Source/Events/Requested/Creation/PlannedExpenseRequestedEvent";
+import { ForecastCalculationRequestEvent } from "../../../Source/Events/Requested/Mutation/ForecastCalculationRequested";
 import { ProjectionStore } from "../../../Source/Projections/Core/ProjectionStore";
 import { ForecastProjection } from "../../../Source/Projections/ForecastProjection";
 import { Subscriptions } from "../../../Source/Subscriptions";

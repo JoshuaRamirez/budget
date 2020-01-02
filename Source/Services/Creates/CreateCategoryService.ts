@@ -1,4 +1,4 @@
-import { CategoryRequestedEvent } from "../../Events/CategoryRequestedEvent";
+import { CategoryRequestedEvent } from "../../Events/Requested/Creation/CategoryRequestedEvent";
 import { CategoryProjection } from "../../Projections/CategoryProjection";
 import { Handler } from "../Core/Handler";
 

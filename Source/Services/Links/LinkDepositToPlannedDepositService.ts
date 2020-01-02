@@ -1,4 +1,4 @@
-import { DepositCreatedEvent } from "../../Events/DepositCreatedEvent";
+import { DepositCreatedEvent } from "../../Events/Created/DepositCreatedEvent";
 import { DepositProjection } from "../../Projections/DepositProjection";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
 import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";

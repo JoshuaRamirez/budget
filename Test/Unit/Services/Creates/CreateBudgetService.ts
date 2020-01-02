@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { BudgetRequestedEvent } from "../../../../Source/Events/BudgetRequestedEvent";
+import { BudgetRequestedEvent } from "../../../../Source/Events/Requested/Creation/BudgetRequestedEvent";
 import {CreateBudgetService} from "../../../../Source/Services/Creates/CreateBudgetService";
 
 describe("CreateBudgetService", () => {

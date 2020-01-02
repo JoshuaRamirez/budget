@@ -1,4 +1,4 @@
-import { ExpenseCreatedEvent } from "../../Events/ExpenseCreatedEvent";
+import { ExpenseCreatedEvent } from "../../Events/Created/ExpenseCreatedEvent";
 import { ExpenseProjection } from "../../Projections/ExpenseProjection";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
 import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";

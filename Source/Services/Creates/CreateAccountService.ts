@@ -1,5 +1,5 @@
-import { AccountCreatedEvent } from "../../Events/AccountCreatedEvent";
-import { AccountRequestedEvent } from "../../Events/AccountRequestedEvent";
+import { AccountCreatedEvent } from "../../Events/Created/AccountCreatedEvent";
+import { AccountRequestedEvent } from "../../Events/Requested/Creation/AccountRequestedEvent";
 import { AccountProjection } from "../../Projections/AccountProjection";
 import { Handler } from "../Core/Handler";
 

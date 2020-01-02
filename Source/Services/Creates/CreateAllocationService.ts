@@ -1,4 +1,4 @@
-import { AllocationRequestedEvent } from "../../Events/AllocationRequestedEvent";
+import { AllocationRequestedEvent } from "../../Events/Requested/Creation/AllocationRequestedEvent";
 import { AllocationProjection } from "../../Projections/AllocationProjection";
 import { Handler } from "../Core/Handler";
 

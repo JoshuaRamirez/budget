@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { LedgerStartingBalanceUpdateRequestedEvent } from "../../../../Source/Events/LedgerStartingBalanceUpdateRequestedEvent";
+import { LedgerStartingBalanceUpdateRequestedEvent } from "../../../../Source/Events/Requested/Mutation/LedgerStartingBalanceUpdateRequestedEvent";
 import {UpdateLedgerStartingBalanceService} from "../../../../Source/Services/Updates/UpdateLedgerStartingBalanceService";
 
 describe("UpdateLedgerStartingBalanceService", () => {

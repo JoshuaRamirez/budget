@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { CategoryRequestedEvent } from "../../../../Source/Events/CategoryRequestedEvent";
+import { CategoryRequestedEvent } from "../../../../Source/Events/Requested/Creation/CategoryRequestedEvent";
 import {CreateCategoryService} from "../../../../Source/Services/Creates/CreateCategoryService";
 
 describe("CreateCategoryService", () => {

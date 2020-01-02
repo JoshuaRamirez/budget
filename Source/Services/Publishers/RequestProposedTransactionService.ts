@@ -1,6 +1,6 @@
 import { User } from "../../Core/User";
-import { PlannedTransactionCreatedEvent } from "../../Events/PlannedTransactionCreatedEvent";
-import { ProposedTransactionCreationRequestedEvent } from "../../Events/ProposedTransactionCreationRequestedEvent";
+import { PlannedTransactionCreatedEvent } from "../../Events/Created/PlannedTransactionCreatedEvent";
+import { ProposedTransactionCreationRequestedEvent } from "../../Events/Requested/Creation/ProposedTransactionCreationRequestedEvent";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
 import { Continuation } from "../Core/Continuation";
 import { ContinuationHandler } from "../Core/ContinuationHandler";

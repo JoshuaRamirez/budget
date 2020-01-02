@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { PayeeRequestedEvent } from "../../../../Source/Events/PayeeRequestedEvent";
+import { PayeeRequestedEvent } from "../../../../Source/Events/Requested/Creation/PayeeRequestedEvent";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { PayeeProjection } from "../../../../Source/Projections/PayeeProjection";
 import { CreatePayeeService } from "../../../../Source/Services/Creates/CreatePayeeService";

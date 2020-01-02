@@ -1,4 +1,4 @@
-import { AccountCreatedEvent } from "../../Events/AccountCreatedEvent";
+import { AccountCreatedEvent } from "../../Events/Created/AccountCreatedEvent";
 import { AccountProjection } from "../../Projections/AccountProjection";
 import { UserProjection } from "../../Projections/UserProjection";
 import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";

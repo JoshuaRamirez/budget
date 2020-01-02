@@ -1,4 +1,4 @@
-import { LedgerStartingBalanceUpdateRequestedEvent } from "../../Events/LedgerStartingBalanceUpdateRequestedEvent";
+import { LedgerStartingBalanceUpdateRequestedEvent } from "../../Events/Requested/Mutation/LedgerStartingBalanceUpdateRequestedEvent";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
 import { Handler } from "../Core/Handler";
 

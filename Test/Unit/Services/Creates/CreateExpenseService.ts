@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { ExpenseRequestedEvent } from "../../../../Source/Events/ExpenseRequestedEvent";
+import { ExpenseRequestedEvent } from "../../../../Source/Events/Requested/Creation/ExpenseRequestedEvent";
 import {CreateExpenseService} from "../../../../Source/Services/Creates/CreateExpenseService";
 
 describe("CreateExpenseService", () => {

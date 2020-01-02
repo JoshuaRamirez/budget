@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { CategoryRequestedEvent } from "../../../../Source/Events/CategoryRequestedEvent";
+import { CategoryRequestedEvent } from "../../../../Source/Events/Requested/Creation/CategoryRequestedEvent";
 import { CategoryProjection } from "../../../../Source/Projections/CategoryProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { CreateCategoryService } from "../../../../Source/Services/Creates/CreateCategoryService";

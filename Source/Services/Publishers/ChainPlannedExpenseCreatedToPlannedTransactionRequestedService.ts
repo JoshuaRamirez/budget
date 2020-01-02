@@ -1,5 +1,5 @@
-import { PlannedExpenseCreatedEvent } from "../../Events/PlannedExpenseCreatedEvent";
-import { PlannedTransactionCreationRequestedEvent } from "../../Events/PlannedTransactionCreationRequestedEvent";
+import { PlannedExpenseCreatedEvent } from "../../Events/Created/PlannedExpenseCreatedEvent";
+import { PlannedTransactionCreationRequestedEvent } from "../../Events/Requested/Creation/PlannedTransactionCreationRequestedEvent";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
 import { Continuation } from "../Core/Continuation";
 import { ContinuationHandler } from "../Core/ContinuationHandler";

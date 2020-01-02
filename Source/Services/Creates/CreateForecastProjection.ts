@@ -1,5 +1,5 @@
-import { ForecastCreatedEvent } from "../../Events/ForecastCreatedEvent";
-import { ForecastRequestedEvent } from "../../Events/ForecastRequestedEvent";
+import { ForecastCreatedEvent } from "../../Events/Created/ForecastCreatedEvent";
+import { ForecastRequestedEvent } from "../../Events/Requested/Creation/ForecastRequestedEvent";
 import { ForecastProjection } from "../../Projections/ForecastProjection";
 import { Handler } from "../Core/Handler";
 

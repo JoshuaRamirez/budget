@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { TransactionCreatedEvent } from "../../../../Source/Events/TransactionCreatedEvent";
+import { TransactionCreatedEvent } from "../../../../Source/Events/Created/TransactionCreatedEvent";
 import { UpdateLedgerBalanceService } from "../../../../Source/Services/Updates/UpdateLedgerBalanceService";
 
 describe("UpdateLedgerBalanceService", () => {

@@ -1,4 +1,4 @@
-import { PayeeRequestedEvent } from "../../Events/PayeeRequestedEvent";
+import { PayeeRequestedEvent } from "../../Events/Requested/Creation/PayeeRequestedEvent";
 import { PayeeProjection } from "../../Projections/PayeeProjection";
 import { Handler } from "../Core/Handler";
 

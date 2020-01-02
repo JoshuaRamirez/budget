@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { User } from "../../../../Source/Core/User";
-import { PlannedTransactionCreationRequestedEvent } from "../../../../Source/Events/PlannedTransactionCreationRequestedEvent";
+import { PlannedTransactionCreationRequestedEvent } from "../../../../Source/Events/Requested/Creation/PlannedTransactionCreationRequestedEvent";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { ProposedTransactionProjection } from "../../../../Source/Projections/ProposedTransactionProjection";
 import { Subscriptions } from "../../../../Source/Subscriptions";

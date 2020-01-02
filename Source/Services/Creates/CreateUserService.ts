@@ -1,5 +1,5 @@
-import { UserCreatedEvent } from "../../Events/UserCreatedEvent";
-import { UserRequestedEvent } from "../../Events/UserRequestedEvent";
+import { UserCreatedEvent } from "../../Events/Created/UserCreatedEvent";
+import { UserRequestedEvent } from "../../Events/Requested/Creation/UserRequestedEvent";
 import { UserProjection } from "../../Projections/UserProjection";
 import { Handler } from "../Core/Handler";
 

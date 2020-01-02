@@ -1,5 +1,5 @@
-import { ExpenseCreatedEvent } from "../../Events/ExpenseCreatedEvent";
-import { ExpenseRequestedEvent } from "../../Events/ExpenseRequestedEvent";
+import { ExpenseCreatedEvent } from "../../Events/Created/ExpenseCreatedEvent";
+import { ExpenseRequestedEvent } from "../../Events/Requested/Creation/ExpenseRequestedEvent";
 import { ExpenseProjection } from "../../Projections/ExpenseProjection";
 import { Handler } from "../Core/Handler";
 

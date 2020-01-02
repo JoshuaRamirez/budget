@@ -1,5 +1,5 @@
-import { TransactionCreatedEvent } from "../../Events/TransactionCreatedEvent";
-import { TransactionRequestedEvent } from "../../Events/TransactionRequestedEvent";
+import { TransactionCreatedEvent } from "../../Events/Created/TransactionCreatedEvent";
+import { TransactionRequestedEvent } from "../../Events/Requested/Creation/TransactionRequestedEvent";
 import { TransactionProjection } from "../../Projections/TransactionProjection";
 import { Handler } from "../Core/Handler";
 

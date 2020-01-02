@@ -1,4 +1,4 @@
-import { LedgerCreatedEvent } from "../../Events/LedgerCreatedEvent";
+import { LedgerCreatedEvent } from "../../Events/Created/LedgerCreatedEvent";
 import { AccountProjection } from "../../Projections/AccountProjection";
 import { LedgerProjection } from "../../Projections/LedgerProjection";
 import { LinkOneSubjectToOneTargetDeclaration } from "./Core/LinkOneSubjectToOneTargetDeclaration";

@@ -1,4 +1,4 @@
-import { PayerRequestedEvent } from "../../Events/PayerRequestedEvent";
+import { PayerRequestedEvent } from "../../Events/Requested/Creation/PayerRequestedEvent";
 import { PayerProjection } from "../../Projections/PayerProjection";
 import { Handler } from "../Core/Handler";
 

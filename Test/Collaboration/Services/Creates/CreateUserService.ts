@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { UserRequestedEvent } from "../../../../Source/Events/UserRequestedEvent";
+import { UserRequestedEvent } from "../../../../Source/Events/Requested/Creation/UserRequestedEvent";
 import { AccountProjection } from "../../../../Source/Projections/AccountProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
