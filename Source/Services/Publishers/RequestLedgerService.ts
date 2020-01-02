@@ -1,9 +1,9 @@
 import { AccountCreatedEvent } from "../../Events/Created/AccountCreatedEvent";
 import { LedgerRequestedEvent } from "../../Events/Requested/Creation/LedgerRequestedEvent";
-import { Continuation } from "../Core/Continuation";
-import { ContinuationReceiver } from "../Core/ContinuationReceiver";
+import { Route } from "../Core/Route";
+import { Router } from "../Core/Router";
 
-export class RequestLedgerService extends Continuation {
+export class RequestLedgerService extends Router {
   public static Instance = new RequestLedgerService();
   private static onAccountCreated(accountCreatedEvent: AccountCreatedEvent) {
     const ledgerRequestedEvent = new LedgerRequestedEvent();
@@ -13,7 +13,7 @@ export class RequestLedgerService extends Continuation {
   }
   constructor() {
     super();
-    const continuationHandler = new ContinuationReceiver(AccountCreatedEvent, RequestLedgerService.onAccountCreated);
-    this.Link(continuationHandler);
+    const route = new Route(AccountCreatedEvent, RequestLedgerService.onAccountCreated);
+    this.Link(route);
   }
 }

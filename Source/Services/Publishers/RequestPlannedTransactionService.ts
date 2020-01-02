@@ -4,10 +4,10 @@ import { PlannedTransactionRequestedEvent } from "../../Events/Requested/Creatio
 import { IPlannedTransaction } from "../../Projections/Core/IPlannedTransaction";
 import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjection";
 import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjection";
-import { Continuation } from "../Core/Continuation";
-import { ContinuationReceiver } from "../Core/ContinuationReceiver";
+import { Route } from "../Core/Route";
+import { Router } from "../Core/Router";
 
-export class RequestPlannedTransactionService extends Continuation {
+export class RequestPlannedTransactionService extends Router {
   public static Instance = new RequestPlannedTransactionService();
   constructor() {
     super();
@@ -22,17 +22,17 @@ export class RequestPlannedTransactionService extends Continuation {
       plannedTransactionRequestedEvent.TransactionType = transactionType;
       return plannedTransactionRequestedEvent;
     };
-    const continuationFromDeposit = new ContinuationReceiver(PlannedDepositCreatedEvent, (subjectEvent: PlannedDepositCreatedEvent) => {
+    const depositRoute = new Route(PlannedDepositCreatedEvent, (subjectEvent: PlannedDepositCreatedEvent) => {
       const subject = PlannedDepositProjection.Get(subjectEvent.PlannedDepositId);
       const targetEvent = map(subject, "Deposit");
       return targetEvent;
     });
-    const continuationFromExpense = new ContinuationReceiver(PlannedExpenseCreatedEvent, (subjectEvent: PlannedExpenseCreatedEvent) => {
+    const expenseRoute = new Route(PlannedExpenseCreatedEvent, (subjectEvent: PlannedExpenseCreatedEvent) => {
       const subject = PlannedExpenseProjection.Get(subjectEvent.PlannedExpenseId);
       const targetEvent = map(subject, "Expense");
       return targetEvent;
     });
-    this.Link(continuationFromDeposit);
-    this.Link(continuationFromExpense);
+    this.Link(depositRoute);
+    this.Link(expenseRoute);
   }
 }

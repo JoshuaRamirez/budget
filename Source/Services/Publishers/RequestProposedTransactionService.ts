@@ -2,10 +2,10 @@ import { User } from "../../Core/User";
 import { PlannedTransactionCreatedEvent } from "../../Events/Created/PlannedTransactionCreatedEvent";
 import { ProposedTransactionRequestedEvent } from "../../Events/Requested/Creation/ProposedTransactionRequestedEvent";
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
-import { Continuation } from "../Core/Continuation";
-import { ContinuationReceiver } from "../Core/ContinuationReceiver";
+import { Route } from "../Core/Route";
+import { Router } from "../Core/Router";
 
-export class RequestProposedTransactionService extends Continuation {
+export class RequestProposedTransactionService extends Router {
   public static Instance = new RequestProposedTransactionService();
   public static processNewDay() {
     const plannedTransactionProjections = PlannedTransactionProjection.All();
@@ -43,8 +43,8 @@ export class RequestProposedTransactionService extends Continuation {
   }
   constructor() {
     super();
-    const continuationHandler = new ContinuationReceiver(PlannedTransactionCreatedEvent, RequestProposedTransactionService.processTransactionCreatedEvent);
-    this.Link(continuationHandler);
+    const route = new Route(PlannedTransactionCreatedEvent, RequestProposedTransactionService.processTransactionCreatedEvent);
+    this.Link(route);
     RequestProposedTransactionService.processNewDay();
     this.startTimer();
   }

@@ -1,9 +1,9 @@
 import { UserCreatedEvent } from "../../Events/Created/UserCreatedEvent";
 import { AccountRequestedEvent } from "../../Events/Requested/Creation/AccountRequestedEvent";
-import { Continuation } from "../Core/Continuation";
-import { ContinuationReceiver } from "../Core/ContinuationReceiver";
+import { Route } from "../Core/Route";
+import { Router } from "../Core/Router";
 
-export class RequestAccountService extends Continuation {
+export class RequestAccountService extends Router {
   public static Instance = new RequestAccountService();
   private static makeAccountRequestedEvent(userCreatedEvent: UserCreatedEvent): AccountRequestedEvent {
     const accountRequestedEvent = new AccountRequestedEvent();
@@ -14,7 +14,7 @@ export class RequestAccountService extends Continuation {
   }
   constructor() {
     super();
-    const continuationHandler = new ContinuationReceiver(UserCreatedEvent, RequestAccountService.makeAccountRequestedEvent);
-    this.Link(continuationHandler);
+    const route = new Route(UserCreatedEvent, RequestAccountService.makeAccountRequestedEvent);
+    this.Link(route);
   }
 }
