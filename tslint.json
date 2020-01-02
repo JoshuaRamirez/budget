@@ -12,7 +12,8 @@
         "no-consecutive-blank-lines": false,
         "no-console": false,
         "max-line-length": false,
-        "max-classes-per-file": false
+        "max-classes-per-file": false,
+        "trailing-comma": false
     },
     "rulesDirectory": []
 }
