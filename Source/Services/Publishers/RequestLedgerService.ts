@@ -1,7 +1,7 @@
 import { AccountCreatedEvent } from "../../Events/Created/AccountCreatedEvent";
 import { LedgerRequestedEvent } from "../../Events/Requested/Creation/LedgerRequestedEvent";
 import { Continuation } from "../Core/Continuation";
-import { ContinuationHandler } from "../Core/ContinuationHandler";
+import { ContinuationReceiver } from "../Core/ContinuationReceiver";
 
 export class RequestLedgerService extends Continuation {
   public static Instance = new RequestLedgerService();
@@ -13,7 +13,7 @@ export class RequestLedgerService extends Continuation {
   }
   constructor() {
     super();
-    const continuationHandler = new ContinuationHandler(AccountCreatedEvent, RequestLedgerService.onAccountCreated);
+    const continuationHandler = new ContinuationReceiver(AccountCreatedEvent, RequestLedgerService.onAccountCreated);
     this.Link(continuationHandler);
   }
 }
