@@ -1,6 +1,6 @@
 import { Event } from "../../Events/Core/Event";
-import { ISubscribable } from "./ISubscribable";
+import { ISubscriber } from "./ISubscriber";
 
-export interface IReceiver<TEvent extends Event> extends ISubscribable {
+export interface IReceiver<TEvent extends Event> extends ISubscriber {
   Receive(event: TEvent): void;
 }

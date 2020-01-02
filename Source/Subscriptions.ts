@@ -1,4 +1,4 @@
-import { ISubscribable } from "./Services/Core/ISubscribable";
+import { ISubscriber } from "./Services/Core/ISubscriber";
 import { CreateAccountService } from "./Services/Creates/CreateAccountService";
 import { CreateAllocationService } from "./Services/Creates/CreateAllocationService";
 import { CreateBudgetService } from "./Services/Creates/CreateBudgetService";
@@ -48,7 +48,7 @@ export class Subscriptions {
       subscriptionList.forEach(unSubscriber);
     });
   }
-  private static createServices: ISubscribable[] = [
+  private static createServices: ISubscriber[] = [
     CreateAccountService.Instance,
     CreateAllocationService.Instance,
     CreateBudgetService.Instance,
@@ -64,11 +64,11 @@ export class Subscriptions {
     CreateTransactionService.Instance,
     CreateUserService.Instance,
   ];
-  private static updateServices: ISubscribable[] = [
+  private static updateServices: ISubscriber[] = [
     UpdateLedgerBalanceService.Instance,
     UpdateLedgerStartingBalanceService.Instance,
   ];
-  private static linkServices: ISubscribable[] = [
+  private static linkServices: ISubscriber[] = [
     LinkAccountToUserService.Instance,
     LinkDepositToPlannedDepositService.Instance,
     LinkExpenseToPayeeService.Instance,
@@ -89,7 +89,7 @@ export class Subscriptions {
   private static domainServices = [
     ForecastPlannedTransactionsService.Instance,
   ];
-  private static allSubscriptions: ISubscribable[][] = [
+  private static allSubscriptions: ISubscriber[][] = [
     Subscriptions.createServices,
     Subscriptions.updateServices,
     Subscriptions.linkServices,

@@ -1,4 +1,4 @@
-export interface ISubscribable {
+export interface ISubscriber {
   Subscribe();
   UnSubscribe();
 }

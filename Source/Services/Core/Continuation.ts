@@ -1,8 +1,8 @@
 import { Event } from "../../Events/Core/Event";
 import { ContinuationHandler } from "./ContinuationHandler";
-import { ISubscribable } from "./ISubscribable";
+import { ISubscriber } from "./ISubscriber";
 
-export abstract class Continuation implements ISubscribable {
+export abstract class Continuation implements ISubscriber {
   private Continuations: Array<ContinuationHandler<Event, Event>> = [];
   public Link<TSubscriptionEvent extends Event, TPublicationEvent extends Event>(continuationHandler: ContinuationHandler<TSubscriptionEvent, TPublicationEvent>) {
     this.Continuations.push(continuationHandler);
