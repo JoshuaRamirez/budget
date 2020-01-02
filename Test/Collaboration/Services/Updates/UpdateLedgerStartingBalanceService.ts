@@ -3,7 +3,7 @@ import "mocha";
 import { LedgerStartingBalanceUpdateRequestedEvent } from "../../../../Source/Events/Requested/Mutation/LedgerStartingBalanceUpdateRequestedEvent";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
-import { UpdateLedgerStartingBalanceService } from "../../../../Source/Services/Updates/UpdateLedgerStartingBalanceService";
+import { UpdateLedgerStartingBalanceService } from "../../../../Source/Services/Domain/UpdateLedgerStartingBalanceService";
 import { Subscriptions } from "../../../../Source/Subscriptions";
 
 
