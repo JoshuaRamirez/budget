@@ -4,8 +4,8 @@ import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjec
 import { Continuation } from "../Core/Continuation";
 import { ContinuationHandler } from "../Core/ContinuationHandler";
 
-export class ChainPlannedDepositCreatedToPlannedTransactionRequestedService extends Continuation {
-  public static Instance = new ChainPlannedDepositCreatedToPlannedTransactionRequestedService();
+export class RequestPlannedTransactionService extends Continuation {
+  public static Instance = new RequestPlannedTransactionService();
   constructor() {
     super();
     const continuationHandler = new ContinuationHandler(PlannedDepositCreatedEvent, (subjectEvent: PlannedDepositCreatedEvent) => {

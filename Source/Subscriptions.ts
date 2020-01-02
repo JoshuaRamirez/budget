@@ -23,11 +23,11 @@ import { LinkForecastToPlannedExpensesService } from "./Services/Links/LinkForec
 import { LinkLedgerToAccountService } from "./Services/Links/LinkLedgerToAccountService";
 import { LinkProposedTransactionToPlannedTransactionService } from "./Services/Links/LinkProposedTransactionToPlannedTransactionService";
 import { LinkTransactionToLedgerService } from "./Services/Links/LinkTransactionToLedgerService";
-import { ChainPlannedDepositCreatedToPlannedTransactionRequestedService } from "./Services/Publishers/ChainPlannedDepositCreatedToPlannedTransactionRequestedService";
 import { ChainPlannedExpenseCreatedToPlannedTransactionRequestedService } from "./Services/Publishers/ChainPlannedExpenseCreatedToPlannedTransactionRequestedService";
 import { PublishAccountRequestedService } from "./Services/Publishers/PublishAccountRequestedService";
 import { PublishLedgerRequestedService } from "./Services/Publishers/PublishLedgerRequestedService";
 import { PublishProposedTransactionCreationRequestedService } from "./Services/Publishers/PublishProposedTransactionCreationRequestedService";
+import { RequestPlannedTransactionService } from "./Services/Publishers/RequestPlannedTransactionService";
 import { UpdateLedgerBalanceService } from "./Services/Updates/UpdateLedgerBalanceService";
 import { UpdateLedgerStartingBalanceService } from "./Services/Updates/UpdateLedgerStartingBalanceService";
 
@@ -84,7 +84,7 @@ export class Subscriptions {
     PublishLedgerRequestedService.Instance,
     PublishProposedTransactionCreationRequestedService.Instance,
     ChainPlannedExpenseCreatedToPlannedTransactionRequestedService.Instance,
-    ChainPlannedDepositCreatedToPlannedTransactionRequestedService.Instance,
+    RequestPlannedTransactionService.Instance,
   ];
   private static domainServices = [
     ForecastPlannedTransactionsService.Instance,
