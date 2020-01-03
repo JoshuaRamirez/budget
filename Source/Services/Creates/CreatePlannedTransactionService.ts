@@ -19,6 +19,7 @@ export class CreatePlannedTransactionService extends Receiver<PlannedTransaction
     plannedTransactionProjection.RepeatPeriod = event.RepeatPeriod;
     plannedTransactionProjection.StartDate = event.RepeatStart;
     plannedTransactionProjection.TransactionType = event.TransactionType;
+    // Where's the LedgerId? Probably should make one.
     plannedTransactionProjection.Project();
     // Publish PlannedTransactionCreatedEvent
     const plannedTransactionCreatedEvent = new PlannedTransactionCreatedEvent();
