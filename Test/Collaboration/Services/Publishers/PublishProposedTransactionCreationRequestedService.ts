@@ -22,7 +22,7 @@ describe("RequestProposedTransactionService", () => {
     plannedTransactionCreationRequestedEvent.RepeatStart.setHours(0, 0, 0, 0);
     return plannedTransactionCreationRequestedEvent;
   };
-  it("should eventually necessitate the creation of a proposed traction from a planned transaction matching today's date.", () => {
+  it("should necessitate the creation of a proposed transaction after the creation of a planned transaction for today's date.", () => {
     const plannedTransactionCreationRequestedEvent = makePlannedTransactionRequestForToday();
     plannedTransactionCreationRequestedEvent.Publish();
     const proposedTransactions = ProposedTransactionProjection.All();
