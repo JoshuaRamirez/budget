@@ -10,7 +10,8 @@ export class Publisher<TEvent extends Event> {
     if (!Publisher.Subscriptions[event.EventName]) {
       return;
     }
-    Publisher.Subscriptions[event.EventName].forEach((handler) => {
+    const handlers = Publisher.Subscriptions[event.EventName];
+    handlers.forEach((handler) => {
         handler(event);
     });
   }
