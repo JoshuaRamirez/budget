@@ -14,6 +14,7 @@ import { CreateProposedTransactionService } from "./Services/Creates/CreatePropo
 import { CreateTransactionService } from "./Services/Creates/CreateTransactionService";
 import { CreateUserService } from "./Services/Creates/CreateUserService";
 import { ForecastPlannedTransactionsService } from "./Services/Domain/ForecastPlannedTransactionsService";
+import { ProposeTransactionsForToday } from "./Services/Domain/ProposeTransactionsForToday";
 import { UpdateLedgerBalanceService } from "./Services/Domain/UpdateLedgerBalanceService";
 import { UpdateLedgerStartingBalanceService } from "./Services/Domain/UpdateLedgerStartingBalanceService";
 import { LinkAccountToUserService } from "./Services/Links/LinkAccountToUserService";
@@ -25,10 +26,10 @@ import { LinkForecastToPlannedExpensesService } from "./Services/Links/LinkForec
 import { LinkLedgerToAccountService } from "./Services/Links/LinkLedgerToAccountService";
 import { LinkProposedTransactionToPlannedTransactionService } from "./Services/Links/LinkProposedTransactionToPlannedTransactionService";
 import { LinkTransactionToLedgerService } from "./Services/Links/LinkTransactionToLedgerService";
-import { RequestProposedTransactionService } from "./Services/Requestors/RequestProposedTransactionService";
 import { AccountCreatedToLedgerRequested } from "./Services/Routes/AccountCreatedToLedgerRequested";
 import { PlannedDepositCreatedToPlannedTransactionRequested } from "./Services/Routes/PlannedDepositCreatedToPlannedTransactionRequested";
 import { PlannedExpenseCreatedToPlannedTransactionRequested } from "./Services/Routes/PlannedExpenseCreatedToPlannedTransactionRequested";
+import { PlannedTransactionCreatedToProposedTransactionRequested } from "./Services/Routes/PlannedTransactionCreatedToProposedTransactionRequested";
 import { UserCreatedToAccountRequested } from "./Services/Routes/UserCreatedToAccountRequested";
 
 export class Subscriptions {
@@ -81,13 +82,14 @@ export class Subscriptions {
   ];
   private static eventChainServices = [
     AccountCreatedToLedgerRequested.Instance,
-    UserCreatedToAccountRequested.Instance,
     PlannedDepositCreatedToPlannedTransactionRequested.Instance,
     PlannedExpenseCreatedToPlannedTransactionRequested.Instance,
-    RequestProposedTransactionService.Instance
+    PlannedTransactionCreatedToProposedTransactionRequested.Instance,
+    UserCreatedToAccountRequested.Instance,
   ];
   private static domainServices = [
     ForecastPlannedTransactionsService.Instance,
+    ProposeTransactionsForToday.Instance,
   ];
   private static allSubscriptions: ISubscriber[][] = [
     Subscriptions.createServices,
