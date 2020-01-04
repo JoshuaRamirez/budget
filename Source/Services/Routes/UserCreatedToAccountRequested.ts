@@ -7,10 +7,7 @@ import { Router } from "../Core/Router";
 export class UserCreatedToAccountRequested extends Route<UserCreatedEvent, AccountRequestedEvent> {
   public static Instance = new UserCreatedToAccountRequested();
   constructor() {
-    super(UserCreatedEvent, (userCreatedEvent) => {
-      const accountRequestedEvent = MapUserCreatedEventToAccountRequestedEvent(userCreatedEvent);
-      return accountRequestedEvent;
-    });
+    super(UserCreatedEvent, MapUserCreatedEventToAccountRequestedEvent);
     Router.Instance.Link(this);
   }
 }
