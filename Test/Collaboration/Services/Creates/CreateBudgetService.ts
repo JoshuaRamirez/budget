@@ -4,14 +4,13 @@ import { BudgetRequestedEvent } from "../../../../Source/Events/Requested/Creati
 import { BudgetProjection } from "../../../../Source/Projections/BudgetProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { CreateBudgetService } from "../../../../Source/Services/Creates/CreateBudgetService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 
 
 describe("CreateBudgetService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create projection", () => {
     const event = new BudgetRequestedEvent();

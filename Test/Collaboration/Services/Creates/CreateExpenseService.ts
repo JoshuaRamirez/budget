@@ -3,15 +3,14 @@ import "mocha";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { ExpenseProjection } from "../../../../Source/Projections/ExpenseProjection";
 import { CreateExpenseService } from "../../../../Source/Services/Creates/CreateExpenseService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 import { NewExpenseRequestedEvent } from "../../../Helpers";
 
 
 describe("CreateExpenseService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create projection", () => {
     const event = NewExpenseRequestedEvent();

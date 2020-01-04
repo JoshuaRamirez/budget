@@ -4,14 +4,13 @@ import { PlannedExpenseRequestedEvent } from "../../../../Source/Events/Requeste
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { PlannedExpenseProjection } from "../../../../Source/Projections/PlannedExpenseProjection";
 import { CreatePlannedExpenseService } from "../../../../Source/Services/Creates/CreatePlannedExpenseService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 
 
 describe("CreatePlannedExpenseService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create projection", () => {
     const event = new PlannedExpenseRequestedEvent();

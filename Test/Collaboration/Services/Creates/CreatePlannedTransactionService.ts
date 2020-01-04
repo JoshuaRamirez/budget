@@ -2,15 +2,14 @@ import { assert } from "chai";
 import "mocha";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { PlannedTransactionProjection } from "../../../../Source/Projections/PlannedTransactionProjection";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 import { NewPlannedTransactionCreationRequestedEvent } from "../../../Helpers";
 
 
 describe("CreatePlannedTransactionService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create projection", () => {
     const event = NewPlannedTransactionCreationRequestedEvent();

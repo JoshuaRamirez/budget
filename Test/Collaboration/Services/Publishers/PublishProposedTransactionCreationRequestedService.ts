@@ -1,15 +1,13 @@
 import { assert } from "chai";
 import { User } from "../../../../Source/Core/User";
 import { PlannedTransactionRequestedEvent } from "../../../../Source/Events/Requested/Creation/PlannedTransactionRequestedEvent";
-import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { ProposedTransactionProjection } from "../../../../Source/Projections/ProposedTransactionProjection";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 
 describe("RequestProposedTransactionService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   const makePlannedTransactionRequestForToday = (repeatStart = new Date()) => {
     const plannedTransactionCreationRequestedEvent = new PlannedTransactionRequestedEvent();
@@ -29,7 +27,7 @@ describe("RequestProposedTransactionService", () => {
     const proposedTransaction = proposedTransactions[0];
     assert.exists(proposedTransaction);
   });
-  it("should ", () => {
+  it("should xyz", () => {
     const tomorrow = User.GetDate();
     tomorrow.setDate(tomorrow.getDate() + 1);
     const plannedTransactionCreationRequestedEvent = makePlannedTransactionRequestForToday(tomorrow);

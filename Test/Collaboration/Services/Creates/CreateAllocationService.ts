@@ -4,14 +4,13 @@ import { AllocationRequestedEvent } from "../../../../Source/Events/Requested/Cr
 import { AllocationProjection } from "../../../../Source/Projections/AllocationProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { CreateAllocationService } from "../../../../Source/Services/Creates/CreateAllocationService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 
 
 describe("CreateAllocationService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create projection", () => {
     const event = new AllocationRequestedEvent();

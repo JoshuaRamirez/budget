@@ -11,7 +11,7 @@ import { PayeeProjection } from "../../Source/Projections/PayeeProjection";
 import { PlannedExpenseProjection } from "../../Source/Projections/PlannedExpenseProjection";
 import { TransactionProjection } from "../../Source/Projections/TransactionProjection";
 import { UserProjection } from "../../Source/Projections/UserProjection";
-import { Subscriptions } from "../../Source/Subscriptions";
+import { System } from "../../Source/System/System";
 import {
   GetLast,
   PublishAccountRequestedEvent,
@@ -34,17 +34,15 @@ describe("Scenarios", () => {
     let ledgerId: any;
 
     before(() => {
-      Subscriptions.Release();
-      ProjectionStore.Instance.ClearAll();
+      System.Shutdown();
     });
 
     after(() => {
-      Subscriptions.Release();
-      ProjectionStore.Instance.ClearAll();
+      System.Shutdown();
     });
     describe("Basic Usage", () => {
-      it("Given all subscriptions are setup", () => {
-        Subscriptions.Create();
+      it("Given the system is started", () => {
+        System.Startup();
       });
       it("When a NewUserRequestedEvent is published", () => {
         PublishUserRequestedEvent();

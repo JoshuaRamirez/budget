@@ -3,15 +3,14 @@ import "mocha";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
 import { CreateLedgerService } from "../../../../Source/Services/Creates/CreateLedgerService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 import { NewLedgerRequestedEvent } from "../../../Helpers";
 
 
 describe("CreateLedgerService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create projection", () => {
     const event = NewLedgerRequestedEvent();

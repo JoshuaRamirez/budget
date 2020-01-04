@@ -4,15 +4,14 @@ import { UserRequestedEvent } from "../../../../Source/Events/Requested/Creation
 import { AccountProjection } from "../../../../Source/Projections/AccountProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { CreateAccountService } from "../../../../Source/Services/Creates/CreateAccountService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 import { NewAccountRequestedEvent } from "../../../Helpers";
 
 
 describe("CreateAccountService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
     // Each Account created is expected to be linked to a User
     const userRequestedEvent = new UserRequestedEvent();
     userRequestedEvent.Publish();

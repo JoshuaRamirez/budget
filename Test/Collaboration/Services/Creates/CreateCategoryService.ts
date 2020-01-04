@@ -4,14 +4,13 @@ import { CategoryRequestedEvent } from "../../../../Source/Events/Requested/Crea
 import { CategoryProjection } from "../../../../Source/Projections/CategoryProjection";
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { CreateCategoryService } from "../../../../Source/Services/Creates/CreateCategoryService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 
 
 describe("CreateCategoryService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create projection", () => {
     const event = new CategoryRequestedEvent();

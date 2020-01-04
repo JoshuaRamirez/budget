@@ -4,14 +4,13 @@ import { PayeeRequestedEvent } from "../../../../Source/Events/Requested/Creatio
 import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionStore";
 import { PayeeProjection } from "../../../../Source/Projections/PayeeProjection";
 import { CreatePayeeService } from "../../../../Source/Services/Creates/CreatePayeeService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 
 
 describe("CreatePayeeService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create projection", () => {
     const event = new PayeeRequestedEvent();

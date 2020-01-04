@@ -6,14 +6,13 @@ import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionS
 import { LedgerProjection } from "../../../../Source/Projections/LedgerProjection";
 import { UserProjection } from "../../../../Source/Projections/UserProjection";
 import { CreateUserService } from "../../../../Source/Services/Creates/CreateUserService";
-import { Subscriptions } from "../../../../Source/Subscriptions";
+import { System } from "../../../../Source/System/System";
 
 
 describe("CreateUserService", () => {
   beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    System.Shutdown();
+    System.Startup();
   });
   it("should create initial projections", () => {
     const event = new UserRequestedEvent();
