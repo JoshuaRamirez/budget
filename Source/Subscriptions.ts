@@ -14,6 +14,7 @@ import { CreateProposedTransactionService } from "./Services/Creates/CreatePropo
 import { CreateTransactionService } from "./Services/Creates/CreateTransactionService";
 import { CreateUserService } from "./Services/Creates/CreateUserService";
 import { ForecastPlannedTransactionsService } from "./Services/Domain/ForecastPlannedTransactionsService";
+import { IncrementProposedTransactionCounter } from "./Services/Domain/IncrementProposedTransactionCounter";
 import { ProposeTransactionsForToday } from "./Services/Domain/ProposeTransactionsForToday";
 import { UpdateLedgerBalanceService } from "./Services/Domain/UpdateLedgerBalanceService";
 import { UpdateLedgerStartingBalanceService } from "./Services/Domain/UpdateLedgerStartingBalanceService";
@@ -65,7 +66,7 @@ export class Subscriptions {
     CreateTransactionService.Instance,
     CreateUserService.Instance
   ];
-  private static updateServices: ISubscriber[] = [UpdateLedgerBalanceService.Instance, UpdateLedgerStartingBalanceService.Instance];
+  private static updateServices: ISubscriber[] = [UpdateLedgerBalanceService.Instance, UpdateLedgerStartingBalanceService.Instance, IncrementProposedTransactionCounter.Instance];
   private static linkServices: ISubscriber[] = [
     LinkAccountToUserService.Instance,
     LinkDepositToPlannedDepositService.Instance,
