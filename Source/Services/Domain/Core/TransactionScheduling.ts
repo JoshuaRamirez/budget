@@ -2,38 +2,47 @@ import { IPlannedTransaction } from "../../../Projections/Core/IPlannedTransacti
 import { PlannedTransactionProjection } from "../../../Projections/PlannedTransactionProjection";
 
 export class TransactionScheduling {
-  public static applyAmounts = (toDays, plannedTransactions) => {
+  public static applyAmounts = (toDays, plannedTransactions, startingBalance: number) => {
     let runningTotal = 0;
+    if (startingBalance) {
+      runningTotal += startingBalance;
+    }
     toDays.forEach(currentDay => {
       plannedTransactions.forEach((plannedTransaction: PlannedTransactionProjection) => {
-        const hasPlanStarted = (() => {
-          return currentDay.date >= plannedTransaction.StartDate;
-        })();
-        const isRecurrenceCountReached = (() => {
+        const startDate = new Date(plannedTransaction.StartDate);
+        startDate.setHours(0, 0, 0, 0);
+        const hasPlanStarted = () => {
+          return currentDay.date >= startDate;
+        };
+        const isRecurrenceCountReached = () => {
           if (!plannedTransaction.RepeatCount) {
             return false;
           }
-          if ((plannedTransaction as any).timesRepeatedInForecast >= plannedTransaction.RepeatCount) {
-            return true;
-          }
-          if ((plannedTransaction as any).timesRepeatedInForecast < plannedTransaction.RepeatCount) {
+          const timesRepeated = (plannedTransaction as any).timesRepeatedInForecast;
+          if (plannedTransaction.RepeatCount < timesRepeated) {
             return false;
           }
-        })();
-        const isForCurrentDay = (() => {
+          if (timesRepeated >= plannedTransaction.RepeatCount) {
+            return true;
+          }
+          if (timesRepeated < plannedTransaction.RepeatCount) {
+            return false;
+          }
+        };
+        const isForCurrentDay = () => {
           const currentDateNumber = currentDay.date.getDate();
-          const startDateNumber = plannedTransaction.StartDate.getDate();
+          const startDateNumber = startDate.getDate();
           const differenceInDays = currentDateNumber - startDateNumber;
           const remainder = differenceInDays % plannedTransaction.RepeatPeriod;
           return remainder === 0;
-        })();
-        if (!hasPlanStarted) {
+        };
+        if (!hasPlanStarted()) {
           return;
         }
-        if (isRecurrenceCountReached) {
+        if (isRecurrenceCountReached()) {
           return;
         }
-        if (isForCurrentDay) {
+        if (isForCurrentDay()) {
           if (plannedTransaction.TransactionType === "Expense") {
             runningTotal -= plannedTransaction.Amount;
           }
@@ -45,8 +54,8 @@ export class TransactionScheduling {
           }
           (plannedTransaction as any).timesRepeatedInForecast += 1;
         }
-        currentDay.amount = runningTotal;
       });
+      currentDay.amount = runningTotal;
     });
     return toDays;
   };

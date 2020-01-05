@@ -12,16 +12,21 @@ export class ForecastPlannedTransactionsService extends Receiver<ForecastCalcula
     super(ForecastCalculationRequestEvent);
   }
   public Receive(event: ForecastCalculationRequestEvent) {
+    const startDate = new Date(event.StartDate);
+    const endDate = new Date(event.EndDate);
+    startDate.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
     if (event.StartDate > event.EndDate) {
       return;
     }
-    let days = TransactionScheduling.createDays(event.StartDate, event.EndDate);
+    let days = TransactionScheduling.createDays(startDate, endDate);
     const plannedTransactions = PlannedTransactionProjection.All();
     if (plannedTransactions.length === 0) {
       throw new Error("Missing PlannedTransactionProjection Data.");
     }
     plannedTransactions.forEach(TransactionScheduling.validatedPlannedTransaction);
-    days = TransactionScheduling.applyAmounts(days, plannedTransactions);
+    const startingBalance = event.StartingBalance;
+    days = TransactionScheduling.applyAmounts(days, plannedTransactions, startingBalance);
     days.forEach(day => {
       const plannedDepositIds = PlannedDepositProjection.All().map(plannedDeposit => plannedDeposit.Id);
       const plannedExpenseIds = PlannedExpenseProjection.All().map(plannedExpense => plannedExpense.Id);

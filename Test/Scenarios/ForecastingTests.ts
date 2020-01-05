@@ -41,6 +41,7 @@ describe("Forecasting", () => {
     newExpense("Lodging", 700, -1, 7);
     newExpense("Food", 50, -1, 1);
     newExpense("Subs", 300, -1, 30);
+    newExpense("Children", 875, -1, 7);
   });
 
   it("Creating Deposits", () => {
@@ -59,9 +60,6 @@ describe("Forecasting", () => {
     const results = ForecastProjection.All();
     results.forEach(x => {
       console.log(`${x.Date}: ${x.Amount} | Expenses: Pending | Deposits: Pending`);
-      // TODO: The starting balance should be taken into account during the calculation.
-      // TODO: The start date for the planned expenses and deposits is the 4th (today)
-      // TODO: It should still calculate the balance for the 1st, 2nd, and 3rd
     });
   });
 
