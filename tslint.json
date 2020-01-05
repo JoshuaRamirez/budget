@@ -1,11 +1,13 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint:recommended"
+        "tslint:latest",
+        "tslint:recommended",
+        "tslint-plugin-prettier",
+        "tslint-config-prettier"
     ],
     "jsRules": {},
     "rules": {
-        "new-parens": true,
         "no-arg": true,
         "no-bitwise": true,
         "no-conditional-assignment": true,
@@ -13,7 +15,8 @@
         "no-console": false,
         "max-line-length": false,
         "max-classes-per-file": false,
-        "trailing-comma": false
+        "trailing-comma": false,
+        "prettier": [true, "./prettierrc"]
     },
-    "rulesDirectory": []
+    "rulesDirectory": ["tslint-plugin-prettier"]
 }

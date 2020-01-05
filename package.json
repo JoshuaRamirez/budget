@@ -9,22 +9,32 @@
   "dependencies": {
     "@types/node": "^11.13.8",
     "jshint": "^2.10.2",
-    "serializr": "^1.5.1"
-  },
-  "devDependencies": {
+    "serializr": "^1.5.1",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "chai": "^4.2.0",
-    "mocha": "^6.1.4",
+    "mocha": "^6.1.4"
+  },
+  "devDependencies": {
+    "onchange": "^6.1.0",
+    "prettier": "1.19.1",
     "ts-node": "^8.1.0",
     "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.1.0",
     "typescript": "^3.4.5"
   },
   "scripts": {
     "start": "tsc Source/main.ts && node main.js --experimental-modules --loader Source/system/customLoader.mjs",
-    "test": "mocha --exit -r ts-node/register 'Test/**/*.ts'",
+    "test": "mocha -r ts-node/register 'Test/**/*.ts'",
     "build": "tsc --p tsconfig.json",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "tslint": "tslint './{Source,Test}/**/*.ts'",
+    "tslint:fix": "npm run tslint -- --fix",
+    "tslint:check": "tslint-config-prettier-check ./tslint.json",
+    "prettier": "prettier --write --config ./prettierrc './{Source,Test}/**/*.ts'",
+    "prettier-watch": "onchange './{Source,Test}/**/*.ts' -- prettier --write {{changed}}",
+    "tslint:fix-watch": "onchange './{Source,Test}/**/*.ts' -- tslint --fix '{{changed}}'"
   },
   "author": "",
   "license": "ISC"
