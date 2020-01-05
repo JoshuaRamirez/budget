@@ -1,0 +1,3 @@
+describe("Publishers", () => {
+  require("./PublishProposedTransactionCreationRequestedService");
+});
