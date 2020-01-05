@@ -1,9 +1,8 @@
 import { assert } from "chai";
 import "mocha";
-import {PlannedDepositProjection} from "../../../Source/Projections/PlannedDepositProjection";
+import { PlannedDepositProjection } from "../../../Source/Projections/PlannedDepositProjection";
 
 describe("PlannedDepositProjection", () => {
-
   it("should import", () => {
     assert.exists(PlannedDepositProjection);
   });
@@ -14,5 +13,4 @@ describe("PlannedDepositProjection", () => {
   it("should get", () => {
     PlannedDepositProjection.Get(1);
   });
-
 });

@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import {LinkExpenseToPayeeService} from "../../../../Source/Services/Links/LinkExpenseToPayeeService";
+import { LinkExpenseToPayeeService } from "../../../../Source/Services/Links/LinkExpenseToPayeeService";
 import { NewExpenseCreatedEvent } from "../../../Helpers";
 
 describe("LinkExpenseToPayeeService", () => {

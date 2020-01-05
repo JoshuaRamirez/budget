@@ -34,7 +34,7 @@ export class ProjectionStore {
     if (!this.Projections[projectionName]) {
       return [];
     }
-    const unwrapped = this.Projections[projectionName].map((projection) => {
+    const unwrapped = this.Projections[projectionName].map(projection => {
       return this.deserialize(type, projection);
     });
     return unwrapped;
@@ -49,7 +49,7 @@ export class ProjectionStore {
   public ClearAll() {
     this.Projections = {};
   }
-  private write(name: string,  object: any) {
+  private write(name: string, object: any) {
     if (!this.Projections[name]) {
       this.Projections[name] = [];
     }
@@ -61,12 +61,12 @@ export class ProjectionStore {
     if (!this.Projections[name]) {
       return undefined;
     }
-    const projectionIndex = this.find(type,  id);
+    const projectionIndex = this.find(type, id);
     if (projectionIndex === -1) {
       return undefined;
     }
     const serialized = this.Projections[name][projectionIndex];
-    const deserialized = this.deserialize(type,  serialized);
+    const deserialized = this.deserialize(type, serialized);
     return deserialized;
   }
   private delete(type: any, id: any): void {
@@ -74,7 +74,7 @@ export class ProjectionStore {
     if (!this.Projections[name]) {
       return;
     }
-    const projectionIndex = this.find(type,  id);
+    const projectionIndex = this.find(type, id);
     if (projectionIndex === -1) {
       return;
     }
@@ -82,8 +82,8 @@ export class ProjectionStore {
   }
   private find(type: any, id: any) {
     const name = type.name;
-    const projection = this.Projections[name].find((wrapped) => {
-      const unwrapped: any = this.deserialize(type,  wrapped);
+    const projection = this.Projections[name].find(wrapped => {
+      const unwrapped: any = this.deserialize(type, wrapped);
       return unwrapped.Id === id;
     });
     return this.Projections[name].indexOf(projection);
@@ -93,7 +93,7 @@ export class ProjectionStore {
     const stringified = JSON.stringify(serialized);
     return stringified;
   }
-  private deserialize<TProjection>(type: (new () => TProjection), serialized: any): TProjection {
+  private deserialize<TProjection>(type: new () => TProjection, serialized: any): TProjection {
     try {
       const deStringified = JSON.parse(serialized);
       const deSerialized = deserialize<TProjection>(type, deStringified);

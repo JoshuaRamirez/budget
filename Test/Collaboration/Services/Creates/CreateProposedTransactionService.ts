@@ -5,7 +5,6 @@ import { ProposedTransactionProjection } from "../../../../Source/Projections/Pr
 import { System } from "../../../../Source/System/System";
 import { NewProposedTransactionCreationRequestedEvent } from "../../../Helpers";
 
-
 describe("CreateProposedTransactionService", () => {
   beforeEach(() => {
     System.Shutdown();

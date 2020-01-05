@@ -6,7 +6,6 @@ import { PayeeProjection } from "../../../../Source/Projections/PayeeProjection"
 import { CreatePayeeService } from "../../../../Source/Services/Creates/CreatePayeeService";
 import { System } from "../../../../Source/System/System";
 
-
 describe("CreatePayeeService", () => {
   beforeEach(() => {
     System.Shutdown();

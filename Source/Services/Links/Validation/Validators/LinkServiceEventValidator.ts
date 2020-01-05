@@ -1,4 +1,4 @@
-import { Event} from "../../../../Events/Core/Event";
+import { Event } from "../../../../Events/Core/Event";
 import { Projection } from "../../../../Projections/Core/Projection";
 import { IDeclaration } from "../../Core/IDeclaration";
 import { LinkServiceFieldValidator } from "./LinkServiceFieldValidator";

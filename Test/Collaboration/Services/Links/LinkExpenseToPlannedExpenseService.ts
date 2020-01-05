@@ -7,7 +7,6 @@ import { LinkExpenseToPlannedExpenseService } from "../../../../Source/Services/
 import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewExpenseCreatedEvent } from "../../../Helpers";
 
-
 describe("LinkExpenseToPlannedExpenseService", () => {
   beforeEach(() => {
     Subscriptions.Release();

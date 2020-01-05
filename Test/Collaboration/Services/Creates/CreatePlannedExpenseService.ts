@@ -6,7 +6,6 @@ import { PlannedExpenseProjection } from "../../../../Source/Projections/Planned
 import { CreatePlannedExpenseService } from "../../../../Source/Services/Creates/CreatePlannedExpenseService";
 import { System } from "../../../../Source/System/System";
 
-
 describe("CreatePlannedExpenseService", () => {
   beforeEach(() => {
     System.Shutdown();

@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import {ExpenseCreatedEvent} from "../../../Source/Events/Created/ExpenseCreatedEvent";
+import { ExpenseCreatedEvent } from "../../../Source/Events/Created/ExpenseCreatedEvent";
 
 describe("ExpenseCreatedEvent", () => {
   it("should import", () => {

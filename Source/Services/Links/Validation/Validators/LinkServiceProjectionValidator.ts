@@ -1,4 +1,4 @@
-import { Event} from "../../../../Events/Core/Event";
+import { Event } from "../../../../Events/Core/Event";
 import { Projection } from "../../../../Projections/Core/Projection";
 import { IDeclaration } from "../../Core/IDeclaration";
 import { LinkManySubjectsToManyTargetsDeclaration } from "../../Core/LinkManySubjectsToManyTargetsDeclaration";
@@ -20,17 +20,17 @@ export class LinkServiceProjectionValidator<TEvent extends Event, TSubjectProjec
   }
   public Validate() {
     if (this.declaration instanceof LinkManySubjectsToManyTargetsDeclaration) {
-      const fields = (this.declaration as unknown as LinkManySubjectsToManyTargetsDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      const fields = (this.declaration as unknown) as LinkManySubjectsToManyTargetsDeclaration<TEvent, TSubjectProjection, TTargetProjection>;
       this.arrayFieldIsValid(this.subjectProjection, fields.SubjectTargetIdsFieldName.toString());
       this.arrayFieldIsValid(this.targetProjection, fields.TargetSubjectIdsFieldName.toString());
     }
     if (this.declaration instanceof LinkManySubjectsToOneTargetDeclaration) {
-      const fields = (this.declaration as unknown as LinkManySubjectsToOneTargetDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      const fields = (this.declaration as unknown) as LinkManySubjectsToOneTargetDeclaration<TEvent, TSubjectProjection, TTargetProjection>;
       this.scalarFieldIsValid(this.subjectProjection, fields.SubjectTargetIdFieldName.toString());
       this.arrayFieldIsValid(this.targetProjection, fields.TargetSubjectIdsFieldName.toString());
     }
     if (this.declaration instanceof LinkOneSubjectToOneTargetDeclaration) {
-      const fields = (this.declaration as unknown as LinkOneSubjectToOneTargetDeclaration<TEvent, TSubjectProjection, TTargetProjection>);
+      const fields = (this.declaration as unknown) as LinkOneSubjectToOneTargetDeclaration<TEvent, TSubjectProjection, TTargetProjection>;
       this.scalarFieldIsValid(this.subjectProjection, fields.SubjectTargetIdFieldName.toString());
       this.scalarFieldIsValid(this.targetProjection, fields.TargetSubjectIdFieldName.toString());
     }

@@ -3,8 +3,7 @@ import { PlannedTransactionRequestedEvent } from "../../Events/Requested/Creatio
 import { PlannedTransactionProjection } from "../../Projections/PlannedTransactionProjection";
 import { Receiver } from "../Core/Receiver";
 
-
-export class CreatePlannedTransactionService extends Receiver<PlannedTransactionRequestedEvent>  {
+export class CreatePlannedTransactionService extends Receiver<PlannedTransactionRequestedEvent> {
   public static Instance = new CreatePlannedTransactionService();
   private constructor() {
     super(PlannedTransactionRequestedEvent);

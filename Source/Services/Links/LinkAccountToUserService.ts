@@ -4,19 +4,16 @@ import { UserProjection } from "../../Projections/UserProjection";
 import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";
 import { LinkService } from "./Core/LinkService";
 
-export class LinkAccountToUserService
-extends LinkService<AccountCreatedEvent, AccountProjection, UserProjection> {
+export class LinkAccountToUserService extends LinkService<AccountCreatedEvent, AccountProjection, UserProjection> {
   public static Instance: LinkAccountToUserService = new LinkAccountToUserService();
   private constructor() {
-    const declaration = new
-    LinkManySubjectsToOneTargetDeclaration<AccountCreatedEvent, AccountProjection, UserProjection>
-    ({
+    const declaration = new LinkManySubjectsToOneTargetDeclaration<AccountCreatedEvent, AccountProjection, UserProjection>({
       EventType: AccountCreatedEvent,
       SubjectIdFieldName: "AccountId",
       SubjectTargetIdFieldName: "UserId",
       SubjectType: AccountProjection,
       TargetSubjectIdsFieldName: "AccountIds",
-      TargetType: UserProjection,
+      TargetType: UserProjection
     });
     super(declaration);
   }

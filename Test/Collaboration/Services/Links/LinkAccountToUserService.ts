@@ -7,7 +7,6 @@ import { LinkAccountToUserService } from "../../../../Source/Services/Links/Link
 import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewAccountCreatedEvent } from "../../../Helpers";
 
-
 describe("LinkAccountToUserService", () => {
   beforeEach(() => {
     Subscriptions.Release();

@@ -4,15 +4,21 @@ import { PlannedTransactionProjection } from "../../../Projections/PlannedTransa
 export class TransactionScheduling {
   public static applyAmounts = (toDays, plannedTransactions) => {
     let runningTotal = 0;
-    toDays.forEach((currentDay) => {
+    toDays.forEach(currentDay => {
       plannedTransactions.forEach((plannedTransaction: PlannedTransactionProjection) => {
         const hasPlanStarted = (() => {
           return currentDay.date >= plannedTransaction.StartDate;
         })();
         const isRecurrenceCountReached = (() => {
-          if (!plannedTransaction.RepeatCount) { return false; }
-          if ((plannedTransaction as any).timesRepeatedInForecast >= plannedTransaction.RepeatCount) { return true; }
-          if ((plannedTransaction as any).timesRepeatedInForecast < plannedTransaction.RepeatCount) { return false; }
+          if (!plannedTransaction.RepeatCount) {
+            return false;
+          }
+          if ((plannedTransaction as any).timesRepeatedInForecast >= plannedTransaction.RepeatCount) {
+            return true;
+          }
+          if ((plannedTransaction as any).timesRepeatedInForecast < plannedTransaction.RepeatCount) {
+            return false;
+          }
         })();
         const isForCurrentDay = (() => {
           const currentDateNumber = currentDay.date.getDate();
@@ -21,8 +27,12 @@ export class TransactionScheduling {
           const remainder = differenceInDays % plannedTransaction.RepeatPeriod;
           return remainder === 0;
         })();
-        if (!hasPlanStarted) { return; }
-        if (isRecurrenceCountReached) { return; }
+        if (!hasPlanStarted) {
+          return;
+        }
+        if (isRecurrenceCountReached) {
+          return;
+        }
         if (isForCurrentDay) {
           if (plannedTransaction.TransactionType === "Expense") {
             runningTotal -= plannedTransaction.Amount;
@@ -39,12 +49,12 @@ export class TransactionScheduling {
       });
     });
     return toDays;
-  }
+  };
 
   public static createDays = (startDate, stopDate) => {
     const createDay = (date: Date) => {
       return {
-        date,
+        date
       };
     };
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
@@ -59,7 +69,7 @@ export class TransactionScheduling {
       days.push(day);
     }
     return days;
-  }
+  };
 
   public static validatedPlannedTransaction(plannedTransaction: IPlannedTransaction) {
     if (!plannedTransaction.StartDate) {

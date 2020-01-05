@@ -1,4 +1,4 @@
 export enum MessageToken {
   FieldName,
-  ObjectName,
+  ObjectName
 }

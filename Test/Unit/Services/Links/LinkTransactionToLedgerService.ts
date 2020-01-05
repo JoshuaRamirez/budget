@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import {LinkTransactionToLedgerService} from "../../../../Source/Services/Links/LinkTransactionToLedgerService";
+import { LinkTransactionToLedgerService } from "../../../../Source/Services/Links/LinkTransactionToLedgerService";
 import { NewTransactionCreatedEvent } from "../../../Helpers";
 
 describe("LinkTransactionToLedgerService", () => {

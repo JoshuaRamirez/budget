@@ -7,7 +7,6 @@ import { LinkTransactionToLedgerService } from "../../../../Source/Services/Link
 import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewTransactionCreatedEvent } from "../../../Helpers";
 
-
 describe("LinkTransactionToLedgerService", () => {
   beforeEach(() => {
     Subscriptions.Release();

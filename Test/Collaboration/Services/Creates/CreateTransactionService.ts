@@ -6,7 +6,6 @@ import { CreateTransactionService } from "../../../../Source/Services/Creates/Cr
 import { System } from "../../../../Source/System/System";
 import { NewTransactionRequestedEvent } from "../../../Helpers";
 
-
 describe("CreateTransactionService", () => {
   beforeEach(() => {
     System.Shutdown();

@@ -7,7 +7,6 @@ import { TransactionProjection } from "../../../../Source/Projections/Transactio
 import { UpdateLedgerBalanceService } from "../../../../Source/Services/Domain/UpdateLedgerBalanceService";
 import { Subscriptions } from "../../../../Source/Subscriptions";
 
-
 describe("UpdateLedgerBalanceService", () => {
   beforeEach(() => {
     Subscriptions.Release();

@@ -8,7 +8,6 @@ import { UserProjection } from "../../../../Source/Projections/UserProjection";
 import { CreateUserService } from "../../../../Source/Services/Creates/CreateUserService";
 import { System } from "../../../../Source/System/System";
 
-
 describe("CreateUserService", () => {
   beforeEach(() => {
     System.Shutdown();

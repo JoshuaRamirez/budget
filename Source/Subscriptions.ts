@@ -34,18 +34,18 @@ import { UserCreatedToAccountRequested } from "./Services/Routes/UserCreatedToAc
 
 export class Subscriptions {
   public static Create() {
-    const subscriber = (handler) => {
+    const subscriber = handler => {
       handler.Subscribe();
     };
-    Subscriptions.allSubscriptions.forEach((subscriptionList) => {
+    Subscriptions.allSubscriptions.forEach(subscriptionList => {
       subscriptionList.forEach(subscriber);
     });
   }
   public static Release() {
-    const unSubscriber = (handler) => {
+    const unSubscriber = handler => {
       handler.UnSubscribe();
     };
-    Subscriptions.allSubscriptions.forEach((subscriptionList) => {
+    Subscriptions.allSubscriptions.forEach(subscriptionList => {
       subscriptionList.forEach(unSubscriber);
     });
   }
@@ -63,12 +63,9 @@ export class Subscriptions {
     CreatePlannedTransactionService.Instance,
     CreateProposedTransactionService.Instance,
     CreateTransactionService.Instance,
-    CreateUserService.Instance,
+    CreateUserService.Instance
   ];
-  private static updateServices: ISubscriber[] = [
-    UpdateLedgerBalanceService.Instance,
-    UpdateLedgerStartingBalanceService.Instance,
-  ];
+  private static updateServices: ISubscriber[] = [UpdateLedgerBalanceService.Instance, UpdateLedgerStartingBalanceService.Instance];
   private static linkServices: ISubscriber[] = [
     LinkAccountToUserService.Instance,
     LinkDepositToPlannedDepositService.Instance,
@@ -78,24 +75,15 @@ export class Subscriptions {
     LinkForecastToPlannedExpensesService.Instance,
     LinkLedgerToAccountService.Instance,
     LinkTransactionToLedgerService.Instance,
-    LinkProposedTransactionToPlannedTransactionService.Instance,
+    LinkProposedTransactionToPlannedTransactionService.Instance
   ];
   private static eventChainServices = [
     AccountCreatedToLedgerRequested.Instance,
     PlannedDepositCreatedToPlannedTransactionRequested.Instance,
     PlannedExpenseCreatedToPlannedTransactionRequested.Instance,
     PlannedTransactionCreatedToProposedTransactionRequested.Instance,
-    UserCreatedToAccountRequested.Instance,
+    UserCreatedToAccountRequested.Instance
   ];
-  private static domainServices = [
-    ForecastPlannedTransactionsService.Instance,
-    ProposeTransactionsForToday.Instance,
-  ];
-  private static allSubscriptions: ISubscriber[][] = [
-    Subscriptions.createServices,
-    Subscriptions.updateServices,
-    Subscriptions.linkServices,
-    Subscriptions.eventChainServices,
-    Subscriptions.domainServices,
-  ];
+  private static domainServices = [ForecastPlannedTransactionsService.Instance, ProposeTransactionsForToday.Instance];
+  private static allSubscriptions: ISubscriber[][] = [Subscriptions.createServices, Subscriptions.updateServices, Subscriptions.linkServices, Subscriptions.eventChainServices, Subscriptions.domainServices];
 }

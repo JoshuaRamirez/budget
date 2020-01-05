@@ -22,9 +22,9 @@ export class ForecastPlannedTransactionsService extends Receiver<ForecastCalcula
     }
     plannedTransactions.forEach(TransactionScheduling.validatedPlannedTransaction);
     days = TransactionScheduling.applyAmounts(days, plannedTransactions);
-    days.forEach((day) => {
-      const plannedDepositIds = PlannedDepositProjection.All().map((plannedDeposit) => plannedDeposit.Id);
-      const plannedExpenseIds = PlannedExpenseProjection.All().map((plannedExpense) => plannedExpense.Id);
+    days.forEach(day => {
+      const plannedDepositIds = PlannedDepositProjection.All().map(plannedDeposit => plannedDeposit.Id);
+      const plannedExpenseIds = PlannedExpenseProjection.All().map(plannedExpense => plannedExpense.Id);
       const forecastRequestedEvent = new ForecastRequestedEvent();
       forecastRequestedEvent.Amount = day.amount;
       forecastRequestedEvent.Date = day.date;
@@ -33,6 +33,4 @@ export class ForecastPlannedTransactionsService extends Receiver<ForecastCalcula
       forecastRequestedEvent.Publish();
     });
   }
-
-
 }

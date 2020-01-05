@@ -3,7 +3,7 @@ import { ProposedTransactionRequestedEvent } from "../../Events/Requested/Creati
 import { ProposedTransactionProjection } from "../../Projections/ProposedTransactionProjection";
 import { Receiver } from "../Core/Receiver";
 
-export class CreateProposedTransactionService extends Receiver<ProposedTransactionRequestedEvent>  {
+export class CreateProposedTransactionService extends Receiver<ProposedTransactionRequestedEvent> {
   public static Instance = new CreateProposedTransactionService();
   private constructor() {
     super(ProposedTransactionRequestedEvent);

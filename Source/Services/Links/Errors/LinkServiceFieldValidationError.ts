@@ -2,13 +2,7 @@ import { LinkServiceValidationErrorType } from "../Validation/Messages/LinkServi
 import { MessageToken } from "../Validation/Messages/MessageToken";
 
 export class LinkServiceFieldValidationError extends Error {
-  public constructor(
-    offendingObjectName: string,
-    offendingFieldName: string,
-    offendingFieldValue: string,
-    validationErrorMessage: string,
-    validationErrorType: LinkServiceValidationErrorType,
-  ) {
+  public constructor(offendingObjectName: string, offendingFieldName: string, offendingFieldValue: string, validationErrorMessage: string, validationErrorType: LinkServiceValidationErrorType) {
     validationErrorMessage = validationErrorMessage.replace("{" + MessageToken.FieldName.toString() + "}", offendingFieldName);
     validationErrorMessage = validationErrorMessage.replace("{" + MessageToken.ObjectName.toString() + "}", offendingObjectName);
     const message =

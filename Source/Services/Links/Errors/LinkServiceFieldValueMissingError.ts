@@ -3,17 +3,7 @@ import { LinkServiceValidationMessage } from "../Validation/Messages/LinkService
 import { LinkServiceFieldValidationError } from "./LinkServiceFieldValidationError";
 
 export class LinkServiceFieldValueMissingError extends LinkServiceFieldValidationError {
-  public constructor(
-    declarationName: string,
-    propertyName: string,
-    propertyValue: string,
-  ) {
-    super(
-      declarationName,
-      propertyName,
-      propertyValue,
-      LinkServiceValidationMessage.FieldValueMissing,
-      LinkServiceValidationErrorType.FieldValueMissing,
-    );
+  public constructor(declarationName: string, propertyName: string, propertyValue: string) {
+    super(declarationName, propertyName, propertyValue, LinkServiceValidationMessage.FieldValueMissing, LinkServiceValidationErrorType.FieldValueMissing);
   }
 }

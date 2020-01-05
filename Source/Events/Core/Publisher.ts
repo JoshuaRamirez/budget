@@ -11,14 +11,11 @@ export class Publisher<TEvent extends Event> {
       return;
     }
     const handlers = Publisher.Subscriptions[event.EventName];
-    handlers.forEach((handler) => {
-        handler(event);
+    handlers.forEach(handler => {
+      handler(event);
     });
   }
-  public Subscribe(
-    eventType: (new (x, y) => TEvent),
-    subscriber: IReceiver<TEvent>,
-  ) {
+  public Subscribe(eventType: new (x, y) => TEvent, subscriber: IReceiver<TEvent>) {
     const eventName = eventType.name;
     const subscriptions = Publisher.Subscriptions[eventName];
     if (!subscriptions) {
@@ -28,15 +25,16 @@ export class Publisher<TEvent extends Event> {
     Publisher.Subscriptions[eventName].push(handle);
     return handle;
   }
-  public UnSubscribe(
-    eventType: (new (x, y) => TEvent),
-    handle: IReceiver<TEvent>,
-  ) {
+  public UnSubscribe(eventType: new (x, y) => TEvent, handle: IReceiver<TEvent>) {
     const eventName = eventType.name;
     const subscriptions = Publisher.Subscriptions[eventName];
-    if (!subscriptions) { return; }
+    if (!subscriptions) {
+      return;
+    }
     const index = subscriptions.indexOf(handle);
-    if (index < 0) { return; }
+    if (index < 0) {
+      return;
+    }
     subscriptions.splice(index, 1);
   }
 }

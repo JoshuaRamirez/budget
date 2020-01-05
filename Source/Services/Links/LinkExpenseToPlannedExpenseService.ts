@@ -4,19 +4,16 @@ import { PlannedExpenseProjection } from "../../Projections/PlannedExpenseProjec
 import { LinkManySubjectsToOneTargetDeclaration } from "./Core/LinkManySubjectsToOneTargetDeclaration";
 import { LinkService } from "./Core/LinkService";
 
-export class LinkExpenseToPlannedExpenseService
-extends LinkService<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjection> {
+export class LinkExpenseToPlannedExpenseService extends LinkService<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjection> {
   public static Instance = new LinkExpenseToPlannedExpenseService();
   private constructor() {
-    const declaration = new
-    LinkManySubjectsToOneTargetDeclaration<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjection>
-    ({
+    const declaration = new LinkManySubjectsToOneTargetDeclaration<ExpenseCreatedEvent, ExpenseProjection, PlannedExpenseProjection>({
       EventType: ExpenseCreatedEvent,
       SubjectIdFieldName: "ExpenseId",
       SubjectTargetIdFieldName: "PlannedExpenseId",
       SubjectType: ExpenseProjection,
       TargetSubjectIdsFieldName: "ExpenseIds",
-      TargetType: PlannedExpenseProjection,
+      TargetType: PlannedExpenseProjection
     });
     super(declaration);
   }

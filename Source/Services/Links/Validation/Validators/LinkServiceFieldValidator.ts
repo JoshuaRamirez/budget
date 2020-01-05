@@ -22,5 +22,4 @@ export abstract class LinkServiceFieldValidator<TEvent extends Event> {
       throw new LinkServiceFieldValueMissingError(object.constructor.name, fieldName, fieldValue);
     }
   }
-
 }

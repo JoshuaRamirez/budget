@@ -6,7 +6,6 @@ import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionS
 import { CreateCategoryService } from "../../../../Source/Services/Creates/CreateCategoryService";
 import { System } from "../../../../Source/System/System";
 
-
 describe("CreateCategoryService", () => {
   beforeEach(() => {
     System.Shutdown();

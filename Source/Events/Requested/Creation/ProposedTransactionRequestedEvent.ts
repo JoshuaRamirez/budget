@@ -2,7 +2,6 @@ import { Event } from "../../Core/Event";
 import { Publisher } from "../../Core/Publisher";
 
 export class ProposedTransactionRequestedEvent extends Event {
-
   public Amount: number;
   public Date: Date;
   public Description: string;

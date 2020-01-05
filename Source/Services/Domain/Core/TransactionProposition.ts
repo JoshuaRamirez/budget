@@ -4,8 +4,12 @@ import { PlannedTransactionProjection } from "../../../Projections/PlannedTransa
 export class TransactionProposition {
   public static GetProposedDate(plannedTransactionProjection: PlannedTransactionProjection): Date {
     const today = User.GetDate();
-    if (plannedTransactionProjection.RepeatCount >= plannedTransactionProjection.TimesRepeated) { return; }
-    if (plannedTransactionProjection.StartDate > today) { return; }
+    if (plannedTransactionProjection.RepeatCount >= plannedTransactionProjection.TimesRepeated) {
+      return;
+    }
+    if (plannedTransactionProjection.StartDate > today) {
+      return;
+    }
     let proposedDate: Date;
     if (plannedTransactionProjection.ProposedTransactionIds.length === 0) {
       proposedDate = plannedTransactionProjection.StartDate;

@@ -20,15 +20,13 @@ import {
   PublishPayeeRequestedEvent,
   PublishTransactionRequestedEvent,
   PublishUserRequestedEvent,
-  RequestPlannedExpenseEvent,
+  RequestPlannedExpenseEvent
 } from "../Helpers";
 
 const projectionStore = ProjectionStore.Instance;
 
 describe("Scenarios", () => {
-
   describe("Features", () => {
-
     let userId: any;
     let accountId: any;
     let ledgerId: any;
@@ -102,7 +100,7 @@ describe("Scenarios", () => {
         const ledger = LedgerProjection.Get(ledgerId);
         PublishTransactionRequestedEvent(-10, ledger.Id);
         const transaction = GetLast(TransactionProjection);
-        PublishAllocationRequestedEvent(transaction.Id,  ledger.Id);
+        PublishAllocationRequestedEvent(transaction.Id, ledger.Id);
       });
       it("Then the Ledger balance should be 110", () => {
         const ledger = LedgerProjection.Get(ledgerId);
@@ -145,7 +143,7 @@ describe("Scenarios", () => {
         transaction.Publish();
         const payeeProjection = projectionStore.GetProjections(PayeeProjection)[0];
         const plannedExpense = projectionStore.GetProjections(PlannedExpenseProjection)[0];
-        PublishExpenseRequestedEvent(transaction.Id,  ledgerId, plannedExpense.Id, payeeProjection.Id);
+        PublishExpenseRequestedEvent(transaction.Id, ledgerId, plannedExpense.Id, payeeProjection.Id);
       });
       it("Then a new ExpenseProjection should exist", () => {
         const expenseProjection = projectionStore.GetProjections(ExpenseProjection)[0];
@@ -166,13 +164,13 @@ describe("Scenarios", () => {
       it("And the PlannedExpenseProjection contains the ExpenseProjection Id", () => {
         const plannedExpenseProjection = GetLast<PlannedExpenseProjection>(PlannedExpenseProjection);
         const expenseProjection = GetLast(ExpenseProjection);
-        const foundId = plannedExpenseProjection.ExpenseIds.find((x) => x === expenseProjection.Id);
+        const foundId = plannedExpenseProjection.ExpenseIds.find(x => x === expenseProjection.Id);
         assert.exists(foundId);
       });
       it("And the Payee involved contains the ExpenseProjection Id", () => {
         const expenseProjection = GetLast(ExpenseProjection);
         const payeeProjection = GetLast<PayeeProjection>(PayeeProjection);
-        const foundId = payeeProjection.ExpenseIds.find((x) => x === expenseProjection.Id);
+        const foundId = payeeProjection.ExpenseIds.find(x => x === expenseProjection.Id);
         assert.exists(foundId);
       });
       it("When the ledger's starting balance is changed from 100 to 200", () => {

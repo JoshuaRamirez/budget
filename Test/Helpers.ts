@@ -151,7 +151,6 @@ export const NewTransactionRequestedEvent = () => {
   return transactionRequestedEvent;
 };
 
-
 export const NewProposedTransactionCreationRequestedEvent = () => {
   const event = new ProposedTransactionRequestedEvent();
   event.PlannedTransactionId = newPlannedTransaction().Id;
@@ -212,7 +211,7 @@ export const PublishAllocationRequestedEvent = (transactionId, ledgerId) => {
   allocationRequestedEvent.Publish();
 };
 
-export const PublishAccountRequestedEvent = (userId) => {
+export const PublishAccountRequestedEvent = userId => {
   const accountRequestedEvent = new AccountRequestedEvent();
   accountRequestedEvent.AccountName = "Wells Fargo Checking";
   accountRequestedEvent.Type = "Bank";

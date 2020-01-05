@@ -7,7 +7,6 @@ import { LinkLedgerToAccountService } from "../../../../Source/Services/Links/Li
 import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewLedgerCreatedEvent } from "../../../Helpers";
 
-
 describe("LinkLedgerToAccountService", () => {
   beforeEach(() => {
     Subscriptions.Release();

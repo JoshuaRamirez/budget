@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import "mocha";
 import { UserRequestedEvent } from "../../../../Source/Events/Requested/Creation/UserRequestedEvent";
-import {CreateUserService} from "../../../../Source/Services/Creates/CreateUserService";
+import { CreateUserService } from "../../../../Source/Services/Creates/CreateUserService";
 
 describe("CreateUserService", () => {
   it("should import", () => {

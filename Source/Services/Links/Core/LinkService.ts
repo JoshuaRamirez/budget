@@ -11,13 +11,7 @@ import { ISingleSubjectField } from "./ISingleSubjectField";
 import { ISingleTargetField } from "./ISingleTargetField";
 
 // TODO: Find a way to remove these Generic Type Params and use something else to determine multi/single logic.
-export abstract class LinkService
-<
-  TEvent extends Event,
-  TSubjectProjection extends Projection,
-  TTargetProjection extends Projection
->
-extends Receiver<TEvent> {
+export abstract class LinkService<TEvent extends Event, TSubjectProjection extends Projection, TTargetProjection extends Projection> extends Receiver<TEvent> {
   private readonly declaration: IDeclaration<TEvent>;
   protected constructor(declaration: IDeclaration<TEvent>) {
     if (!declaration) {
@@ -39,7 +33,7 @@ extends Receiver<TEvent> {
       const fieldName = this.declaration.SubjectTargetIdsFieldName.toString();
       targetIds.concat(...subjectProjection[fieldName]);
     }
-    targetIds.forEach((targetId) => {
+    targetIds.forEach(targetId => {
       const target = ProjectionStore.Instance.GetProjection(this.declaration.TargetType, targetId);
       const linkServiceProjectionValidator = new LinkServiceProjectionValidator(this.declaration, event, subjectProjection, target);
       linkServiceProjectionValidator.Validate();
@@ -54,20 +48,16 @@ extends Receiver<TEvent> {
       target.Update();
     });
   }
-  private isISingleSubjectField(declaration: ISingleSubjectField<TTargetProjection> | object):
-  declaration is ISingleSubjectField<TTargetProjection> {
+  private isISingleSubjectField(declaration: ISingleSubjectField<TTargetProjection> | object): declaration is ISingleSubjectField<TTargetProjection> {
     return (declaration as ISingleSubjectField<TTargetProjection>).TargetSubjectIdFieldName !== undefined;
   }
-  private isIMultiSubjectProjectionField(declaration: IMultiSubjectField<TTargetProjection> | object):
-  declaration is IMultiSubjectField<TTargetProjection> {
+  private isIMultiSubjectProjectionField(declaration: IMultiSubjectField<TTargetProjection> | object): declaration is IMultiSubjectField<TTargetProjection> {
     return (declaration as IMultiSubjectField<TTargetProjection>).TargetSubjectIdsFieldName !== undefined;
   }
-  private isISingleTargetField(declaration: ISingleTargetField<TSubjectProjection> | object):
-  declaration is ISingleTargetField<TSubjectProjection> {
+  private isISingleTargetField(declaration: ISingleTargetField<TSubjectProjection> | object): declaration is ISingleTargetField<TSubjectProjection> {
     return (declaration as ISingleTargetField<TSubjectProjection>).SubjectTargetIdFieldName !== undefined;
   }
-  private isIMultiTargetField(declaration: IMultiTargetField<TSubjectProjection>| object):
-  declaration is IMultiTargetField<TSubjectProjection> {
+  private isIMultiTargetField(declaration: IMultiTargetField<TSubjectProjection> | object): declaration is IMultiTargetField<TSubjectProjection> {
     return (declaration as IMultiTargetField<TSubjectProjection>).SubjectTargetIdsFieldName !== undefined;
   }
 }

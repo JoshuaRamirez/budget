@@ -1,9 +1,8 @@
 import { assert } from "chai";
 import "mocha";
-import {CategoryRequestedEvent} from "../../../Source/Events/Requested/Creation/CategoryRequestedEvent";
+import { CategoryRequestedEvent } from "../../../Source/Events/Requested/Creation/CategoryRequestedEvent";
 
 describe("CategoryRequestedEvent", () => {
-
   it("should import", () => {
     assert.exists(CategoryRequestedEvent);
   });
@@ -15,5 +14,4 @@ describe("CategoryRequestedEvent", () => {
     const event = new CategoryRequestedEvent();
     event.Publish();
   });
-
 });

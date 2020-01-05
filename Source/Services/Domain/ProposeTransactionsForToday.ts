@@ -11,7 +11,7 @@ export class ProposeTransactionsForToday extends Receiver<DailyTimerIntervalPubl
   }
   public Receive(event: DailyTimerIntervalPublished): void {
     const plannedTransactionProjections = PlannedTransactionProjection.All();
-    plannedTransactionProjections.forEach((plannedTransactionProjection) => {
+    plannedTransactionProjections.forEach(plannedTransactionProjection => {
       const proposedDate = TransactionProposition.GetProposedDate(plannedTransactionProjection);
       const proposedTransactionCreationRequestedEvent = MapPlannedTransactionToProposedTransactionCreationRequested(plannedTransactionProjection, proposedDate);
       if (proposedTransactionCreationRequestedEvent) {

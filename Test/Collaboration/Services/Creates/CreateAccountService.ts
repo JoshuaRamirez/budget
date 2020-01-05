@@ -7,7 +7,6 @@ import { CreateAccountService } from "../../../../Source/Services/Creates/Create
 import { System } from "../../../../Source/System/System";
 import { NewAccountRequestedEvent } from "../../../Helpers";
 
-
 describe("CreateAccountService", () => {
   beforeEach(() => {
     System.Shutdown();

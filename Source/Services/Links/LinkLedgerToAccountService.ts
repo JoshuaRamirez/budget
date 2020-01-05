@@ -4,19 +4,16 @@ import { LedgerProjection } from "../../Projections/LedgerProjection";
 import { LinkOneSubjectToOneTargetDeclaration } from "./Core/LinkOneSubjectToOneTargetDeclaration";
 import { LinkService } from "./Core/LinkService";
 
-export class LinkLedgerToAccountService
-extends LinkService<LedgerCreatedEvent, LedgerProjection, AccountProjection> {
+export class LinkLedgerToAccountService extends LinkService<LedgerCreatedEvent, LedgerProjection, AccountProjection> {
   public static Instance: LinkLedgerToAccountService = new LinkLedgerToAccountService();
   private constructor() {
-    const declaration = new
-    LinkOneSubjectToOneTargetDeclaration<LedgerCreatedEvent, LedgerProjection, AccountProjection>
-    ({
+    const declaration = new LinkOneSubjectToOneTargetDeclaration<LedgerCreatedEvent, LedgerProjection, AccountProjection>({
       EventType: LedgerCreatedEvent,
       SubjectIdFieldName: "LedgerId",
       SubjectTargetIdFieldName: "AccountId",
       SubjectType: LedgerProjection,
       TargetSubjectIdFieldName: "LedgerId",
-      TargetType: AccountProjection,
+      TargetType: AccountProjection
     });
     super(declaration);
   }

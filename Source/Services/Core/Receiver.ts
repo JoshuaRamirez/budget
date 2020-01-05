@@ -14,7 +14,7 @@ export abstract class Receiver<TEvent extends Event> implements IReceiver<TEvent
     this.handles.push(handle);
   }
   public UnSubscribe() {
-    this.handles.forEach((handle) => {
+    this.handles.forEach(handle => {
       Publisher.Instance.UnSubscribe(this.eventType, handle);
     });
     this.handles = [];

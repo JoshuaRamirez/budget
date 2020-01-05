@@ -3,13 +3,8 @@ import { Projection } from "../../../Projections/Core/Projection";
 import { LinkServiceDeclarationValidator } from "../Validation/Validators/LinkServiceDeclarationValidator";
 import { ILinkManySubjectsToManyTargetsDeclaration } from "./ILinkManySubjectsToManyTargetsDeclaration";
 
-export class LinkManySubjectsToManyTargetsDeclaration
-<
-  TEvent extends Event,
-  TSubjectProjection extends Projection,
-  TTargetProjection extends Projection
->
-implements ILinkManySubjectsToManyTargetsDeclaration<TEvent, TSubjectProjection, TTargetProjection> {
+export class LinkManySubjectsToManyTargetsDeclaration<TEvent extends Event, TSubjectProjection extends Projection, TTargetProjection extends Projection>
+  implements ILinkManySubjectsToManyTargetsDeclaration<TEvent, TSubjectProjection, TTargetProjection> {
   public readonly EventType: any;
   public readonly SubjectType: any;
   public readonly SubjectTargetIdsFieldName: keyof TSubjectProjection;
@@ -20,7 +15,7 @@ implements ILinkManySubjectsToManyTargetsDeclaration<TEvent, TSubjectProjection,
     if (!declaration) {
       throw new Error("Missing object instance in the provided Declaration.");
     }
-    Object.assign(this, {...declaration});
+    Object.assign(this, { ...declaration });
     const linkServiceDeclarationValidator = new LinkServiceDeclarationValidator(declaration);
     linkServiceDeclarationValidator.Validate();
   }

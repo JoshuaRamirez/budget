@@ -6,7 +6,6 @@ import { CreateExpenseService } from "../../../../Source/Services/Creates/Create
 import { System } from "../../../../Source/System/System";
 import { NewExpenseRequestedEvent } from "../../../Helpers";
 
-
 describe("CreateExpenseService", () => {
   beforeEach(() => {
     System.Shutdown();

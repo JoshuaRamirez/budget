@@ -6,4 +6,3 @@ export interface IDeclaration<TEvent extends Event> {
   readonly TargetType: any;
   readonly SubjectIdFieldName: keyof TEvent;
 }
-

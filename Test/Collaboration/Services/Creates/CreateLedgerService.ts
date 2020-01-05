@@ -6,7 +6,6 @@ import { CreateLedgerService } from "../../../../Source/Services/Creates/CreateL
 import { System } from "../../../../Source/System/System";
 import { NewLedgerRequestedEvent } from "../../../Helpers";
 
-
 describe("CreateLedgerService", () => {
   beforeEach(() => {
     System.Shutdown();

@@ -6,7 +6,6 @@ import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionS
 import { CreateAllocationService } from "../../../../Source/Services/Creates/CreateAllocationService";
 import { System } from "../../../../Source/System/System";
 
-
 describe("CreateAllocationService", () => {
   beforeEach(() => {
     System.Shutdown();

@@ -6,7 +6,6 @@ import { ProjectionStore } from "../../../../Source/Projections/Core/ProjectionS
 import { CreateBudgetService } from "../../../../Source/Services/Creates/CreateBudgetService";
 import { System } from "../../../../Source/System/System";
 
-
 describe("CreateBudgetService", () => {
   beforeEach(() => {
     System.Shutdown();
