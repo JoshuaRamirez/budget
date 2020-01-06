@@ -1,4 +1,4 @@
 describe("Scenarios", () => {
-  require("./BasicUsage");
+  require("./BasicUsageTests");
   require("./ForecastingTests");
 });

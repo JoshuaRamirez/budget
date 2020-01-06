@@ -1,3 +1,3 @@
 describe("Publishers", () => {
-  require("./PublishProposedTransactionCreationRequestedService");
+  require("./PublishProposedTransactionCreationRequestedServiceTests");
 });

@@ -1,6 +1,6 @@
 describe("Created", () => {
-  require("./BudgetCreatedEvent");
-  require("./DepositCreatedEvent");
-  require("./ExpenseCreatedEvent");
-  require("./TransactionCreatedEvent");
+  require("./BudgetCreatedEventTests");
+  require("./DepositCreatedEventTests");
+  require("./ExpenseCreatedEventTests");
+  require("./TransactionCreatedEventTests");
 });

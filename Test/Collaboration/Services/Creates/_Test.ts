@@ -1,14 +1,14 @@
 describe("Creates", () => {
-  require("./CreateAccountService");
-  require("./CreateAllocationService");
-  require("./CreateBudgetService");
-  require("./CreateCategoryService");
-  require("./CreateExpenseService");
-  require("./CreateLedgerService");
-  require("./CreatePayeeService");
-  require("./CreatePlannedExpenseService");
-  require("./CreatePlannedTransactionService");
-  require("./CreateProposedTransactionService");
-  require("./CreateTransactionService");
-  require("./CreateUserService");
+  require("./CreateAccountServiceTests");
+  require("./CreateAllocationServiceTests");
+  require("./CreateBudgetServiceTests");
+  require("./CreateCategoryServiceTests");
+  require("./CreateExpenseServiceTests");
+  require("./CreateLedgerServiceTests");
+  require("./CreatePayeeServiceTests");
+  require("./CreatePlannedExpenseServiceTests");
+  require("./CreatePlannedTransactionServiceTests");
+  require("./CreateProposedTransactionServiceTests");
+  require("./CreateTransactionServiceTests");
+  require("./CreateUserServiceTests");
 });

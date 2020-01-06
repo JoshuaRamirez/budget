@@ -1,15 +1,15 @@
 describe("Requested", () => {
-  require("./AccountRequestedEvent");
-  require("./AllocationRequestedEvent");
-  require("./CategoryRequestedEvent");
-  require("./DepositRequestedEvent");
-  require("./ExpenseRequestedEvent");
-  require("./LedgerRequestedEvent");
-  require("./LedgerStartingBalanceUpdateRequestedEvent");
-  require("./PayeeRequestedEvent");
-  require("./PayerRequestedEvent");
-  require("./PlannedDespositRequestedEvent");
-  require("./PlannedExpenseRequestedEvent");
-  require("./TransactionRequestedEvent");
-  require("./UserRequestedEvent");
+  require("./AccountRequestedEventTests");
+  require("./AllocationRequestedEventTests");
+  require("./CategoryRequestedEventTests");
+  require("./DepositRequestedEventTests");
+  require("./ExpenseRequestedEventTests");
+  require("./LedgerRequestedEventTests");
+  require("./LedgerStartingBalanceUpdateRequestedEventTests");
+  require("./PayeeRequestedEventTests");
+  require("./PayerRequestedEventTests");
+  require("./PlannedDespositRequestedEventTests");
+  require("./PlannedExpenseRequestedEventTests");
+  require("./TransactionRequestedEventTests");
+  require("./UserRequestedEventTests");
 });
