@@ -6,7 +6,7 @@ import { ForecastProjection } from "../../Source/Projections/ForecastProjection"
 import { System } from "../../Source/System/System";
 
 const startDate = new Date("1/1/2020");
-const endDate = new Date("1/1/2021");
+const endDate = new Date("2/1/2020");
 
 const newDeposit = (description, amount, repeatCount, repeatPeriod) => {
   const event = new PlannedDepositRequestedEvent();
