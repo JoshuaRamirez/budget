@@ -3,7 +3,7 @@ import "mocha";
 import { Event } from "../../../Source/Events/Core/Event";
 import { PlannedDepositRequestedEvent } from "../../../Source/Events/Requested/Creation/PlannedDepositRequestedEvent";
 import { PlannedExpenseRequestedEvent } from "../../../Source/Events/Requested/Creation/PlannedExpenseRequestedEvent";
-import { ForecastCalculationRequestEvent } from "../../../Source/Events/Requested/Mutation/ForecastCalculationRequested";
+import { ForecastCalculationRequestEvent } from "../../../Source/Events/Requested/Mutation/ForecastCalculationRequestedEvent";
 import { ForecastProjection } from "../../../Source/Projections/ForecastProjection";
 import { System } from "../../../Source/System/System";
 
