@@ -1,5 +1,5 @@
 import { User } from "../Core/User";
-import { DailyTimerIntervalPublished } from "../Events/System/DailyTimerIntervalPublished";
+import { DailyTimerIntervalPublishedEvent } from "../Events/System/DailyTimerIntervalPublishedEvent";
 
 export class Timer {
   public static StartDaily() {
@@ -21,7 +21,7 @@ export class Timer {
     setInterval(this.publishInterval, oneDay);
   }
   private static publishInterval() {
-    const event = new DailyTimerIntervalPublished();
+    const event = new DailyTimerIntervalPublishedEvent();
     event.Publish();
   }
 }
