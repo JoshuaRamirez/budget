@@ -5,13 +5,16 @@ import { ForecastCalculationRequestEvent } from "../../Source/Events/Requested/M
 import { ForecastProjection } from "../../Source/Projections/ForecastProjection";
 import { System } from "../../Source/System/System";
 
+const startDate = new Date("1/1/2020");
+const endDate = new Date("1/1/2021");
+
 const newDeposit = (description, amount, repeatCount, repeatPeriod) => {
   const event = new PlannedDepositRequestedEvent();
   event.Amount = amount;
   event.Description = description;
   event.RepeatCount = repeatCount;
   event.RepeatPeriod = repeatPeriod;
-  event.RepeatStart = new Date();
+  event.RepeatStart = startDate;
   event.Publish();
 };
 
@@ -21,7 +24,7 @@ const newExpense = (description, amount, repeatCount, repeatPeriod) => {
   event.Description = description;
   event.RepeatCount = repeatCount;
   event.RepeatPeriod = repeatPeriod;
-  event.RepeatStart = new Date();
+  event.RepeatStart = startDate;
   event.Publish();
 };
 
@@ -50,8 +53,8 @@ describe("Forecasting", () => {
 
   it("Running Forecast", () => {
     const event = new ForecastCalculationRequestEvent();
-    event.StartDate = new Date("1/1/2020");
-    event.EndDate = new Date("2/5/2020");
+    event.StartDate = startDate;
+    event.EndDate = endDate;
     event.StartingBalance = 1500;
     event.Publish();
   });
