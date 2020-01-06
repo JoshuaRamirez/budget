@@ -1,4 +1,4 @@
 describe("Updates", () => {
-  require("./UpdateLedgerBalanceServiceTests.js");
-  require("./UpdateLedgerStartingBalanceServiceTests.js");
+  require("./UpdateLedgerBalanceServiceTests");
+  require("./UpdateLedgerStartingBalanceServiceTests");
 });

@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import "mocha";
-import { AllocationRequestedEvent } from "../../../../Source/Events/Requested/Creation/AllocationRequestedEvent";
+import { AllocationRequestedEvent } from "../../../../../Source/Events/Requested/Creation/AllocationRequestedEvent";
 
 describe("AllocationRequestedEvent", () => {
   it("should import", () => {

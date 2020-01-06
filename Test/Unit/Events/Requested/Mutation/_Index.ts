@@ -1,0 +1,3 @@
+describe("Mutation", () => {
+  require("./LedgerStartingBalanceUpdateRequestedEventTests");
+});
