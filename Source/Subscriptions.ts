@@ -23,7 +23,7 @@ import { LinkDepositToPlannedDepositService } from "./Services/Links/LinkDeposit
 import { LinkExpenseToPayeeService } from "./Services/Links/LinkExpenseToPayeeService";
 import { LinkExpenseToPlannedExpenseService } from "./Services/Links/LinkExpenseToPlannedExpenseService";
 import { LinkForecastToPlannedDepositService } from "./Services/Links/LinkForecastToPlannedDepositService";
-import { LinkForecastToPlannedExpensesService } from "./Services/Links/LinkForecastToPlannedExpensesService";
+import { LinkForecastToPlannedExpenseService } from "./Services/Links/LinkForecastToPlannedExpenseService";
 import { LinkLedgerToAccountService } from "./Services/Links/LinkLedgerToAccountService";
 import { LinkProposedTransactionToPlannedTransactionService } from "./Services/Links/LinkProposedTransactionToPlannedTransactionService";
 import { LinkTransactionToLedgerService } from "./Services/Links/LinkTransactionToLedgerService";
@@ -73,7 +73,7 @@ export class Subscriptions {
     LinkExpenseToPayeeService.Instance,
     LinkExpenseToPlannedExpenseService.Instance,
     LinkForecastToPlannedDepositService.Instance,
-    LinkForecastToPlannedExpensesService.Instance,
+    LinkForecastToPlannedExpenseService.Instance,
     LinkLedgerToAccountService.Instance,
     LinkTransactionToLedgerService.Instance,
     LinkProposedTransactionToPlannedTransactionService.Instance
