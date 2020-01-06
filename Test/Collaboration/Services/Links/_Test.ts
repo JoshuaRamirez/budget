@@ -3,5 +3,5 @@ describe("Links", () => {
   require("./LinkExpenseToPayeeService");
   require("./LinkExpenseToPlannedExpenseService");
   require("./LinkLedgerToAccountService");
-  require("./LinkTransactionToLedgerToService");
+  require("./LinkTransactionToLedgerService");
 });
