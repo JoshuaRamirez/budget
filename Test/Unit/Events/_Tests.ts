@@ -1,19 +1,4 @@
 describe("Events", () => {
-  require("./AccountRequestedEvent.ts");
-  require("./AllocationRequestedEvent.ts");
-  require("./BudgetCreatedEvent.ts");
-  require("./CategoryRequestedEvent.ts");
-  require("./DepositCreatedEvent.ts");
-  require("./DepositRequestedEvent.ts");
-  require("./ExpenseCreatedEvent.ts");
-  require("./ExpenseRequestedEvent.ts");
-  require("./LedgerRequestedEvent.ts");
-  require("./LedgerStartingBalanceUpdateRequestedEvent.ts");
-  require("./PayeeRequestedEvent.ts");
-  require("./PayerRequestedEvent.ts");
-  require("./PlannedDespositRequestedEvent.ts");
-  require("./PlannedExpenseRequestedEvent.ts");
-  require("./TransactionCreatedEvent.ts");
-  require("./TransactionRequestedEvent.ts");
-  require("./UserRequestedEvent.ts");
+  require("./Created/_Tests");
+  require("./Requested/_Tests");
 });
