@@ -3,5 +3,4 @@ describe("Services", () => {
   require("./Links/_Test");
   require("./Routes/_Tests");
   require("./Domain/_Tests");
-  require("./ForecastPlannedTransactionsTests");
 });
