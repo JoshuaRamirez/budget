@@ -4,8 +4,8 @@ import { PlannedDepositProjection } from "../../Projections/PlannedDepositProjec
 import { LinkManySubjectsToManyTargetsDeclaration } from "./Core/LinkManySubjectsToManyTargetsDeclaration";
 import { LinkService } from "./Core/LinkService";
 
-export class LinkForecastToPlannedDepositsService extends LinkService<ForecastCreatedEvent, ForecastProjection, PlannedDepositProjection> {
-  public static Instance = new LinkForecastToPlannedDepositsService();
+export class LinkForecastToPlannedDepositService extends LinkService<ForecastCreatedEvent, ForecastProjection, PlannedDepositProjection> {
+  public static Instance = new LinkForecastToPlannedDepositService();
   private constructor() {
     const declaration = new LinkManySubjectsToManyTargetsDeclaration<ForecastCreatedEvent, ForecastProjection, PlannedDepositProjection>({
       EventType: ForecastCreatedEvent,
