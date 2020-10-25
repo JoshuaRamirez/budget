@@ -8,18 +8,18 @@ import { System } from "../../../../Source/System/System";
 import { NewAccountRequestedEvent } from "../../../Helpers";
 
 describe("CreateAccountService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
     // Each Account created is expected to be linked to a User
     const userRequestedEvent = new UserRequestedEvent();
-    userRequestedEvent.Publish();
+    await userRequestedEvent.Publish();
   });
-  it("should create projection", () => {
-    const event = NewAccountRequestedEvent();
-    event.Publish();
+  it("should create projection", async () => {
+    const newAccountRequestedEvent = await NewAccountRequestedEvent();
+    await newAccountRequestedEvent.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections(AccountProjection);
+    const projections = await projectionStore.GetProjections(AccountProjection);
     const projection = projections[0];
     assert.exists(projection);
   });

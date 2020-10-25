@@ -4,7 +4,8 @@ import { Publisher } from "../../Core/Publisher";
 export class LedgerStartingBalanceUpdateRequestedEvent extends Event {
   public LedgerId: any;
   public StartingBalance: number;
-  public Publish(): void {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

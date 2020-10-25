@@ -1,92 +1,121 @@
 import { deserialize, serialize } from "serializr";
 import { Projection } from "./Projection";
 
+class FirebaseStore {}
+
+export interface IProjectionStore {
+  Save(projection: Projection): Promise<void>;
+  Update(type: any, projection: Projection): Promise<void>;
+  GetProjection<TProjection extends Projection>(type: any, id: any): Promise<TProjection>;
+  GetProjections<TProjection extends Projection>(type: any): Promise<TProjection[]>;
+  Clear<TProjection extends Projection>(type: any): Promise<void>;
+  ClearAll(): Promise<void>;
+}
+
 // TODO: Begin thinking about User Id in each projection.
-export class ProjectionStore {
+export class ProjectionStore implements IProjectionStore {
   public static Instance = new ProjectionStore();
-  private Projections = {};
-  public Save(projection: Projection): void {
-    if (!this.Projections[projection.ProjectionName]) {
-      this.Projections[projection.ProjectionName] = [];
+  private projections = {};
+  public async Save(projection: Projection): Promise<void> {
+    if (!this.projections[projection.ProjectionName]) {
+      this.projections[projection.ProjectionName] = [];
     }
     this.write(projection.ProjectionName, projection);
+    return new Promise((resolve, reject) => {
+      resolve();
+    });
   }
-  public Update(type: any, projection: Projection): void {
-    if (!this.Projections[projection.ProjectionName]) {
-      this.Save(projection);
+  public async Update(type: any, projection: Projection): Promise<void> {
+    if (!this.projections[projection.ProjectionName]) {
+      await this.Save(projection);
     } else {
       this.delete(type, projection.Id);
-      this.Save(projection);
+      await this.Save(projection);
     }
+    return new Promise((resolve, reject) => {
+      resolve();
+    });
   }
-  public GetProjection<TProjection extends Projection>(type: any, id: any): TProjection {
+  public async GetProjection<TProjection extends Projection>(type: any, id: any): Promise<TProjection> {
     if (!type) {
       return undefined;
     }
-    if (!this.Projections[type.name]) {
+    if (!this.projections[type.name]) {
       return undefined;
     }
-    const read = this.read(type, id);
-    return read;
+    const read = this.read(type, id) as TProjection;
+    return new Promise((resolve, reject) => {
+      resolve(read);
+    });
   }
-  public GetProjections<TProjection extends Projection>(type: any): TProjection[] {
+  public async GetProjections<TProjection extends Projection>(type: any): Promise<TProjection[]> {
     const projectionName = type.name;
-    if (!this.Projections[projectionName]) {
-      return [];
+    if (!this.projections[projectionName]) {
+      return new Promise((resolve, reject) => {
+        resolve([]);
+      });
     }
-    const unwrapped = this.Projections[projectionName].map(projection => {
+    const unwrapped = this.projections[projectionName].map(projection => {
       return this.deserialize(type, projection);
     });
-    return unwrapped;
+    return new Promise((resolve, reject) => {
+      resolve(unwrapped);
+    });
   }
-  public Clear<TProjection extends Projection>(type: any): TProjection[] {
+  public async Clear<TProjection extends Projection>(type: any): Promise<void> {
     const projectionName = type.name;
-    if (!this.Projections[projectionName]) {
+    if (!this.projections[projectionName]) {
       return;
     }
-    this.Projections[projectionName] = [];
+    this.projections[projectionName] = [];
+    return new Promise((resolve, reject) => {
+      resolve();
+    });
   }
-  public ClearAll() {
-    this.Projections = {};
+  public async ClearAll(): Promise<void> {
+    this.projections = {};
+    return new Promise((resolve, reject) => {
+      resolve();
+    });
   }
-  private write(name: string, object: any) {
-    if (!this.Projections[name]) {
-      this.Projections[name] = [];
+  private write(name: string, object: any): void {
+    if (!this.projections[name]) {
+      this.projections[name] = [];
     }
     const wrapped = this.serialize(object);
-    this.Projections[name].push(wrapped);
+    this.projections[name].push(wrapped);
   }
   private read(type: any, id: any): any {
     const name = type.name;
-    if (!this.Projections[name]) {
+    if (!this.projections[name]) {
       return undefined;
     }
     const projectionIndex = this.find(type, id);
     if (projectionIndex === -1) {
       return undefined;
     }
-    const serialized = this.Projections[name][projectionIndex];
+    const serialized = this.projections[name][projectionIndex];
     const deserialized = this.deserialize(type, serialized);
     return deserialized;
   }
   private delete(type: any, id: any): void {
     const name = type.name;
-    if (!this.Projections[name]) {
+    if (!this.projections[name]) {
       return;
     }
     const projectionIndex = this.find(type, id);
     if (projectionIndex === -1) {
       return;
     }
-    this.Projections[name].splice(projectionIndex, 1);
+    this.projections[name].splice(projectionIndex, 1);
   }
-  private find(type: any, id: any) {
+  private find(type: any, id: any): number {
     const name = type.name;
-    const projection = this.Projections[name].find(wrapped => {
+    const projection = this.projections[name].find(wrapped => {
       const unwrapped: any = this.deserialize(type, wrapped);
       return unwrapped.Id === id;
     });
-    return this.Projections[name].indexOf(projection);
+    return this.projections[name].indexOf(projection);
   }
   private serialize<TProjection>(object: TProjection): any {
     const serialized = serialize(object);

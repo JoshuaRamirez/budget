@@ -7,13 +7,13 @@ export class CreatePayeeService extends Receiver<PayeeRequestedEvent> {
   private constructor() {
     super(PayeeRequestedEvent);
   }
-  public Receive(event: PayeeRequestedEvent) {
+  public async Receive(event: PayeeRequestedEvent): Promise<void> {
     // Create PayeeProjection
     const payeeProjection = new PayeeProjection();
     payeeProjection.Description = event.Description;
     payeeProjection.PayeeName = event.PayeeName;
     payeeProjection.Type = event.Type;
-    payeeProjection.Project();
-    return payeeProjection;
+    await payeeProjection.Project();
+    return new Promise((resolve, reject) => resolve());
   }
 }

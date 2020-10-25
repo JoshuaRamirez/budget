@@ -3,7 +3,8 @@ import { Publisher } from "../Core/Publisher";
 
 export class ForecastCreatedEvent extends Event {
   public ForecastId: any;
-  public Publish(): void {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

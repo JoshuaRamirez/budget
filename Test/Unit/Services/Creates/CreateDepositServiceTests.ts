@@ -11,9 +11,9 @@ describe("CreateDepositService", () => {
     const service = CreateDepositService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreateDepositService.Instance;
     const event = new DepositRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

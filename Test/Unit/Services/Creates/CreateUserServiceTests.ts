@@ -11,9 +11,9 @@ describe("CreateUserService", () => {
     const service = CreateUserService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreateUserService.Instance;
     const event = new UserRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

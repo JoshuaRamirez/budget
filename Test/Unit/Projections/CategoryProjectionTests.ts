@@ -10,7 +10,7 @@ describe("CategoryProjection", () => {
     const allocationProjection = new CategoryProjection();
     assert.exists(allocationProjection);
   });
-  it("should get", () => {
-    CategoryProjection.Get(1);
+  it("should get", async () => {
+    await CategoryProjection.Get(1);
   });
 });

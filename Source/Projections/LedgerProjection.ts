@@ -3,11 +3,13 @@ import { Projection } from "./Core/Projection";
 import { ProjectionStore } from "./Core/ProjectionStore";
 
 export class LedgerProjection extends Projection {
-  public static Get(id: any): LedgerProjection {
-    return ProjectionStore.Instance.GetProjection(LedgerProjection, id);
+  public static async Get(id: any): Promise<LedgerProjection> {
+    const projection = await ProjectionStore.Instance.GetProjection<LedgerProjection>(LedgerProjection, id);
+    return new Promise((resolve, reject) => resolve(projection));
   }
-  public static All(): LedgerProjection[] {
-    return ProjectionStore.Instance.GetProjections(LedgerProjection);
+  public static async All(): Promise<LedgerProjection[]> {
+    const projection = await ProjectionStore.Instance.GetProjections<LedgerProjection>(LedgerProjection);
+    return new Promise((resolve, reject) => resolve(projection));
   }
 
   // Foreign Keys
@@ -22,10 +24,12 @@ export class LedgerProjection extends Projection {
   constructor() {
     super(LedgerProjection.name);
   }
-  public Project(): void {
-    ProjectionStore.Instance.Save(this);
+  public async Project(): Promise<void> {
+    await ProjectionStore.Instance.Save(this);
+    return new Promise((resolve, reject) => resolve());
   }
-  public Update(): void {
-    ProjectionStore.Instance.Update(LedgerProjection, this);
+  public async Update(): Promise<void> {
+    await ProjectionStore.Instance.Update(LedgerProjection, this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

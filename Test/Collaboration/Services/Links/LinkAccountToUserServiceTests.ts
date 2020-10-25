@@ -8,16 +8,16 @@ import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewAccountCreatedEvent } from "../../../Helpers";
 
 describe("LinkAccountToUserService", () => {
-  beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+  beforeEach(async () => {
+    await Subscriptions.Release();
+    await Subscriptions.Create();
+    await ProjectionStore.Instance.ClearAll();
   });
-  it("should add the account id to the user link list", () => {
-    const accountCreatedEvent = NewAccountCreatedEvent();
-    accountCreatedEvent.Publish();
-    const accountProjection = AccountProjection.Get(accountCreatedEvent.AccountId);
-    const userProjection = UserProjection.Get(accountProjection.UserId);
+  it("should add the account id to the user link list", async () => {
+    const accountCreatedEvent = await NewAccountCreatedEvent();
+    await accountCreatedEvent.Publish();
+    const accountProjection = await AccountProjection.Get(accountCreatedEvent.AccountId);
+    const userProjection = await UserProjection.Get(accountProjection.UserId);
     assert.equal(userProjection.AccountIds[0], accountCreatedEvent.AccountId);
   });
 });

@@ -8,7 +8,7 @@ export class CreateForecastService extends Receiver<ForecastRequestedEvent> {
   private constructor() {
     super(ForecastRequestedEvent);
   }
-  public Receive(event: ForecastRequestedEvent) {
+  public async Receive(event: ForecastRequestedEvent): Promise<void> {
     // Create ForecastProjection
     const forecastProjection = new ForecastProjection();
     forecastProjection.Amount = event.Amount;
@@ -17,10 +17,11 @@ export class CreateForecastService extends Receiver<ForecastRequestedEvent> {
     forecastProjection.Notes = event.Notes;
     forecastProjection.PlannedDepositIds = event.PlannedDepositIds;
     forecastProjection.PlannedExpenseIds = event.PlannedExpenseIds;
-    forecastProjection.Project();
+    await forecastProjection.Project();
     // Publish ForecastCreatedEvent
     const forecastCreatedEvent = new ForecastCreatedEvent();
     forecastCreatedEvent.ForecastId = forecastProjection.Id;
-    forecastCreatedEvent.Publish();
+    await forecastCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

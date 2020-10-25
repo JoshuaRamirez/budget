@@ -8,7 +8,7 @@ export class CreatePlannedTransactionService extends Receiver<PlannedTransaction
   private constructor() {
     super(PlannedTransactionRequestedEvent);
   }
-  public Receive(event: PlannedTransactionRequestedEvent) {
+  public async Receive(event: PlannedTransactionRequestedEvent): Promise<void> {
     // Create PlannedTransactionProjection
     const plannedTransactionProjection = new PlannedTransactionProjection();
     plannedTransactionProjection.Amount = event.Amount;
@@ -19,10 +19,11 @@ export class CreatePlannedTransactionService extends Receiver<PlannedTransaction
     plannedTransactionProjection.StartDate = event.RepeatStart;
     plannedTransactionProjection.TransactionType = event.TransactionType;
     // Where's the LedgerId? Probably should make one.
-    plannedTransactionProjection.Project();
+    await plannedTransactionProjection.Project();
     // Publish PlannedTransactionCreatedEvent
     const plannedTransactionCreatedEvent = new PlannedTransactionCreatedEvent();
     plannedTransactionCreatedEvent.PlannedTransactionId = plannedTransactionProjection.Id;
-    plannedTransactionCreatedEvent.Publish();
+    await plannedTransactionCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

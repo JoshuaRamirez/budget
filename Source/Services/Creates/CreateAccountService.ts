@@ -8,16 +8,17 @@ export class CreateAccountService extends Receiver<AccountRequestedEvent> {
   private constructor() {
     super(AccountRequestedEvent);
   }
-  public Receive(event: AccountRequestedEvent) {
+  public async Receive(event: AccountRequestedEvent): Promise<void> {
     // Create AccountProjection
     const accountProjection = new AccountProjection();
     accountProjection.AccountName = event.AccountName;
     accountProjection.Type = event.Type;
     accountProjection.UserId = event.UserId;
-    accountProjection.Project();
+    await accountProjection.Project();
     // Publish AccountCreatedEvent
     const accountCreated = new AccountCreatedEvent();
     accountCreated.AccountId = accountProjection.Id;
-    accountCreated.Publish();
+    await accountCreated.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

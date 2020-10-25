@@ -3,11 +3,13 @@ import { Projection } from "./Core/Projection";
 import { ProjectionStore } from "./Core/ProjectionStore";
 
 export class ProposedTransactionProjection extends Projection {
-  public static Get(id: any): ProposedTransactionProjection {
-    return ProjectionStore.Instance.GetProjection(ProposedTransactionProjection, id);
+  public static async Get(id: any): Promise<ProposedTransactionProjection> {
+    const projection = await ProjectionStore.Instance.GetProjection<ProposedTransactionProjection>(ProposedTransactionProjection, id);
+    return new Promise((resolve, reject) => resolve(projection));
   }
-  public static All(): ProposedTransactionProjection[] {
-    return ProjectionStore.Instance.GetProjections(ProposedTransactionProjection);
+  public static async All(): Promise<ProposedTransactionProjection[]> {
+    const projection = await ProjectionStore.Instance.GetProjections<ProposedTransactionProjection>(ProposedTransactionProjection);
+    return new Promise((resolve, reject) => resolve(projection));
   }
 
   // Fields
@@ -20,10 +22,12 @@ export class ProposedTransactionProjection extends Projection {
   constructor() {
     super(ProposedTransactionProjection.name);
   }
-  public Project(): void {
-    ProjectionStore.Instance.Save(this);
+  public async Project(): Promise<void> {
+    await ProjectionStore.Instance.Save(this);
+    return new Promise((resolve, reject) => resolve());
   }
-  public Update(): void {
-    ProjectionStore.Instance.Update(ProposedTransactionProjection, this);
+  public async Update(): Promise<void> {
+    await ProjectionStore.Instance.Update(ProposedTransactionProjection, this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

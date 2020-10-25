@@ -7,10 +7,11 @@ export class CreateCategoryService extends Receiver<CategoryRequestedEvent> {
   private constructor() {
     super(CategoryRequestedEvent);
   }
-  public Receive(event: CategoryRequestedEvent) {
+  public async Receive(event: CategoryRequestedEvent): Promise<void> {
     const accountProjection = new CategoryProjection();
     accountProjection.CategoryName = event.CategoryName;
     accountProjection.Type = event.Type;
-    accountProjection.Project();
+    await accountProjection.Project();
+    return new Promise((resolve, reject) => resolve());
   }
 }

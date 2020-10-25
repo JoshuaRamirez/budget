@@ -7,22 +7,22 @@ import { UpdateLedgerStartingBalanceService } from "../../../../Source/Services/
 import { Subscriptions } from "../../../../Source/Subscriptions";
 
 describe("UpdateLedgerStartingBalanceService", () => {
-  beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+  beforeEach(async () => {
+    await Subscriptions.Release();
+    await Subscriptions.Create();
+    await ProjectionStore.Instance.ClearAll();
   });
-  it("should update projection", () => {
+  it("should update projection", async () => {
     const service = UpdateLedgerStartingBalanceService.Instance;
     service.Subscribe();
     const ledgerProjection = new LedgerProjection();
-    ledgerProjection.Project();
+    await ledgerProjection.Project();
     const ledgerStartingBalanceUpdateRequestedEvent = new LedgerStartingBalanceUpdateRequestedEvent();
     ledgerStartingBalanceUpdateRequestedEvent.LedgerId = ledgerProjection.Id;
     ledgerStartingBalanceUpdateRequestedEvent.StartingBalance = 10;
-    ledgerStartingBalanceUpdateRequestedEvent.Publish();
+    await ledgerStartingBalanceUpdateRequestedEvent.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections<LedgerProjection>(LedgerProjection);
+    const projections = await projectionStore.GetProjections<LedgerProjection>(LedgerProjection);
     const projection = projections[0];
     assert.equal(projection.Balance, 10);
   });

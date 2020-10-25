@@ -10,7 +10,7 @@ describe("PayerProjection", () => {
     const payerProjection = new PayerProjection();
     assert.exists(payerProjection);
   });
-  it("should get", () => {
-    PayerProjection.Get(1);
+  it("should get", async () => {
+    await PayerProjection.Get(1);
   });
 });

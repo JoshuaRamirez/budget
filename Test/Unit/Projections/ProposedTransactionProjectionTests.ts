@@ -10,7 +10,7 @@ describe("ProposedTransactionProjection", () => {
     const proposedTransactionProjection = new ProposedTransactionProjection();
     assert.exists(proposedTransactionProjection);
   });
-  it("should get", () => {
-    ProposedTransactionProjection.Get(1);
+  it("should get", async () => {
+    await ProposedTransactionProjection.Get(1);
   });
 });

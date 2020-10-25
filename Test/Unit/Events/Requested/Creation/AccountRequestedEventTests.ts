@@ -10,8 +10,8 @@ describe("AccountRequestedEvent", () => {
     const event = new AccountRequestedEvent();
     assert.exists(event);
   });
-  it("should publish", () => {
+  it("should publish", async () => {
     const event = new AccountRequestedEvent();
-    event.Publish();
+    await event.Publish();
   });
 });

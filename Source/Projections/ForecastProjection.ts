@@ -3,15 +3,19 @@ import { Projection } from "./Core/Projection";
 import { ProjectionStore } from "./Core/ProjectionStore";
 
 export class ForecastProjection extends Projection {
-  public static All(): ForecastProjection[] {
-    return ProjectionStore.Instance.GetProjections(ForecastProjection);
+  public static async All(): Promise<ForecastProjection[]> {
+    const projections = await ProjectionStore.Instance.GetProjections<ForecastProjection>(ForecastProjection);
+    return new Promise((resolve, reject) => resolve(projections));
   }
-  public static Get(id: any): ForecastProjection {
-    return ProjectionStore.Instance.GetProjection(ForecastProjection, id);
+  public static async Get(id: any): Promise<ForecastProjection> {
+    const projection = await ProjectionStore.Instance.GetProjection<ForecastProjection>(ForecastProjection, id);
+    return new Promise((resolve, reject) => resolve(projection));
   }
-  public static Last(): ForecastProjection {
-    const result = ProjectionStore.Instance.GetProjections<ForecastProjection>(ForecastProjection);
-    return result[result.length - 1];
+  public static async Last(): Promise<ForecastProjection> {
+    // TODO: Convert below to use a Length method on the ProjectionStore
+    const projections = await ProjectionStore.Instance.GetProjections<ForecastProjection>(ForecastProjection);
+    const projection = projections[projections.length - 1];
+    return new Promise((resolve, reject) => resolve(projection));
   }
 
   // Foreign Keys
@@ -28,10 +32,12 @@ export class ForecastProjection extends Projection {
   constructor() {
     super(ForecastProjection.name);
   }
-  public Project(): void {
+  public async Project(): Promise<void> {
     ProjectionStore.Instance.Save(this);
+    return new Promise((resolve, reject) => resolve());
   }
-  public Update(): void {
+  public async Update(): Promise<void> {
     ProjectionStore.Instance.Update(ForecastProjection, this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

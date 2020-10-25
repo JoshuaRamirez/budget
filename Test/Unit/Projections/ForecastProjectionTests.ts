@@ -10,7 +10,7 @@ describe("ForecastProjection", () => {
     const forecastProjection = new ForecastProjection();
     assert.exists(forecastProjection);
   });
-  it("should get", () => {
-    ForecastProjection.Get(1);
+  it("should get", async () => {
+    await ForecastProjection.Get(1);
   });
 });

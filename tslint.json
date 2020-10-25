@@ -16,7 +16,8 @@
         "max-line-length": false,
         "max-classes-per-file": false,
         "trailing-comma": false,
-        "prettier": [true, "./prettierrc"]
+        "prettier": [true, "./prettierrc"],
+        "no-submodule-imports": false
     },
     "rulesDirectory": ["tslint-plugin-prettier"]
 }

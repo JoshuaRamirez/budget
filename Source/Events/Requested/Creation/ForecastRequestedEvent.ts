@@ -12,7 +12,8 @@ export class ForecastRequestedEvent extends Event {
   constructor() {
     super();
   }
-  public Publish() {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

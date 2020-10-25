@@ -10,8 +10,8 @@ describe("AllocationRequestedEvent", () => {
     const event = new AllocationRequestedEvent();
     assert.exists(event);
   });
-  it("should publish", () => {
+  it("should publish", async () => {
     const event = new AllocationRequestedEvent();
-    event.Publish();
+    await event.Publish();
   });
 });

@@ -29,197 +29,200 @@ import { ProposedTransactionProjection } from "../Source/Projections/ProposedTra
 import { TransactionProjection } from "../Source/Projections/TransactionProjection";
 import { UserProjection } from "../Source/Projections/UserProjection";
 
-const newTransactionProjection = () => {
+const newTransactionProjection = async (): Promise<TransactionProjection> => {
   const transaction = new TransactionProjection();
-  transaction.LedgerId = newLedgerProjection().Id;
+  transaction.LedgerId = (await newLedgerProjection()).Id;
   transaction.Amount = -1;
-  transaction.Project();
-  return transaction;
+  await transaction.Project();
+  return new Promise((resolve, reject) => resolve(transaction));
 };
 
-const newPlannedExpenseProjection = () => {
+const newPlannedExpenseProjection = async (): Promise<PlannedExpenseProjection> => {
   const plannedExpense = new PlannedExpenseProjection();
-  plannedExpense.Project();
-  return plannedExpense;
+  await plannedExpense.Project();
+  return new Promise((resolve, reject) => resolve(plannedExpense));
 };
 
-const newPlannedDepositProjection = () => {
+const newPlannedDepositProjection = async (): Promise<PlannedDepositProjection> => {
   const plannedDeposit = new PlannedDepositProjection();
-  plannedDeposit.Project();
-  return plannedDeposit;
+  await plannedDeposit.Project();
+  return new Promise((resolve, reject) => resolve(plannedDeposit));
 };
 
-const newPayeeProjection = () => {
+const newPayeeProjection = async (): Promise<PayeeProjection> => {
   const payeeProjection = new PayeeProjection();
   payeeProjection.PayeeName = "TestPayeeName";
-  payeeProjection.Project();
-  return payeeProjection;
+  await payeeProjection.Project();
+  return new Promise((resolve, reject) => resolve(payeeProjection));
 };
 
-const newPayerProjection = () => {
+const newPayerProjection = async (): Promise<PayerProjection> => {
   const payerProjection = new PayerProjection();
   payerProjection.PayerName = "TestPayerName";
-  payerProjection.Project();
-  return payerProjection;
+  await payerProjection.Project();
+  return new Promise((resolve, reject) => resolve(payerProjection));
 };
 
-const newExpenseProjection = () => {
+const newExpenseProjection = async (): Promise<ExpenseProjection> => {
   const expenseProjection = new ExpenseProjection();
-  expenseProjection.PlannedExpenseId = newPlannedExpenseProjection().Id;
-  expenseProjection.LedgerId = newLedgerProjection().Id;
-  expenseProjection.PayeeId = newPayeeProjection().Id;
-  expenseProjection.Project();
-  return expenseProjection;
+  expenseProjection.PlannedExpenseId = (await newPlannedExpenseProjection()).Id;
+  expenseProjection.LedgerId = (await newLedgerProjection()).Id;
+  expenseProjection.PayeeId = (await newPayeeProjection()).Id;
+  await expenseProjection.Project();
+  return new Promise((resolve, reject) => resolve(expenseProjection));
 };
 
-const newDepositProjection = () => {
+const newDepositProjection = async (): Promise<DepositProjection> => {
   const depositProjection = new DepositProjection();
-  depositProjection.PlannedDepositId = newPlannedDepositProjection().Id;
-  depositProjection.LedgerId = newLedgerProjection().Id;
-  depositProjection.PayerId = newPayerProjection().Id;
-  depositProjection.Project();
-  return depositProjection;
+  depositProjection.PlannedDepositId = (await newPlannedDepositProjection()).Id;
+  depositProjection.LedgerId = (await newLedgerProjection()).Id;
+  depositProjection.PayerId = (await newPayerProjection()).Id;
+  await depositProjection.Project();
+  return new Promise((resolve, reject) => resolve(depositProjection));
 };
 
-const newLedgerProjection = () => {
+const newLedgerProjection = async (): Promise<LedgerProjection> => {
   const ledgerProjection = new LedgerProjection();
-  ledgerProjection.AccountId = newAccountProjection().Id;
-  ledgerProjection.Project();
-  return ledgerProjection;
+  ledgerProjection.AccountId = (await newAccountProjection()).Id;
+  await ledgerProjection.Project();
+  return new Promise((resolve, reject) => resolve(ledgerProjection));
 };
 
-const newAccountProjection = () => {
+const newAccountProjection = async (): Promise<AccountProjection> => {
   const accountProjection = new AccountProjection();
   accountProjection.AccountName = "TestAccountName";
   accountProjection.Type = "TestType";
-  accountProjection.UserId = newUserProjection().Id;
-  accountProjection.Project();
-  return accountProjection;
+  accountProjection.UserId = (await newUserProjection()).Id;
+  await accountProjection.Project();
+  return new Promise((resolve, reject) => resolve(accountProjection));
 };
 
-const newUserProjection = () => {
+const newUserProjection = async (): Promise<UserProjection> => {
   const userProjection = new UserProjection();
-  userProjection.Project();
-  return userProjection;
+  await userProjection.Project();
+  return new Promise((resolve, reject) => resolve(userProjection));
 };
 
-const newCategoryProjection = () => {
+const newCategoryProjection = async (): Promise<CategoryProjection> => {
   const categoryProjection = new CategoryProjection();
-  categoryProjection.Project();
-  return categoryProjection;
+  await categoryProjection.Project();
+  return new Promise((resolve, reject) => resolve(categoryProjection));
 };
 
-export const newPlannedTransaction = () => {
+export const newPlannedTransaction = async (): Promise<PlannedTransactionProjection> => {
   const plannedTransactionProjection = new PlannedTransactionProjection();
-  plannedTransactionProjection.Project();
-  return plannedTransactionProjection;
+  await plannedTransactionProjection.Project();
+  return new Promise((resolve, reject) => resolve(plannedTransactionProjection));
 };
 
-export const newProposedTransaction = () => {
+export const newProposedTransaction = async (): Promise<ProposedTransactionProjection> => {
   const proposedTransaction = new ProposedTransactionProjection();
-  proposedTransaction.PlannedTransactionId = newPlannedTransaction().Id;
-  proposedTransaction.Project();
-  return proposedTransaction;
+  proposedTransaction.PlannedTransactionId = (await newPlannedTransaction()).Id;
+  await proposedTransaction.Project();
+  return new Promise((resolve, reject) => resolve(proposedTransaction));
 };
 
-export const NewLedgerRequestedEvent = () => {
+export const NewLedgerRequestedEvent = async (): Promise<LedgerRequestedEvent> => {
   const ledgerRequestedEvent = new LedgerRequestedEvent();
-  ledgerRequestedEvent.AccountId = newAccountProjection().Id;
+  ledgerRequestedEvent.AccountId = (await newAccountProjection()).Id;
   ledgerRequestedEvent.Type = "TestType";
-  return ledgerRequestedEvent;
+  return new Promise((resolve, reject) => resolve(ledgerRequestedEvent));
 };
 
-export const NewExpenseRequestedEvent = () => {
+export const NewExpenseRequestedEvent = async (): Promise<ExpenseRequestedEvent> => {
   const expenseRequestedEvent = new ExpenseRequestedEvent();
-  expenseRequestedEvent.CategoryId = newCategoryProjection().Id;
-  expenseRequestedEvent.LedgerId = newLedgerProjection().Id;
-  expenseRequestedEvent.PayeeId = newPayeeProjection().Id;
-  expenseRequestedEvent.PlannedExpenseId = newPlannedExpenseProjection().Id;
-  expenseRequestedEvent.TransactionId = newTransactionProjection().Id;
-  return expenseRequestedEvent;
+  expenseRequestedEvent.CategoryId = (await newCategoryProjection()).Id;
+  expenseRequestedEvent.LedgerId = (await newLedgerProjection()).Id;
+  expenseRequestedEvent.PayeeId = (await newPayeeProjection()).Id;
+  expenseRequestedEvent.PlannedExpenseId = (await newPlannedExpenseProjection()).Id;
+  expenseRequestedEvent.TransactionId = (await newTransactionProjection()).Id;
+  return new Promise((resolve, reject) => resolve(expenseRequestedEvent));
 };
 
-export const NewAccountRequestedEvent = () => {
+export const NewAccountRequestedEvent = async (): Promise<AccountRequestedEvent> => {
   const accountRequestedEvent = new AccountRequestedEvent();
-  accountRequestedEvent.UserId = newUserProjection().Id;
-  return accountRequestedEvent;
+  accountRequestedEvent.UserId = (await newUserProjection()).Id;
+  return new Promise((resolve, reject) => resolve(accountRequestedEvent));
 };
 
-export const NewTransactionRequestedEvent = () => {
+export const NewTransactionRequestedEvent = async (): Promise<TransactionRequestedEvent> => {
   const transactionRequestedEvent = new TransactionRequestedEvent();
-  transactionRequestedEvent.LedgerId = newLedgerProjection().Id;
-  return transactionRequestedEvent;
+  transactionRequestedEvent.LedgerId = (await newLedgerProjection()).Id;
+  return new Promise((resolve, reject) => resolve(transactionRequestedEvent));
 };
 
-export const NewProposedTransactionCreationRequestedEvent = () => {
-  const event = new ProposedTransactionRequestedEvent();
-  event.PlannedTransactionId = newPlannedTransaction().Id;
-  return event;
+export const NewProposedTransactionCreationRequestedEvent = async (): Promise<ProposedTransactionRequestedEvent> => {
+  const proposedTransactionRequestedEvent = new ProposedTransactionRequestedEvent();
+  proposedTransactionRequestedEvent.PlannedTransactionId = (await newPlannedTransaction()).Id;
+  return new Promise((resolve, reject) => resolve(proposedTransactionRequestedEvent));
 };
 
-export const NewPlannedTransactionCreationRequestedEvent = () => {
-  const event = new PlannedTransactionRequestedEvent();
-  return event;
+export const NewPlannedTransactionCreationRequestedEvent = async (): Promise<PlannedTransactionRequestedEvent> => {
+  const plannedTransactionRequestedEvent = new PlannedTransactionRequestedEvent();
+  return new Promise((resolve, reject) => resolve(plannedTransactionRequestedEvent));
 };
 
-export const NewDepositCreatedEvent = () => {
-  const depositProjection = newDepositProjection();
+export const NewDepositCreatedEvent = async (): Promise<DepositCreatedEvent> => {
+  const depositProjection = await newDepositProjection();
   const depositCreatedEvent = new DepositCreatedEvent();
   depositCreatedEvent.DepositId = depositProjection.Id;
-  return depositCreatedEvent;
+  return new Promise((resolve, reject) => resolve(depositCreatedEvent));
 };
 
-export const NewTransactionCreatedEvent = () => {
-  const transactionProjection = newTransactionProjection();
+export const NewTransactionCreatedEvent = async (): Promise<TransactionCreatedEvent> => {
+  const transactionProjection = await newTransactionProjection();
   const transactionCreatedEvent = new TransactionCreatedEvent();
   transactionCreatedEvent.TransactionId = transactionProjection.Id;
-  return transactionCreatedEvent;
+  return new Promise((resolve, reject) => resolve(transactionCreatedEvent));
 };
 
-export const NewLedgerCreatedEvent = () => {
-  const ledgerProjection = newLedgerProjection();
+export const NewLedgerCreatedEvent = async (): Promise<LedgerCreatedEvent> => {
+  const ledgerProjection = await newLedgerProjection();
   const ledgerCreatedEvent = new LedgerCreatedEvent();
   ledgerCreatedEvent.LedgerId = ledgerProjection.Id;
-  return ledgerCreatedEvent;
+  return new Promise((resolve, reject) => resolve(ledgerCreatedEvent));
 };
 
-export const NewAccountCreatedEvent = () => {
-  const accountProjection = newAccountProjection();
+export const NewAccountCreatedEvent = async (): Promise<AccountCreatedEvent> => {
+  const accountProjection = await newAccountProjection();
   const accountCreatedEvent = new AccountCreatedEvent();
   accountCreatedEvent.AccountId = accountProjection.Id;
-  return accountCreatedEvent;
+  return new Promise((resolve, reject) => resolve(accountCreatedEvent));
 };
 
-export const NewExpenseCreatedEvent = () => {
-  const expenseProjection = newExpenseProjection();
+export const NewExpenseCreatedEvent = async (): Promise<ExpenseCreatedEvent> => {
+  const expenseProjection = await newExpenseProjection();
   const expenseCreatedEvent = new ExpenseCreatedEvent();
   expenseCreatedEvent.ExpenseId = expenseProjection.Id;
-  return expenseCreatedEvent;
+  return new Promise((resolve, reject) => resolve(expenseCreatedEvent));
 };
 
-export const PublishUserRequestedEvent = () => {
+export const PublishUserRequestedEvent = async (): Promise<UserRequestedEvent> => {
   const userRequestedEvent = new UserRequestedEvent();
   userRequestedEvent.UserName = "Test";
   userRequestedEvent.Type = "Test";
-  userRequestedEvent.Publish();
+  await userRequestedEvent.Publish();
+  return new Promise((resolve, reject) => resolve());
 };
 
-export const PublishAllocationRequestedEvent = (transactionId, ledgerId) => {
+export const PublishAllocationRequestedEvent = async (transactionId, ledgerId): Promise<AllocationRequestedEvent> => {
   const allocationRequestedEvent = new AllocationRequestedEvent();
   allocationRequestedEvent.LedgerId = ledgerId;
   allocationRequestedEvent.TransactionId = transactionId;
-  allocationRequestedEvent.Publish();
+  await allocationRequestedEvent.Publish();
+  return new Promise((resolve, reject) => resolve());
 };
 
-export const PublishAccountRequestedEvent = userId => {
+export const PublishAccountRequestedEvent = async (userId): Promise<void> => {
   const accountRequestedEvent = new AccountRequestedEvent();
   accountRequestedEvent.AccountName = "Wells Fargo Checking";
   accountRequestedEvent.Type = "Bank";
   accountRequestedEvent.UserId = userId;
-  accountRequestedEvent.Publish();
+  await accountRequestedEvent.Publish();
+  return new Promise((resolve, reject) => resolve());
 };
 
-export const PublishExpenseRequestedEvent = (transactionId, ledgerId, plannedExpenseId = null, payeeId = null) => {
+export const PublishExpenseRequestedEvent = async (transactionId, ledgerId, plannedExpenseId = null, payeeId = null): Promise<void> => {
   const expenseRequestedEvent = new ExpenseRequestedEvent();
   expenseRequestedEvent.CategoryId = "CategoryId";
   expenseRequestedEvent.Description = "Description";
@@ -227,34 +230,38 @@ export const PublishExpenseRequestedEvent = (transactionId, ledgerId, plannedExp
   expenseRequestedEvent.PayeeId = payeeId;
   expenseRequestedEvent.PlannedExpenseId = plannedExpenseId;
   expenseRequestedEvent.TransactionId = transactionId;
-  expenseRequestedEvent.Publish();
+  await expenseRequestedEvent.Publish();
+  return new Promise((resolve, reject) => resolve());
 };
 
-export const PublishTransactionRequestedEvent = (amount, ledgerId) => {
+export const PublishTransactionRequestedEvent = async (amount, ledgerId): Promise<void> => {
   const transactionRequestedEvent = new TransactionRequestedEvent();
   transactionRequestedEvent.Amount = amount;
   transactionRequestedEvent.LedgerId = ledgerId;
-  transactionRequestedEvent.Publish();
+  await transactionRequestedEvent.Publish();
+  return new Promise((resolve, reject) => resolve());
 };
 
-export const PublishPayeeRequestedEvent = () => {
+export const PublishPayeeRequestedEvent = async (): Promise<void> => {
   const payeeRequestedEvent = new PayeeRequestedEvent();
   payeeRequestedEvent.Description = "Test";
   payeeRequestedEvent.Type = "Test";
-  payeeRequestedEvent.Publish();
+  await payeeRequestedEvent.Publish();
+  return new Promise((resolve, reject) => resolve());
 };
 
-export const RequestPlannedExpenseEvent = () => {
+export const RequestPlannedExpenseEvent = async (): Promise<void> => {
   const event = new PlannedExpenseRequestedEvent();
   event.RepeatPeriod = 1;
   event.RepeatMeasurement = "Weeks";
   event.RepeatCount = -1;
   event.Description = "Testing";
-  event.Publish();
+  await event.Publish();
+  return new Promise((resolve, reject) => resolve());
 };
 
-export function GetLast<TProjection extends Projection>(type: any) {
-  const projections = ProjectionStore.Instance.GetProjections<TProjection>(type);
+export async function GetLast<TProjection extends Projection>(type: any): Promise<TProjection> {
+  const projections = await ProjectionStore.Instance.GetProjections<TProjection>(type);
   const last = projections[projections.length - 1];
-  return last;
+  return new Promise((resolve, reject) => resolve(last));
 }

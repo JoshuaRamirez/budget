@@ -8,7 +8,7 @@ export class CreateTransactionService extends Receiver<TransactionRequestedEvent
   private constructor() {
     super(TransactionRequestedEvent);
   }
-  public Receive(event: TransactionRequestedEvent) {
+  public async Receive(event: TransactionRequestedEvent): Promise<void> {
     // Create TransactionProjection
     const transactionProjection = new TransactionProjection();
     transactionProjection.Amount = event.Amount;
@@ -16,10 +16,11 @@ export class CreateTransactionService extends Receiver<TransactionRequestedEvent
     transactionProjection.LedgerId = event.LedgerId;
     transactionProjection.Source = event.Source;
     transactionProjection.Type = event.Type;
-    transactionProjection.Project();
+    await transactionProjection.Project();
     // Publish TransactionCreatedEvent
     const newTransactionCreatedEvent = new TransactionCreatedEvent();
     newTransactionCreatedEvent.TransactionId = transactionProjection.Id;
-    newTransactionCreatedEvent.Publish();
+    await newTransactionCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

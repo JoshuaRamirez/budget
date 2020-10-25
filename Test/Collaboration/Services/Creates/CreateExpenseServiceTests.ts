@@ -7,15 +7,15 @@ import { System } from "../../../../Source/System/System";
 import { NewExpenseRequestedEvent } from "../../../Helpers";
 
 describe("CreateExpenseService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  it("should create projection", () => {
-    const event = NewExpenseRequestedEvent();
-    event.Publish();
+  it("should create projection", async () => {
+    const event = await NewExpenseRequestedEvent();
+    await event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections(ExpenseProjection);
+    const projections = await projectionStore.GetProjections(ExpenseProjection);
     const projection = projections[0];
     assert.exists(projection);
   });

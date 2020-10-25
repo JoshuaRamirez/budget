@@ -7,15 +7,15 @@ import { System } from "../../../../Source/System/System";
 import { NewLedgerRequestedEvent } from "../../../Helpers";
 
 describe("CreateLedgerService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  it("should create projection", () => {
-    const event = NewLedgerRequestedEvent();
-    event.Publish();
+  it("should create projection", async () => {
+    const event = await NewLedgerRequestedEvent();
+    await event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections(LedgerProjection);
+    const projections = await projectionStore.GetProjections(LedgerProjection);
     const projection = projections[0];
     assert.exists(projection);
   });

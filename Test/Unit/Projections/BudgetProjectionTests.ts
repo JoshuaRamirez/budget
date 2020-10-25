@@ -10,7 +10,7 @@ describe("BudgetProjection", () => {
     const accountProjection = new BudgetProjection();
     assert.exists(accountProjection);
   });
-  it("should get", () => {
-    BudgetProjection.Get(1);
+  it("should get", async () => {
+    await BudgetProjection.Get(1);
   });
 });

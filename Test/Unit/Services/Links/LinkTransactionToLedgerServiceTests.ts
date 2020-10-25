@@ -11,9 +11,9 @@ describe("LinkTransactionToLedgerService", () => {
     const service = LinkTransactionToLedgerService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = LinkTransactionToLedgerService.Instance;
-    const event = NewTransactionCreatedEvent();
-    service.Receive(event);
+    const event = await NewTransactionCreatedEvent();
+    await service.Receive(event);
   });
 });

@@ -11,9 +11,9 @@ describe("UpdateLedgerBalanceService", () => {
     const service = UpdateLedgerBalanceService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = UpdateLedgerBalanceService.Instance;
     const event = new TransactionCreatedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

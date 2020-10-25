@@ -4,11 +4,13 @@ import { Projection } from "./Core/Projection";
 import { ProjectionStore } from "./Core/ProjectionStore";
 
 export class PlannedExpenseProjection extends Projection implements IPlannedTransaction {
-  public static Get(id: any): PlannedExpenseProjection {
-    return ProjectionStore.Instance.GetProjection(PlannedExpenseProjection, id);
+  public static async Get(id: any): Promise<PlannedExpenseProjection> {
+    const projection = await ProjectionStore.Instance.GetProjection<PlannedExpenseProjection>(PlannedExpenseProjection, id);
+    return new Promise((resolve, reject) => resolve(projection));
   }
-  public static All(): PlannedExpenseProjection[] {
-    return ProjectionStore.Instance.GetProjections(PlannedExpenseProjection);
+  public static async All(): Promise<PlannedExpenseProjection[]> {
+    const projection = await ProjectionStore.Instance.GetProjections<PlannedExpenseProjection>(PlannedExpenseProjection);
+    return new Promise((resolve, reject) => resolve(projection));
   }
 
   // Foreign Keys
@@ -27,10 +29,12 @@ export class PlannedExpenseProjection extends Projection implements IPlannedTran
     super(PlannedExpenseProjection.name);
     this.ExpenseIds = [];
   }
-  public Project(): void {
-    ProjectionStore.Instance.Save(this);
+  public async Project(): Promise<void> {
+    await ProjectionStore.Instance.Save(this);
+    return new Promise((resolve, reject) => resolve());
   }
-  public Update(): void {
-    ProjectionStore.Instance.Update(PlannedExpenseProjection, this);
+  public async Update(): Promise<void> {
+    await ProjectionStore.Instance.Update(PlannedExpenseProjection, this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

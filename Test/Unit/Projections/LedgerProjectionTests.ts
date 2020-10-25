@@ -10,7 +10,7 @@ describe("LedgerProjection", () => {
     const ledgerProjection = new LedgerProjection();
     assert.exists(ledgerProjection);
   });
-  it("should get", () => {
-    LedgerProjection.Get(1);
+  it("should get", async () => {
+    await LedgerProjection.Get(1);
   });
 });

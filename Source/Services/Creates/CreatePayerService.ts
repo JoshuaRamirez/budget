@@ -7,13 +7,13 @@ export class CreatePayerService extends Receiver<PayerRequestedEvent> {
   private constructor() {
     super(PayerRequestedEvent);
   }
-  public Receive(event: PayerRequestedEvent) {
+  public async Receive(event: PayerRequestedEvent): Promise<void> {
     // Create PayerProjection
     const payerProjection = new PayerProjection();
     payerProjection.Description = event.Description;
     payerProjection.PayerName = event.PayerName;
     payerProjection.Type = event.Type;
-    payerProjection.Project();
-    return payerProjection;
+    await payerProjection.Project();
+    return new Promise((resolve, reject) => resolve());
   }
 }

@@ -5,7 +5,8 @@
     "module": "commonjs",
     "target": "ES5",
     "outDir": "./build",
-    "rootDir": "./"
+    "rootDir": "./",
+    "baseUrl": "./"
   },
   "include": [
     "./**/*"

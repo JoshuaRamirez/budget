@@ -9,7 +9,8 @@ export class PlannedTransactionRequestedEvent extends Event {
   public RepeatCount: number;
   public RepeatStart: Date;
   public TransactionType: string;
-  public Publish(): void {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

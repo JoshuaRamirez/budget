@@ -11,9 +11,9 @@ describe("CreatePayerService", () => {
     const service = CreatePayerService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreatePayerService.Instance;
     const event = new PayerRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

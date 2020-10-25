@@ -8,7 +8,7 @@ export abstract class Receiver<TEvent extends Event> implements IReceiver<TEvent
   protected constructor(eventType: typeof Event) {
     this.eventType = eventType;
   }
-  public abstract Receive(event: TEvent): void;
+  public abstract async Receive(event: TEvent): Promise<void>;
   public Subscribe() {
     const handle = Publisher.Instance.Subscribe(this.eventType, this);
     this.handles.push(handle);

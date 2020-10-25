@@ -17,7 +17,8 @@ export class LinkForecastToPlannedDepositService extends LinkService<ForecastCre
     });
     super(declaration);
   }
-  public Receive(event: ForecastCreatedEvent): void {
-    super.Receive(event);
+  public async Receive(event: ForecastCreatedEvent): Promise<void> {
+    await super.Receive(event);
+    return new Promise((resolve, reject) => resolve());
   }
 }

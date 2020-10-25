@@ -7,15 +7,15 @@ import { CreateAllocationService } from "../../../../Source/Services/Creates/Cre
 import { System } from "../../../../Source/System/System";
 
 describe("CreateAllocationService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  it("should create projection", () => {
+  it("should create projection", async () => {
     const event = new AllocationRequestedEvent();
-    event.Publish();
+    await event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections(AllocationProjection);
+    const projections = await projectionStore.GetProjections(AllocationProjection);
     const projection = projections[0];
     assert.exists(projection);
   });

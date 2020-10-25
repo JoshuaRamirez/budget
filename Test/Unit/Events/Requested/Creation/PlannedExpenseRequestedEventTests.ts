@@ -10,8 +10,8 @@ describe("PlannedExpenseRequestedEvent", () => {
     const event = new PlannedExpenseRequestedEvent();
     assert.exists(event);
   });
-  it("should publish", () => {
+  it("should publish", async () => {
     const event = new PlannedExpenseRequestedEvent();
-    event.Publish();
+    await event.Publish();
   });
 });

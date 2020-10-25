@@ -7,15 +7,15 @@ import { CreateCategoryService } from "../../../../Source/Services/Creates/Creat
 import { System } from "../../../../Source/System/System";
 
 describe("CreateCategoryService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  it("should create projection", () => {
+  it("should create projection", async () => {
     const event = new CategoryRequestedEvent();
-    event.Publish();
+    await event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections(CategoryProjection);
+    const projections = await projectionStore.GetProjections(CategoryProjection);
     const projection = projections[0];
     assert.exists(projection);
   });

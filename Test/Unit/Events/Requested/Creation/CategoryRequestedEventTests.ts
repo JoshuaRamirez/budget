@@ -10,8 +10,8 @@ describe("CategoryRequestedEvent", () => {
     const event = new CategoryRequestedEvent();
     assert.exists(event);
   });
-  it("should publish", () => {
+  it("should publish", async () => {
     const event = new CategoryRequestedEvent();
-    event.Publish();
+    await event.Publish();
   });
 });

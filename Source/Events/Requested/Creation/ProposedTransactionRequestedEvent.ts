@@ -7,7 +7,8 @@ export class ProposedTransactionRequestedEvent extends Event {
   public Description: string;
   public PlannedTransactionId: any;
   public TransactionType: string;
-  public Publish(): void {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

@@ -11,9 +11,9 @@ describe("CreateAllocationService", () => {
     const service = CreateAllocationService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreateAllocationService.Instance;
     const event = new AllocationRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

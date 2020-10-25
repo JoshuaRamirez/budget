@@ -7,13 +7,14 @@
     "test": "Source/test"
   },
   "dependencies": {
-    "@types/node": "^11.13.8",
-    "jshint": "^2.10.2",
-    "serializr": "^1.5.1",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
+    "@types/node": "^11.13.8",
     "chai": "^4.2.0",
-    "mocha": "^6.1.4"
+    "firebase": "^7.24.0",
+    "jshint": "^2.10.2",
+    "mocha": "^6.1.4",
+    "serializr": "^1.5.1"
   },
   "devDependencies": {
     "nyc": "^15.0.0",

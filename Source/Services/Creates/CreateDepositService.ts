@@ -8,7 +8,7 @@ export class CreateDepositService extends Receiver<DepositRequestedEvent> {
   private constructor() {
     super(DepositRequestedEvent);
   }
-  public Receive(event: DepositRequestedEvent) {
+  public async Receive(event: DepositRequestedEvent): Promise<void> {
     // Create DepositProjection
     const depositProjection = new DepositProjection();
     depositProjection.CategoryId = event.CategoryId;
@@ -17,10 +17,11 @@ export class CreateDepositService extends Receiver<DepositRequestedEvent> {
     depositProjection.PayerId = event.PayerId;
     depositProjection.PlannedDepositId = event.PlannedDepositId;
     depositProjection.TransactionId = event.TransactionId;
-    depositProjection.Project();
+    await depositProjection.Project();
     // Publish DepositCreatedEvent
     const depositCreatedEvent = new DepositCreatedEvent();
     depositCreatedEvent.DepositId = depositProjection.Id;
-    depositCreatedEvent.Publish();
+    await depositCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

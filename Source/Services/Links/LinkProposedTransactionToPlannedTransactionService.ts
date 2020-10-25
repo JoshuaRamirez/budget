@@ -17,7 +17,8 @@ export class LinkProposedTransactionToPlannedTransactionService extends LinkServ
     });
     super(declaration);
   }
-  public Receive(event: ProposedTransactionCreatedEvent): void {
-    super.Receive(event);
+  public async Receive(event: ProposedTransactionCreatedEvent): Promise<void> {
+    await super.Receive(event);
+    return new Promise((resolve, reject) => resolve());
   }
 }

@@ -9,14 +9,15 @@ export class ProposeTransactionsForToday extends Receiver<DailyTimerIntervalPubl
   constructor() {
     super(DailyTimerIntervalPublishedEvent);
   }
-  public Receive(event: DailyTimerIntervalPublishedEvent): void {
-    const plannedTransactionProjections = PlannedTransactionProjection.All();
-    plannedTransactionProjections.forEach(plannedTransactionProjection => {
-      const proposedDate = TransactionProposition.GetProposedDate(plannedTransactionProjection);
+  public async Receive(event: DailyTimerIntervalPublishedEvent): Promise<void> {
+    const plannedTransactionProjections = await PlannedTransactionProjection.All();
+    for (const plannedTransactionProjection of plannedTransactionProjections) {
+      const proposedDate = await TransactionProposition.GetProposedDate(plannedTransactionProjection);
       const proposedTransactionCreationRequestedEvent = MapPlannedTransactionToProposedTransactionCreationRequested(plannedTransactionProjection, proposedDate);
       if (proposedTransactionCreationRequestedEvent) {
-        proposedTransactionCreationRequestedEvent.Publish();
+        await proposedTransactionCreationRequestedEvent.Publish();
       }
-    });
+    }
+    return new Promise((resolve, reject) => resolve());
   }
 }

@@ -5,17 +5,18 @@ import { EventStore } from "./EventStore";
 export class Publisher<TEvent extends Event> {
   public static Subscriptions = {};
   public static Instance = new Publisher();
-  public Publish(event: TEvent) {
-    EventStore.Instance.Record(event);
+  public async Publish(event: TEvent): Promise<void> {
+    await EventStore.Instance.Record(event);
     if (!Publisher.Subscriptions[event.EventName]) {
-      return;
+      return new Promise((resolve, reject) => resolve());
     }
     const handlers = Publisher.Subscriptions[event.EventName];
-    handlers.forEach(handler => {
-      handler(event);
-    });
+    for (const handler of handlers) {
+      await handler(event);
+    }
+    return new Promise((resolve, reject) => resolve());
   }
-  public Subscribe(eventType: new (x, y) => TEvent, subscriber: IReceiver<TEvent>) {
+  public Subscribe(eventType: new (x, y) => TEvent, subscriber: IReceiver<TEvent>): any {
     const eventName = eventType.name;
     const subscriptions = Publisher.Subscriptions[eventName];
     if (!subscriptions) {
@@ -25,7 +26,7 @@ export class Publisher<TEvent extends Event> {
     Publisher.Subscriptions[eventName].push(handle);
     return handle;
   }
-  public UnSubscribe(eventType: new (x, y) => TEvent, handle: IReceiver<TEvent>) {
+  public UnSubscribe(eventType: new (x, y) => TEvent, handle: IReceiver<TEvent>): void {
     const eventName = eventType.name;
     const subscriptions = Publisher.Subscriptions[eventName];
     if (!subscriptions) {

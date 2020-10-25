@@ -17,7 +17,8 @@ export class LinkDepositToPlannedDepositService extends LinkService<DepositCreat
     });
     super(declaration);
   }
-  public Receive(event: DepositCreatedEvent): void {
-    super.Receive(event);
+  public async Receive(event: DepositCreatedEvent): Promise<void> {
+    await super.Receive(event);
+    return new Promise((resolve, reject) => resolve());
   }
 }

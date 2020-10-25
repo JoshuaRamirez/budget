@@ -8,7 +8,7 @@ export class CreatePlannedExpenseService extends Receiver<PlannedExpenseRequeste
   private constructor() {
     super(PlannedExpenseRequestedEvent);
   }
-  public Receive(event: PlannedExpenseRequestedEvent) {
+  public async Receive(event: PlannedExpenseRequestedEvent): Promise<void> {
     // Create PlannedExpenseProjection
     const plannedExpenseProjection = new PlannedExpenseProjection();
     plannedExpenseProjection.Amount = event.Amount;
@@ -18,10 +18,11 @@ export class CreatePlannedExpenseService extends Receiver<PlannedExpenseRequeste
     plannedExpenseProjection.RepeatMeasurement = event.RepeatMeasurement;
     plannedExpenseProjection.RepeatPeriod = event.RepeatPeriod;
     plannedExpenseProjection.StartDate = event.RepeatStart;
-    plannedExpenseProjection.Project();
+    await plannedExpenseProjection.Project();
     // Publish PlannedExpenseCreated Event
     const plannedExpenseCreatedEvent = new PlannedExpenseCreatedEvent();
     plannedExpenseCreatedEvent.PlannedExpenseId = plannedExpenseProjection.Id;
-    plannedExpenseCreatedEvent.Publish();
+    await plannedExpenseCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

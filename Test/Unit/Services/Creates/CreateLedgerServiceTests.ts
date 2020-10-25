@@ -11,9 +11,9 @@ describe("CreateLedgerService", () => {
     const createLedgerService = CreateLedgerService.Instance;
     assert.exists(createLedgerService);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreateLedgerService.Instance;
     const event = new LedgerRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

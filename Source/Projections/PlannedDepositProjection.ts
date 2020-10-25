@@ -4,11 +4,13 @@ import { Projection } from "./Core/Projection";
 import { ProjectionStore } from "./Core/ProjectionStore";
 
 export class PlannedDepositProjection extends Projection implements IPlannedTransaction {
-  public static All(): PlannedDepositProjection[] {
-    return ProjectionStore.Instance.GetProjections(PlannedDepositProjection);
+  public static async All(): Promise<PlannedDepositProjection[]> {
+    const projection = await ProjectionStore.Instance.GetProjections<PlannedDepositProjection>(PlannedDepositProjection);
+    return new Promise((resolve, reject) => resolve(projection));
   }
-  public static Get(id: any): PlannedDepositProjection {
-    return ProjectionStore.Instance.GetProjection(PlannedDepositProjection, id);
+  public static async Get(id: any): Promise<PlannedDepositProjection> {
+    const projection = await ProjectionStore.Instance.GetProjection<PlannedDepositProjection>(PlannedDepositProjection, id);
+    return new Promise((resolve, reject) => resolve(projection));
   }
 
   // Foreign Keys
@@ -27,10 +29,12 @@ export class PlannedDepositProjection extends Projection implements IPlannedTran
     super(PlannedDepositProjection.name);
     this.DepositIds = [];
   }
-  public Project(): void {
-    ProjectionStore.Instance.Save(this);
+  public async Project(): Promise<void> {
+    await ProjectionStore.Instance.Save(this);
+    return new Promise((resolve, reject) => resolve());
   }
-  public Update(): void {
-    ProjectionStore.Instance.Update(PlannedDepositProjection, this);
+  public async Update(): Promise<void> {
+    await ProjectionStore.Instance.Update(PlannedDepositProjection, this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

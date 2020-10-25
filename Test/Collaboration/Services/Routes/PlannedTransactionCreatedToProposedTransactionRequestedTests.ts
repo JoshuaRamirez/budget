@@ -5,9 +5,9 @@ import { ProposedTransactionProjection } from "../../../../Source/Projections/Pr
 import { System } from "../../../../Source/System/System";
 
 describe("RequestProposedTransactionService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
   const makePlannedTransactionRequestForToday = (repeatStart = new Date()) => {
     const plannedTransactionCreationRequestedEvent = new PlannedTransactionRequestedEvent();
@@ -20,19 +20,19 @@ describe("RequestProposedTransactionService", () => {
     plannedTransactionCreationRequestedEvent.RepeatStart.setHours(0, 0, 0, 0);
     return plannedTransactionCreationRequestedEvent;
   };
-  it("should necessitate the creation of a proposed transaction after the creation of a planned transaction for today's date.", () => {
+  it("should necessitate the creation of a proposed transaction after the creation of a planned transaction for today's date.", async () => {
     const plannedTransactionCreationRequestedEvent = makePlannedTransactionRequestForToday();
-    plannedTransactionCreationRequestedEvent.Publish();
-    const proposedTransactions = ProposedTransactionProjection.All();
+    await plannedTransactionCreationRequestedEvent.Publish();
+    const proposedTransactions = await ProposedTransactionProjection.All();
     const proposedTransaction = proposedTransactions[0];
     assert.exists(proposedTransaction);
   });
-  it("should xyz", () => {
+  it("should xyz", async () => {
     const tomorrow = User.GetDate();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const plannedTransactionCreationRequestedEvent = makePlannedTransactionRequestForToday(tomorrow);
-    plannedTransactionCreationRequestedEvent.Publish();
-    const proposedTransactions = ProposedTransactionProjection.All();
+    const plannedTransactionCreationRequestedEvent = await makePlannedTransactionRequestForToday(tomorrow);
+    await plannedTransactionCreationRequestedEvent.Publish();
+    const proposedTransactions = await ProposedTransactionProjection.All();
     const expected = 0;
     const actual = proposedTransactions.length;
     assert.equal(actual, expected);

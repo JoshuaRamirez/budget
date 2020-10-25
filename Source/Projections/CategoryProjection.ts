@@ -3,8 +3,9 @@ import { Projection } from "./Core/Projection";
 import { ProjectionStore } from "./Core/ProjectionStore";
 
 export class CategoryProjection extends Projection {
-  public static Get(id: any): CategoryProjection {
-    return ProjectionStore.Instance.GetProjection(CategoryProjection, id);
+  public static async Get(id: any): Promise<CategoryProjection> {
+    const projection = await ProjectionStore.Instance.GetProjection<CategoryProjection>(CategoryProjection, id);
+    return new Promise((resolve, reject) => resolve(projection));
   }
 
   // Fields
@@ -14,10 +15,12 @@ export class CategoryProjection extends Projection {
   constructor() {
     super(CategoryProjection.name);
   }
-  public Project(): void {
-    ProjectionStore.Instance.Save(this);
+  public async Project(): Promise<void> {
+    await ProjectionStore.Instance.Save(this);
+    return new Promise((resolve, reject) => resolve());
   }
-  public Update(): void {
-    ProjectionStore.Instance.Update(CategoryProjection, this);
+  public async Update(): Promise<void> {
+    await ProjectionStore.Instance.Update(CategoryProjection, this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

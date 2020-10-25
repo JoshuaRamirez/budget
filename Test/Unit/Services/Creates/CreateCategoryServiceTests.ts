@@ -11,9 +11,9 @@ describe("CreateCategoryService", () => {
     const service = CreateCategoryService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreateCategoryService.Instance;
     const event = new CategoryRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

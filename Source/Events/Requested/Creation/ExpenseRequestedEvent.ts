@@ -8,7 +8,8 @@ export class ExpenseRequestedEvent extends Event {
   public PayeeId: any;
   public PlannedExpenseId: any;
   public TransactionId: any;
-  public Publish() {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

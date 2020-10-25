@@ -4,7 +4,8 @@ import { Publisher } from "../../Core/Publisher";
 export class AllocationRequestedEvent extends Event {
   public LedgerId: any;
   public TransactionId: any;
-  public Publish() {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

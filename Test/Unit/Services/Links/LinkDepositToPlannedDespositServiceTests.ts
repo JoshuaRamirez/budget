@@ -11,9 +11,9 @@ describe("LinkDepositToPlannedDepositService", () => {
     const service = LinkDepositToPlannedDepositService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const linkDepositToPlannedDepositService = LinkDepositToPlannedDepositService.Instance;
-    const depositCreatedEvent = NewDepositCreatedEvent();
-    linkDepositToPlannedDepositService.Receive(depositCreatedEvent);
+    const depositCreatedEvent = await NewDepositCreatedEvent();
+    await linkDepositToPlannedDepositService.Receive(depositCreatedEvent);
   });
 });

@@ -7,15 +7,15 @@ import { CreatePayeeService } from "../../../../Source/Services/Creates/CreatePa
 import { System } from "../../../../Source/System/System";
 
 describe("CreatePayeeService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  it("should create projection", () => {
+  it("should create projection", async () => {
     const event = new PayeeRequestedEvent();
-    event.Publish();
+    await event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections(PayeeProjection);
+    const projections = await projectionStore.GetProjections(PayeeProjection);
     const projection = projections[0];
     assert.exists(projection);
   });

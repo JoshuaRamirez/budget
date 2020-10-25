@@ -5,10 +5,11 @@ import { Receiver } from "../Core/Receiver";
 
 export class IncrementProposedTransactionCounter extends Receiver<ProposedTransactionCreatedEvent> {
   public static Instance = new IncrementProposedTransactionCounter(ProposedTransactionCreatedEvent);
-  public Receive(event: ProposedTransactionCreatedEvent): void {
-    const proposedTransaction = ProposedTransactionProjection.Get(event.ProposedTransactionId);
-    const plannedTransaction = PlannedTransactionProjection.Get(proposedTransaction.PlannedTransactionId);
+  public async Receive(event: ProposedTransactionCreatedEvent): Promise<void> {
+    const proposedTransaction = await ProposedTransactionProjection.Get(event.ProposedTransactionId);
+    const plannedTransaction = await PlannedTransactionProjection.Get(proposedTransaction.PlannedTransactionId);
     plannedTransaction.TimesRepeated += 1;
-    plannedTransaction.Update();
+    await plannedTransaction.Update();
+    return new Promise((resolve, reject) => resolve());
   }
 }

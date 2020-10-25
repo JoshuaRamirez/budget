@@ -5,7 +5,8 @@ export class AccountRequestedEvent extends Event {
   public AccountName: string;
   public Type: string;
   public UserId: any;
-  public Publish() {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

@@ -8,16 +8,16 @@ import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewLedgerCreatedEvent } from "../../../Helpers";
 
 describe("LinkLedgerToAccountService", () => {
-  beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+  beforeEach(async () => {
+    await Subscriptions.Release();
+    await Subscriptions.Create();
+    await ProjectionStore.Instance.ClearAll();
   });
-  it("should add the ledger id to the account link list", () => {
-    const ledgerCreatedEvent = NewLedgerCreatedEvent();
-    ledgerCreatedEvent.Publish();
-    const ledgerProjection = LedgerProjection.Get(ledgerCreatedEvent.LedgerId);
-    const accountProjection = AccountProjection.Get(ledgerProjection.AccountId);
+  it("should add the ledger id to the account link list", async () => {
+    const ledgerCreatedEvent = await NewLedgerCreatedEvent();
+    await ledgerCreatedEvent.Publish();
+    const ledgerProjection = await LedgerProjection.Get(ledgerCreatedEvent.LedgerId);
+    const accountProjection = await AccountProjection.Get(ledgerProjection.AccountId);
     assert.equal(accountProjection.LedgerId, ledgerCreatedEvent.LedgerId);
   });
 });

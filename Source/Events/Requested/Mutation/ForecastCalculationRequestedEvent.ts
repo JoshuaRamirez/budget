@@ -5,11 +5,12 @@ export class ForecastCalculationRequestEvent extends Event {
   public EndDate: Date;
   public StartDate: Date;
   public StartingBalance: number = 0;
-  public Publish() {
+  public async Publish(): Promise<void> {
     if (this.StartDate !== undefined && this.EndDate !== undefined && this.StartingBalance !== undefined) {
-      Publisher.Instance.Publish(this);
+      await Publisher.Instance.Publish(this);
     } else {
       throw Error("Event not valid.");
     }
+    return new Promise((resolve, reject) => resolve());
   }
 }

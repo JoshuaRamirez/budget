@@ -11,9 +11,9 @@ describe("CreateExpenseService", () => {
     const service = CreateExpenseService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreateExpenseService.Instance;
     const event = new ExpenseRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

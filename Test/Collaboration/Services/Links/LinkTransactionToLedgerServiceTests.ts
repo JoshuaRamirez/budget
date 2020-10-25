@@ -8,16 +8,16 @@ import { Subscriptions } from "../../../../Source/Subscriptions";
 import { NewTransactionCreatedEvent } from "../../../Helpers";
 
 describe("LinkTransactionToLedgerService", () => {
-  beforeEach(() => {
-    Subscriptions.Release();
-    Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+  beforeEach(async () => {
+    await Subscriptions.Release();
+    await Subscriptions.Create();
+    await ProjectionStore.Instance.ClearAll();
   });
-  it("should link transaction to ledger", () => {
-    const transactionCreatedEvent = NewTransactionCreatedEvent();
-    transactionCreatedEvent.Publish();
-    const transactionProjection = TransactionProjection.Get(transactionCreatedEvent.TransactionId);
-    const ledgerProjection = LedgerProjection.Get(transactionProjection.LedgerId);
+  it("should link transaction to ledger", async () => {
+    const transactionCreatedEvent = await NewTransactionCreatedEvent();
+    await transactionCreatedEvent.Publish();
+    const transactionProjection = await TransactionProjection.Get(transactionCreatedEvent.TransactionId);
+    const ledgerProjection = await LedgerProjection.Get(transactionProjection.LedgerId);
     assert.equal(ledgerProjection.TransactionIds[0], transactionCreatedEvent.TransactionId);
   });
 });

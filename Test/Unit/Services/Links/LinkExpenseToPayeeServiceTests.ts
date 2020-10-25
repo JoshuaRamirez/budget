@@ -11,9 +11,9 @@ describe("LinkExpenseToPayeeService", () => {
     const service = LinkExpenseToPayeeService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = LinkExpenseToPayeeService.Instance;
-    const event = NewExpenseCreatedEvent();
-    service.Receive(event);
+    const event = await NewExpenseCreatedEvent();
+    await service.Receive(event);
   });
 });

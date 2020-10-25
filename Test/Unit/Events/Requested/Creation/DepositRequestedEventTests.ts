@@ -10,8 +10,8 @@ describe("DepositRequestedEvent", () => {
     const event = new DepositRequestedEvent();
     assert.exists(event);
   });
-  it("should publish", () => {
+  it("should publish", async () => {
     const event = new DepositRequestedEvent();
-    event.Publish();
+    await event.Publish();
   });
 });

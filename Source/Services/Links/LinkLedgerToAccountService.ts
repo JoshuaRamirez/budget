@@ -17,7 +17,8 @@ export class LinkLedgerToAccountService extends LinkService<LedgerCreatedEvent, 
     });
     super(declaration);
   }
-  public Receive(event: LedgerCreatedEvent): void {
-    super.Receive(event);
+  public async Receive(event: LedgerCreatedEvent): Promise<void> {
+    await super.Receive(event);
+    return new Promise((resolve, reject) => resolve());
   }
 }

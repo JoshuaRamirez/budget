@@ -8,7 +8,7 @@ export class CreateExpenseService extends Receiver<ExpenseRequestedEvent> {
   private constructor() {
     super(ExpenseRequestedEvent);
   }
-  public Receive(event: ExpenseRequestedEvent) {
+  public async Receive(event: ExpenseRequestedEvent): Promise<void> {
     // Create ExpenseProjection
     const expenseProjection = new ExpenseProjection();
     expenseProjection.Description = event.Description;
@@ -16,10 +16,11 @@ export class CreateExpenseService extends Receiver<ExpenseRequestedEvent> {
     expenseProjection.PayeeId = event.PayeeId;
     expenseProjection.TransactionId = event.TransactionId;
     expenseProjection.PlannedExpenseId = event.PlannedExpenseId;
-    expenseProjection.Project();
+    await expenseProjection.Project();
     // Publish ExpenseCreatedEvent
     const expenseCreatedEvent = new ExpenseCreatedEvent();
     expenseCreatedEvent.ExpenseId = expenseProjection.Id;
-    expenseCreatedEvent.Publish();
+    await expenseCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

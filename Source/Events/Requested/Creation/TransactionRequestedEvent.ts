@@ -7,7 +7,8 @@ export class TransactionRequestedEvent extends Event {
   public LedgerId: any;
   public Source: any;
   public Type: string;
-  public Publish() {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

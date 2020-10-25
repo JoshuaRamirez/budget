@@ -11,9 +11,9 @@ describe("CreateBudgetService", () => {
     const service = CreateBudgetService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreateBudgetService.Instance;
     const event = new BudgetRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

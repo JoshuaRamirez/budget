@@ -10,7 +10,7 @@ describe("UserProjection", () => {
     const userProjection = new UserProjection();
     assert.exists(userProjection);
   });
-  it("should get", () => {
-    UserProjection.Get(1);
+  it("should get", async () => {
+    await UserProjection.Get(1);
   });
 });

@@ -6,15 +6,15 @@ import { System } from "../../../../Source/System/System";
 import { NewProposedTransactionCreationRequestedEvent } from "../../../Helpers";
 
 describe("CreateProposedTransactionService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  it("should create projection", () => {
-    const event = NewProposedTransactionCreationRequestedEvent();
-    event.Publish();
+  it("should create projection", async () => {
+    const event = await NewProposedTransactionCreationRequestedEvent();
+    await event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections(ProposedTransactionProjection);
+    const projections = await projectionStore.GetProjections(ProposedTransactionProjection);
     const projection = projections[0];
     assert.exists(projection);
   });

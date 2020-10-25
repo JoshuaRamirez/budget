@@ -8,11 +8,11 @@ export class UpdateLedgerBalanceService extends Receiver<TransactionCreatedEvent
   private constructor() {
     super(TransactionCreatedEvent);
   }
-  public Receive(event: TransactionCreatedEvent): void {
+  public async Receive(event: TransactionCreatedEvent): Promise<void> {
     if (!event.TransactionId) {
       return;
     }
-    const transactionProjection = TransactionProjection.Get(event.TransactionId);
+    const transactionProjection = await TransactionProjection.Get(event.TransactionId);
     if (!transactionProjection) {
       return;
     }
@@ -20,8 +20,9 @@ export class UpdateLedgerBalanceService extends Receiver<TransactionCreatedEvent
       return;
     }
     const ledgerId = transactionProjection.LedgerId;
-    const ledgerProjection = LedgerProjection.Get(ledgerId);
+    const ledgerProjection = await LedgerProjection.Get(ledgerId);
     ledgerProjection.Balance -= transactionProjection.Amount;
-    ledgerProjection.Update();
+    await ledgerProjection.Update();
+    return new Promise((resolve, reject) => resolve());
   }
 }

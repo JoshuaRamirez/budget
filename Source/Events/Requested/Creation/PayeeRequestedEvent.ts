@@ -5,7 +5,8 @@ export class PayeeRequestedEvent extends Event {
   public Description: string;
   public PayeeName: string;
   public Type: string;
-  public Publish() {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

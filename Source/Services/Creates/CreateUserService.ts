@@ -8,15 +8,16 @@ export class CreateUserService extends Receiver<UserRequestedEvent> {
   private constructor() {
     super(UserRequestedEvent);
   }
-  public Receive(event: UserRequestedEvent) {
+  public async Receive(event: UserRequestedEvent): Promise<void> {
     // Create UserProjection
     const userProjection = new UserProjection();
     userProjection.UserName = event.UserName;
     userProjection.Type = event.Type;
-    userProjection.Project();
+    await userProjection.Project();
     // Publish UserCreatedEvent
     const userCreatedEvent = new UserCreatedEvent();
     userCreatedEvent.UserId = userProjection.Id;
-    userCreatedEvent.Publish();
+    await userCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

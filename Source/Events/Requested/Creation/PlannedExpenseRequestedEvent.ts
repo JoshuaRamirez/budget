@@ -8,7 +8,8 @@ export class PlannedExpenseRequestedEvent extends Event {
   public RepeatMeasurement: string;
   public RepeatCount: number;
   public RepeatStart: Date;
-  public Publish() {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

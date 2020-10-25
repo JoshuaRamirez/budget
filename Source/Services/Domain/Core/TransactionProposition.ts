@@ -2,7 +2,7 @@ import { User } from "../../../Core/User";
 import { PlannedTransactionProjection } from "../../../Projections/PlannedTransactionProjection";
 
 export class TransactionProposition {
-  public static GetProposedDate(plannedTransactionProjection: PlannedTransactionProjection): Date {
+  public static async GetProposedDate(plannedTransactionProjection: PlannedTransactionProjection): Promise<Date> {
     const today = User.GetDate();
     if (plannedTransactionProjection.RepeatCount >= plannedTransactionProjection.TimesRepeated) {
       return;
@@ -15,11 +15,11 @@ export class TransactionProposition {
       proposedDate = plannedTransactionProjection.StartDate;
     }
     if (plannedTransactionProjection.ProposedTransactionIds.length > 0) {
-      const lastProposedTransaction = PlannedTransactionProjection.Last();
+      const lastProposedTransaction = await PlannedTransactionProjection.Last();
       const nextDate = lastProposedTransaction.Date;
       nextDate.setDate(nextDate.getDate() + plannedTransactionProjection.RepeatPeriod);
       proposedDate = nextDate;
     }
-    return proposedDate;
+    return new Promise((resolve, reject) => resolve(proposedDate));
   }
 }

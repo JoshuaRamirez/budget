@@ -10,8 +10,8 @@ describe("LedgerRequestedEvent", () => {
     const event = new LedgerRequestedEvent();
     assert.exists(event);
   });
-  it("should publish", () => {
+  it("should publish", async () => {
     const event = new LedgerRequestedEvent();
-    event.Publish();
+    await event.Publish();
   });
 });

@@ -20,10 +20,10 @@ export abstract class LinkService<TEvent extends Event, TSubjectProjection exten
     super(declaration.EventType);
     this.declaration = declaration;
   }
-  public Receive(event: TEvent): void {
+  public async Receive(event: TEvent): Promise<void> {
     const linkServiceEventValidator = new LinkServiceEventValidator<TEvent, TSubjectProjection>(this.declaration, event);
     linkServiceEventValidator.Validate();
-    const subjectProjection = ProjectionStore.Instance.GetProjection(this.declaration.SubjectType, event[this.declaration.SubjectIdFieldName.toString()]);
+    const subjectProjection = await ProjectionStore.Instance.GetProjection(this.declaration.SubjectType, event[this.declaration.SubjectIdFieldName.toString()]);
     const targetIds = [];
     if (this.isISingleTargetField(this.declaration)) {
       const fieldName = this.declaration.SubjectTargetIdFieldName.toString();
@@ -33,20 +33,24 @@ export abstract class LinkService<TEvent extends Event, TSubjectProjection exten
       const fieldName = this.declaration.SubjectTargetIdsFieldName.toString();
       targetIds.concat(...subjectProjection[fieldName]);
     }
-    targetIds.forEach(targetId => {
-      const target = ProjectionStore.Instance.GetProjection(this.declaration.TargetType, targetId);
-      const linkServiceProjectionValidator = new LinkServiceProjectionValidator(this.declaration, event, subjectProjection, target);
+    const link = async targetId => {
+      const targetProjection = await ProjectionStore.Instance.GetProjection(this.declaration.TargetType, targetId);
+      const linkServiceProjectionValidator = new LinkServiceProjectionValidator(this.declaration, event, subjectProjection, targetProjection);
       linkServiceProjectionValidator.Validate();
       if (this.isISingleSubjectField(this.declaration)) {
         const fieldName = this.declaration.TargetSubjectIdFieldName.toString();
-        target[fieldName] = subjectProjection.Id;
+        targetProjection[fieldName] = subjectProjection.Id;
       }
       if (this.isIMultiSubjectProjectionField(this.declaration)) {
         const fieldName = this.declaration.TargetSubjectIdsFieldName.toString();
-        target[fieldName].push(subjectProjection.Id);
+        targetProjection[fieldName].push(subjectProjection.Id);
       }
-      target.Update();
-    });
+      targetProjection.Update();
+      return new Promise((resolve, reject) => {
+        resolve();
+      });
+    };
+    targetIds.forEach(link);
   }
   private isISingleSubjectField(declaration: ISingleSubjectField<TTargetProjection> | object): declaration is ISingleSubjectField<TTargetProjection> {
     return (declaration as ISingleSubjectField<TTargetProjection>).TargetSubjectIdFieldName !== undefined;

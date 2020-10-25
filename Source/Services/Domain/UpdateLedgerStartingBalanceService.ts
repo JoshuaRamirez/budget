@@ -7,16 +7,17 @@ export class UpdateLedgerStartingBalanceService extends Receiver<LedgerStartingB
   private constructor() {
     super(LedgerStartingBalanceUpdateRequestedEvent);
   }
-  public Receive(event: LedgerStartingBalanceUpdateRequestedEvent): void {
+  public async Receive(event: LedgerStartingBalanceUpdateRequestedEvent): Promise<void> {
     if (!event.LedgerId) {
       return;
     }
-    const ledger = LedgerProjection.Get(event.LedgerId);
+    const ledger = await LedgerProjection.Get(event.LedgerId);
     if (ledger.StartingBalance !== 0) {
       ledger.Balance -= ledger.StartingBalance;
     }
     ledger.StartingBalance = event.StartingBalance;
     ledger.Balance += ledger.StartingBalance;
-    ledger.Update();
+    await ledger.Update();
+    return new Promise((resolve, reject) => resolve());
   }
 }

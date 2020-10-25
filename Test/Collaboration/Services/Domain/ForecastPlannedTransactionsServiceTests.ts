@@ -8,11 +8,11 @@ import { ForecastProjection } from "../../../../Source/Projections/ForecastProje
 import { System } from "../../../../Source/System/System";
 
 describe("ForecastPlannedTransactionsService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  const publishPlannedTransactionCreationRequestEvent = (type: string, amount: number, repeatStart: Date = undefined, repeatPeriod: number = undefined, repeatCount: number = undefined) => {
+  const publishPlannedTransactionCreationRequestEvent = async (type: string, amount: number, repeatStart: Date = undefined, repeatPeriod: number = undefined, repeatCount: number = undefined): Promise<void> => {
     let event: PlannedDepositRequestedEvent | PlannedExpenseRequestedEvent;
     if (type === "Deposit") {
       event = new PlannedDepositRequestedEvent();
@@ -25,20 +25,21 @@ describe("ForecastPlannedTransactionsService", () => {
     event.RepeatPeriod = repeatPeriod;
     event.RepeatStart = repeatStart;
     event.RepeatMeasurement = "TODO";
-    event.Publish();
+    await event.Publish();
+    return new Promise((resolve, reject) => resolve());
   };
-  const createForecastCalculationRequestedEvent = (forecastDayCount: number): Event => {
+  const createForecastCalculationRequestedEvent = async (forecastDayCount: number): Promise<Event> => {
     const startDate = new Date("1/1/19");
     const endDate = new Date("1/1/19");
     endDate.setDate(endDate.getDate() + forecastDayCount - 1);
     const event = new ForecastCalculationRequestEvent();
     event.StartDate = startDate;
     event.EndDate = endDate;
-    return event;
+    return new Promise((resolve, reject) => resolve(event));
   };
-  const checkForSingleTransactionPlanResults = (type: string, amount: number, repeatPeriod: number, forecastDayCount: number) => {
+  const checkForSingleTransactionPlanResults = async (type: string, amount: number, repeatPeriod: number, forecastDayCount: number): Promise<void> => {
     const startDate = new Date("1/1/19");
-    const forecastProjections = ForecastProjection.All();
+    const forecastProjections = await ForecastProjection.All();
     assert.equal(forecastProjections.length, forecastDayCount);
     const thisDate = new Date(startDate.valueOf());
     let amountTotal = Math.ceil(forecastDayCount / repeatPeriod) * amount;
@@ -50,58 +51,61 @@ describe("ForecastPlannedTransactionsService", () => {
       assert.equal(forecastProjections[forecastProjections.length - 1].Amount, amountTotal);
       assert.equal(forecastProjection.Date.toDateString(), thisDate.toDateString());
     });
+    return new Promise((resolve, reject) => resolve());
   };
-  const actWithSingleDeposit = (amount: number, repeatStart: Date, repeatPeriod: number, startDate: Date, endDate: Date) => {
-    publishPlannedDepositRequestedEvent(amount, repeatStart, repeatPeriod);
-    publishForecastCalculationRequestedEvent(startDate, endDate);
+  const actWithSingleDeposit = async (amount: number, repeatStart: Date, repeatPeriod: number, startDate: Date, endDate: Date): Promise<void> => {
+    await publishPlannedDepositRequestedEvent(amount, repeatStart, repeatPeriod);
+    await publishForecastCalculationRequestedEvent(startDate, endDate);
+    return new Promise((resolve, reject) => resolve());
   };
-  const actWithSingleExpense = (amount: number, repeatStart: Date, repeatPeriod: number, startDate: Date, endDate: Date) => {
-    publishPlannedExpenseRequestedEvent(amount, repeatStart, repeatPeriod);
-    publishForecastCalculationRequestedEvent(startDate, endDate);
+  const actWithSingleExpense = async (amount: number, repeatStart: Date, repeatPeriod: number, startDate: Date, endDate: Date): Promise<void> => {
+    await publishPlannedExpenseRequestedEvent(amount, repeatStart, repeatPeriod);
+    await publishForecastCalculationRequestedEvent(startDate, endDate);
+    return new Promise((resolve, reject) => resolve());
   };
-  const publishPlannedDepositRequestedEvent = (amount: number, repeatStart: Date, repeatPeriod: number) => {
+  const publishPlannedDepositRequestedEvent = async (amount: number, repeatStart: Date, repeatPeriod: number): Promise<void> => {
     const plannedDepositRequestedEvent = new PlannedDepositRequestedEvent();
     plannedDepositRequestedEvent.Amount = amount;
     plannedDepositRequestedEvent.RepeatPeriod = repeatPeriod;
     plannedDepositRequestedEvent.RepeatStart = repeatStart;
-    plannedDepositRequestedEvent.Publish();
+    await plannedDepositRequestedEvent.Publish();
   };
-  const publishPlannedExpenseRequestedEvent = (amount: number, repeatStart: Date, repeatPeriod: number) => {
+  const publishPlannedExpenseRequestedEvent = async (amount: number, repeatStart: Date, repeatPeriod: number): Promise<void> => {
     const plannedExpenseRequestedEvent = new PlannedExpenseRequestedEvent();
     plannedExpenseRequestedEvent.Amount = amount;
     plannedExpenseRequestedEvent.RepeatPeriod = repeatPeriod;
     plannedExpenseRequestedEvent.RepeatStart = repeatStart;
-    plannedExpenseRequestedEvent.Publish();
+    await plannedExpenseRequestedEvent.Publish();
   };
-  const publishForecastCalculationRequestedEvent = (startDate: Date, endDate: Date) => {
+  const publishForecastCalculationRequestedEvent = async (startDate: Date, endDate: Date): Promise<void> => {
     const forecastCalculationRequestEvent = new ForecastCalculationRequestEvent();
     forecastCalculationRequestEvent.StartDate = startDate;
     forecastCalculationRequestEvent.EndDate = endDate;
     forecastCalculationRequestEvent.StartingBalance = 0;
-    forecastCalculationRequestEvent.Publish();
+    await forecastCalculationRequestEvent.Publish();
   };
-  const runTest = (type, context) => {
+  const runTest = async (type, context): Promise<void> => {
     const amount = context.amount;
     const repeatStart = context.repeatStart;
     const repeatPeriod = context.repeatPeriod;
     const startDate = context.startDate;
     const endDate = context.endDate;
     if (type === "Deposit") {
-      actWithSingleDeposit(amount, repeatStart, repeatPeriod, startDate, endDate);
+      await actWithSingleDeposit(amount, repeatStart, repeatPeriod, startDate, endDate);
     }
     if (type === "Expense") {
-      actWithSingleExpense(amount, repeatStart, repeatPeriod, startDate, endDate);
+      await actWithSingleExpense(amount, repeatStart, repeatPeriod, startDate, endDate);
     }
   };
-  const runTestCorrectNumberOfForecasts = (type, context) => {
-    runTest(type, context);
-    const actual = ForecastProjection.All().length;
+  const runTestCorrectNumberOfForecasts = async (type, context) => {
+    await runTest(type, context);
+    const actual = (await ForecastProjection.All()).length;
     const expected = context.expectedNumberOfForecasts;
     assert.equal(actual, expected);
   };
-  const runTestCorrectFinalForecastAmount = (type, context) => {
-    runTest(type, context);
-    const actual = ForecastProjection.Last().Amount;
+  const runTestCorrectFinalForecastAmount = async (type, context) => {
+    await runTest(type, context);
+    const actual = (await ForecastProjection.Last()).Amount;
     let expected: number;
     if (type === "Deposit") {
       expected = context.expectedFinalDepositAmount;
@@ -115,24 +119,24 @@ describe("ForecastPlannedTransactionsService", () => {
     let plannedTransactionType;
     plannedTransactionType = "Deposit";
     describe(plannedTransactionType, () => {
-      it("Correct Number of Forecasts", () => {
-        runTestCorrectNumberOfForecasts(plannedTransactionType, context);
+      it("Correct Number of Forecasts", async () => {
+        await runTestCorrectNumberOfForecasts(plannedTransactionType, context);
       });
-      it("Correct Final Forecast Amount", () => {
-        runTestCorrectFinalForecastAmount(plannedTransactionType, context);
+      it("Correct Final Forecast Amount", async () => {
+        await runTestCorrectFinalForecastAmount(plannedTransactionType, context);
       });
     });
     plannedTransactionType = "Expense";
     describe(plannedTransactionType, () => {
-      it("Correct Number of Forecasts", () => {
-        runTestCorrectNumberOfForecasts(plannedTransactionType, context);
+      it("Correct Number of Forecasts", async () => {
+        await runTestCorrectNumberOfForecasts(plannedTransactionType, context);
       });
-      it("Correct Final Forecast Amount", () => {
-        runTestCorrectFinalForecastAmount(plannedTransactionType, context);
+      it("Correct Final Forecast Amount", async () => {
+        await runTestCorrectFinalForecastAmount(plannedTransactionType, context);
       });
     });
   };
-  describe("Single Daily Planned Transaction", () => {
+  describe("Single Daily Planned Transaction", async () => {
     const context = {
       amount: 1,
       endDate: new Date("1/10/19"),
@@ -145,7 +149,7 @@ describe("ForecastPlannedTransactionsService", () => {
     };
     runtTests(context);
   });
-  describe("Single Weekly Planned Transaction", () => {
+  describe("Single Weekly Planned Transaction", async () => {
     const context = {
       amount: 1,
       endDate: new Date("1/31/19"),
@@ -158,7 +162,7 @@ describe("ForecastPlannedTransactionsService", () => {
     };
     runtTests(context);
   });
-  describe("Single Daily Planned Transaction Starting in Middle of Repeat Window", () => {
+  describe("Single Daily Planned Transaction Starting in Middle of Repeat Window", async () => {
     const context = {
       amount: 1,
       endDate: new Date("1/10/19"),
@@ -171,7 +175,7 @@ describe("ForecastPlannedTransactionsService", () => {
     };
     runtTests(context);
   });
-  describe("Single Every Other Day Planned Transaction Starting in Middle of Repeat Window", () => {
+  describe("Single Every Other Day Planned Transaction Starting in Middle of Repeat Window", async () => {
     const context = {
       amount: 1,
       endDate: new Date("1/10/19"),
@@ -194,11 +198,11 @@ describe("ForecastPlannedTransactionsService", () => {
           const amount = i + 1;
           const repeatPeriod = 1;
           const type = "Deposit";
-          it(type + " " + amount, () => {
-            publishPlannedTransactionCreationRequestEvent(type, amount, repeatStart, repeatPeriod);
-            const event = createForecastCalculationRequestedEvent(forecastDayCount);
-            event.Publish();
-            checkForSingleTransactionPlanResults(type, amount, repeatPeriod, forecastDayCount);
+          it(type + " " + amount, async () => {
+            await publishPlannedTransactionCreationRequestEvent(type, amount, repeatStart, repeatPeriod);
+            const event = await createForecastCalculationRequestedEvent(forecastDayCount);
+            await event.Publish();
+            await checkForSingleTransactionPlanResults(type, amount, repeatPeriod, forecastDayCount);
           });
         }
       });
@@ -207,11 +211,11 @@ describe("ForecastPlannedTransactionsService", () => {
           const amount = i + 1;
           const repeatPeriod = i + 1;
           const type = "Deposit";
-          it(type + " " + amount, () => {
-            publishPlannedTransactionCreationRequestEvent(type, amount, repeatStart, repeatPeriod);
-            const event = createForecastCalculationRequestedEvent(forecastDayCount);
-            event.Publish();
-            checkForSingleTransactionPlanResults(type, amount, repeatPeriod, forecastDayCount);
+          it(type + " " + amount, async () => {
+            await publishPlannedTransactionCreationRequestEvent(type, amount, repeatStart, repeatPeriod);
+            const event = await createForecastCalculationRequestedEvent(forecastDayCount);
+            await event.Publish();
+            await checkForSingleTransactionPlanResults(type, amount, repeatPeriod, forecastDayCount);
           });
         }
       });
@@ -222,11 +226,11 @@ describe("ForecastPlannedTransactionsService", () => {
           const amount = i + 1;
           const repeatPeriod = 1;
           const type = "Expense";
-          it(type + " " + amount, () => {
-            publishPlannedTransactionCreationRequestEvent(type, amount, repeatStart, repeatPeriod);
-            const event = createForecastCalculationRequestedEvent(forecastDayCount);
-            event.Publish();
-            checkForSingleTransactionPlanResults(type, amount, repeatPeriod, forecastDayCount);
+          it(type + " " + amount, async () => {
+            await publishPlannedTransactionCreationRequestEvent(type, amount, repeatStart, repeatPeriod);
+            const event = await createForecastCalculationRequestedEvent(forecastDayCount);
+            await event.Publish();
+            await checkForSingleTransactionPlanResults(type, amount, repeatPeriod, forecastDayCount);
           });
         }
       });
@@ -235,11 +239,11 @@ describe("ForecastPlannedTransactionsService", () => {
           const amount = i + 1;
           const repeatPeriod = i + 1;
           const type = "Expense";
-          it(type + "" + amount, () => {
-            publishPlannedTransactionCreationRequestEvent(type, amount, repeatStart, repeatPeriod);
-            const event = createForecastCalculationRequestedEvent(forecastDayCount);
-            event.Publish();
-            checkForSingleTransactionPlanResults(type, amount, repeatPeriod, forecastDayCount);
+          it(type + "" + amount, async () => {
+            await publishPlannedTransactionCreationRequestEvent(type, amount, repeatStart, repeatPeriod);
+            const event = await createForecastCalculationRequestedEvent(forecastDayCount);
+            await event.Publish();
+            await checkForSingleTransactionPlanResults(type, amount, repeatPeriod, forecastDayCount);
           });
         }
       });

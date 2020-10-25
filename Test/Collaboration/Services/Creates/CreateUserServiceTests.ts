@@ -9,21 +9,21 @@ import { CreateUserService } from "../../../../Source/Services/Creates/CreateUse
 import { System } from "../../../../Source/System/System";
 
 describe("CreateUserService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  it("should create initial projections", () => {
+  it("should create initial projections", async () => {
     const event = new UserRequestedEvent();
-    event.Publish();
+    await event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const userProjections = projectionStore.GetProjections<UserProjection>(UserProjection);
+    const userProjections = await projectionStore.GetProjections<UserProjection>(UserProjection);
     const userProjection: UserProjection = userProjections[0];
     assert.exists(userProjection);
-    const accountProjections = projectionStore.GetProjections<AccountProjection>(AccountProjection);
+    const accountProjections = await projectionStore.GetProjections<AccountProjection>(AccountProjection);
     const accountProjection: AccountProjection = accountProjections[0];
     assert.exists(accountProjection);
-    const ledgerProjections = projectionStore.GetProjections<LedgerProjection>(LedgerProjection);
+    const ledgerProjections = await projectionStore.GetProjections<LedgerProjection>(LedgerProjection);
     const ledgerProjection: LedgerProjection = ledgerProjections[0];
     assert.exists(ledgerProjection);
     assert.equal(userProjection.AccountIds[0], accountProjection.Id);

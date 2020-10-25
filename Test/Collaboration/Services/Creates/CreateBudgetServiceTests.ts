@@ -7,15 +7,15 @@ import { CreateBudgetService } from "../../../../Source/Services/Creates/CreateB
 import { System } from "../../../../Source/System/System";
 
 describe("CreateBudgetService", () => {
-  beforeEach(() => {
-    System.Shutdown();
-    System.Startup();
+  beforeEach(async () => {
+    await System.Shutdown();
+    await System.Startup();
   });
-  it("should create projection", () => {
+  it("should create projection", async () => {
     const event = new BudgetRequestedEvent();
-    event.Publish();
+    await event.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections(BudgetProjection);
+    const projections = await projectionStore.GetProjections(BudgetProjection);
     const projection = projections[0];
     assert.exists(projection);
   });

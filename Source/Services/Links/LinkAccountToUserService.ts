@@ -17,7 +17,8 @@ export class LinkAccountToUserService extends LinkService<AccountCreatedEvent, A
     });
     super(declaration);
   }
-  public Receive(event: AccountCreatedEvent): void {
-    super.Receive(event);
+  public async Receive(event: AccountCreatedEvent): Promise<void> {
+    await super.Receive(event);
+    return new Promise((resolve, reject) => resolve());
   }
 }

@@ -6,7 +6,8 @@ export class BudgetRequestedEvent extends Event {
   public SubBudgetIds: any[];
   public SuperBudgetIds: any[];
   public Type: string;
-  public Publish() {
-    Publisher.Instance.Publish(this);
+  public async Publish(): Promise<void> {
+    await Publisher.Instance.Publish(this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

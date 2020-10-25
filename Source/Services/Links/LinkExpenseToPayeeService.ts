@@ -17,7 +17,8 @@ export class LinkExpenseToPayeeService extends LinkService<ExpenseCreatedEvent, 
     });
     super(declaration);
   }
-  public Receive(event: ExpenseCreatedEvent): void {
-    super.Receive(event);
+  public async Receive(event: ExpenseCreatedEvent): Promise<void> {
+    await super.Receive(event);
+    return new Promise((resolve, reject) => resolve());
   }
 }

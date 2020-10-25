@@ -7,11 +7,12 @@ export class CreateAllocationService extends Receiver<AllocationRequestedEvent> 
   private constructor() {
     super(AllocationRequestedEvent);
   }
-  public Receive(event: AllocationRequestedEvent) {
+  public async Receive(event: AllocationRequestedEvent): Promise<void> {
     // Create Allocation Projection
     const allocationProjection: AllocationProjection = new AllocationProjection();
     allocationProjection.LedgerId = event.LedgerId;
     allocationProjection.TransactionId = event.TransactionId;
-    allocationProjection.Project();
+    await allocationProjection.Project();
+    return new Promise((resolve, reject) => resolve());
   }
 }

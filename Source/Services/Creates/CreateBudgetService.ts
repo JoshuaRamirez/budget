@@ -7,10 +7,11 @@ export class CreateBudgetService extends Receiver<BudgetRequestedEvent> {
   private constructor() {
     super(BudgetRequestedEvent);
   }
-  public Receive(event: BudgetRequestedEvent) {
+  public async Receive(event: BudgetRequestedEvent): Promise<void> {
     const budgetProjection = new BudgetProjection();
     budgetProjection.BudgetName = event.BudgetName;
     budgetProjection.Type = event.Type;
-    budgetProjection.Project();
+    await budgetProjection.Project();
+    return new Promise((resolve, reject) => resolve());
   }
 }

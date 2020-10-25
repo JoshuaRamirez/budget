@@ -11,9 +11,9 @@ describe("CreateTransactionService", () => {
     const service = CreateTransactionService.Instance;
     assert.exists(service);
   });
-  it("should process", () => {
+  it("should process", async () => {
     const service = CreateTransactionService.Instance;
     const event = new TransactionRequestedEvent();
-    service.Receive(event);
+    await service.Receive(event);
   });
 });

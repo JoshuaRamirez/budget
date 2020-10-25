@@ -7,24 +7,24 @@ import { TransactionProjection } from "../../../../Source/Projections/Transactio
 import { UpdateLedgerBalanceService } from "../../../../Source/Services/Domain/UpdateLedgerBalanceService";
 import { Subscriptions } from "../../../../Source/Subscriptions";
 
-describe("UpdateLedgerBalanceService", () => {
-  beforeEach(() => {
+describe("UpdateLedgerBalanceService", async () => {
+  beforeEach(async () => {
     Subscriptions.Release();
     Subscriptions.Create();
-    ProjectionStore.Instance.ClearAll();
+    await ProjectionStore.Instance.ClearAll();
   });
-  it("should update projection with allocation", () => {
+  it("should update projection with allocation", async () => {
     const ledgerProjection = new LedgerProjection();
-    ledgerProjection.Project();
+    await ledgerProjection.Project();
     const transactionProjection = new TransactionProjection();
     transactionProjection.Amount = -1;
     transactionProjection.LedgerId = ledgerProjection.Id;
-    transactionProjection.Project();
+    await transactionProjection.Project();
     const transactionCreatedEvent = new TransactionCreatedEvent();
     transactionCreatedEvent.TransactionId = transactionProjection.Id;
-    transactionCreatedEvent.Publish();
+    await transactionCreatedEvent.Publish();
     const projectionStore = ProjectionStore.Instance;
-    const projections = projectionStore.GetProjections<LedgerProjection>(LedgerProjection);
+    const projections = await projectionStore.GetProjections<LedgerProjection>(LedgerProjection);
     const projection = projections[0];
     assert.equal(projection.Balance, 1);
   });

@@ -3,8 +3,9 @@ import { Projection } from "./Core/Projection";
 import { ProjectionStore } from "./Core/ProjectionStore";
 
 export class UserProjection extends Projection {
-  public static Get(id: any): UserProjection {
-    return ProjectionStore.Instance.GetProjection(UserProjection, id);
+  public static async Get(id: any): Promise<UserProjection> {
+    const projection = await ProjectionStore.Instance.GetProjection<UserProjection>(UserProjection, id);
+    return new Promise((resolve, reject) => resolve(projection));
   }
 
   // Foreign Keys
@@ -24,10 +25,12 @@ export class UserProjection extends Projection {
   constructor() {
     super(UserProjection.name);
   }
-  public Project(): void {
-    ProjectionStore.Instance.Save(this);
+  public async Project(): Promise<void> {
+    await ProjectionStore.Instance.Save(this);
+    return new Promise((resolve, reject) => resolve());
   }
-  public Update(): void {
-    ProjectionStore.Instance.Update(UserProjection, this);
+  public async Update(): Promise<void> {
+    await ProjectionStore.Instance.Update(UserProjection, this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

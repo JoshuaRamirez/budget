@@ -10,8 +10,8 @@ describe("PayerRequestedEvent", () => {
     const event = new PayerRequestedEvent();
     assert.exists(event);
   });
-  it("should publish", () => {
+  it("should publish", async () => {
     const event = new PayerRequestedEvent();
-    event.Publish();
+    await event.Publish();
   });
 });

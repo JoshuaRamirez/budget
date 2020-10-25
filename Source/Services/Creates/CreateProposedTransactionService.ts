@@ -8,17 +8,18 @@ export class CreateProposedTransactionService extends Receiver<ProposedTransacti
   private constructor() {
     super(ProposedTransactionRequestedEvent);
   }
-  public Receive(event: ProposedTransactionRequestedEvent) {
+  public async Receive(event: ProposedTransactionRequestedEvent): Promise<void> {
     // Create ProposedTransactionProjection
     const proposedTransactionProjection = new ProposedTransactionProjection();
     proposedTransactionProjection.Amount = event.Amount;
     proposedTransactionProjection.Description = event.Description;
     proposedTransactionProjection.PlannedTransactionId = event.PlannedTransactionId;
     proposedTransactionProjection.TransactionType = event.TransactionType;
-    proposedTransactionProjection.Project();
+    await proposedTransactionProjection.Project();
     // Publish ProposedTransactionCreatedEvent
     const proposedTransactionCreatedEvent = new ProposedTransactionCreatedEvent();
     proposedTransactionCreatedEvent.ProposedTransactionId = proposedTransactionProjection.Id;
-    proposedTransactionCreatedEvent.Publish();
+    await proposedTransactionCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

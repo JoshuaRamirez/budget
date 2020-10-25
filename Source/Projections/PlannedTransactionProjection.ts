@@ -4,15 +4,18 @@ import { Projection } from "./Core/Projection";
 import { ProjectionStore } from "./Core/ProjectionStore";
 
 export class PlannedTransactionProjection extends Projection implements IPlannedTransaction {
-  public static Get(id: any): PlannedTransactionProjection {
-    return ProjectionStore.Instance.GetProjection(PlannedTransactionProjection, id);
+  public static async Get(id: any): Promise<PlannedTransactionProjection> {
+    const projection = await ProjectionStore.Instance.GetProjection<PlannedTransactionProjection>(PlannedTransactionProjection, id);
+    return new Promise((resolve, reject) => resolve(projection));
   }
-  public static All(): PlannedTransactionProjection[] {
-    return ProjectionStore.Instance.GetProjections(PlannedTransactionProjection);
+  public static async All(): Promise<PlannedTransactionProjection[]> {
+    const projection = await ProjectionStore.Instance.GetProjections<PlannedTransactionProjection>(PlannedTransactionProjection);
+    return new Promise((resolve, reject) => resolve(projection));
   }
-  public static Last(): PlannedTransactionProjection {
-    const result = ProjectionStore.Instance.GetProjections<PlannedTransactionProjection>(PlannedTransactionProjection);
-    return result[result.length - 1];
+  public static async Last(): Promise<PlannedTransactionProjection> {
+    const projections = await ProjectionStore.Instance.GetProjections<PlannedTransactionProjection>(PlannedTransactionProjection);
+    const projection = projections[projections.length - 1];
+    return new Promise((resolve, reject) => resolve(projection));
   }
 
   // Fields
@@ -31,10 +34,12 @@ export class PlannedTransactionProjection extends Projection implements IPlanned
   constructor() {
     super(PlannedTransactionProjection.name);
   }
-  public Project(): void {
-    ProjectionStore.Instance.Save(this);
+  public async Project(): Promise<void> {
+    await ProjectionStore.Instance.Save(this);
+    return new Promise((resolve, reject) => resolve());
   }
-  public Update(): void {
-    ProjectionStore.Instance.Update(PlannedTransactionProjection, this);
+  public async Update(): Promise<void> {
+    await ProjectionStore.Instance.Update(PlannedTransactionProjection, this);
+    return new Promise((resolve, reject) => resolve());
   }
 }

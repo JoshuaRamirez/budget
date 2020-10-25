@@ -7,9 +7,9 @@ import { PlannedExpenseProjection } from "../../../Projections/PlannedExpensePro
 import { PlannedTransactionProjection } from "../../../Projections/PlannedTransactionProjection";
 import { TransactionProposition } from "../../Domain/Core/TransactionProposition";
 
-export function ConvertPlannedTransactionCreatedToProposedTransactionCreationRequested(plannedTransactionCreatedEvent: PlannedTransactionCreatedEvent) {
-  const plannedTransactionProjection = PlannedTransactionProjection.Get(plannedTransactionCreatedEvent.PlannedTransactionId);
-  const proposedDate = TransactionProposition.GetProposedDate(plannedTransactionProjection);
+export async function ConvertPlannedTransactionCreatedToProposedTransactionCreationRequested(plannedTransactionCreatedEvent: PlannedTransactionCreatedEvent) {
+  const plannedTransactionProjection = await PlannedTransactionProjection.Get(plannedTransactionCreatedEvent.PlannedTransactionId);
+  const proposedDate = await TransactionProposition.GetProposedDate(plannedTransactionProjection);
   if (!proposedDate) {
     return;
   }
@@ -17,14 +17,14 @@ export function ConvertPlannedTransactionCreatedToProposedTransactionCreationReq
   return proposedTransactionCreationRequestedEvent;
 }
 
-export function ConvertPlannedDepositCreatedToPlannedTransactionRequested(plannedDepositCreatedEvent: PlannedDepositCreatedEvent) {
-  const plannedDepositProjection = PlannedDepositProjection.Get(plannedDepositCreatedEvent.PlannedDepositId);
+export async function ConvertPlannedDepositCreatedToPlannedTransactionRequested(plannedDepositCreatedEvent: PlannedDepositCreatedEvent) {
+  const plannedDepositProjection = await PlannedDepositProjection.Get(plannedDepositCreatedEvent.PlannedDepositId);
   const plannedTransactionRequestedEvent = MapPlannedItemToPlannedTransaction(plannedDepositProjection, "Deposit");
   return plannedTransactionRequestedEvent;
 }
 
-export function ConvertPlannedExpenseCreatedToPlannedTransactionRequested(plannedExpenseCreatedEvent: PlannedExpenseCreatedEvent) {
-  const plannedExpenseProjection = PlannedExpenseProjection.Get(plannedExpenseCreatedEvent.PlannedExpenseId);
+export async function ConvertPlannedExpenseCreatedToPlannedTransactionRequested(plannedExpenseCreatedEvent: PlannedExpenseCreatedEvent) {
+  const plannedExpenseProjection = await PlannedExpenseProjection.Get(plannedExpenseCreatedEvent.PlannedExpenseId);
   const plannedTransactionRequestedEvent = MapPlannedItemToPlannedTransaction(plannedExpenseProjection, "Expense");
   return plannedTransactionRequestedEvent;
 }

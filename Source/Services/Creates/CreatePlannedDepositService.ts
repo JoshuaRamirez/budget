@@ -8,7 +8,7 @@ export class CreatePlannedDepositService extends Receiver<PlannedDepositRequeste
   private constructor() {
     super(PlannedDepositRequestedEvent);
   }
-  public Receive(event: PlannedDepositRequestedEvent) {
+  public async Receive(event: PlannedDepositRequestedEvent): Promise<void> {
     // Create PlannedDepositProjection
     const plannedDepositProjection = new PlannedDepositProjection();
     plannedDepositProjection.Amount = event.Amount;
@@ -18,10 +18,11 @@ export class CreatePlannedDepositService extends Receiver<PlannedDepositRequeste
     plannedDepositProjection.RepeatMeasurement = event.RepeatMeasurement;
     plannedDepositProjection.RepeatPeriod = event.RepeatPeriod;
     plannedDepositProjection.StartDate = event.RepeatStart;
-    plannedDepositProjection.Project();
+    await plannedDepositProjection.Project();
     // Publish PlannedExpenseCreated Event
     const plannedDepositCreatedEvent = new PlannedDepositCreatedEvent();
     plannedDepositCreatedEvent.PlannedDepositId = plannedDepositProjection.Id;
-    plannedDepositCreatedEvent.Publish();
+    await plannedDepositCreatedEvent.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

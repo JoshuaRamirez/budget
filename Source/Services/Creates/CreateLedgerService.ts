@@ -8,17 +8,18 @@ export class CreateLedgerService extends Receiver<LedgerRequestedEvent> {
   private constructor() {
     super(LedgerRequestedEvent);
   }
-  public Receive(event: LedgerRequestedEvent) {
+  public async Receive(event: LedgerRequestedEvent): Promise<void> {
     // Create LedgerProjection
     const ledgerProjection = new LedgerProjection();
     ledgerProjection.AccountId = event.AccountId;
     ledgerProjection.Balance = 0;
     ledgerProjection.TransactionIds = [];
     ledgerProjection.Type = event.Type;
-    ledgerProjection.Project();
+    await ledgerProjection.Project();
     // Publish LedgerCreatedEvent
     const ledgerCreated = new LedgerCreatedEvent();
     ledgerCreated.LedgerId = ledgerProjection.Id;
-    ledgerCreated.Publish();
+    await ledgerCreated.Publish();
+    return new Promise((resolve, reject) => resolve());
   }
 }

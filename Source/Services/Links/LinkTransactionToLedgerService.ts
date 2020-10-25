@@ -17,7 +17,8 @@ export class LinkTransactionToLedgerService extends LinkService<TransactionCreat
     });
     super(declaration);
   }
-  public Receive(event: TransactionCreatedEvent): void {
-    super.Receive(event);
+  public async Receive(event: TransactionCreatedEvent): Promise<void> {
+    await super.Receive(event);
+    return new Promise((resolve, reject) => resolve());
   }
 }
